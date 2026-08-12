@@ -1,0 +1,2458 @@
+﻿<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0"> 
+
+<!-- Primary Meta Tags -->
+<title>Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert</title>
+<meta name="title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
+<meta name="description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development. Transform your ideas into beautiful, high-performance mobile apps.">
+<meta name="keywords" content="Flutter Developer, Mobile App Development, Cross-Platform Apps, UI/UX Design, Dart, Firebase, App Development, Cairo, Egypt">
+<meta name="author" content="Abdelrahman Abdullah">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abdelrahman.dev/">
+<meta property="og:title" content="Abdelrahman Abdullah — Flutter Developer">
+<meta property="og:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
+<meta property="og:image" content="https://abdelrahman.dev/images/6037452442028413306.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://abdelrahman.dev/">
+<meta property="twitter:title" content="Abdelrahman Abdullah — Flutter Developer">
+<meta property="twitter:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
+<meta property="twitter:image" content="https://abdelrahman.dev/images/6037452442028413306.jpg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://abdelrahman.dev/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/6037452442028413306.jpg">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#A855F7">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="images/6037452442028413306.jpg">
+
+<!-- Basic Analytics -->
+<script>
+  // Simple analytics tracking
+  (function() {
+    const analytics = {
+      trackEvent: function(category, action, label) {
+        console.log(`Analytics: ${category} - ${action} - ${label}`);
+        // Replace with actual analytics code like Google Analytics
+        // gtag('event', action, {
+        //   'event_category': category,
+        //   'event_label': label
+        // });
+      },
+      trackPageView: function(page) {
+        console.log(`Page View: ${page}`);
+        // Replace with actual analytics code
+        // gtag('config', 'GA_MEASUREMENT_ID', {
+        //   'page_path': page
+        // });
+      }
+    };
+
+    // Track page view
+    analytics.trackPageView(window.location.pathname);
+
+    // Track button clicks
+    document.addEventListener('click', function(e) {
+      const button = e.target.closest('button, a, .btn-primary, .btn-outline, .nav-cta');
+      if (button) {
+        const buttonText = button.textContent.trim() || button.getAttribute('aria-label') || 'Unknown';
+        analytics.trackEvent('Engagement', 'Click', buttonText);
+      }
+    });
+
+    // Track form submissions
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function() {
+        analytics.trackEvent('Lead', 'Form Submit', 'Contact Form');
+      });
+    }
+
+    // Track project clicks
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const projectName = this.querySelector('h3')?.textContent || 'Unknown Project';
+        analytics.trackEvent('Portfolio', 'Project Click', projectName);
+      });
+    });
+
+    // Track theme toggles
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        analytics.trackEvent('Preferences', 'Theme Toggle', newTheme);
+      });
+    }
+
+    // Expose analytics globally for custom tracking
+    window.analytics = analytics;
+  })();
+</script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Abdelrahman Abdullah",
+  "jobTitle": "Flutter Developer",
+  "url": "https://abdelrahman.dev/",
+  "image": "https://abdelrahman.dev/images/6037452442028413306.jpg",
+  "sameAs": [
+    "https://github.com/abdelrahmanabuoelwafa-cell",
+    "https://linkedin.com/in/abdelrahman-abdullah",
+    "https://twitter.com/abdelrahman_dev"
+  ],
+  "description": "Professional Flutter developer specializing in cross-platform mobile applications with expertise in clean architecture, REST API integration, and modern UI/UX design patterns.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cairo",
+    "addressCountry": "Egypt"
+  },
+  "knowsAbout": [
+    "Flutter",
+    "Dart",
+    "Mobile App Development",
+    "UI/UX Design",
+    "Firebase",
+    "REST APIs",
+    "Clean Architecture"
+  ]
+}
+</script> 
+<style> 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root { 
+  --primary: #A855F7; 
+  --secondary: #9333EA; 
+  --accent: #A855F7; 
+  --neon: #A855F7; 
+  --bg: #111111; 
+  --card-bg: #1E293B; 
+  --border: #334155; 
+  --text: #F8FAFC; 
+  --muted: #94A3B8; 
+  --font: 'Inter', system-ui, -apple-system, sans-serif; 
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --card-bg: #F8FAFC;
+  --border: #E2E8F0;
+  --text: #1E293B;
+  --muted: #64748B;
+  --primary: #9333EA;
+  --secondary: #7C3AED;
+  --neon: #7C3AED;
+} 
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
+html{scroll-behavior:smooth} 
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6} 
+h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700} 
+a{text-decoration:none;color:inherit} 
+ul{list-style:none} 
+::-webkit-scrollbar{width:4px} 
+::-webkit-scrollbar-track{background:var(--bg)} 
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+
+/* Theme Toggle Button (navbar) */
+.theme-toggle-nav{
+  width:40px; height:40px;
+  border-radius:50%;
+  background:var(--card-bg);
+  border:2px solid var(--border);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:var(--text);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  flex-shrink:0;
+}
+.theme-toggle-nav:hover{
+  border-color:var(--primary);
+  box-shadow:0 4px 15px rgba(147,51,234,.25);
+}
+.theme-toggle-nav .sun-icon{display:none}
+[data-theme="light"] .theme-toggle-nav .moon-icon{display:none}
+[data-theme="light"] .theme-toggle-nav .sun-icon{display:block}
+
+/* Focus visible styles for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+body.keyboard-nav *:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+} 
+
+/* Background Grid Overlay */ 
+body::after{ 
+  content:''; 
+  position:fixed; 
+  inset:0; 
+  background-image:linear-gradient(rgba(168,85,247,.03) 1px,transparent 1px), linear-gradient(90deg,rgba(168,85,247,.03) 1px,transparent 1px); 
+  background-size:60px 60px; 
+  pointer-events:none; 
+  z-index:0; 
+  transition: opacity 0.3s;
+}
+
+[data-theme="light"] body::after {
+  background-image:linear-gradient(rgba(147,51,234,.05) 1px,transparent 1px), linear-gradient(90deg,rgba(147,51,234,.05) 1px,transparent 1px);
+} 
+
+/* Neon & Purple Glow Effects */ 
+.neon{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,0.7),0 0 20px rgba(168,85,247,0.5)} 
+.gradient-text{ 
+  background:linear-gradient(135deg,var(--primary),#d8b4fe); 
+  -webkit-background-clip:text; 
+  -webkit-text-fill-color:transparent; 
+  background-clip:text; 
+} 
+
+/* Reveal Animation */ 
+.reveal{opacity:0;transform:translateY(30px);transition:all 1s cubic-bezier(.16,1,.3,1)} 
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Staggered Animations */
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.2s; }
+.reveal:nth-child(3) { transition-delay: 0.3s; }
+.reveal:nth-child(4) { transition-delay: 0.4s; }
+.reveal:nth-child(5) { transition-delay: 0.5s; }
+
+/* Smooth Parallax Effect */
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Magnetic Button Effect */
+.btn-primary, .btn-outline, .nav-cta, .btn-cv {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before, .btn-outline::before, .nav-cta::before, .btn-cv::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before, .btn-outline:hover::before, .nav-cta:hover::before, .btn-cv:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Floating Animation Enhancement */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating-badge {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glow Pulse Effect */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+}
+
+.project-card:hover {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Testimonials Section Styling */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon);
+  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.3);
+}
+
+.testimonial-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.testimonial-rating {
+  color: #fbbf24;
+  font-size: 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.testimonial-text {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.author-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.author-info p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+[data-theme="light"] .testimonial-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .testimonial-card:hover {
+  box-shadow: 0 8px 25px rgba(147, 51, 234, 0.15);
+} 
+
+/* Navbar */ 
+#navbar{ 
+  position:fixed; 
+  top:0; left:0; right:0; 
+  z-index:1000; 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  padding:20px 60px; 
+  background:rgba(17,17,17,.9); 
+  backdrop-filter:blur(20px); 
+  border-bottom:1px solid var(--border); 
+  transition:all .3s; 
+} 
+#navbar.scrolled{padding:12px 60px;background:rgba(17,17,17,.95)} 
+.nav-logo{font-size:24px;font-weight:800;letter-spacing:-1px;color:var(--neon)} 
+.nav-logo span{color:#fff} 
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;min-width:44px;min-height:44px;padding:10px;} 
+.hamburger span{width:25px;height:2px;background:var(--text);transition:all .3s} 
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)} 
+.hamburger.open span:nth-child(2){opacity:0} 
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)} 
+.nav-menu{display:flex;align-items:center;gap:40px} 
+.nav-menu ul{display:flex;gap:24px} 
+.nav-menu a{ 
+  font-size:14px; 
+  font-weight:600; 
+  color:var(--muted); 
+  position:relative; 
+  transition:color .3s; 
+} 
+.nav-menu a:hover{color:var(--neon)} 
+.nav-menu a::after{ 
+  content:''; 
+  position:absolute; 
+  bottom:-4px; left:0; 
+  width:0; height:2px; 
+  background:var(--neon); 
+  transition:width .3s; 
+} 
+.nav-menu a:hover::after{width:100%} 
+.nav-actions{display:flex;align-items:center;gap:12px}
+.btn-cv{
+  padding:8px 18px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  border-radius:50px;
+  font-size:13px;
+  font-weight:700;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all .3s;
+}
+.btn-cv:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(168,85,247,.5);
+}
+.nav-cta{ 
+  padding:8px 20px; 
+  background:var(--primary); 
+  border-radius:50px; 
+  font-size:13px; 
+  font-weight:700; 
+  color:#fff; 
+  transition:all .3s; 
+} 
+.nav-cta:hover{ 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168,85,247,.7); 
+} 
+
+/* Hero Section */ 
+.hero{ 
+  min-height:100vh; 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  justify-content:center; 
+  padding:120px 20px 80px; 
+  position:relative; 
+  overflow:hidden; 
+  text-align:center; 
+} 
+.hero-content{ 
+  position:relative; 
+  z-index:2; 
+  max-width:900px; 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+} 
+.hero-top-image{ 
+  position:relative; 
+  width:180px; 
+  height:180px; 
+  margin-bottom:24px; 
+  animation:fadeInDown 1s ease; 
+  border-radius:50%;
+  overflow:visible;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+} 
+@keyframes fadeInDown{ 
+  from{opacity:0;transform:translateY(-30px)} 
+  to{opacity:1;transform:translateY(0)} 
+} 
+.top-img-container{ 
+  width:100%; 
+  height:100%; 
+  border-radius:50%; 
+  overflow:hidden; 
+  border:2px solid rgba(168, 85, 247, 0.2); 
+  position:relative; 
+  background:var(--card-bg); 
+  z-index: 2;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.hero-top-image:hover { 
+  transform:scale(1.08); 
+  box-shadow:0 20px 40px rgba(168,85,247,0.3);
+} 
+.top-img{ 
+  width:100%; 
+  height:100%; 
+  object-fit:cover; 
+  object-position:center center; 
+} 
+.top-img-ring{ 
+  position:absolute; 
+  inset:-8px; 
+  border:2px dashed rgba(168,85,247,.3); 
+  border-radius:50%; 
+  animation:spin 15s linear infinite; 
+  z-index: 3;
+  pointer-events: none;
+} 
+@keyframes spin{to{transform:rotate(360deg)}} 
+.floating-badge{ 
+  position:absolute; 
+  bottom:0; 
+  right:0; 
+  width:45px; 
+  height:45px; 
+  background:var(--card-bg); 
+  border:2px solid var(--neon); 
+  border-radius:50%; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:20px; 
+  box-shadow:0 0 20px rgba(168,85,247,.5); 
+  animation:bounce 2s infinite; 
+  z-index:10; 
+} 
+@keyframes bounce{ 
+  0%,100%{transform:translateY(0)} 
+  50%{transform:translateY(-10px)} 
+} 
+.hero-name{ 
+  font-size:clamp(36px,5vw,68px); 
+  font-weight:800; 
+  letter-spacing:-2px; 
+  margin-bottom:16px; 
+  background:linear-gradient(135deg,#fff 30%,var(--neon)); 
+  -webkit-background-clip:text; 
+  -webkit-text-fill-color:transparent; 
+  background-clip:text; 
+  animation:fadeInUp 0.8s ease 0.3s both; 
+  font-family:var(--font-heading);
+} 
+@keyframes fadeInUp{ 
+  from{opacity:0;transform:translateY(-30px)} 
+  to{opacity:1;transform:translateY(0)} 
+} 
+.typing-container{ 
+  height:40px; 
+  margin-bottom:24px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  gap:8px; 
+  animation:fadeInUp 0.8s ease 0.5s both; 
+} 
+.typing-text{ 
+  font-size:22px; 
+  font-weight:600; 
+  color:var(--neon); 
+  font-family:var(--font-heading);
+} 
+.cursor{ 
+  width:3px; 
+  height:24px; 
+  background:var(--neon); 
+  animation:blink 1s infinite; 
+} 
+@keyframes blink{ 
+  0%,50%{opacity:1} 
+  51%,100%{opacity:0} 
+} 
+.hero-badge{ 
+  display:inline-flex; 
+  align-items:center; 
+  gap:8px; 
+  padding:8px 20px; 
+  background:rgba(168,85,247,.1); 
+  border:1px solid rgba(168,85,247,.3); 
+  border-radius:50px; 
+  font-size:13px; 
+  font-weight:600; 
+  color:var(--accent); 
+  margin-bottom:32px; 
+  animation:fadeInUp 0.8s ease 0.7s both; 
+} 
+.status-dot{ 
+  width:8px; 
+  height:8px; 
+  background:#a855f7; 
+  border-radius:50%; 
+  box-shadow:0 0 10px #a855f7; 
+  animation:statusPulse 2s infinite; 
+} 
+@keyframes statusPulse{ 
+  0%,100%{opacity:1;transform:scale(1)} 
+  50%{opacity:.6;transform:scale(1.2)} 
+} 
+.hero-desc{ 
+  font-size:18px; 
+  color:var(--muted); 
+  max-width:650px; 
+  margin-bottom:40px; 
+  line-height:1.7; 
+  animation:fadeInUp 0.8s ease 0.9s both; 
+  font-weight:400;
+} 
+.hero-buttons{ 
+  display:flex; 
+  gap:16px; 
+  flex-wrap:wrap; 
+  justify-content:center; 
+  animation:fadeInUp 0.8s ease 1.1s both; 
+} 
+.btn-primary{ 
+  padding:14px 48px; 
+  background:var(--primary); 
+  color:#fff; 
+  border-radius:14px; 
+  font-weight:700; 
+  font-size:16px; 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1); 
+  min-height:48px;
+  min-width:48px;
+} 
+.btn-primary:hover{ 
+  transform:translateY(-3px); 
+  box-shadow:0 15px 40px rgba(168, 85, 247, 0.8); 
+} 
+.btn-outline{ 
+  padding:14px 48px; 
+  background:transparent; 
+  color:var(--text); 
+  border:1px solid var(--border); 
+  border-radius:14px; 
+  font-weight:700; 
+  font-size:16px; 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1); 
+  min-height:48px;
+  min-width:48px;
+} 
+.btn-outline:hover{ 
+  border-color:var(--neon); 
+  color:var(--neon); 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.3); 
+} 
+
+/* Scroll Indicator */ 
+.scroll-indicator{ 
+  position:absolute; 
+  bottom:40px; 
+  left:50%; 
+  transform:translateX(-50%); 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  gap:8px; 
+  color:var(--muted); 
+  font-size:12px; 
+  font-weight:600; 
+  letter-spacing:2px; 
+  animation:bounceScroll 2s infinite; 
+} 
+.scroll-indicator i{font-size:20px;color:var(--neon)} 
+@keyframes bounceScroll{ 
+  0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)} 
+  40%{transform:translateX(-50%) translateY(-10px)} 
+  60%{transform:translateX(-50%) translateY(-5px)} 
+} 
+
+/* Sections */ 
+section{padding:100px 60px;position:relative;z-index:1} 
+.section-header{text-align:center;margin-bottom:60px} 
+.section-label{ 
+  display:inline-flex; 
+  align-items:center; 
+  gap:12px; 
+  font-size:12px; 
+  font-weight:700; 
+  color:var(--neon); 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+  margin-bottom:16px; 
+} 
+.section-label::before{ 
+  content:''; 
+  width:30px; 
+  height:1px; 
+  background:var(--neon); 
+  box-shadow:0 0 10px var(--neon); 
+} 
+.section-title{ 
+  font-size:clamp(32px,4vw,42px); 
+  font-weight:700; 
+  line-height:1.5; 
+  font-family:var(--font-heading);
+  letter-spacing:-1px;
+} 
+
+/* About Section */ 
+.about-grid{ 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:80px; 
+  align-items:center; 
+  max-width:1200px; 
+  margin:0 auto; 
+} 
+.about-image{ 
+  position:relative; 
+  display:flex; 
+  justify-content:center; 
+  width:380px;
+  height:380px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: visible;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+} 
+.about-img-container{ 
+  width:100%; 
+  height:100%; 
+  border-radius:50%; 
+  background:var(--card-bg); 
+  border:2px solid rgba(168, 85, 247, 0.2); 
+  overflow:hidden; 
+  position:relative; 
+  z-index: 2;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.about-image:hover {
+  transform:scale(1.03); 
+}
+.about-img{ 
+  width:100%; 
+  height:100%; 
+  object-fit:cover; 
+  object-position:center center;
+} 
+.about-content h3{ 
+  font-size:28px; 
+  font-weight:700; 
+  margin-bottom:24px; 
+  line-height:1.3; 
+} 
+.about-content p{ 
+  color:var(--muted); 
+  font-size:17.6px; 
+  line-height:1.8; 
+  margin-bottom:20px; 
+} 
+.languages-section{ 
+  margin-top:40px; 
+  padding-top:40px; 
+  border-top:1px solid var(--border); 
+} 
+.languages-title{ 
+  font-size:18px; 
+  font-weight:700; 
+  color:var(--neon); 
+  margin-bottom:24px; 
+  display:flex; 
+  align-items:center; 
+  gap:10px; 
+} 
+.languages-grid{ 
+  display:grid; 
+  grid-template-columns:repeat(2,1fr); 
+  gap:20px; 
+} 
+.language-card{ 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  padding:24px; 
+  display:flex; 
+  align-items:center; 
+  gap:20px; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.language-card:hover{ 
+  border-color:var(--neon); 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.4); 
+} 
+.lang-icon{ 
+  width:50px; 
+  height:50px; 
+  background:rgba(168,85,247,.1); 
+  border-radius:12px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:24px; 
+} 
+.lang-info h4{ 
+  font-size:18px; 
+  font-weight:600; 
+  margin-bottom:6px; 
+} 
+.lang-info p{ 
+  font-size:14px; 
+  color:var(--muted); 
+  margin:0; 
+} 
+.lang-level{ 
+  display:inline-block; 
+  margin-top:8px; 
+  padding:4px 12px; 
+  background:rgba(168,85,247,.1); 
+  border:1px solid rgba(168,85,247,.3); 
+  border-radius:50px; 
+  font-size:12px; 
+  font-weight:700; 
+  color:var(--neon); 
+} 
+
+/* Services (5 Cards) */ 
+.services-grid{ 
+  display:grid; 
+  grid-template-columns:repeat(5,1fr); 
+  gap:24px; 
+  max-width:1300px; 
+  margin:0 auto; 
+} 
+.service-card{ 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  padding:24px; 
+  text-align:center; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  position:relative; 
+  overflow:hidden; 
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+} 
+.service-card:hover{ 
+  border-color:var(--neon); 
+  transform:translateY(-4px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.7); 
+}
+
+[data-theme="light"] .service-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .service-card:hover {
+  box-shadow: 0 8px 25px rgba(147, 51, 234, 0.15);
+} 
+.service-icon{ 
+  width:64px; 
+  height:64px; 
+  background:rgba(168,85,247,.1); 
+  border-radius:20px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  margin:0 auto 20px; 
+  font-size:26px; 
+  color:var(--neon); 
+  transition:all .3s; 
+} 
+.service-card:hover .service-icon{ 
+  background:rgba(168,85,247,.2); 
+  transform:scale(1.1); 
+} 
+.service-title{ 
+  font-size:18px; 
+  font-weight:700; 
+  margin-bottom:12px; 
+  font-family:var(--font-heading);
+} 
+.service-desc{ 
+  font-size:13px; 
+  color:var(--muted); 
+  line-height:1.6; 
+} 
+
+/* Skills (5 Categories) */ 
+.skills-container{ 
+  max-width:1100px; 
+  margin:0 auto; 
+} 
+.skill-category{ 
+  margin-bottom:40px; 
+} 
+.skill-header{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+  margin-bottom:24px; 
+  padding-bottom:12px; 
+  border-bottom:2px solid var(--border); 
+} 
+.skill-header i{ 
+  font-size:22px; 
+  color:var(--neon); 
+} 
+.skill-header h3{ 
+  font-size:20px; 
+  font-weight:700; 
+} 
+.skills-row{ 
+  display:grid; 
+  grid-template-columns:repeat(3,1fr); 
+  gap:20px; 
+} 
+.skill-item{ 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  padding:20px; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.skill-item:hover{ 
+  border-color:var(--neon); 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.4); 
+} 
+.skill-top{ 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  margin-bottom:14px; 
+} 
+.skill-info{ 
+  display:flex; 
+  align-items:center; 
+  gap:10px; 
+} 
+.skill-info img{ 
+  width:28px; 
+  height:28px; 
+  object-fit:contain; 
+} 
+.skill-info span{ 
+  font-size:15px; 
+  font-weight:600; 
+} 
+.skill-percent{ 
+  font-size:16px; 
+  font-weight:700; 
+  color:var(--neon); 
+} 
+.skill-bar{ 
+  height:8px; 
+  background:rgba(255,255,255,.05); 
+  border-radius:4px; 
+  overflow:hidden; 
+} 
+.skill-progress{ 
+  height:100%; 
+  background:linear-gradient(90deg,var(--primary),#d8b4fe); 
+  border-radius:4px; 
+  width:0; 
+  transition:width 1.5s cubic-bezier(.16,1,.3,1); 
+} 
+
+/* Experience CAR Cards */
+.exp-cards-stack{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
+.car-card{
+  background:rgba(30,41,59,.8);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:32px;
+  transition:all 0.3s ease;
+}
+.car-card:hover{
+  border-color:var(--neon);
+  box-shadow:0 10px 30px rgba(168,85,247,.4);
+}
+.car-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(51,65,85,.6);
+}
+.car-logo-info{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+/* White Logo Box so ITI black logo text is 100% visible */
+.car-logo-box{
+  width:54px; height:54px;
+  border-radius:14px;
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center;
+  padding:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+.car-logo-box img{
+  max-width:100%; max-height:100%; object-fit:contain;
+}
+.car-date-badge{
+  padding:6px 16px;
+  border-radius:50px;
+  font-size:12px;
+  font-weight:700;
+}
+.badge-depi{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:#06b6d4;}
+.badge-iti{background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);color:var(--neon);}
+.car-body p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:12px;
+}
+.car-body p strong{color:var(--neon);}
+
+/* Pricing Section */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  max-width:1150px;
+  margin:0 auto;
+}
+.price-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  transition:all .3s;
+}
+.price-card.featured{
+  border-color:rgba(16,185,129,.6);
+  box-shadow:0 0 30px rgba(16,185,129,.2);
+  transform:translateY(-8px);
+}
+.popular-badge{
+  position:absolute;
+  top:-16px; left:50%;
+  transform:translateX(-50%);
+  background:#10b981;
+  color:#0f172a;
+  padding:4px 16px;
+  border-radius:50px;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.price-header{text-align:center;margin-bottom:24px}
+.price-tier-name{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+.price-range{display:flex;align-items:center;justify-content:center;gap:16px;margin:16px 0;}
+.price-val{font-size:32px;font-weight:800;color:#fff;}
+.price-unit{font-size:11px;color:var(--muted);}
+.price-features{space-y:12px;padding:20px 0;border-top:1px solid rgba(51,65,85,.6);margin-bottom:24px;}
+.price-feature-item{display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:10px;}
+.price-feature-item.included{color:var(--text);}
+.price-feature-item.excluded{color:rgba(148,163,184,.4);text-decoration:line-through;}
+.btn-pricing{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:14px;
+  text-align:center;
+  display:block;
+  transition:all .3s;
+}
+.btn-pricing.outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:#fff;
+}
+.btn-pricing.outline:hover{
+  border-color:var(--neon);
+  color:var(--neon);
+}
+.btn-pricing.featured-btn{
+  background:linear-gradient(90deg,#10b981,#2dd4bf);
+  color:#0f172a;
+}
+.btn-pricing.featured-btn:hover{
+  filter:brightness(1.1);
+}
+
+/* Projects Showcase Styling */ 
+.projects-grid{ 
+  display:grid; 
+  grid-template-columns:repeat(2,1fr); 
+  gap:40px; 
+  max-width:1200px; 
+  margin:0 auto; 
+} 
+.project-card{ 
+  background:linear-gradient(145deg, var(--card-bg), #1a1a2e);
+  border:1px solid var(--border); 
+  border-radius:28px; 
+  overflow:hidden; 
+  transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  cursor:pointer;
+  position:relative;
+}
+
+[data-theme="light"] .project-card {
+  background: linear-gradient(145deg, var(--card-bg), #f1f5f9);
+} 
+.project-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.project-card:hover::before{
+  opacity:1;
+}
+.project-card:hover{ 
+  border-color:var(--neon); 
+  transform:translateY(-10px) scale(1.02); 
+  box-shadow:0 25px 50px rgba(168, 85, 247, 0.7); 
+} 
+/* Expanded 420px Showcase Image Box for Full High-Quality Mockup View */
+.project-image{ 
+  height:420px; 
+  background:linear-gradient(180deg, #0d0d14 0%, #151520 100%); 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:70px; 
+  position:relative; 
+  overflow:hidden;
+  border-bottom:1px solid rgba(51,65,85,.6);
+}
+
+[data-theme="light"] .project-image {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.6);
+} 
+.project-image img{
+  width:100%; height:100%; object-fit:contain; object-position:center;
+  transition:transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.project-card:hover .project-image img{
+  transform:scale(1.05);
+}
+.project-content{padding:32px} 
+.project-content h3{ 
+  font-size:24px; 
+  font-weight:800; 
+  margin-bottom:8px; 
+  background:linear-gradient(135deg, #fff 0%, var(--neon) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+} 
+.project-subtitle{
+  font-size:13px; font-weight:700; color:var(--neon); margin-bottom:16px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.project-content > p{ 
+  color:var(--muted); 
+  font-size:14px; 
+  line-height:1.6; 
+  margin-bottom:20px; 
+} 
+.tech-stack{ 
+  display:flex; 
+  flex-wrap:wrap; 
+  gap:8px; 
+  margin-bottom:20px; 
+} 
+.tech-tag{ 
+  padding:4px 12px; 
+  background:rgba(168,85,247,.1); 
+  border:1px solid rgba(168,85,247,.3); 
+  border-radius:50px; 
+  font-size:11px; 
+  font-weight:600; 
+  color:var(--accent); 
+} 
+.project-links{ 
+  display:flex; 
+  gap:12px; 
+} 
+.project-btn{ 
+  flex:1; 
+  padding:12px 18px; 
+  border-radius:12px; 
+  font-weight:700; 
+  font-size:13px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  gap:8px; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.project-btn.primary{ 
+  background:var(--primary); 
+  color:#fff; 
+} 
+.project-btn.primary:hover{ 
+  box-shadow:0 10px 25px rgba(168, 85, 247, 0.7); 
+} 
+.project-btn.secondary{ 
+  background:transparent; 
+  border:1px solid var(--border); 
+  color:var(--text); 
+} 
+.project-btn.secondary:hover{ 
+  border-color:var(--neon); 
+  color:var(--neon); 
+} 
+
+/* Project Modal Overlay */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(12px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  max-width:850px;
+  width:100%;
+  max-height:90vh;
+  overflow-y:auto;
+  padding:32px;
+  position:relative;
+  box-shadow:0 25px 50px rgba(0,0,0,.6);
+}
+.modal-close{
+  position:absolute;
+  top:24px; right:24px;
+  width:40px; height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--muted);
+  font-size:20px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .3s;
+  z-index:10;
+}
+.modal-close:hover{border-color:var(--neon);color:#fff;}
+
+/* Contact */ 
+.contact-container{ 
+  max-width:1000px; 
+  margin:0 auto; 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:60px; 
+} 
+.contact-info h3{ 
+  font-size:32px; 
+  font-weight:700; 
+  margin-bottom:24px; 
+} 
+.contact-info > p{ 
+  color:var(--muted); 
+  font-size:16px; 
+  line-height:1.8; 
+  margin-bottom:32px; 
+} 
+.contact-links{ 
+  display:flex; 
+  flex-direction:column; 
+  gap:16px; 
+} 
+.contact-link{ 
+  display:flex; 
+  align-items:center; 
+  gap:16px; 
+  padding:18px; 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.contact-link:hover{ 
+  border-color:var(--neon); 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.4); 
+} 
+.contact-link i{ 
+  width:44px; 
+  height:44px; 
+  background:rgba(168,85,247,.1); 
+  border-radius:12px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:18px; 
+  color:var(--neon); 
+} 
+.contact-link div strong{ 
+  display:block; 
+  font-size:12px; 
+  color:var(--muted); 
+  margin-bottom:2px; 
+  text-transform:uppercase;
+} 
+.contact-link div span{ 
+  font-size:14px; 
+  font-weight:600; 
+} 
+.contact-form{ 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:24px; 
+  padding:36px; 
+} 
+.form-group{ 
+  margin-bottom:20px; 
+} 
+.form-group label{ 
+  display:block; 
+  font-size:12px; 
+  font-weight:600; 
+  color:var(--muted); 
+  margin-bottom:8px; 
+  text-transform:uppercase; 
+  letter-spacing:1px; 
+} 
+.form-group input, .form-group textarea{ 
+  width:100%; 
+  padding:16px; 
+  background:var(--bg); 
+  border:1px solid var(--border); 
+  border-radius:12px; 
+  color:var(--text); 
+  font-family:inherit; 
+  font-size:14px; 
+  transition:all .3s; 
+} 
+.form-group input:focus, .form-group textarea:focus{ 
+  outline:none; 
+  border-color:var(--neon); 
+  box-shadow:0 0 10px rgba(168, 85, 247, 0.2); 
+} 
+.form-group textarea{ 
+  min-height:130px; 
+  resize:none; 
+} 
+.submit-btn{ 
+  width:100%; 
+  padding:16px; 
+  background:var(--primary); 
+  border:none; 
+  border-radius:14px; 
+  color:#fff; 
+  font-family:inherit; 
+  font-size:15px; 
+  font-weight:700; 
+  cursor:pointer; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  gap:10px; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.submit-btn:hover{ 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 30px rgba(168, 85, 247, 0.7); 
+} 
+
+/* Footer */ 
+footer{ 
+  padding:60px; 
+  text-align:center; 
+  border-top:1px solid var(--border); 
+  background:rgba(17,17,17,.8); 
+} 
+.footer-name{ 
+  font-size:24px; 
+  font-weight:800; 
+  color:var(--neon); 
+  margin-bottom:16px; 
+} 
+.footer-social{ 
+  display:flex; 
+  justify-content:center; 
+  gap:20px; 
+  margin-bottom:24px; 
+} 
+.footer-social a{ 
+  width:46px; 
+  height:46px; 
+  background:var(--card-bg); 
+  border:1px solid var(--border); 
+  border-radius:50px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  font-size:18px; 
+  color:var(--muted); 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+} 
+.footer-social a:hover{ 
+  border-color:var(--neon); 
+  color:var(--neon); 
+  transform:translateY(-2px); 
+  box-shadow:0 10px 25px rgba(168, 85, 247, 0.4); 
+} 
+footer p{ 
+  color:var(--muted); 
+  font-size:14px; 
+} 
+
+/* ===== Complete Light (White) Mode ===== */
+[data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
+[data-theme="light"] #navbar{background:rgba(255,255,255,.85)}
+[data-theme="light"] #navbar.scrolled{background:rgba(255,255,255,.92)}
+[data-theme="light"] .nav-logo span{color:#0f172a}
+[data-theme="light"] .hero-name,
+[data-theme="light"] .project-content h3{
+  background:linear-gradient(135deg,#1e293b 0%, var(--neon) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+[data-theme="light"] .skill-bar{background:rgba(15,23,42,.08)}
+[data-theme="light"] .car-card{background:rgba(248,250,252,.88)}
+[data-theme="light"] .car-card h3{color:#1e293b !important}
+[data-theme="light"] .car-header{border-bottom-color:var(--border)}
+[data-theme="light"] .price-val{color:var(--text)}
+[data-theme="light"] .price-features{border-top-color:var(--border)}
+[data-theme="light"] .btn-pricing.outline{color:var(--text)}
+[data-theme="light"] .price-feature-item.excluded{color:rgba(100,116,139,.5)}
+[data-theme="light"] .project-card:hover{box-shadow:0 20px 40px rgba(147,51,234,.18)}
+[data-theme="light"] footer{background:rgba(248,250,252,.85)}
+[data-theme="light"] .modal-card h2{color:#1e293b !important}
+[data-theme="light"] .modal-media{background:#e2e8f0 !important}
+
+/* ===== Projects Section Polish (additive) ===== */
+.projects-grid{ 
+  gap:36px; 
+  align-items:stretch; 
+} 
+.project-card{ 
+  display:flex; 
+  flex-direction:column; 
+  box-shadow:0 15px 35px rgba(0,0,0,.35); 
+} 
+.project-card::after{ 
+  content:''; 
+  position:absolute; 
+  inset:0; 
+  background:radial-gradient(120% 80% at 0% 0%, rgba(168,85,247,.18), transparent 55%); 
+  opacity:0; 
+  transition:opacity .4s ease; 
+  pointer-events:none; 
+} 
+.project-card:hover::after{opacity:1} 
+.project-card:hover{ 
+  box-shadow:0 30px 60px rgba(168,85,247,.35); 
+} 
+.project-image::before{ 
+  content:''; 
+  position:absolute; 
+  inset:0; 
+  background:radial-gradient(60% 60% at 50% 45%, rgba(168,85,247,.12), transparent 70%); 
+  pointer-events:none; 
+} 
+.project-content{ 
+  flex:1; 
+  display:flex; 
+  flex-direction:column; 
+} 
+.project-content > p{flex:1} 
+.project-links{ 
+  margin-top:auto; 
+  padding-top:18px; 
+  border-top:1px solid var(--border); 
+} 
+[data-theme="light"] .project-card{ 
+  box-shadow:0 15px 35px rgba(15,23,42,.10); 
+} 
+[data-theme="light"] .project-card:hover{ 
+  box-shadow:0 30px 60px rgba(147,51,234,.22); 
+} 
+[data-theme="light"] .project-links{border-top-color:rgba(148,163,184,.4)}
+
+/* Responsive */ 
+@media(max-width:1024px){ 
+  .services-grid{grid-template-columns:repeat(3,1fr)} 
+  .skills-row{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:1fr;}
+  .price-card.featured{transform:none;}
+  .projects-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-top-image{width:160px;height:160px}
+} 
+@media(max-width:768px){ 
+  #navbar{padding:16px 24px} 
+  .nav-menu{ 
+    position:fixed; 
+    top:0; right:-100%; 
+    width:80%; 
+    max-width:300px; 
+    height:100vh; 
+    background:var(--card-bg); 
+    flex-direction:column; 
+    padding:80px 40px; 
+    transition:right .4s; 
+    border-left:1px solid var(--border); 
+  } 
+  .nav-menu.open{right:0} 
+  .nav-menu ul{flex-direction:column;gap:24px} 
+  .hamburger{display:flex} 
+  section{padding:80px 24px} 
+  .about-grid{grid-template-columns:1fr;gap:60px} 
+  .about-image{order:-1} 
+  .services-grid{grid-template-columns:1fr} 
+  .skills-row{grid-template-columns:1fr} 
+  .testimonials-grid{grid-template-columns:1fr}
+  .contact-container{grid-template-columns:1fr} 
+  .hero-name{font-size:38px} 
+  .hero-top-image{width:120px;height:120px} 
+  .about-image{width:280px;height:280px}
+  .project-image{height:260px;}
+} 
+</style> 
+<base target="_blank"> 
+</head> 
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="main-content" tabindex="-1">
+
+<!-- WebGL Tornado Background -->
+<div id="vortex-container" style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+  <canvas id="vortex-canvas" style="width:100%;height:100%;display:block;"></canvas>
+</div>
+
+<!-- Navbar --> 
+<nav id="navbar" role="navigation" aria-label="Main navigation"> 
+  <div class="nav-logo" aria-label="Abdelrahman Abdullah Logo">AA<span>.</span></div> 
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
+    <span></span><span></span><span></span> 
+  </button> 
+  <div class="nav-menu" id="navMenu" role="menubar"> 
+    <ul role="menubar"> 
+      <li role="none"><a href="#about" onclick="closeMenu()" role="menuitem">About</a></li> 
+      <li role="none"><a href="#services" onclick="closeMenu()" role="menuitem">Services</a></li> 
+      <li role="none"><a href="#skills" onclick="closeMenu()" role="menuitem">Skills</a></li> 
+      <li role="none"><a href="#experience" onclick="closeMenu()" role="menuitem">Experience</a></li> 
+      <li role="none"><a href="#projects" onclick="closeMenu()" role="menuitem">Projects</a></li> 
+      <li role="none"><a href="#testimonials" onclick="closeMenu()" role="menuitem">Testimonials</a></li> 
+      <li role="none"><a href="#pricing" onclick="closeMenu()" role="menuitem">Pricing</a></li> 
+      <li role="none"><a href="#contact" onclick="closeMenu()" role="menuitem">Contact</a></li> 
+    </ul> 
+    <div class="nav-actions">
+      <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF">
+        <i class="fas fa-download" aria-hidden="true"></i> Download CV
+      </a>
+      <a href="https://wa.me/201123031944" class="nav-cta" aria-label="Contact via WhatsApp to hire">Hire Me</a> 
+      <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+        <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
+        <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div> 
+</nav> 
+
+<!-- Hero Section --> 
+<section class="hero" id="hero" aria-labelledby="hero-title"> 
+  <div class="hero-content"> 
+    <div class="hero-top-image"> 
+      <div class="top-img-ring"></div> 
+      <div class="top-img-container"> 
+        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="top-img" loading="eager" fetchpriority="high"> 
+      </div> 
+      <div class="floating-badge">💻</div> 
+    </div> 
+
+    <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
+
+    <div class="typing-container"> 
+      <span class="typing-text" id="typingText"></span> 
+      <span class="cursor"></span> 
+    </div> 
+
+    <div class="hero-badge"> 
+      <span class="status-dot"></span> Available for new projects 
+    </div> 
+
+    <p class="hero-desc"> 
+      Flutter Developer specializing in building high-performance, cross-platform mobile applications with clean architecture and modern development practices. 
+    </p> 
+
+    <div class="hero-buttons"> 
+      <a href="#projects" class="btn-primary" target="_self"> 
+        <i class="fas fa-rocket"></i> View Projects 
+      </a> 
+      <a href="#contact" class="btn-outline" target="_self"> 
+        <i class="fas fa-envelope"></i> Contact Me 
+      </a> 
+    </div> 
+  </div> 
+
+  <div class="scroll-indicator"> 
+    <span>SCROLL</span> 
+    <i class="fas fa-chevron-down"></i> 
+  </div> 
+</section> 
+
+<!-- About Section --> 
+<section id="about"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">About Me</div> 
+    <h2 class="section-title">Get To Know <span class="gradient-text">Me Better</span></h2> 
+  </div> 
+  <div class="about-grid"> 
+    <div class="about-content reveal"> 
+      <h3>Passionate Flutter Developer Creating Digital Excellence</h3> 
+      <p> 
+        I'm <strong>Abdelrahman Abdullah</strong>, a dedicated Flutter developer based in Cairo, Egypt. I specialize in transforming complex ideas into elegant, high-performance mobile applications that users love. 
+      </p> 
+      <p> 
+        With intensive training from <strong>ITI</strong> and <strong>DEPI</strong>, I've mastered clean architecture principles, REST API integration, and modern UI/UX design patterns. My approach combines technical excellence with creative problem-solving. 
+      </p> 
+
+      <div class="languages-section"> 
+        <div class="languages-title"> 
+          <i class="fas fa-language"></i> Languages 
+        </div> 
+        <div class="languages-grid"> 
+          <div class="language-card"> 
+            <div class="lang-icon">🇪🇬</div> 
+            <div class="lang-info"> 
+              <h4>العربية</h4> 
+              <p>Native Language</p> 
+              <span class="lang-level">Native</span> 
+            </div> 
+          </div> 
+          <div class="language-card"> 
+            <div class="lang-icon">🇬🇧</div> 
+            <div class="lang-info"> 
+              <h4>English</h4> 
+              <p>Professional Proficiency</p> 
+              <span class="lang-level">Professional</span> 
+            </div> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+    <div class="about-image reveal"> 
+      <div class="about-img-container"> 
+        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img" loading="lazy"> 
+      </div> 
+    </div> 
+  </div> 
+</section> 
+
+<!-- Services Section (5 Cards) --> 
+<section id="services"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">What I Do</div> 
+    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2> 
+  </div> 
+  <div class="services-grid"> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div> 
+      <h3 class="service-title">Mobile App Development</h3> 
+      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div> 
+      <h3 class="service-title">UI/UX Design</h3> 
+      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-plug"></i></div> 
+      <h3 class="service-title">API Integration</h3> 
+      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div> 
+      <h3 class="service-title">App Optimization</h3> 
+      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-globe"></i></div> 
+      <h3 class="service-title">Portfolio & Landing Pages</h3> 
+      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p> 
+    </div> 
+  </div> 
+</section> 
+
+<!-- Skills Section (5 Categories) --> 
+<section id="skills"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">Expertise</div> 
+    <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2> 
+  </div> 
+  <div class="skills-container"> 
+
+    <!-- Cat 1 -->
+    <div class="skill-category reveal"> 
+      <div class="skill-header"> 
+        <i class="fas fa-mobile-alt"></i> 
+        <h3>Mobile Development</h3> 
+      </div> 
+      <div class="skills-row"> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" width="32" height="32" loading="lazy"> 
+              <span>Flutter</span> 
+            </div> 
+            <span class="skill-percent">85%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" width="32" height="32" loading="lazy"> 
+              <span>Dart</span> 
+            </div> 
+            <span class="skill-percent">85%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div> 
+        </div> 
+      </div> 
+    </div> 
+
+    <!-- Cat 2 -->
+    <div class="skill-category reveal"> 
+      <div class="skill-header"> 
+        <i class="fas fa-code"></i> 
+        <h3>Programming Languages</h3> 
+      </div> 
+      <div class="skills-row"> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="32" height="32" loading="lazy"> 
+              <span>C++</span> 
+            </div> 
+            <span class="skill-percent">70%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="32" height="32" loading="lazy"> 
+              <span>Java</span> 
+            </div> 
+            <span class="skill-percent">65%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="32" height="32" loading="lazy"> 
+              <span>Python</span> 
+            </div> 
+            <span class="skill-percent">65%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div> 
+        </div> 
+      </div> 
+    </div> 
+
+    <!-- Cat 3 -->
+    <div class="skill-category reveal"> 
+      <div class="skill-header"> 
+        <i class="fas fa-globe"></i> 
+        <h3>Web Development</h3> 
+      </div> 
+      <div class="skills-row"> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" width="32" height="32" loading="lazy"> 
+              <span>Laravel</span> 
+            </div> 
+            <span class="skill-percent">70%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="32" height="32" loading="lazy"> 
+              <span>HTML5</span> 
+            </div> 
+            <span class="skill-percent">90%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="32" height="32" loading="lazy"> 
+              <span>JavaScript</span> 
+            </div> 
+            <span class="skill-percent">75%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div> 
+        </div> 
+      </div> 
+    </div> 
+
+  </div> 
+</section> 
+
+<!-- Experience Section (CAR Format Cards) --> 
+<section id="experience"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">Journey</div> 
+    <h2 class="section-title">Training & <span class="gradient-text">Experience</span></h2> 
+  </div> 
+  <div class="exp-cards-stack"> 
+
+    <!-- DEPI Card -->
+    <div class="car-card reveal">
+      <div class="car-header">
+        <div class="car-logo-info">
+          <div class="car-logo-box">
+            <img src="images/depi.png" alt="DEPI Logo" loading="lazy" width="60" height="60">
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#fff;">Flutter Developer Trainee</h3>
+            <p style="font-size:13px;color:#06b6d4;font-weight:600;">Digital Egypt Pioneers Initiative (DEPI) · Cairo</p>
+          </div>
+        </div>
+        <span class="car-date-badge badge-depi">Nov 2024 – Present</span>
+      </div>
+      <div class="car-body">
+        <p><strong>Challenge: </strong>Mastering advanced Flutter development and clean architecture principles within a professional, fast-paced training environment while building production-quality cross-platform applications.</p>
+        <p><strong>Action: </strong>Developed cross-platform mobile applications using Flutter and Dart, applying clean architecture principles, MVVM pattern, and modern development practices with hands-on project delivery and collaborative workflows.</p>
+        <p><strong>Result: </strong>Successfully delivered real-world Flutter projects with scalable, maintainable code and gained comprehensive experience in modern cross-platform mobile development.</p>
+      </div>
+    </div>
+
+    <!-- ITI Card (White Logo Box Background for 100% Logo Visibility) -->
+    <div class="car-card reveal">
+      <div class="car-header">
+        <div class="car-logo-info">
+          <div class="car-logo-box">
+            <img src="images/iti.png" alt="ITI Logo" loading="lazy" width="60" height="60">
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#fff;">Full-Stack Development Trainee</h3>
+            <p style="font-size:13px;color:var(--neon);font-weight:600;">Information Technology Institute (ITI) · Online</p>
+          </div>
+        </div>
+        <span class="car-date-badge badge-iti">2023 – 2024</span>
+      </div>
+      <div class="car-body">
+        <p><strong>Challenge: </strong>Rapidly mastering both frontend and backend technologies, along with the Laravel framework, to build full-stack web applications within an intensive, fast-paced training schedule.</p>
+        <p><strong>Action: </strong>Completed a rigorous program covering modern frontend technologies, backend fundamentals, Laravel framework, and RESTful API integration with hands-on project delivery and collaborative development workflows.</p>
+        <p><strong>Result: </strong>Built fully functional, end-to-end web applications with seamless frontend-backend integration and gained practical experience in the full development lifecycle from design to deployment.</p>
+      </div>
+    </div>
+
+  </div> 
+</section> 
+
+<!-- Projects Section (High Quality Showcase Display) --> 
+<section id="projects"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">Portfolio</div> 
+    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2> 
+  </div> 
+  <div class="projects-grid"> 
+
+    <!-- Project 1: MovieVerse -->
+    <div class="project-card reveal" onclick="openProjectModal(0)"> 
+      <div class="project-image">
+        <img src="images/movie2.jpg" alt="MovieVerse Showcase" loading="lazy">
+      </div> 
+      <div class="project-content"> 
+        <h3>MovieVerse — Movie Explorer</h3> 
+        <div class="project-subtitle">Movies & Series Streaming Platform</div>
+        <p>A cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.</p> 
+        <div class="tech-stack"> 
+          <span class="tech-tag">Flutter</span> 
+          <span class="tech-tag">REST API</span> 
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Hive</span>
+        </div> 
+        <div class="project-links" onclick="event.stopPropagation()"> 
+          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary"><i class="fab fa-github"></i> Source Code</a> 
+          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary"><i class="fas fa-external-link-alt"></i> Live Demo</a> 
+        </div> 
+      </div> 
+    </div> 
+
+    <!-- Project 2: Masrofy -->
+    <div class="project-card reveal" onclick="openProjectModal(1)"> 
+      <div class="project-image">
+        <img src="images/masrofy2.png" alt="Masrofy Showcase" loading="lazy">
+      </div> 
+      <div class="project-content"> 
+        <h3>Masrofy — Smart Expense Tracker</h3> 
+        <div class="project-subtitle">Personal Finance Management</div>
+        <p>A smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.</p> 
+        <div class="tech-stack"> 
+          <span class="tech-tag">Flutter</span> 
+          <span class="tech-tag">Dart</span> 
+          <span class="tech-tag">Hive</span>
+          <span class="tech-tag">FL Chart</span>
+        </div> 
+        <div class="project-links" onclick="event.stopPropagation()"> 
+          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary"><i class="fab fa-github"></i> Source Code</a> 
+          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary"><i class="fas fa-external-link-alt"></i> Live Demo</a> 
+        </div> 
+      </div> 
+    </div> 
+
+  </div> 
+</section> 
+
+<!-- Testimonials Section -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title">What Clients <span class="gradient-text">Say</span></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-content">
+        <div class="testimonial-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Abdelrahman delivered an exceptional Flutter app that exceeded our expectations. His attention to detail and clean code architecture made the project a success. Highly recommended for any mobile development work."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SA</div>
+          <div class="author-info">
+            <h4>Sarah Ahmed</h4>
+            <p>Product Manager, TechStart</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-content">
+        <div class="testimonial-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Working with Abdelrahman was a fantastic experience. He understood our requirements perfectly and delivered a high-performance app on time. His expertise in Flutter and modern development practices is impressive."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MK</div>
+          <div class="author-info">
+            <h4>Mohamed Kamel</h4>
+            <p>CEO, Digital Solutions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-content">
+        <div class="testimonial-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <p class="testimonial-text">"Professional, skilled, and communicative. Abdelrahman transformed our concept into a beautiful, functional mobile application. The app performance is outstanding and the UI/UX is top-notch."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">NH</div>
+          <div class="author-info">
+            <h4>Nour Hassan</h4>
+            <p>Founder, AppVenture</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section (3 Tiers) -->
+<section id="pricing">
+  <div class="section-header reveal"> 
+    <div class="section-label">Pricing</div> 
+    <h2 class="section-title">My <span class="gradient-text">Pricing</span> Plans</h2> 
+  </div> 
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="price-card reveal">
+      <div class="price-header">
+        <div class="price-tier-name" style="color:#fbbf24;">STARTER</div>
+        <div class="price-range">
+          <div><span class="price-unit">MIN </span><span class="price-val">$15</span></div>
+          <div style="width:1px;height:30px;background:#334155;"></div>
+          <div><span class="price-unit">MAX </span><span class="price-val">$30</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">Simple apps · short timeline</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Best for simple utility or personal apps. Clean UI; on-time delivery; source code included.</p>
+      </div>
+      <div class="price-features">
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Up to 5 screens</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Firebase Auth (login/register)</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Provider state management</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> GitHub source code delivery</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> 1 round of revisions</div>
+        <div class="price-feature-item excluded"><i class="fas fa-times"></i> Firestore / real-time DB</div>
+        <div class="price-feature-item excluded"><i class="fas fa-times"></i> Store deployment</div>
+      </div>
+      <a href="https://wa.me/201123031944?text=Hi%20Abdelrahman!%20I'm%20interested%20in%20the%20Starter%20plan." class="btn-pricing outline">Get Started</a>
+    </div>
+
+    <!-- STANDARD (Featured) -->
+    <div class="price-card featured reveal">
+      <div class="popular-badge">⭐ Most Popular</div>
+      <div class="price-header">
+        <div class="price-tier-name" style="color:#34d399;">STANDARD</div>
+        <div class="price-range">
+          <div><span class="price-unit">MIN </span><span class="price-val">$35</span></div>
+          <div style="width:1px;height:30px;background:#334155;"></div>
+          <div><span class="price-unit">MAX </span><span class="price-val">$70</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">E-commerce & dashboards · mid complexity</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Ideal for e-commerce, dashboards, or productivity apps with real-time data and clean architecture.</p>
+      </div>
+      <div class="price-features">
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Up to 12 screens</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Firebase Auth + Firestore</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Provider or BLoC</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Real-time product/order data</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Custom UI (Figma-based)</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> 2 rounds of revisions</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Android + iOS build</div>
+        <div class="price-feature-item excluded"><i class="fas fa-times"></i> Store deployment</div>
+      </div>
+      <a href="https://wa.me/201123031944?text=Hi%20Abdelrahman!%20I'm%20interested%20in%20the%20Standard%20plan." class="btn-pricing featured-btn">Hire Me →</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="price-card reveal">
+      <div class="price-header">
+        <div class="price-tier-name" style="color:#22d3ee;">PRO</div>
+        <div class="price-range">
+          <div><span class="price-unit">MIN </span><span class="price-val">$75</span></div>
+          <div style="width:1px;height:30px;background:#334155;"></div>
+          <div><span class="price-unit">MAX </span><span class="price-val">$100</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">Full production apps · startup & launches</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Full production-ready app — multi-feature, optimized, deployed. Ideal for startups & launches.</p>
+      </div>
+      <div class="price-features">
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Unlimited screens</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Full Firebase integration</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> BLoC architecture</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Performance-optimized code</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Push Notifications setup</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Store submission</div>
+        <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> 3 rounds of revisions</div>
+      </div>
+      <a href="https://wa.me/201123031944?text=Hi%20Abdelrahman!%20I'm%20interested%20in%20the%20Pro%20plan." class="btn-pricing outline">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact Section (5 Cards + Form) --> 
+<section id="contact"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">Get In Touch</div> 
+    <h2 class="section-title">Let's <span class="gradient-text">Work</span> Together</h2> 
+  </div> 
+  <div class="contact-container"> 
+    <div class="contact-info reveal"> 
+      <h3>Have a project in mind?</h3> 
+      <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Let's create something amazing together.</p> 
+      <div class="contact-links"> 
+        <a href="mailto:abdulrahman.abuoshaifa@gmail.com" class="contact-link"> 
+          <i class="fas fa-envelope"></i> 
+          <div> 
+            <strong>Email</strong> 
+            <span>abdulrahman.abuoshaifa@gmail.com</span> 
+          </div> 
+        </a> 
+        <a href="https://wa.me/201123031944" class="contact-link"> 
+          <i class="fab fa-whatsapp" style="color:#25d366;"></i> 
+          <div> 
+            <strong>WhatsApp</strong> 
+            <span>+20 112 303 1944</span> 
+          </div> 
+        </a> 
+        <a href="tel:+201123031944" class="contact-link"> 
+          <i class="fas fa-phone-alt"></i> 
+          <div> 
+            <strong>Phone</strong> 
+            <span>+20 112 303 1944</span> 
+          </div> 
+        </a> 
+        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" class="contact-link"> 
+          <i class="fab fa-linkedin-in" style="color:#0077b5;"></i> 
+          <div> 
+            <strong>LinkedIn</strong> 
+            <span>Abdulrahman Abdullah</span> 
+          </div> 
+        </a> 
+        <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="contact-link"> 
+          <i class="fab fa-github"></i> 
+          <div> 
+            <strong>GitHub</strong> 
+            <span>@abdelrahmanabuoelwafa-cell</span> 
+          </div> 
+        </a> 
+      </div> 
+    </div> 
+
+    <form class="contact-form reveal" onsubmit="handleFormSubmit(event)"> 
+      <div class="form-group"> 
+        <label>Your Name</label> 
+        <input type="text" id="contactName" placeholder="John Doe" required> 
+      </div> 
+      <div class="form-group"> 
+        <label>Your Email</label> 
+        <input type="email" id="contactEmail" placeholder="john@example.com" required> 
+      </div> 
+      <div class="form-group"> 
+        <label>Message</label> 
+        <textarea id="contactMsg" placeholder="Tell me about your project..." required></textarea> 
+      </div> 
+      <button type="submit" id="contactBtn" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button> 
+    </form> 
+  </div> 
+</section> 
+
+<!-- Footer --> 
+<footer> 
+  <div class="footer-name">Abdelrahman Abdullah</div> 
+  <div class="footer-social"> 
+    <a href="https://github.com/abdelrahmanabuoelwafa-cell"><i class="fab fa-github"></i></a> 
+    <a href="https://www.linkedin.com/in/abdelrahman-abdullah/"><i class="fab fa-linkedin-in"></i></a> 
+    <a href="https://wa.me/201123031944"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:abdulrahman.abuoshaifa@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div> 
+  <p>&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
+</footer> 
+
+<!-- Project Detail Modal -->
+<div class="modal-overlay" id="projectModal" onclick="closeProjectModal()">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Three.js & Libraries --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/neon-border.js?v=7"></script>
+<script src="js/tornado.js?v=7"></script>
+<script src="js/firework-cursor.js?v=7"></script>
+
+<script> 
+// Mobile Menu Toggle 
+function toggleMenu() { 
+  document.getElementById('navMenu').classList.toggle('open'); 
+  document.querySelector('.hamburger').classList.toggle('open'); 
+} 
+function closeMenu() { 
+  document.getElementById('navMenu').classList.remove('open'); 
+  document.querySelector('.hamburger').classList.remove('open'); 
+} 
+
+// Navbar Scroll background change 
+window.addEventListener('scroll', () => { 
+  const nav = document.getElementById('navbar'); 
+  if (window.scrollY > 50) nav.classList.add('scrolled'); 
+  else nav.classList.remove('scrolled'); 
+}); 
+
+// Typing effect 
+const words = ["Flutter Developer", "Mobile App Engineer", "UI/UX Enthusiast"]; 
+let i = 0, j = 0, isDeleting = false; 
+function type() { 
+  const current = words[i]; 
+  const textEl = document.getElementById('typingText'); 
+  if (!textEl) return;
+  if (isDeleting) { 
+    textEl.textContent = current.substring(0, j - 1); 
+    j--; 
+  } else { 
+    textEl.textContent = current.substring(0, j + 1); 
+    j++; 
+  } 
+  if (!isDeleting && j === current.length) { 
+    isDeleting = true; 
+    setTimeout(type, 2000); 
+  } else if (isDeleting && j === 0) { 
+    isDeleting = false; 
+    i = (i + 1) % words.length; 
+    setTimeout(type, 500); 
+  } else { 
+    setTimeout(type, isDeleting ? 50 : 100); 
+  } 
+} 
+type(); 
+
+// Reveal Animations 
+const observer = new IntersectionObserver((entries) => { 
+  entries.forEach(entry => { 
+    if (entry.isIntersecting) { 
+      entry.target.classList.add('visible'); 
+      const progressBars = entry.target.querySelectorAll('.skill-progress'); 
+      progressBars.forEach(bar => { 
+        bar.style.width = bar.getAttribute('data-width') + '%'; 
+      }); 
+    } 
+  }); 
+}, { threshold: 0.1 }); 
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); 
+
+// Project Data & Modal System
+const projectDetails = [
+  {
+    title: "MovieVerse — Movie Explorer App",
+    subtitle: "Movies & Series Streaming",
+    image: "images/movie2.jpg",
+    desc: "MovieVerse is a cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.",
+    challenge: "Developing cross-platform applications with high responsiveness, clean networking logic, offline usability, and synchronized cloud stores without causing frame drops during media-heavy list rendering.",
+    solution: "Implemented Clean Architecture with strict layer separations (Core, Data, Domain, Presentation). Utilized BLoC for clean state containment, Hive for local database persistence enabling instant offline access, and responsive grid layouts ensuring visual continuity from compact mobile devices to tablets.",
+    results: "Dynamic TMDB API integration for up-to-the-minute trailers, reviews, and film databases. Blazing fast local cache using Hive database engine. Firebase Cloud sync for customized bookmarks. Fully responsive adaptation with layout switches. Custom micro-interactions and dark theme aesthetics matching standard Material 3 specs.",
+    features: [
+      "Dynamic TMDB API integration for up-to-the-minute trailers, reviews, and film databases.",
+      "Blazing fast local cache using Hive database engine.",
+      "Firebase Cloud database sync for customized bookmarks.",
+      "Fully responsive adaptation with layout switches.",
+      "Custom micro-interactions and dark theme aesthetics matching standard Material 3 specs."
+    ]
+  },
+  {
+    title: "Masrofy — Expense Tracker App",
+    subtitle: "Track • Manage • Grow",
+    image: "images/masrofy2.png",
+    desc: "Masrofy is a smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.",
+    challenge: "Building a comprehensive expense tracking app with intuitive UI, multi-currency support, and secure data management that works seamlessly offline.",
+    solution: "Flutter with clean architecture, local database (Hive) for offline-first experience, customizable budget categories, and real-time expense analytics with visual charts.",
+    results: "Full-featured expense tracker with multi-currency support (Saudi Riyal, US Dollar, UAE Dirhams, Euro), budget control with category limits, detailed statistics and charts, and a polished dark-themed UI.",
+    features: [
+      "Smart expense tracking with auto-categorization",
+      "Budget control with customizable limits per category",
+      "Insightful reports with visual charts and statistics",
+      "Multi-currency support (SAR, USD, AED, EUR)",
+      "Secure & private data handling (local-first, no cloud required)",
+      "Dark theme with smooth animations"
+    ]
+  }
+];
+
+function openProjectModal(index) {
+  const p = projectDetails[index];
+  if (!p) return;
+  const content = `
+    <div class="modal-media" style="width:100%;height:350px;background:#0d0d14;border-radius:16px;overflow:hidden;margin-bottom:20px;display:flex;align-items:center;justify-content:center;">
+      <img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:contain;object-position:center;">
+    </div>
+    <h2 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:4px;">${p.title}</h2>
+    <p style="font-size:14px;color:var(--neon);font-weight:600;margin-bottom:16px;">${p.subtitle}</p>
+    <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px;">${p.desc}</p>
+    <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:16px;">
+      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Challenge</h4>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:12px;">${p.challenge}</p>
+      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Solution</h4>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:12px;">${p.solution}</p>
+      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Results</h4>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px;">${p.results}</p>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:16px;">
+      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:12px;">Key Features</h4>
+      <ul style="list-style:none;padding:0;">
+        ${p.features.map(f => `<li style="font-size:14px;color:var(--muted);margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-check-circle" style="color:var(--neon);margin-top:3px;"></i> <span>${f}</span></li>`).join('')}
+      </ul>
+    </div>
+    <div style="margin-top:24px;display:flex;gap:12px;">
+      <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+      <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+    </div>
+  `;
+  document.getElementById('modalContent').innerHTML = content;
+  document.getElementById('projectModal').classList.add('open');
+}
+
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('open');
+}
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('contactBtn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending message...';
+  btn.style.background = '#9333EA';
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+    btn.style.background = '#10b981';
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactMsg').value = '';
+    setTimeout(() => {
+      btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+      btn.style.background = 'var(--primary)';
+    }, 3500);
+  }, 1200);
+}
+
+// Initialize Neon Glowing Borders & WebGL Tornado Background
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.VanillaNeonBorder) {
+    new VanillaNeonBorder(document.querySelector('.hero-top-image'), {
+      color: '#A855F7',
+      thickness: 4,
+      borderSize: 45,
+      glow: 100,
+      speed: 12,
+      rounded: 100
+    });
+
+    new VanillaNeonBorder(document.querySelector('.about-image'), {
+      color: '#A855F7',
+      thickness: 4,
+      borderSize: 45,
+      glow: 100,
+      speed: 10,
+      rounded: 100
+    });
+  }
+
+  // 3D Tornado WebGL Background Engine
+  (function() {
+    var canvas = document.getElementById("vortex-canvas");
+    var container = document.getElementById("vortex-container");
+    if (!canvas || !container || !window.createVortex || typeof THREE === "undefined") return;
+    var config = {
+      floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
+      waistAt: 0.5, twist: 3, zoom: 75,
+      flowDir: 1, flowSpeed: 0.1,
+      lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
+      showDots: true, dotCount: 1200, dotSize: 0.02,
+      dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
+      showComets: true, cometCount: 4, cometSpeed: 0.08,
+      cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
+      cometDelay: 6, collideForce: 0.6,
+      hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
+    };
+    window.createVortex(canvas, container, { current: config });
+  })();
+});
+</script> 
+
+<script>
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to dark
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+
+// Toggle theme function
+function toggleTheme() {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+}
+
+// Add click event listener
+themeToggle.addEventListener('click', toggleTheme);
+
+// Add keyboard support
+themeToggle.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    toggleTheme();
+  }
+});
+
+// Keyboard Navigation for Main Content
+document.addEventListener('keydown', (e) => {
+  // Tab navigation enhancement
+  if (e.key === 'Tab') {
+    document.body.classList.add('keyboard-nav');
+  }
+});
+
+document.addEventListener('mousedown', () => {
+  document.body.classList.remove('keyboard-nav');
+});
+
+// Service Worker not used locally (no service-worker.js) - registrations are cleaned up below.
+</script>
+
+</div>
+<!-- Build marker: confirms the newest version is loaded -->
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v7</div>
+<script>
+  var bn = document.getElementById('build-note');
+  if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
+    if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
+  }
+</script>
+</body> 
+</html>
+
+
+
+
+

@@ -1,0 +1,33 @@
+{
+  "name": "Abdelrahman Abdullah - Flutter Developer",
+  "short_name": "Abdelrahman.dev",
+  "description": "Professional Flutter developer specializing in cross-platform mobile applications",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#A855F7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/6037452442028413306.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/6037452442028413306.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "mobile"],
+  "screenshots": [
+    {
+      "src": "images/movie2.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ]
+}
