@@ -1557,6 +1557,7 @@ section{padding:100px 60px;position:relative;z-index:1}
 .project-links{ 
   display:flex; 
   gap:12px; 
+  align-items:center; 
 } 
 .project-btn{ 
   flex:1; 
@@ -3184,7 +3185,16 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(0)"><i class="fas fa-eye"></i> See More</button> 
-          <button class="project-btn secondary" onclick="openProjectVideo('images/movieberse.mp4', 'MovieVerse')"><i class="fas fa-play"></i> View Project</button> 
+          <div class="demo-card" onclick="openProjectVideo('images/movieberse.mp4', 'MovieVerse')" style="flex: 1.5; margin: 0; padding: 8px;">
+            <div class="demo-thumbnail" style="width: 70px; height: 50px;">
+              <img src="images/movie2.jpg" alt="MovieVerse Demo" onerror="this.style.display='none'">
+              <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="demo-info">
+              <h4 style="font-size: 13px;">Watch Web<br>Project</h4>
+            </div>
+            <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
+          </div>
         </div> 
       </div> 
     </div> 
@@ -3206,7 +3216,16 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
-          <button class="project-btn secondary" onclick="openProjectVideo('images/masrofy.mp4', 'Masrofy')"><i class="fas fa-play"></i> View Project</button> 
+          <div class="demo-card" onclick="openProjectVideo('images/masrofy.mp4', 'Masrofy')" style="flex: 1.5; margin: 0; padding: 8px;">
+            <div class="demo-thumbnail" style="width: 70px; height: 50px;">
+              <img src="images/masrofy2.png" alt="Masrofy Demo" onerror="this.style.display='none'">
+              <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="demo-info">
+              <h4 style="font-size: 13px;">Watch Mobile<br>Project</h4>
+            </div>
+            <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
+          </div>
         </div> 
       </div> 
     </div> 
