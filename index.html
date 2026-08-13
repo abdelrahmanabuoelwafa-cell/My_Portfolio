@@ -2261,153 +2261,150 @@ footer p{
 [data-theme="light"] .lamp-body{background:linear-gradient(180deg,#fff,#e2e8f0);}
 [data-theme="light"] .lamp-form{box-shadow:0 20px 45px rgba(15,23,42,.15);}
 
-/* ===== Interactive Contact Lamp (right column) ===== */
-.interactive-contact-wrapper {
+/* --- حاوية الجانب الأيمن التفاعلي --- */
+.interactive-lamp-side {
   position: relative;
+  background: transparent;
+  border: none;
   min-height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  overflow: hidden;
+  padding: 30px;
 }
 
-.lamp-scene {
+/* --- مشهد الأباجورة المصغر والاحترافي --- */
+.lamp-scene-box {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  z-index: 10;
+  justify-content: center;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
 }
-.lamp-scene.fade-out {
+
+.lamp-scene-box.fade-out {
   opacity: 0;
-  transform: translateY(-20px) scale(0.9);
+  transform: scale(0.9);
   pointer-events: none;
 }
 
-.interactive-contact-wrapper .lamp-body {
+/* هيكل الأباجورة المصغر */
+.mini-lamp {
+  position: relative;
+  width: 150px;
+  height: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 }
-.interactive-contact-wrapper .lamp-shade {
-  width: 140px;
-  height: 70px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 70px 70px 0 0;
+
+.mini-shade {
+  width: 130px;
+  height: 60px;
+  background: linear-gradient(180deg, #fff 0%, #d8d3be 100%);
+  border-radius: 65px 65px 10px 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
   position: relative;
+  z-index: 5;
+}
+
+.mini-bulb {
+  width: 24px;
+  height: 32px;
+  background: #d4ccb0;
+  border-radius: 50% 50% 40% 40%;
+  margin-top: -8px;
+  z-index: 4;
+  transition: all 0.4s ease;
+}
+.lamp-scene-box.lit .mini-bulb {
+  background: #ffec8b;
+  box-shadow: 0 0 15px #ffec8b, 0 0 35px rgba(255, 215, 0, 0.8);
+}
+
+.mini-stem {
+  width: 8px;
+  height: 110px;
+  background: linear-gradient(90deg, #888, #ccc, #888);
+  border-radius: 4px;
+  margin-top: -4px;
   z-index: 3;
-  box-shadow: inset 0 -5px 15px rgba(0,0,0,0.5);
 }
-.interactive-contact-wrapper .lamp-bulb {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
-  margin-top: -20px;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-.interactive-contact-wrapper .lamp-bulb.illuminated {
-  background: #fff;
-  box-shadow: 0 0 30px #fff, 0 0 60px var(--neon), 0 0 100px var(--primary);
-}
-.interactive-contact-wrapper .lamp-stand {
-  width: 12px;
-  height: 120px;
-  background: var(--border);
-  margin-top: -10px;
-  z-index: 1;
-}
-.interactive-contact-wrapper .lamp-base-plate {
-  width: 90px;
+
+.mini-base {
+  width: 80px;
   height: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-.interactive-contact-wrapper .pull-mechanism {
-  position: absolute;
-  top: 70px;
-  right: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: grab;
+  background: linear-gradient(180deg, #e2dcce, #9e9782);
+  border-radius: 50%;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
   z-index: 4;
 }
-.interactive-contact-wrapper .pull-mechanism:active { cursor: grabbing; }
-.interactive-contact-wrapper .pull-cord {
-  width: 3px;
-  height: 60px;
-  background: var(--muted);
+
+/* حبل السحب */
+.mini-cord {
+  position: absolute;
+  top: 45px;
+  right: 35px;
+  width: 2px;
+  height: 65px;
+  background: #888;
+  z-index: 6;
+  transform-origin: top;
+  transition: transform 0.2s ease;
 }
-.interactive-contact-wrapper .pull-handle {
-  width: 20px;
-  height: 30px;
-  background: var(--primary);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(168, 85, 247, 0.4);
+
+.mini-cord-handle {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--neon), var(--secondary));
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon);
+  cursor: pointer;
 }
-.interactive-contact-wrapper .connect-hint {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  animation: floatHint 2s infinite ease-in-out;
+
+.mini-cord.pull {
+  transform: rotate(10deg);
 }
-.interactive-contact-wrapper .hint-text {
+
+/* --- الفورم المصغر والمخفي --- */
+.compact-form {
+  width: 100%;
+  max-width: 380px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.compact-form .form-group input, 
+.compact-form .form-group textarea {
+  padding: 12px 14px;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--neon);
-  border: 1px solid var(--neon);
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: rgba(168, 85, 247, 0.1);
 }
-.interactive-contact-wrapper .hint-arrow {
-  font-size: 18px;
-  color: var(--neon);
+.compact-form .form-group textarea {
+  min-height: 90px;
 }
-@keyframes floatHint {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
-.interactive-contact-wrapper .compact-form {
-  max-width: 420px;
-  padding: 30px;
-  margin: 0 auto;
-}
-.interactive-contact-wrapper .compact-form .form-group input,
-.interactive-contact-wrapper .compact-form .form-group textarea {
-  padding: 12px;
-}
-.interactive-contact-wrapper .compact-form .form-group textarea {
-  min-height: 100px;
-}
-.interactive-contact-wrapper .hidden-form {
+
+.hidden-form {
   opacity: 0;
-  transform: translateY(40px) scale(0.9);
+  transform: translateY(30px) scale(0.95);
   pointer-events: none;
   position: absolute;
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.interactive-contact-wrapper .hidden-form.revealed {
+
+.hidden-form.revealed {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
   position: relative;
-  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.15);
 }
-[data-theme="light"] .interactive-contact-wrapper .lamp-shade{background:#fff;}
-[data-theme="light"] .interactive-contact-wrapper .lamp-base-plate{background:#fff;border-color:#e2e8f0;}
-[data-theme="light"] .interactive-contact-wrapper .lamp-bulb{background:rgba(15,23,42,.06);}
 
 /* Responsive */ 
 @media(max-width:1024px){ 
@@ -3223,21 +3220,17 @@ footer p{
       </div> 
     </div> 
 
-    <div class="interactive-contact-wrapper reveal" id="interactiveWrapper">
-      <div class="lamp-scene" id="lampScene">
-        <div class="lamp-body">
-          <div class="lamp-shade"></div>
-          <div class="lamp-bulb" id="lampBulb"></div>
-          <div class="lamp-stand"></div>
-          <div class="lamp-base-plate"></div>
-        </div>
-        <div class="pull-mechanism" id="pullMechanism">
-          <div class="pull-cord" id="pullCord"></div>
-          <div class="pull-handle" id="pullHandle"></div>
-        </div>
-        <div class="connect-hint">
-          <span class="hint-text">Pull to connect</span>
-          <i class="fas fa-chevron-down hint-arrow"></i>
+    <div class="interactive-lamp-side" id="interactiveSide">
+      <div class="lamp-scene-box" id="lampSceneBox">
+        <div class="mini-lamp">
+          <div class="mini-shade"></div>
+          <div class="mini-bulb" id="miniBulb"></div>
+          <div class="mini-stem"></div>
+          <div class="mini-base"></div>
+
+          <div class="mini-cord" id="miniCord">
+            <div class="mini-cord-handle" id="miniCordHandle"></div>
+          </div>
         </div>
       </div>
 
@@ -3645,76 +3638,32 @@ function sendLampMessage() {
   glow.classList.remove('on');
 }
 
-// ===== Interactive Contact Lamp (pull cord to reveal form) =====
-(function() {
-  const pullMechanism = document.getElementById('pullMechanism');
-  const pullCord = document.getElementById('pullCord');
-  const pullHandle = document.getElementById('pullHandle');
-  const lampBulb = document.getElementById('lampBulb');
-  const lampScene = document.getElementById('lampScene');
-  const contactForm = document.getElementById('actualContactForm');
-  if (!pullMechanism || !pullHandle || !lampBulb || !lampScene || !contactForm) return;
+// ===== Interactive Contact Lamp (pull to reveal message form) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const lampSceneBox = document.getElementById('lampSceneBox');
+  const miniCord = document.getElementById('miniCord');
+  const miniCordHandle = document.getElementById('miniCordHandle');
+  const actualContactForm = document.getElementById('actualContactForm');
+  if (!lampSceneBox || !miniCordHandle || !actualContactForm) return;
 
-  let isDragging = false;
-  let startY = 0;
-  const triggerDistance = 45;
-  const originalCordHeight = 60;
+  function triggerLampAction() {
+    miniCord.classList.add('pull');
+    setTimeout(() => miniCord.classList.remove('pull'), 200);
 
-  pullHandle.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startY = e.clientY;
-    e.preventDefault();
-  });
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    handleDrag(e.clientY);
-  });
-  window.addEventListener('mouseup', () => {
-    if (isDragging) resetPull();
-  });
+    lampSceneBox.classList.add('lit');
 
-  pullHandle.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    startY = e.touches[0].clientY;
-  }, { passive: true });
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    handleDrag(e.touches[0].clientY);
-  }, { passive: true });
-  window.addEventListener('touchend', () => {
-    if (isDragging) resetPull();
-  });
-
-  function handleDrag(currentY) {
-    const diff = Math.max(0, currentY - startY);
-    if (diff <= triggerDistance + 15) {
-      pullCord.style.height = (originalCordHeight + diff) + 'px';
-      pullHandle.style.transform = 'translateY(' + diff + 'px)';
-    }
-    if (diff > triggerDistance) {
-      triggerLight();
-    }
-  }
-
-  function resetPull() {
-    isDragging = false;
-    pullCord.style.height = originalCordHeight + 'px';
-    pullHandle.style.transform = 'translateY(0)';
-  }
-
-  function triggerLight() {
-    isDragging = false;
-    resetPull();
-    lampBulb.classList.add('illuminated');
     setTimeout(() => {
-      lampScene.classList.add('fade-out');
+      lampSceneBox.classList.add('fade-out');
       setTimeout(() => {
-        lampScene.style.display = 'none';
-        contactForm.classList.add('revealed');
-      }, 600);
-    }, 500);
+        lampSceneBox.style.display = 'none';
+        actualContactForm.classList.add('revealed');
+      }, 500);
+    }, 600);
   }
-})();
+
+  miniCordHandle.addEventListener('click', triggerLampAction);
+});
+
 </script>
 
 </div>
