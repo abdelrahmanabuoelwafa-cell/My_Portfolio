@@ -2344,6 +2344,29 @@ footer p{
   z-index: 4;
 }
 
+/* Light theme: dark blue lamp so it stands out on light background */
+[data-theme="light"] .mini-shade {
+  background: linear-gradient(180deg, #3b4a6b 0%, #1e293b 100%);
+  box-shadow: 0 6px 18px rgba(30, 41, 59, 0.35);
+}
+[data-theme="light"] .mini-bulb {
+  background: #8b9bb8;
+}
+[data-theme="light"] .lamp-scene-box.lit .mini-bulb {
+  background: #ffd978;
+  box-shadow: 0 0 18px #ffd978, 0 0 40px rgba(255, 200, 80, 0.85);
+}
+[data-theme="light"] .mini-stem {
+  background: linear-gradient(90deg, #5c6b88, #aebcd4, #5c6b88);
+}
+[data-theme="light"] .mini-base {
+  background: linear-gradient(180deg, #4a5a78, #26344d);
+  box-shadow: 0 6px 14px rgba(30, 41, 59, 0.3);
+}
+[data-theme="light"] .mini-cord {
+  background: #5c6b88;
+}
+
 /* حبل السحب */
 .mini-cord {
   position: absolute;
