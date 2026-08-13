@@ -2397,6 +2397,91 @@ footer p{
   transform: rotate(10deg);
 }
 
+/* --- Video Modal Styles --- */
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 12, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-modal-content {
+  background: var(--card-bg);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.15);
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.video-modal-overlay.active .video-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.video-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.video-modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.close-video-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-video-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  outline: none;
+}
+
 /* --- الفورم المصغر والمخفي --- */
 .compact-form {
   width: 100%;
@@ -3379,6 +3464,7 @@ const projectDetails = [
     title: "MovieVerse — Movie Explorer App",
     subtitle: "Movies & Series Streaming",
     image: "images/movie2.jpg",
+    video: "images/movieberse.mp4",
     tech: ["Flutter", "REST API", "Firebase", "Hive"],
     desc: "MovieVerse is a cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.",
     challenge: "Developing cross-platform applications with high responsiveness, clean networking logic, offline usability, and synchronized cloud stores without causing frame drops during media-heavy list rendering.",
@@ -3396,6 +3482,7 @@ const projectDetails = [
     title: "Masrofy — Expense Tracker App",
     subtitle: "Track • Manage • Grow",
     image: "images/masrofy2.png",
+    video: "images/masrofy.mp4",
     tech: ["Flutter", "Dart", "Hive", "FL Chart"],
     desc: "Masrofy is a smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.",
     challenge: "Building a comprehensive expense tracking app with intuitive UI, multi-currency support, and secure data management that works seamlessly offline.",
@@ -3481,7 +3568,7 @@ function openProjectModal(index) {
       </div>
       <div class="project-action-buttons">
         <a href="#" class="btn-premium secondary-btn"><i class="fab fa-github"></i> Source Code</a>
-        <a href="https://youtube.com/@abdelrahmanabuoelwafa" target="_blank" class="btn-premium primary-btn"><i class="fas fa-play"></i> View Project Video</a>
+        ${p.video ? `<button class="btn-premium primary-btn" onclick="openProjectVideo('${p.video}', '${String(p.title.split(' — ')[0]).replace(/'/g, '')}')"><i class="fas fa-play"></i> View Project Video</button>` : `<a href="https://youtube.com/@abdelrahmanabuoelwafa" target="_blank" class="btn-premium primary-btn"><i class="fas fa-play"></i> View Project Video</a>`}
       </div>
     </div>
   `;
@@ -3687,6 +3774,62 @@ document.addEventListener('DOMContentLoaded', () => {
   miniCordHandle.addEventListener('click', triggerLampAction);
 });
 
+</script>
+
+<!-- Video Player Modal Overlay -->
+<div class="video-modal-overlay" id="videoModalOverlay">
+  <div class="video-modal-content">
+    <div class="video-modal-header">
+      <h3 id="videoModalTitle">Project Demo</h3>
+      <button class="close-video-btn" id="closeVideoBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="video-wrapper">
+      <video id="projectVideoPlayer" controls controlsList="nodownload">
+        <source src="" type="video/mp4" id="videoSource">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const videoModal = document.getElementById('videoModalOverlay');
+  const closeVideoBtn = document.getElementById('closeVideoBtn');
+  const videoPlayer = document.getElementById('projectVideoPlayer');
+  const videoTitle = document.getElementById('videoModalTitle');
+
+  window.openProjectVideo = function(videoSrc, projectName) {
+    videoTitle.textContent = projectName + " Demo";
+    videoPlayer.src = videoSrc;
+
+    videoModal.classList.add('active');
+
+    setTimeout(() => {
+      videoPlayer.play().catch(e => console.log("Auto-play prevented:", e));
+    }, 300);
+  };
+
+  function closeVideoModal() {
+    videoModal.classList.remove('active');
+    videoPlayer.pause();
+    videoPlayer.currentTime = 0;
+  }
+
+  closeVideoBtn.addEventListener('click', closeVideoModal);
+
+  videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+      closeVideoModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeVideoModal();
+  });
+});
 </script>
 
 </div>
