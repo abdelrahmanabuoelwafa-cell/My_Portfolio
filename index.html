@@ -395,8 +395,10 @@ body::after{
   transition:all .3s; 
 } 
 #navbar.scrolled{padding:12px 60px;background:rgba(17,17,17,.95)} 
-.nav-logo{font-size:24px;font-weight:800;letter-spacing:-1px;color:var(--neon)} 
-.nav-logo span{color:#fff} 
+.nav-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:26px;font-weight:800;color:#fff;letter-spacing:1px;transition:transform .3s ease}
+.nav-logo:hover{transform:scale(1.05)}
+.nav-logo .code-bracket{color:var(--muted);font-size:22px;font-weight:700;letter-spacing:0}
+.nav-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)} 
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;min-width:44px;min-height:44px;padding:10px;} 
 .hamburger span{width:25px;height:2px;background:var(--text);transition:all .3s} 
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)} 
@@ -2057,7 +2059,7 @@ footer p{
 [data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
 [data-theme="light"] #navbar{background:rgba(255,255,255,.85)}
 [data-theme="light"] #navbar.scrolled{background:rgba(255,255,255,.92)}
-[data-theme="light"] .nav-logo span{color:#0f172a}
+[data-theme="light"] .nav-logo{color:#0f172a}
 [data-theme="light"] .hero-name,
 [data-theme="light"] .project-content h3{
   background:linear-gradient(135deg,#1e293b 0%, var(--neon) 100%);
@@ -2480,7 +2482,7 @@ footer p{
 
 <!-- Navbar --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
-  <div class="nav-logo" aria-label="Abdelrahman Abdullah Logo">AA<span>.</span></div> 
+  <a href="#hero" class="nav-logo" aria-label="Abdelrahman Abdullah Logo"><span class="code-bracket">&lt;/&gt;</span><span class="logo-name">A<span class="neon-dot">.</span>A</span></a> 
   <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
     <span></span><span></span><span></span> 
   </button> 
@@ -3291,9 +3293,9 @@ footer p{
 
 <!-- Three.js & Libraries --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/neon-border.js?v=20"></script>
-<script src="js/tornado.js?v=20"></script>
-<script src="js/firework-cursor.js?v=20"></script>
+<script src="js/neon-border.js?v=21"></script>
+<script src="js/tornado.js?v=21"></script>
+<script src="js/firework-cursor.js?v=21"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -3717,7 +3719,7 @@ function sendLampMessage() {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v20</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v21</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
