@@ -2669,7 +2669,87 @@ footer p{
   .hero-top-image{width:120px;height:120px} 
   .about-image{width:280px;height:280px}
   .project-image{height:260px;}
-} 
+}
+
+/* Responsive hardening for all new premium sections */
+body{overflow-x:hidden;}
+
+/* Tablet: (max-width: 1024px) refinements */
+@media(max-width:1024px){
+  .demo-buttons-container{flex-wrap:wrap;}
+  .demo-card{min-width:220px;}
+  .contact-container{gap:40px;}
+  .interactive-lamp-side{min-height:440px;}
+}
+
+/* Mobile + small mobile fixes */
+@media(max-width:768px){
+  section{padding:70px 20px;}
+  .hero-name{font-size:32px;line-height:1.2;}
+  .hero-desc{font-size:15px;line-height:1.6;margin-bottom:30px;}
+  .section-title{font-size:26px;}
+  .section-header{margin-bottom:40px;}
+  .contact-container{gap:48px;}
+}
+
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+  .stat-card{padding:26px 18px;}
+  .car-boxes-container{grid-template-columns:1fr;gap:20px;}
+  .skills-category{grid-template-columns:1fr;}
+  .exp-cards-stack .car-box{border-radius:14px;}
+  section{padding:64px 18px;}
+  body{font-size:15px;}
+}
+
+/* Contact: stack info on top, lamp below on mobile */
+@media(max-width:768px){
+  .contact-info{order:1;}
+  .interactive-lamp-side{order:2;min-height:340px;width:100%;}
+  .interactive-lamp-side .hidden-form{position:relative;}
+  .interactive-lamp-side .hidden-form.revealed{position:relative;width:100%;max-width:100%;box-sizing:border-box;padding:20px 16px;}
+  .mini-lamp{transform:scale(0.72);transform-origin:center;}
+  .pull-to-connect-btn{font-size:10px;padding:7px 14px;}
+}
+
+/* Video demo cards inside project cards */
+@media(max-width:768px){
+  .project-links{flex-wrap:wrap;}
+  .project-links .project-btn{flex:1 1 100%;}
+  .project-links .demo-card{flex:1 1 100%;margin-top:4px;min-width:0;}
+}
+
+@media(max-width:768px){
+  .demo-buttons-container{flex-direction:column;align-items:stretch;}
+  .demo-card{width:100%;min-width:0;}
+  .testimonial-card{padding:28px 20px;}
+  footer{padding:44px 20px;}
+  .footer-platforms{flex-wrap:wrap;justify-content:center;gap:14px;}
+}
+
+/* Small phones: (max-width: 480px) */
+@media(max-width:480px){
+  section{padding:56px 14px;}
+  .hero-name{font-size:27px;}
+  .hero-top-image{width:100px;height:100px;}
+  .about-image{width:240px;height:240px;}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .stat-card{padding:20px 12px;}
+  .stat-card h3{font-size:26px;}
+  .contact-link{padding:14px;}
+  .demo-card{gap:12px;padding:10px;}
+  .demo-thumbnail{width:64px;height:46px;}
+  .demo-info h4{font-size:12px;}
+  .interactive-lamp-side{min-height:300px;}
+  .mini-lamp{transform:scale(0.68);}
+  .video-modal-content{width:95%;}
+  .video-modal-header{padding:12px 16px;}
+  .form-group input,.form-group textarea{padding:13px;}
+  .submit-btn{padding:14px;}
+  .nav-logo .logo-name{font-size:20px;}
+  .footer-name{font-size:20px;}
+}
+
 </style> 
 <base target="_blank"> 
 </head> 
