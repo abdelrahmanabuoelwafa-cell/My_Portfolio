@@ -1620,11 +1620,10 @@ footer{
 } 
 .footer-freelance{
   display:flex;
+  flex-direction:column;
   align-items:center;
-  justify-content:center;
-  gap:16px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
+  gap:14px;
+  margin-bottom:20px;
 }
 .footer-freelance-label{
   font-size:13px;
@@ -1633,28 +1632,38 @@ footer{
   text-transform:uppercase;
   letter-spacing:1px;
 }
-.footer-freelance-link{
-  display:inline-flex;
+.footer-platforms{
+  display:flex;
   align-items:center;
-  gap:8px;
-  padding:8px 18px;
-  background:var(--card-bg);
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.footer-platform-link{
+  width:64px;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:50px;
-  font-size:13px;
-  font-weight:700;
-  color:var(--text);
+  border-radius:16px;
+  padding:10px;
+  overflow:hidden;
   transition:all .3s cubic-bezier(0.4,0,0.2,1);
 }
-.footer-freelance-link i{
-  color:var(--neon);
+.footer-platform-link img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
-.footer-freelance-link:hover{
+.footer-platform-link:hover{
   border-color:var(--neon);
-  color:var(--neon);
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(168,85,247,.35);
-} 
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 12px 28px rgba(168,85,247,.45);
+}
+[data-theme="light"] .footer-platform-link{background:#fff;border-color:#e2e8f0;box-shadow:0 4px 14px rgba(0,0,0,.06);}
+[data-theme="light"] .footer-platform-link:hover{border-color:var(--neon);box-shadow:0 12px 28px rgba(147,51,234,.18);} 
 footer p{ 
   color:var(--muted); 
   font-size:14px; 
@@ -2655,20 +2664,22 @@ footer p{
 <!-- Footer --> 
 <footer> 
   <div class="footer-name">Abdelrahman Abdullah</div> 
-  <div class="footer-social"> 
-    <a href="https://github.com/abdelrahmanabuoelwafa-cell"><i class="fab fa-github"></i></a> 
-    <a href="https://www.linkedin.com/in/abdelrahman-abdullah/"><i class="fab fa-linkedin-in"></i></a> 
-    <a href="https://wa.me/201123031944"><i class="fab fa-whatsapp"></i></a>
-    <a href="mailto:abdulrahman.abuoshaifa@gmail.com"><i class="fas fa-envelope"></i></a>
-  </div> 
   <div class="footer-freelance">
     <span class="footer-freelance-label">Find me on:</span>
-    <a href="https://khamsat.com/user/abdulrahmanabuoelwafa" class="footer-freelance-link" target="_blank" rel="noopener">
-      <i class="fas fa-briefcase"></i> خمسات (Khamsat)
-    </a>
-    <a href="https://nafzly.com" class="footer-freelance-link" target="_blank" rel="noopener">
-      <i class="fas fa-rocket"></i> نفذلي (Nafzly)
-    </a>
+    <div class="footer-platforms">
+      <a href="https://mostaql.com/onboarding/profile" class="footer-platform-link" target="_blank" rel="noopener" title="مستقل (Mostaql)" aria-label="Mostaql profile">
+        <img src="images/مستقل.jpeg" alt="مستقل (Mostaql)" loading="lazy">
+      </a>
+      <a href="https://nafezly.com/u/ENGabdelrahamn" class="footer-platform-link" target="_blank" rel="noopener" title="نفذلي (Nafzly)" aria-label="Nafzly profile">
+        <img src="images/نفذلي.jpg" alt="نفذلي (Nafzly)" loading="lazy">
+      </a>
+      <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="footer-platform-link" target="_blank" rel="noopener" title="خمسات (Khamsat)" aria-label="Khamsat profile">
+        <img src="images/خمسات.png" alt="خمسات (Khamsat)" loading="lazy">
+      </a>
+      <a href="https://www.freelancer.com/u/abdelrahmana089" class="footer-platform-link" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile">
+        <img src="images/فريلانسر.jpg" alt="Freelancer" loading="lazy">
+      </a>
+    </div>
   </div>
   <p>&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
 </footer> 
@@ -2683,9 +2694,9 @@ footer p{
 
 <!-- Three.js & Libraries --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/neon-border.js?v=8"></script>
-<script src="js/tornado.js?v=8"></script>
-<script src="js/firework-cursor.js?v=8"></script>
+<script src="js/neon-border.js?v=9"></script>
+<script src="js/tornado.js?v=9"></script>
+<script src="js/firework-cursor.js?v=9"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -3000,7 +3011,7 @@ function sendLampMessage() {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v8</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v9</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
