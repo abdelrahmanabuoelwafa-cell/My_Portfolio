@@ -1626,6 +1626,219 @@ section{padding:100px 60px;position:relative;z-index:1}
 }
 .modal-close:hover{border-color:var(--neon);color:#fff;}
 
+/* --- Premium Project Details Layout (Project Modal) --- */
+.premium-project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header Section */
+.project-header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-badge {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--neon);
+  background: rgba(168, 85, 247, 0.15);
+  padding: 6px 14px;
+  border-radius: 50px;
+}
+
+.project-main-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.project-overview {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.tech-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tech-pill i {
+  color: var(--neon);
+}
+
+/* Dividers */
+.premium-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin: 8px 0;
+}
+
+/* CAR Grid (scoped so Experience-section CAR stays intact) */
+.project-car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.premium-project-details .car-box {
+  padding: 20px;
+  border-radius: 16px;
+  border-top: 3px solid;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.premium-project-details .box-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.premium-project-details .box-header h4 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.premium-project-details .car-box p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* CAR Colors (Consistent with Experience section) */
+.premium-project-details .challenge-box { border-top-color: #f59e0b; }
+.premium-project-details .challenge-box .box-header { color: #f59e0b; }
+
+.premium-project-details .action-box { border-top-color: #3b82f6; }
+.premium-project-details .action-box .box-header { color: #3b82f6; }
+
+.premium-project-details .result-box { border-top-color: #10b981; }
+.premium-project-details .result-box .box-header { color: #10b981; }
+
+/* Features Section */
+.section-micro-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--neon);
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-item .text-neon {
+  color: var(--neon);
+  margin-top: 3px;
+}
+
+.feature-item span {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* Action Buttons */
+.project-action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.btn-premium {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.secondary-btn:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+  background: rgba(168, 85, 247, 0.05);
+}
+
+/* Light theme overrides */
+[data-theme="light"] .project-main-title { color: #0f172a; }
+[data-theme="light"] .premium-project-details .car-box { background: rgba(248, 250, 252, 0.9); }
+[data-theme="light"] .premium-project-details .challenge-box { background: rgba(245, 158, 11, 0.08); }
+[data-theme="light"] .premium-project-details .action-box { background: rgba(59, 130, 246, 0.08); }
+[data-theme="light"] .premium-project-details .result-box { background: rgba(16, 185, 129, 0.08); }
+[data-theme="light"] .feature-item { background: #fff; border-color: #e2e8f0; }
+[data-theme="light"] .tech-pill { background: #f8fafc; border-color: #cbd5e1; color: #334155; }
+[data-theme="light"] .project-badge { background: rgba(147, 51, 234, 0.12); }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-car-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-action-buttons {
+    flex-direction: column;
+  }
+}
+
 /* Contact */ 
 .contact-container{ 
   max-width:1000px; 
@@ -3078,9 +3291,9 @@ footer p{
 
 <!-- Three.js & Libraries --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/neon-border.js?v=19"></script>
-<script src="js/tornado.js?v=19"></script>
-<script src="js/firework-cursor.js?v=19"></script>
+<script src="js/neon-border.js?v=20"></script>
+<script src="js/tornado.js?v=20"></script>
+<script src="js/firework-cursor.js?v=20"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -3148,6 +3361,7 @@ const projectDetails = [
     title: "MovieVerse — Movie Explorer App",
     subtitle: "Movies & Series Streaming",
     image: "images/movie2.jpg",
+    tech: ["Flutter", "REST API", "Firebase", "Hive"],
     desc: "MovieVerse is a cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.",
     challenge: "Developing cross-platform applications with high responsiveness, clean networking logic, offline usability, and synchronized cloud stores without causing frame drops during media-heavy list rendering.",
     solution: "Implemented Clean Architecture with strict layer separations (Core, Data, Domain, Presentation). Utilized BLoC for clean state containment, Hive for local database persistence enabling instant offline access, and responsive grid layouts ensuring visual continuity from compact mobile devices to tablets.",
@@ -3164,6 +3378,7 @@ const projectDetails = [
     title: "Masrofy — Expense Tracker App",
     subtitle: "Track • Manage • Grow",
     image: "images/masrofy2.png",
+    tech: ["Flutter", "Dart", "Hive", "FL Chart"],
     desc: "Masrofy is a smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.",
     challenge: "Building a comprehensive expense tracking app with intuitive UI, multi-currency support, and secure data management that works seamlessly offline.",
     solution: "Flutter with clean architecture, local database (Hive) for offline-first experience, customizable budget categories, and real-time expense analytics with visual charts.",
@@ -3181,6 +3396,7 @@ const projectDetails = [
     title: "StudySync — Smart Study Planner",
     subtitle: "Study Organization • Focus",
     image: "images/STUDYSYNC.jpg",
+    tech: ["Flutter", "Firebase", "AI Integration", "REST APIs"],
     desc: "StudySync is a focused study companion that keeps your learning on track. It brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.",
     challenge: "Designing an intuitive planner that balances feature richness with a calm, minimal interface — without overwhelming students juggling multiple courses.",
     solution: "Built with Flutter and Dart using a clean, modular architecture. Focused on smooth navigation, clear visual hierarchy, and effortless schedule management.",
@@ -3196,6 +3412,7 @@ const projectDetails = [
     title: "MediMind — Health Companion",
     subtitle: "Wellness • Medication Reminders",
     image: "images/MediMind.jpg",
+    tech: ["Flutter", "Dart"],
     desc: "MediMind is a simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.",
     challenge: "Building a health app that is genuinely easy to use for everyone — clear reminders, zero clutter, and reliable notifications.",
     solution: "Developed with Flutter and Dart, prioritizing a warm, accessible UI and dependable reminder flows that fit naturally into daily life.",
@@ -3212,30 +3429,42 @@ const projectDetails = [
 function openProjectModal(index) {
   const p = projectDetails[index];
   if (!p) return;
+  const badge = p.title.split(' — ')[0];
+  const techPills = (p.tech || []).map(t => `<span class="tech-pill"><i class="fas fa-code"></i> ${t}</span>`).join('');
   const content = `
-    <div class="modal-media" style="width:100%;height:350px;background:#0d0d14;border-radius:16px;overflow:hidden;margin-bottom:20px;display:flex;align-items:center;justify-content:center;">
-      <img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:contain;object-position:center;">
-    </div>
-    <h2 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:4px;">${p.title}</h2>
-    <p style="font-size:14px;color:var(--neon);font-weight:600;margin-bottom:16px;">${p.subtitle}</p>
-    <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px;">${p.desc}</p>
-    <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:16px;">
-      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Challenge</h4>
-      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:12px;">${p.challenge}</p>
-      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Solution</h4>
-      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:12px;">${p.solution}</p>
-      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:6px;">Results</h4>
-      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px;">${p.results}</p>
-    </div>
-    <div style="border-top:1px solid var(--border);padding-top:16px;">
-      <h4 style="font-size:12px;color:var(--neon);text-transform:uppercase;font-weight:800;margin-bottom:12px;">Key Features</h4>
-      <ul style="list-style:none;padding:0;">
-        ${p.features.map(f => `<li style="font-size:14px;color:var(--muted);margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-check-circle" style="color:var(--neon);margin-top:3px;"></i> <span>${f}</span></li>`).join('')}
-      </ul>
-    </div>
-    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-      <button class="project-btn primary" onclick="event.preventDefault()"><i class="fas fa-eye"></i> See More Details</button>
-      <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project Video</a>
+    <div class="premium-project-details">
+      <div class="project-header-section">
+        <span class="project-badge">${badge}</span>
+        <h3 class="project-main-title">${p.title}</h3>
+        <p class="project-overview">${p.desc}</p>
+        <div class="project-tech-stack">${techPills}</div>
+      </div>
+      <hr class="premium-divider">
+      <div class="project-car-grid">
+        <div class="car-box challenge-box">
+          <div class="box-header"><i class="fas fa-exclamation-triangle"></i><h4>THE CHALLENGE</h4></div>
+          <p>${p.challenge}</p>
+        </div>
+        <div class="car-box action-box">
+          <div class="box-header"><i class="fas fa-tools"></i><h4>THE SOLUTION (ACTION)</h4></div>
+          <p>${p.solution}</p>
+        </div>
+        <div class="car-box result-box">
+          <div class="box-header"><i class="fas fa-check-circle"></i><h4>THE RESULT</h4></div>
+          <p>${p.results}</p>
+        </div>
+      </div>
+      <hr class="premium-divider">
+      <div class="project-features-section">
+        <h4 class="section-micro-title">KEY FEATURES</h4>
+        <div class="features-grid">
+          ${p.features.map(f => `<div class="feature-item"><i class="fas fa-check text-neon"></i><span>${f}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="project-action-buttons">
+        <a href="#" class="btn-premium secondary-btn"><i class="fab fa-github"></i> Source Code</a>
+        <a href="https://youtube.com/@abdelrahmanabuoelwafa" target="_blank" class="btn-premium primary-btn"><i class="fas fa-play"></i> View Project Video</a>
+      </div>
     </div>
   `;
   document.getElementById('modalContent').innerHTML = content;
@@ -3488,7 +3717,7 @@ function sendLampMessage() {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v19</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v20</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
