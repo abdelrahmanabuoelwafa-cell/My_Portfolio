@@ -1,0 +1,20 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Temp / credentials
+*.tmp
+*.log
+.env
+.env.*
+credentials.json
+safeset.sh
+.token*
+temp/
+tmp/

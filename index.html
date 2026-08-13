@@ -171,7 +171,7 @@
 } 
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
-html{scroll-behavior:smooth} 
+html{scroll-behavior:smooth;scroll-padding-top:90px} 
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6} 
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700} 
 a{text-decoration:none;color:inherit} 
@@ -662,6 +662,46 @@ body::after{
 } 
 
 /* Scroll Indicator */ 
+.hero-scroll-cue{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  margin-top:36px;
+  cursor:pointer;
+  animation:fadeInUp 0.8s ease 1.3s both;
+}
+.hero-scroll-mouse{
+  width:24px;
+  height:38px;
+  border:2px solid var(--muted);
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  padding-top:6px;
+  transition:border-color .3s;
+}
+.hero-scroll-cue:hover .hero-scroll-mouse{border-color:var(--neon);}
+.hero-scroll-wheel{
+  width:4px;
+  height:8px;
+  border-radius:4px;
+  background:var(--neon);
+  animation:scrollWheel 1.6s ease-in-out infinite;
+}
+@keyframes scrollWheel{
+  0%{opacity:1;transform:translateY(0);}
+  70%{opacity:0;transform:translateY(12px);}
+  100%{opacity:0;transform:translateY(12px);}
+}
+.hero-scroll-text{
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
 .scroll-indicator{ 
   position:absolute; 
   bottom:40px; 
@@ -900,6 +940,25 @@ section{padding:100px 60px;position:relative;z-index:1}
   max-width:1100px; 
   margin:0 auto; 
 } 
+.skills-blurb{
+  margin-bottom:48px;
+  padding:28px 32px;
+  background:linear-gradient(135deg,rgba(168,85,247,.08),rgba(30,41,59,.5));
+  border:1px solid rgba(168,85,247,.25);
+  border-left:4px solid var(--neon);
+  border-radius:18px;
+}
+.skills-blurb p{
+  font-size:16px;
+  color:var(--muted);
+  line-height:1.8;
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+.skills-blurb p strong{color:var(--neon);}
+.skills-blurb p i{color:var(--neon);margin-right:6px;font-size:14px;vertical-align:super;}
+[data-theme="light"] .skills-blurb{background:linear-gradient(135deg,rgba(147,51,234,.06),#fff);}
 .skill-category{ 
   margin-bottom:40px; 
 } 
@@ -1036,6 +1095,124 @@ section{padding:100px 60px;position:relative;z-index:1}
   margin-bottom:12px;
 }
 .car-body p strong{color:var(--neon);}
+
+/* Stats Section (Big Numbers) */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.stat-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:36px 24px;
+  text-align:center;
+  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.stat-card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  opacity:0;
+  transition:opacity .3s;
+}
+.stat-card:hover::before{opacity:1;}
+.stat-card:hover{
+  border-color:var(--neon);
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px rgba(168,85,247,.35);
+}
+.stat-value{
+  font-size:52px;
+  font-weight:800;
+  font-family:var(--font-heading);
+  background:linear-gradient(135deg,var(--primary),#d8b4fe);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1;
+  margin-bottom:12px;
+}
+.stat-label{
+  font-size:14px;
+  color:var(--muted);
+  font-weight:600;
+  line-height:1.5;
+}
+[data-theme="light"] .stat-card{box-shadow:0 4px 15px rgba(0,0,0,.05);}
+[data-theme="light"] .stat-card:hover{box-shadow:0 8px 25px rgba(147,51,234,.15);}
+
+/* Future / Featured Section */
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.future-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px;
+  text-align:center;
+  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.future-card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  opacity:0;
+  transition:opacity .3s;
+}
+.future-card:hover::before{opacity:1;}
+.future-card:hover{
+  border-color:var(--neon);
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px rgba(168,85,247,.35);
+}
+.future-icon{
+  width:60px;
+  height:60px;
+  margin:0 auto 18px;
+  background:rgba(168,85,247,.1);
+  border:1px solid rgba(168,85,247,.3);
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  color:var(--neon);
+  transition:all .3s;
+}
+.future-card:hover .future-icon{
+  background:rgba(168,85,247,.2);
+  transform:scale(1.1);
+}
+.future-title{
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:10px;
+  font-family:var(--font-heading);
+}
+.future-desc{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.7;
+}
+[data-theme="light"] .future-card{box-shadow:0 4px 15px rgba(0,0,0,.05);}
+[data-theme="light"] .future-card:hover{box-shadow:0 8px 25px rgba(147,51,234,.15);}
 
 /* Pricing Section */
 .pricing-grid{
@@ -1441,6 +1618,43 @@ footer{
   transform:translateY(-2px); 
   box-shadow:0 10px 25px rgba(168, 85, 247, 0.4); 
 } 
+.footer-freelance{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.footer-freelance-label{
+  font-size:13px;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.footer-freelance-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 18px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:50px;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text);
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.footer-freelance-link i{
+  color:var(--neon);
+}
+.footer-freelance-link:hover{
+  border-color:var(--neon);
+  color:var(--neon);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(168,85,247,.35);
+} 
 footer p{ 
   color:var(--muted); 
   font-size:14px; 
@@ -1518,6 +1732,140 @@ footer p{
 } 
 [data-theme="light"] .project-links{border-top-color:rgba(148,163,184,.4)}
 
+/* ===== Interactive Pull-Lamp ===== */
+.universe-lamp{
+  position:fixed;
+  top:64px;
+  right:24px;
+  z-index:1200;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  cursor:pointer;
+  pointer-events:auto;
+}
+.lamp-cord{
+  width:3px;
+  height:70px;
+  background:linear-gradient(180deg,#555,#2c2c2c);
+  position:relative;
+  transition:transform .25s ease;
+  transform-origin:top center;
+}
+.lamp-knob{
+  position:absolute;
+  bottom:-6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ffd166,#d97706);
+  box-shadow:0 0 10px rgba(217,119,6,.6);
+  border:1px solid rgba(255,255,255,.2);
+}
+.lamp-body{
+  width:52px;
+  height:38px;
+  background:linear-gradient(180deg,var(--card-bg),#1a1a2e);
+  border:1px solid var(--border);
+  border-radius:26px 26px 8px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:-1px;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+}
+.lamp-bulb{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#444;
+  transition:all .4s ease;
+}
+.universe-lamp.pulled .lamp-cord{
+  transform:translateY(6px) scaleY(1.12);
+}
+.universe-lamp.lit .lamp-bulb{
+  background:radial-gradient(circle at 40% 40%,#fff7d6,#ffd166 55%,#f59e0b);
+  box-shadow:0 0 20px 8px rgba(255,209,102,.55),0 0 45px 18px rgba(255,209,102,.25);
+}
+.universe-lamp.lit .lamp-body{
+  border-color:rgba(255,209,102,.5);
+}
+/* Light pool that brightens the universe when lit */
+.lamp-glow{
+  position:fixed;
+  inset:0;
+  z-index:1100;
+  pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 88% 8%,rgba(255,209,102,.16),transparent 60%);
+  opacity:0;
+  transition:opacity .6s ease;
+}
+.lamp-glow.on{opacity:1;}
+/* Revealed form panel */
+.lamp-form{
+  position:absolute;
+  top:150px;
+  right:0;
+  width:240px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 20px 45px rgba(0,0,0,.5);
+}
+.universe-lamp.lit .lamp-form{display:flex;}
+.lamp-form-title{
+  font-size:13px;
+  font-weight:700;
+  color:var(--neon);
+  text-align:center;
+  margin-bottom:2px;
+}
+.lamp-form input,
+.lamp-form textarea{
+  width:100%;
+  padding:10px 12px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:var(--text);
+  font-family:inherit;
+  font-size:13px;
+  transition:border-color .3s, box-shadow .3s;
+}
+.lamp-form textarea{min-height:70px;resize:none;}
+.lamp-form input:focus,
+.lamp-form textarea:focus{
+  outline:none;
+  border-color:var(--neon);
+  box-shadow:0 0 8px rgba(168,85,247,.25);
+}
+.lamp-send{
+  padding:10px;
+  background:var(--primary);
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:all .3s;
+}
+.lamp-send:hover{box-shadow:0 8px 20px rgba(168,85,247,.5);}
+[data-theme="light"] .lamp-body{background:linear-gradient(180deg,#fff,#e2e8f0);}
+[data-theme="light"] .lamp-form{box-shadow:0 20px 45px rgba(15,23,42,.15);}
+
 /* Responsive */ 
 @media(max-width:1024px){ 
   .services-grid{grid-template-columns:repeat(3,1fr)} 
@@ -1526,6 +1874,8 @@ footer p{
   .price-card.featured{transform:none;}
   .projects-grid{grid-template-columns:1fr}
   .testimonials-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .future-grid{grid-template-columns:1fr}
   .hero-top-image{width:160px;height:160px}
 } 
 @media(max-width:768px){ 
@@ -1569,6 +1919,24 @@ footer p{
   <canvas id="vortex-canvas" style="width:100%;height:100%;display:block;"></canvas>
 </div>
 
+<div class="lamp-glow" id="lampGlow"></div>
+
+<!-- Interactive Pull-Lamp (universe light) -->
+<div class="universe-lamp" id="universeLamp" aria-hidden="true">
+  <div class="lamp-cord" id="lampCord">
+    <span class="lamp-knob"></span>
+  </div>
+  <div class="lamp-body">
+    <div class="lamp-bulb"></div>
+  </div>
+  <div class="lamp-form" id="lampForm">
+    <p class="lamp-form-title">Quick Message</p>
+    <input type="text" id="lampName" placeholder="Your name">
+    <textarea id="lampMsg" placeholder="How can I help?"></textarea>
+    <button type="button" class="lamp-send" onclick="sendLampMessage()"><i class="fas fa-paper-plane"></i> Send</button>
+  </div>
+</div>
+
 <!-- Navbar --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <div class="nav-logo" aria-label="Abdelrahman Abdullah Logo">AA<span>.</span></div> 
@@ -1577,14 +1945,16 @@ footer p{
   </button> 
   <div class="nav-menu" id="navMenu" role="menubar"> 
     <ul role="menubar"> 
-      <li role="none"><a href="#about" onclick="closeMenu()" role="menuitem">About</a></li> 
-      <li role="none"><a href="#services" onclick="closeMenu()" role="menuitem">Services</a></li> 
-      <li role="none"><a href="#skills" onclick="closeMenu()" role="menuitem">Skills</a></li> 
-      <li role="none"><a href="#experience" onclick="closeMenu()" role="menuitem">Experience</a></li> 
-      <li role="none"><a href="#projects" onclick="closeMenu()" role="menuitem">Projects</a></li> 
-      <li role="none"><a href="#testimonials" onclick="closeMenu()" role="menuitem">Testimonials</a></li> 
-      <li role="none"><a href="#pricing" onclick="closeMenu()" role="menuitem">Pricing</a></li> 
-      <li role="none"><a href="#contact" onclick="closeMenu()" role="menuitem">Contact</a></li> 
+      <li role="none"><a href="#about" onclick="closeMenu()" role="menuitem" target="_self">About</a></li> 
+      <li role="none"><a href="#services" onclick="closeMenu()" role="menuitem" target="_self">Services</a></li> 
+      <li role="none"><a href="#skills" onclick="closeMenu()" role="menuitem" target="_self">Skills</a></li> 
+      <li role="none"><a href="#experience" onclick="closeMenu()" role="menuitem" target="_self">Experience</a></li> 
+      <li role="none"><a href="#education" onclick="closeMenu()" role="menuitem" target="_self">Education</a></li> 
+      <li role="none"><a href="#stats" onclick="closeMenu()" role="menuitem" target="_self">Stats</a></li> 
+      <li role="none"><a href="#projects" onclick="closeMenu()" role="menuitem" target="_self">Projects</a></li> 
+      <li role="none"><a href="#testimonials" onclick="closeMenu()" role="menuitem" target="_self">Testimonials</a></li> 
+      <li role="none"><a href="#pricing" onclick="closeMenu()" role="menuitem" target="_self">Pricing</a></li> 
+      <li role="none"><a href="#contact" onclick="closeMenu()" role="menuitem" target="_self">Contact</a></li> 
     </ul> 
     <div class="nav-actions">
       <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF">
@@ -1632,6 +2002,11 @@ footer p{
       <a href="#contact" class="btn-outline" target="_self"> 
         <i class="fas fa-envelope"></i> Contact Me 
       </a> 
+    </div> 
+
+    <div class="hero-scroll-cue" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"> 
+      <span class="hero-scroll-mouse"><span class="hero-scroll-wheel"></span></span> 
+      <span class="hero-scroll-text">Scroll to explore</span> 
     </div> 
   </div> 
 
@@ -1731,6 +2106,10 @@ footer p{
     <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2> 
   </div> 
   <div class="skills-container"> 
+
+    <div class="skills-blurb reveal">
+      <p><i class="fas fa-quote-left"></i> I chose <strong>Flutter</strong> because it lets me build one beautiful, high-performance app for both Android and iOS from a single codebase — no compromises on speed, UI, or user experience. Every project I ship is a chance to blend clean architecture with pixel-perfect design.</p>
+    </div>
 
     <!-- Cat 1 -->
     <div class="skill-category reveal"> 
@@ -1839,6 +2218,26 @@ footer p{
           </div> 
           <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div> 
         </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="32" height="32" loading="lazy"> 
+              <span>PHP</span> 
+            </div> 
+            <span class="skill-percent">60%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="60"></div></div> 
+        </div> 
+        <div class="skill-item"> 
+          <div class="skill-top"> 
+            <div class="skill-info"> 
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" width="32" height="32" loading="lazy"> 
+              <span>CSS</span> 
+            </div> 
+            <span class="skill-percent">85%</span> 
+          </div> 
+          <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div> 
+        </div> 
       </div> 
     </div> 
 
@@ -1869,7 +2268,7 @@ footer p{
       </div>
       <div class="car-body">
         <p><strong>Challenge: </strong>Mastering advanced Flutter development and clean architecture principles within a professional, fast-paced training environment while building production-quality cross-platform applications.</p>
-        <p><strong>Action: </strong>Developed cross-platform mobile applications using Flutter and Dart, applying clean architecture principles, MVVM pattern, and modern development practices with hands-on project delivery and collaborative workflows.</p>
+        <p><strong>Action: </strong>Developed cross-platform mobile applications using Flutter and Dart, applying clean architecture principles, MVVM pattern, and modern development practices with hands-on project delivery and collaborative workflows. Training is delivered <strong>online twice a week</strong> alongside <strong>offline sessions at the Al-Harbiya facility (El-Nozha)</strong>.</p>
         <p><strong>Result: </strong>Successfully delivered real-world Flutter projects with scalable, maintainable code and gained comprehensive experience in modern cross-platform mobile development.</p>
       </div>
     </div>
@@ -1898,11 +2297,65 @@ footer p{
   </div> 
 </section> 
 
+<!-- Education Section (MTI) -->
+<section id="education"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">Education</div> 
+    <h2 class="section-title">Academic <span class="gradient-text">Background</span></h2> 
+  </div> 
+  <div class="exp-cards-stack"> 
+    <div class="car-card reveal">
+      <div class="car-header">
+        <div class="car-logo-info">
+          <div class="car-logo-box" style="background:rgba(30,41,59,.9);">
+            <i class="fas fa-university" style="font-size:26px;color:var(--neon);"></i>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#fff;">B.Sc. Computer Science &amp; Artificial Intelligence</h3>
+            <p style="font-size:13px;color:var(--neon);font-weight:600;">Modern University for Technology and Information (MTI) · Online</p>
+          </div>
+        </div>
+        <span class="car-date-badge badge-depi">2024 – 2028</span>
+      </div>
+      <div class="car-body">
+        <p><strong>Focus: </strong>Pursuing a Bachelor of Computer Science with a concentration in Artificial Intelligence, building a strong foundation in algorithms, data structures, machine learning, and software engineering fundamentals.</p>
+        <p><strong style="color:#a855f7;">Status: </strong>Currently enrolled in an online program, balancing academic studies with hands-on Flutter development and professional training through ITI and DEPI.</p>
+      </div>
+    </div>
+  </div> 
+</section> 
+
+<!-- Stats Section (Big Numbers) -->
+<section id="stats"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">By The Numbers</div> 
+    <h2 class="section-title">Impact In <span class="gradient-text">Numbers</span></h2> 
+  </div> 
+  <div class="stats-grid"> 
+    <div class="stat-card reveal"> 
+      <div class="stat-value">+8</div> 
+      <div class="stat-label">Projects Completed</div> 
+    </div> 
+    <div class="stat-card reveal"> 
+      <div class="stat-value">+4</div> 
+      <div class="stat-label">Years of Learning &amp; Building</div> 
+    </div> 
+    <div class="stat-card reveal"> 
+      <div class="stat-value">2</div> 
+      <div class="stat-label">Intensive Training Programs</div> 
+    </div> 
+    <div class="stat-card reveal"> 
+      <div class="stat-value">100%</div> 
+      <div class="stat-label">Commitment to Clean Code</div> 
+    </div> 
+  </div> 
+</section> 
+
 <!-- Projects Section (High Quality Showcase Display) --> 
 <section id="projects"> 
   <div class="section-header reveal"> 
     <div class="section-label">Portfolio</div> 
-    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2> 
+    <h2 class="section-title">My <span class="gradient-text">Projects</span></h2> 
   </div> 
   <div class="projects-grid"> 
 
@@ -1922,8 +2375,8 @@ footer p{
           <span class="tech-tag">Hive</span>
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
-          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary"><i class="fab fa-github"></i> Source Code</a> 
-          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary"><i class="fas fa-external-link-alt"></i> Live Demo</a> 
+          <button class="project-btn primary" onclick="openProjectModal(0)"><i class="fas fa-eye"></i> See More</button> 
+          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
         </div> 
       </div> 
     </div> 
@@ -1944,8 +2397,48 @@ footer p{
           <span class="tech-tag">FL Chart</span>
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
-          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary"><i class="fab fa-github"></i> Source Code</a> 
-          <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary"><i class="fas fa-external-link-alt"></i> Live Demo</a> 
+          <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
+          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
+        </div> 
+      </div> 
+    </div> 
+
+    <!-- Project 3: StudySync -->
+    <div class="project-card reveal" onclick="openProjectModal(2)"> 
+      <div class="project-image">
+        <img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" loading="lazy">
+      </div> 
+      <div class="project-content"> 
+        <h3>StudySync — Smart Study Planner</h3> 
+        <div class="project-subtitle">Study Organization &amp; Focus</div>
+        <p>A focused study companion that keeps your learning on track. StudySync brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.</p> 
+        <div class="tech-stack"> 
+          <span class="tech-tag">Flutter</span> 
+          <span class="tech-tag">Dart</span> 
+        </div> 
+        <div class="project-links" onclick="event.stopPropagation()"> 
+          <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button> 
+          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
+        </div> 
+      </div> 
+    </div> 
+
+    <!-- Project 4: MediMind -->
+    <div class="project-card reveal" onclick="openProjectModal(3)"> 
+      <div class="project-image">
+        <img src="images/MediMind.jpg" alt="MediMind Showcase" loading="lazy">
+      </div> 
+      <div class="project-content"> 
+        <h3>MediMind — Health Companion</h3> 
+        <div class="project-subtitle">Wellness &amp; Medication Reminders</div>
+        <p>A simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.</p> 
+        <div class="tech-stack"> 
+          <span class="tech-tag">Flutter</span> 
+          <span class="tech-tag">Dart</span> 
+        </div> 
+        <div class="project-links" onclick="event.stopPropagation()"> 
+          <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button> 
+          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
         </div> 
       </div> 
     </div> 
@@ -1953,14 +2446,39 @@ footer p{
   </div> 
 </section> 
 
+<!-- Future / Featured Section -->
+<section id="future">
+  <div class="section-header reveal">
+    <div class="section-label">What's Next</div>
+    <h2 class="section-title">Future &amp; <span class="gradient-text">Featured</span></h2>
+  </div>
+  <div class="future-grid">
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-brain"></i></div>
+      <h3 class="future-title">Deepening AI &amp; ML</h3>
+      <p class="future-desc">Expanding my Artificial Intelligence studies at MTI and applying ML concepts into Flutter-powered smart mobile experiences.</p>
+    </div>
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-store"></i></div>
+      <h3 class="future-title">Client-Launched Apps</h3>
+      <p class="future-desc">Shipping freelance Flutter apps to production on Google Play and the App Store — for clients across Khamsat and Nafzly.</p>
+    </div>
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-plug"></i></div>
+      <h3 class="future-title">Full-Stack Flutter</h3>
+      <p class="future-desc">Bridging mobile and backend with clean REST APIs, Firebase, and Laravel to deliver complete, end-to-end product experiences.</p>
+    </div>
+  </div>
+</section>
+
 <!-- Testimonials Section -->
 <section id="testimonials">
   <div class="section-header reveal">
     <div class="section-label">Testimonials</div>
-    <h2 class="section-title">What Clients <span class="gradient-text">Say</span></h2>
+    <h2 class="section-title">A Word From <span class="gradient-text">My Mentor</span></h2>
   </div>
   <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
+    <div class="testimonial-card reveal" style="grid-column:1/-1;max-width:760px;margin:0 auto;width:100%;">
       <div class="testimonial-content">
         <div class="testimonial-rating">
           <i class="fas fa-star"></i>
@@ -1969,50 +2487,12 @@ footer p{
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
         </div>
-        <p class="testimonial-text">"Abdelrahman delivered an exceptional Flutter app that exceeded our expectations. His attention to detail and clean code architecture made the project a success. Highly recommended for any mobile development work."</p>
+        <p class="testimonial-text">"Abdelrahman stood out during the Flutter training as a fast learner with a genuine passion for building clean, well-architected mobile applications. He consistently went beyond the required tasks, delivered polished projects on time, and approached every challenge with a professional, problem-solving mindset. I confidently recommend him for any mobile development opportunity."</p>
         <div class="testimonial-author">
-          <div class="author-avatar">SA</div>
+          <div class="author-avatar">أ.أ</div>
           <div class="author-info">
-            <h4>Sarah Ahmed</h4>
-            <p>Product Manager, TechStart</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-content">
-        <div class="testimonial-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"Working with Abdelrahman was a fantastic experience. He understood our requirements perfectly and delivered a high-performance app on time. His expertise in Flutter and modern development practices is impressive."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MK</div>
-          <div class="author-info">
-            <h4>Mohamed Kamel</h4>
-            <p>CEO, Digital Solutions</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-content">
-        <div class="testimonial-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
-        </div>
-        <p class="testimonial-text">"Professional, skilled, and communicative. Abdelrahman transformed our concept into a beautiful, functional mobile application. The app performance is outstanding and the UI/UX is top-notch."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">NH</div>
-          <div class="author-info">
-            <h4>Nour Hassan</h4>
-            <p>Founder, AppVenture</p>
+            <h4>A. Amira · Flutter Mentor</h4>
+            <p style="display:flex;align-items:center;gap:6px;"><i class="fab fa-linkedin" style="color:#0077b5;"></i> Recommendation — <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" style="color:var(--neon);font-weight:700;">View on LinkedIn</a></p>
           </div>
         </div>
       </div>
@@ -2181,6 +2661,15 @@ footer p{
     <a href="https://wa.me/201123031944"><i class="fab fa-whatsapp"></i></a>
     <a href="mailto:abdulrahman.abuoshaifa@gmail.com"><i class="fas fa-envelope"></i></a>
   </div> 
+  <div class="footer-freelance">
+    <span class="footer-freelance-label">Find me on:</span>
+    <a href="https://khamsat.com/user/abdulrahmanabuoelwafa" class="footer-freelance-link" target="_blank" rel="noopener">
+      <i class="fas fa-briefcase"></i> خمسات (Khamsat)
+    </a>
+    <a href="https://nafzly.com" class="footer-freelance-link" target="_blank" rel="noopener">
+      <i class="fas fa-rocket"></i> نفذلي (Nafzly)
+    </a>
+  </div>
   <p>&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
 </footer> 
 
@@ -2194,9 +2683,9 @@ footer p{
 
 <!-- Three.js & Libraries --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/neon-border.js?v=7"></script>
-<script src="js/tornado.js?v=7"></script>
-<script src="js/firework-cursor.js?v=7"></script>
+<script src="js/neon-border.js?v=8"></script>
+<script src="js/tornado.js?v=8"></script>
+<script src="js/firework-cursor.js?v=8"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -2292,6 +2781,36 @@ const projectDetails = [
       "Secure & private data handling (local-first, no cloud required)",
       "Dark theme with smooth animations"
     ]
+  },
+  {
+    title: "StudySync — Smart Study Planner",
+    subtitle: "Study Organization • Focus",
+    image: "images/STUDYSYNC.jpg",
+    desc: "StudySync is a focused study companion that keeps your learning on track. It brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.",
+    challenge: "Designing an intuitive planner that balances feature richness with a calm, minimal interface — without overwhelming students juggling multiple courses.",
+    solution: "Built with Flutter and Dart using a clean, modular architecture. Focused on smooth navigation, clear visual hierarchy, and effortless schedule management.",
+    results: "A polished study planner that turns scattered to-dos into an organized, motivating daily rhythm.",
+    features: [
+      "Session scheduling and study-task organization",
+      "Progress tracking across courses and subjects",
+      "Clean, distraction-free interface",
+      "Fast, fluid Flutter experience"
+    ]
+  },
+  {
+    title: "MediMind — Health Companion",
+    subtitle: "Wellness • Medication Reminders",
+    image: "images/MediMind.jpg",
+    desc: "MediMind is a simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.",
+    challenge: "Building a health app that is genuinely easy to use for everyone — clear reminders, zero clutter, and reliable notifications.",
+    solution: "Developed with Flutter and Dart, prioritizing a warm, accessible UI and dependable reminder flows that fit naturally into daily life.",
+    results: "An approachable wellness app that helps users stay consistent with their medication and self-care routines.",
+    features: [
+      "Medication schedule reminders",
+      "Daily wellness routine tracking",
+      "Warm, accessible interface",
+      "Reliable local notifications"
+    ]
   }
 ];
 
@@ -2319,9 +2838,9 @@ function openProjectModal(index) {
         ${p.features.map(f => `<li style="font-size:14px;color:var(--muted);margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-check-circle" style="color:var(--neon);margin-top:3px;"></i> <span>${f}</span></li>`).join('')}
       </ul>
     </div>
-    <div style="margin-top:24px;display:flex;gap:12px;">
-      <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn primary" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-      <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="project-btn secondary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="project-btn primary" onclick="event.preventDefault()"><i class="fas fa-eye"></i> See More Details</button>
+      <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project Video</a>
     </div>
   `;
   document.getElementById('modalContent').innerHTML = content;
@@ -2438,9 +2957,50 @@ document.addEventListener('mousedown', () => {
 // Service Worker not used locally (no service-worker.js) - registrations are cleaned up below.
 </script>
 
+<script>
+// ===== Interactive Pull-Lamp =====
+(function() {
+  const lamp = document.getElementById('universeLamp');
+  const glow = document.getElementById('lampGlow');
+  if (!lamp || !glow) return;
+
+  function lightUp() {
+    lamp.classList.toggle('lit');
+    lamp.classList.toggle('pulled');
+    glow.classList.toggle('on', lamp.classList.contains('lit'));
+  }
+
+  lamp.addEventListener('click', (e) => {
+    if (e.target.closest('.lamp-send') || e.target.closest('.lamp-form')) return;
+    lightUp();
+    // Collapse the form after a moment if not filled
+    setTimeout(() => {
+      if (lamp.classList.contains('lit')) {
+        lamp.classList.remove('pulled');
+      }
+    }, 250);
+  });
+})();
+
+function sendLampMessage() {
+  const name = document.getElementById('lampName').value.trim();
+  const msg = document.getElementById('lampMsg').value.trim();
+  if (!name || !msg) { alert('Please fill in your name and message.'); return; }
+  const text = encodeURIComponent('Hello Abdelrahman! My name is ' + name + '. ' + msg);
+  window.open('https://wa.me/201123031944?text=' + text, '_blank');
+  document.getElementById('lampName').value = '';
+  document.getElementById('lampMsg').value = '';
+  const lamp = document.getElementById('universeLamp');
+  const glow = document.getElementById('lampGlow');
+  lamp.classList.remove('lit');
+  lamp.classList.remove('pulled');
+  glow.classList.remove('on');
+}
+</script>
+
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v7</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v8</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
