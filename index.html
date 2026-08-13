@@ -2482,6 +2482,120 @@ footer p{
   outline: none;
 }
 
+/* --- Video Demo Cards Container --- */
+.demo-buttons-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.demo-card {
+  display: flex;
+  align-items: center;
+  background-color: #121218;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 12px;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  min-width: 250px;
+}
+
+.demo-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.demo-thumbnail {
+  position: relative;
+  width: 95px;
+  height: 65px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.demo-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.demo-card:hover .demo-thumbnail img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.play-icon-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.play-icon-overlay i {
+  color: #fff;
+  font-size: 18px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.demo-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.demo-info h4 {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.demo-info p {
+  color: #888;
+  font-size: 11px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.demo-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.demo-arrow i {
+  color: var(--neon);
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.demo-card:hover .demo-arrow {
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.demo-card:hover .demo-arrow i {
+  transform: translateX(4px);
+}
+
 /* --- الفورم المصغر والمخفي --- */
 .compact-form {
   width: 100%;
@@ -3568,8 +3682,25 @@ function openProjectModal(index) {
       </div>
       <div class="project-action-buttons">
         <a href="#" class="btn-premium secondary-btn"><i class="fab fa-github"></i> Source Code</a>
-        ${p.video ? `<button class="btn-premium primary-btn" onclick="openProjectVideo('${p.video}', '${String(p.title.split(' — ')[0]).replace(/'/g, '')}')"><i class="fas fa-play"></i> View Project Video</button>` : `<a href="https://youtube.com/@abdelrahmanabuoelwafa" target="_blank" class="btn-premium primary-btn"><i class="fas fa-play"></i> View Project Video</a>`}
       </div>
+      ${p.video ? `
+      <div class="demo-buttons-container">
+        <div class="demo-card" onclick="openProjectVideo('${p.video}', '${String(p.title.split(' — ')[0]).replace(/'/g, '')}')">
+          <div class="demo-thumbnail">
+            <img src="${p.image}" alt="Demo Thumbnail" onerror="this.src='https://via.placeholder.com/100x65/222/fff?text=Demo'">
+            <div class="play-icon-overlay">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+          <div class="demo-info">
+            <h4>Watch Demo</h4>
+            <p>Play the ${String(p.title.split(' — ')[0]).replace(/'/g, '')} showcase</p>
+          </div>
+          <div class="demo-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>` : ''}
     </div>
   `;
   document.getElementById('modalContent').innerHTML = content;
