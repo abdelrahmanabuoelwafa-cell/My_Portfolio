@@ -1096,6 +1096,168 @@ section{padding:100px 60px;position:relative;z-index:1}
 }
 .car-body p strong{color:var(--neon);}
 
+/* --- Professional Experience Cards (CAR Layout) --- */
+.pro-exp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 32px;
+  transition: all 0.3s ease;
+}
+.pro-exp-card:hover {
+  border-color: var(--neon);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.35);
+}
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.exp-logo-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  flex-shrink: 0;
+}
+.exp-logo-box.bg-white {
+  background: #ffffff;
+}
+.exp-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.exp-title-info h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 6px;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.exp-title-info p {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.badge-type {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--neon);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.exp-meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.meta-item {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.meta-item i {
+  color: var(--neon);
+}
+.exp-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.exp-tech-tags span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.25);
+}
+.exp-tech-tags span i {
+  color: var(--neon);
+}
+.car-boxes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.car-box {
+  padding: 20px 24px;
+  border-radius: 0 16px 16px 0;
+  border-left: 4px solid;
+}
+.car-box h4 {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.car-box p, .car-box ul {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.car-box ul {
+  padding-left: 16px;
+  list-style-type: disc;
+}
+.car-box ul li {
+  margin-bottom: 8px;
+}
+.car-box ul li:last-child {
+  margin-bottom: 0;
+}
+.challenge-box {
+  border-left-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+.challenge-box h4 {
+  color: #f59e0b;
+}
+.action-box {
+  border-left-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+}
+.action-box h4 {
+  color: #3b82f6;
+}
+.result-box {
+  border-left-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+.result-box h4 {
+  color: #10b981;
+}
+[data-theme="light"] .exp-title-info h3{color:#1e293b;}
+[data-theme="light"] .exp-logo-box { background: #fff; border-color: #e2e8f0; }
+[data-theme="light"] .exp-tech-tags span { background: #f8fafc; border-color: #cbd5e1; color: #334155; }
+[data-theme="light"] .exp-meta{border-bottom-color:var(--border);}
+[data-theme="light"] .challenge-box { background: rgba(245, 158, 11, 0.10); }
+[data-theme="light"] .action-box { background: rgba(59, 130, 246, 0.10); }
+[data-theme="light"] .result-box { background: rgba(16, 185, 129, 0.10); }
+
 /* Stats Section (Big Numbers) */
 .stats-grid{
   display:grid;
@@ -2410,44 +2572,90 @@ footer p{
   <div class="exp-cards-stack"> 
 
     <!-- DEPI Card -->
-    <div class="car-card reveal">
-      <div class="car-header">
-        <div class="car-logo-info">
-          <div class="car-logo-box">
-            <img src="images/depi.png" alt="DEPI Logo" loading="lazy" width="60" height="60">
-          </div>
-          <div>
-            <h3 style="font-size:22px;font-weight:700;color:#fff;">Flutter Developer Trainee</h3>
-            <p style="font-size:13px;color:#06b6d4;font-weight:600;">Digital Egypt Pioneers Initiative (DEPI) · Cairo</p>
-          </div>
+    <div class="pro-exp-card reveal">
+      <div class="exp-header">
+        <div class="exp-logo-box">
+          <img src="images/depi.png" alt="DEPI Logo" loading="lazy">
         </div>
-        <span class="car-date-badge badge-depi">Nov 2024 – Present</span>
+        <div class="exp-title-info">
+          <h3>Flutter Developer Trainee</h3>
+          <p>Digital Egypt Pioneers Initiative (DEPI) <span class="badge-type">Traineeship</span></p>
+        </div>
       </div>
-      <div class="car-body">
-        <p><strong>Challenge: </strong>Mastering advanced Flutter development and clean architecture principles within a professional, fast-paced training environment while building production-quality cross-platform applications.</p>
-        <p><strong>Action: </strong>Developed cross-platform mobile applications using Flutter and Dart, applying clean architecture principles, MVVM pattern, and modern development practices with hands-on project delivery and collaborative workflows. Training is delivered <strong>online twice a week</strong> alongside <strong>offline sessions at the Al-Harbiya facility (El-Nozha)</strong>.</p>
-        <p><strong>Result: </strong>Successfully delivered real-world Flutter projects with scalable, maintainable code and gained comprehensive experience in modern cross-platform mobile development.</p>
+      <div class="exp-meta">
+        <div class="meta-item"><i class="far fa-calendar-alt"></i> Nov 2024 – Present</div>
+        <div class="meta-item"><i class="fas fa-map-marker-alt"></i> Hybrid (Online &amp; Cairo, El Nozha)</div>
+      </div>
+      <div class="exp-tech-tags">
+        <span><i class="fab fa-flutter"></i> Flutter</span>
+        <span><i class="fas fa-code"></i> Dart</span>
+        <span><i class="fas fa-layer-group"></i> Clean Architecture</span>
+        <span><i class="fas fa-network-wired"></i> REST APIs</span>
+      </div>
+      <div class="car-boxes-container">
+        <div class="car-box challenge-box">
+          <h4>CHALLENGE</h4>
+          <p>Mastering advanced Flutter development and clean architecture principles within a fast-paced environment while building production-quality cross-platform applications.</p>
+        </div>
+        <div class="car-box action-box">
+          <h4>ACTION</h4>
+          <ul>
+            <li>Attended structured online sessions (2 days/week schedule).</li>
+            <li>Participated in intensive offline technical sessions at the Computing Qualifying Center (El Nozha).</li>
+            <li>Applied clean architecture and MVVM patterns in hands-on project delivery and collaborative workflows.</li>
+          </ul>
+        </div>
+        <div class="car-box result-box">
+          <h4>RESULT</h4>
+          <ul>
+            <li>Successfully delivered real-world, scalable Flutter projects with maintainable code.</li>
+            <li>Gained comprehensive, practical experience in modern cross-platform mobile development workflows.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- ITI Card (White Logo Box Background for 100% Logo Visibility) -->
-    <div class="car-card reveal">
-      <div class="car-header">
-        <div class="car-logo-info">
-          <div class="car-logo-box">
-            <img src="images/iti.png" alt="ITI Logo" loading="lazy" width="60" height="60">
-          </div>
-          <div>
-            <h3 style="font-size:22px;font-weight:700;color:#fff;">Full-Stack Development Trainee</h3>
-            <p style="font-size:13px;color:var(--neon);font-weight:600;">Information Technology Institute (ITI) · Online</p>
-          </div>
+    <!-- ITI Card -->
+    <div class="pro-exp-card reveal">
+      <div class="exp-header">
+        <div class="exp-logo-box bg-white">
+          <img src="images/iti.png" alt="ITI Logo" loading="lazy">
         </div>
-        <span class="car-date-badge badge-iti">2023 – 2024</span>
+        <div class="exp-title-info">
+          <h3>Full-Stack Development Trainee</h3>
+          <p>Information Technology Institute (ITI) <span class="badge-type">Traineeship</span></p>
+        </div>
       </div>
-      <div class="car-body">
-        <p><strong>Challenge: </strong>Rapidly mastering both frontend and backend technologies, along with the Laravel framework, to build full-stack web applications within an intensive, fast-paced training schedule.</p>
-        <p><strong>Action: </strong>Completed a rigorous program covering modern frontend technologies, backend fundamentals, Laravel framework, and RESTful API integration with hands-on project delivery and collaborative development workflows.</p>
-        <p><strong>Result: </strong>Built fully functional, end-to-end web applications with seamless frontend-backend integration and gained practical experience in the full development lifecycle from design to deployment.</p>
+      <div class="exp-meta">
+        <div class="meta-item"><i class="far fa-calendar-alt"></i> 2023 – 2024</div>
+        <div class="meta-item"><i class="fas fa-globe"></i> Online</div>
+      </div>
+      <div class="exp-tech-tags">
+        <span><i class="fab fa-laravel"></i> Laravel</span>
+        <span><i class="fab fa-php"></i> PHP</span>
+        <span><i class="fas fa-database"></i> MySQL</span>
+        <span><i class="fab fa-html5"></i> HTML/CSS/JS</span>
+      </div>
+      <div class="car-boxes-container">
+        <div class="car-box challenge-box">
+          <h4>CHALLENGE</h4>
+          <p>Rapidly mastering both frontend technologies and backend frameworks (Laravel) to build full-stack web applications within an intensive, fast-paced training schedule.</p>
+        </div>
+        <div class="car-box action-box">
+          <h4>ACTION</h4>
+          <ul>
+            <li>Completed a rigorous online program covering modern frontend and backend fundamentals.</li>
+            <li>Developed RESTful APIs and integrated them seamlessly with frontend interfaces.</li>
+            <li>Collaborated on building end-to-end web applications applying best coding practices.</li>
+          </ul>
+        </div>
+        <div class="car-box result-box">
+          <h4>RESULT</h4>
+          <ul>
+            <li>Built fully functional, full-stack web applications with robust database structures.</li>
+            <li>Acquired practical, hands-on experience covering the complete software development lifecycle.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -2861,9 +3069,9 @@ footer p{
 
 <!-- Three.js & Libraries --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/neon-border.js?v=12"></script>
-<script src="js/tornado.js?v=12"></script>
-<script src="js/firework-cursor.js?v=12"></script>
+<script src="js/neon-border.js?v=13"></script>
+<script src="js/tornado.js?v=13"></script>
+<script src="js/firework-cursor.js?v=13"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -3249,7 +3457,7 @@ function sendLampMessage() {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v12</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v13</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
