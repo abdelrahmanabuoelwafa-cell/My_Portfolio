@@ -2755,6 +2755,29 @@ body{overflow-x:hidden;}
   .footer-name{font-size:20px;}
 }
 
+/* ====== Mobile: kill min-content horizontal overflow ====== */
+@media(max-width:767px){
+  .about-grid > *,
+  .contact-container > *{min-width:0;}
+  .about-content,
+  .contact-info,
+  .interactive-lamp-side{min-width:0;max-width:100%;}
+  .languages-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .language-card,
+  .lang-info{min-width:0;}
+  .lang-info h4,
+  .lang-info p{overflow-wrap:anywhere;word-break:break-word;}
+  .contact-link{min-width:0;}
+  .contact-link > div,
+  .contact-link span{min-width:0;overflow-wrap:anywhere;word-break:break-word;}
+  .car-header{flex-wrap:wrap;gap:10px;}
+  .car-header .car-logo-info{min-width:0;flex:1 1 auto;}
+  .car-date-badge{flex-shrink:1;}
+}
+@media(max-width:540px){
+  .languages-grid{grid-template-columns:1fr;}
+}
+
 /* ====== Premium responsive hardening ====== */
 
 /* Wide screens: contained content width, centered */
