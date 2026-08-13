@@ -171,14 +171,19 @@
 } 
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
-html{scroll-behavior:smooth;scroll-padding-top:90px} 
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6} 
+html{scroll-behavior:smooth;scroll-padding-top:90px;width:100%;overflow-x:hidden} 
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%} 
+img{max-width:100%;height:auto;display:block} 
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700} 
 a{text-decoration:none;color:inherit} 
 ul{list-style:none} 
+button{font-family:inherit} 
 ::-webkit-scrollbar{width:4px} 
 ::-webkit-scrollbar-track{background:var(--bg)} 
 ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+/* Touch targets & focus visibility */
+a,button,.project-btn,.demo-card,.contact-link,.hamburger,.theme-toggle-nav,.submit-btn{min-height:44px;min-width:44px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
 
 /* Theme Toggle Button (navbar) */
 .theme-toggle-nav{
@@ -456,12 +461,12 @@ body::after{
 
 /* Hero Section */ 
 .hero{ 
-  min-height:100vh; 
+  min-height:100dvh; 
   display:flex; 
   flex-direction:column; 
   align-items:center; 
   justify-content:center; 
-  padding:120px 20px 80px; 
+  padding:max(120px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(80px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left)); 
   position:relative; 
   overflow:hidden; 
   text-align:center; 
@@ -727,7 +732,7 @@ body::after{
 } 
 
 /* Sections */ 
-section{padding:100px 60px;position:relative;z-index:1} 
+section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-index:1} 
 .section-header{text-align:center;margin-bottom:60px} 
 .section-label{ 
   display:inline-flex; 
@@ -2748,6 +2753,61 @@ body{overflow-x:hidden;}
   .submit-btn{padding:14px;}
   .nav-logo .logo-name{font-size:20px;}
   .footer-name{font-size:20px;}
+}
+
+/* ====== Premium responsive hardening ====== */
+
+/* Wide screens: contained content width, centered */
+@media(min-width:1440px){
+  .services-grid{grid-template-columns:repeat(5,1fr);max-width:1280px;margin:0 auto;}
+  .skills-row{grid-template-columns:repeat(3,1fr);max-width:1280px;margin:0 auto;}
+  .projects-grid{max-width:1280px;margin:0 auto;}
+  .future-grid{max-width:1100px;margin:0 auto;}
+  .testimonials-grid{max-width:1100px;margin:0 auto;}
+  .pricing-grid{max-width:1100px;margin:0 auto;}
+  .contact-container{max-width:1000px;}
+  .hero-content{max-width:1000px;}
+}
+
+/* Small Desktop / Laptop: 3-col projects, 4-col services */
+@media(min-width:1024px) and (max-width:1279px){
+  .services-grid{grid-template-columns:repeat(4,1fr);}
+  .pricing-grid{grid-template-columns:repeat(3,1fr);}
+}
+
+/* Tablet: 2-col projects, 3-col services */
+@media(min-width:768px) and (max-width:1023px){
+  .projects-grid{grid-template-columns:repeat(2,1fr);}
+  .services-grid{grid-template-columns:repeat(3,1fr);}
+  .skills-row{grid-template-columns:repeat(2,1fr);}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-container{gap:40px;}
+}
+
+/* Mobile landscape: keep usable, reduce hero height */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{min-height:100svh;padding-top:140px;padding-bottom:40px;}
+  .hero-top-image{width:100px;height:100px;margin-bottom:12px;}
+  .hero-name{font-size:clamp(24px,5vw,40px);}
+  .hero-desc{font-size:14px;margin-bottom:20px;}
+  .hero-buttons{flex-direction:row;flex-wrap:wrap;}
+  .section-header{margin-bottom:30px;}
+  .nav-menu{max-height:100vh;overflow-y:auto;}
+}
+
+/* Hover effects only on devices that support hover */
+@media(hover:hover) and (pointer:fine){
+  .service-card:hover{transform:translateY(-4px);border-color:var(--neon);box-shadow:0 10px 30px rgba(168,85,247,.7);}
+  .stat-card:hover{border-color:var(--neon);transform:translateY(-4px);}
+  .future-card:hover{transform:translateY(-4px);}
+  .demo-card:hover{box-shadow:0 10px 20px rgba(0,0,0,.3);}
+}
+
+/* Respect reduced-motion preference */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  .top-img-ring{animation:none;}
+  .dust-particle,.particle{display:none;}
 }
 
 </style> 
