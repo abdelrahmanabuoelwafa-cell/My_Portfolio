@@ -416,18 +416,10 @@ body::after{
   font-weight:600; 
   color:var(--muted); 
   position:relative; 
-  transition:color .3s; 
+  transition:all .3s; 
 } 
-.nav-menu a:hover{color:var(--neon)} 
-.nav-menu a::after{ 
-  content:''; 
-  position:absolute; 
-  bottom:-4px; left:0; 
-  width:0; height:2px; 
-  background:var(--neon); 
-  transition:width .3s; 
-} 
-.nav-menu a:hover::after{width:100%} 
+.nav-menu a:hover,.nav-menu a.active{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)} 
+[data-theme="light"] .nav-menu a:hover,[data-theme="light"] .nav-menu a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)} 
 .nav-actions{display:flex;align-items:center;gap:12px}
 .btn-cv{
   padding:8px 18px;
@@ -2124,9 +2116,19 @@ footer p{
 .footer-logo .code-bracket{color:var(--muted);font-size:20px;font-weight:700}
 .footer-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)}
 .footer-subtitle{margin-bottom:20px}
-.premium-footer .footer-platforms{gap:14px}
-.premium-footer .footer-platform-link{width:56px;height:56px;border-radius:14px}
-.premium-footer .footer-platform-link img{width:80%;height:80%;object-fit:contain}
+.right-col{text-align:right}
+.freelance-platforms{display:flex;gap:10px;flex-wrap:wrap}
+.platform-icon{
+  width:40px;height:40px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  padding:5px;
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.platform-icon:hover{border-color:var(--neon);transform:translateY(-3px);box-shadow:0 10px 25px rgba(168,85,247,.35)}
+.platform-icon img{max-width:100%;max-height:100%;object-fit:contain}
 .footer-copy{
   text-align:center;
   border-top:1px solid var(--border);
@@ -2138,14 +2140,34 @@ footer p{
 [data-theme="light"] .premium-footer{background:rgba(248,250,252,.92)}
 @media(max-width:768px){
   .footer-grid{grid-template-columns:1fr;gap:36px;text-align:center}
-  .footer-col{text-align:center}
-  .footer-social-icons{justify-content:center}
+  .footer-col,.right-col{text-align:center}
+  .footer-social-icons,.freelance-platforms{justify-content:center}
 }
 
-/* --- Premium touches: testimonial avatar + active nav link --- */
-.testimonial-card .author-avatar{background:#a855f7;box-shadow:0 0 18px rgba(168,85,247,.5)}
-.nav-menu a.active{color:var(--neon);text-shadow:0 0 12px rgba(168,85,247,.6)}
-.nav-menu a.active::after{width:100%} 
+/* --- Premium Testimonial Card --- */
+.premium-testimonial-card{
+  background:var(--card-bg);
+  border:1px solid rgba(168,85,247,.25);
+  border-radius:16px;
+  padding:30px;
+  max-width:800px;
+  margin:0 auto;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.premium-testimonial-card:hover{border-color:var(--neon);box-shadow:0 15px 40px rgba(168,85,247,.35)}
+.stars{color:#fbbf24;margin-bottom:15px;font-size:14px;display:flex;gap:4px}
+.quote{color:var(--muted);font-style:italic;font-size:15px;line-height:1.8;margin-bottom:25px}
+.author-info{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.avatar{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px;background-color:#a855f7;box-shadow:0 0 18px rgba(168,85,247,.5)}
+.details h4{color:var(--text);margin:0 0 5px 0;font-size:15px}
+.linkedin-link{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.linkedin-link i{color:#0077b5}
+.neon-link{color:var(--neon);text-decoration:none;font-weight:600;transition:color .3s;min-height:44px;display:inline-flex;align-items:center}
+.neon-link:hover{color:#c084fc;text-decoration:underline}
+@media(max-width:480px){
+  .premium-testimonial-card{padding:24px 18px}
+} 
 
 /* ===== Complete Light (White) Mode ===== */
 [data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
@@ -3603,21 +3625,22 @@ body{overflow-x:hidden;}
     <h2 class="section-title">A Word From <span class="gradient-text">My Mentor</span></h2>
   </div>
   <div class="testimonials-grid">
-    <div class="testimonial-card reveal" style="grid-column:1/-1;max-width:760px;margin:0 auto;width:100%;">
-      <div class="testimonial-content">
-        <div class="testimonial-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"Abdelrahman stood out during the Flutter training as a fast learner with a genuine passion for building clean, well-architected mobile applications. He consistently went beyond the required tasks, delivered polished projects on time, and approached every challenge with a professional, problem-solving mindset. I confidently recommend him for any mobile development opportunity."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">أ.أ</div>
-          <div class="author-info">
-            <h4>A. Amira · Flutter Mentor</h4>
-            <p style="display:flex;align-items:center;gap:6px;"><i class="fab fa-linkedin" style="color:#0077b5;"></i> Recommendation — <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150/" style="color:var(--neon);font-weight:700;" target="_blank">View on LinkedIn</a></p>
+    <div class="premium-testimonial-card reveal" style="grid-column:1/-1;width:100%;">
+      <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <p class="quote">"Abdelrahman stood out during the Flutter training as a fast learner with a genuine passion for building clean, well-architected mobile applications. He consistently went beyond the required tasks, delivered polished projects on time, and approached every challenge with a professional, problem-solving mindset. I confidently recommend him for any mobile development opportunity."</p>
+      <div class="author-info">
+        <div class="avatar" style="background-color: #a855f7;">أ.أ</div>
+        <div class="details">
+          <h4>A. Amira · Flutter Mentor</h4>
+          <div class="linkedin-link">
+            <i class="fab fa-linkedin" aria-hidden="true"></i> Recommendation —
+            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" class="neon-link">View on LinkedIn</a>
           </div>
         </div>
       </div>
@@ -3795,7 +3818,7 @@ body{overflow-x:hidden;}
 <!-- Footer --> 
 <footer class="premium-footer"> 
   <div class="footer-grid">
-    <div class="footer-col">
+    <div class="footer-col left-col">
       <h4 class="footer-title">LET'S CONNECT</h4>
       <p>I'm always open to discussing new Flutter projects, freelance opportunities, and collaborations to build great mobile experiences.</p>
       <div class="footer-social-icons">
@@ -3807,22 +3830,14 @@ body{overflow-x:hidden;}
     <div class="footer-col center-col">
       <div class="footer-logo"><span class="code-bracket">&lt;/&gt;</span> A<span class="neon-dot">.</span>A</div>
       <p class="footer-subtitle">Flutter Developer · Cairo, Egypt</p>
-      <div class="footer-platforms">
-        <a href="https://mostaql.com/onboarding/profile" class="footer-platform-link" target="_blank" rel="noopener" title="مستقل (Mostaql)" aria-label="Mostaql profile">
-          <img src="images/مستقل.jpeg" alt="مستقل (Mostaql)" loading="lazy">
-        </a>
-        <a href="https://nafezly.com/u/ENGabdelrahamn" class="footer-platform-link" target="_blank" rel="noopener" title="نفذلي (Nafzly)" aria-label="Nafzly profile">
-          <img src="images/نفذلي.jpg" alt="نفذلي (Nafzly)" loading="lazy">
-        </a>
-        <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="footer-platform-link" target="_blank" rel="noopener" title="خمسات (Khamsat)" aria-label="Khamsat profile">
-          <img src="images/خمسات.png" alt="خمسات (Khamsat)" loading="lazy">
-        </a>
-        <a href="https://www.freelancer.com/u/abdelrahmana089" class="footer-platform-link" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile">
-          <img src="images/فريلانسر.jpg" alt="Freelancer" loading="lazy">
-        </a>
+      <div class="freelance-platforms">
+        <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="خمسات (Khamsat)" aria-label="Khamsat profile"><img src="images/خمسات.png" alt="خمسات" loading="lazy"></a>
+        <a href="https://nafezly.com/u/ENGabdelrahamn" class="platform-icon" target="_blank" rel="noopener" title="نفذلي (Nafzly)" aria-label="Nafzly profile"><img src="images/نفذلي.jpg" alt="نفذلي" loading="lazy"></a>
+        <a href="https://mostaql.com/onboarding/profile" class="platform-icon" target="_blank" rel="noopener" title="مستقل (Mostaql)" aria-label="Mostaql profile"><img src="images/مستقل.jpeg" alt="مستقل" loading="lazy"></a>
+        <a href="https://www.freelancer.com/u/abdelrahmana089" class="platform-icon" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile"><img src="images/فريلانسر.jpg" alt="Freelancer" loading="lazy"></a>
       </div>
     </div>
-    <div class="footer-col">
+    <div class="footer-col right-col">
       <h4 class="footer-title">WHO AM I?</h4>
       <p>I'm <strong style="color:var(--text)">Abdelrahman Abdullah</strong>, a Flutter Developer passionate about building scalable, cross-platform mobile apps with clean architecture and seamless user experiences.</p>
     </div>
