@@ -33,7 +33,6 @@
 <link rel="canonical" href="https://abdelrahman.dev/">
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='56' y2='48'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='56' height='48' rx='12' fill='%230b0b12'/%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M20 8L7 23M20 40L7 23' stroke='%23e2e8f0' stroke-width='3.4'/%3E%3Cpath d='M9 23H17' stroke='url(%23g)' stroke-width='3.4'/%3E%3Cpath d='M29.4 7L26.6 41' stroke='url(%23g)' stroke-width='2.4'/%3E%3Cpath d='M36 8L49 23M36 40L49 23' stroke='%23e2e8f0' stroke-width='3.4'/%3E%3Cpath d='M39 23H47' stroke='url(%23g)' stroke-width='3.4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="icon" type="image/png" href="images/6037452442028413306.jpg">
 
 <!-- PWA Manifest -->
@@ -417,17 +416,16 @@ body::after{
   min-height:48px;
 }
 .brand-mark{
-  width:clamp(42px,3.5vw,52px);
-  height:clamp(36px,3vw,45px);
+  width:clamp(42px,3.6vw,54px);
+  height:clamp(28px,2.4vw,36px);
   color:#fff;
   flex-shrink:0;
   transition:transform .3s cubic-bezier(.4,0,.2,1), filter .3s;
 }
-.brand-mark .aa-bar,
-.brand-mark .aa-slash{transition:filter .3s}
+.brand-mark .eng-accent{transition:filter .3s}
+.brand-mark .eng-cursor{transition:opacity .3s}
 .brand:hover .brand-mark{transform:scale(1.06) rotate(-2deg);filter:drop-shadow(0 0 10px rgba(168,85,247,.65))}
-.brand:hover .brand-mark .aa-bar,
-.brand:hover .brand-mark .aa-slash{filter:drop-shadow(0 0 5px rgba(34,211,238,.85))}
+.brand:hover .brand-mark .eng-accent{filter:drop-shadow(0 0 5px rgba(34,211,238,.85))}
 .brand-name{
   display:flex;
   flex-direction:column;
@@ -3079,19 +3077,19 @@ body{overflow-x:hidden;}
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home"> 
-    <svg class="brand-mark" viewBox="0 0 56 48" fill="none" aria-hidden="true" focusable="false">
+    <svg class="brand-mark" viewBox="0 0 72 48" fill="none" aria-hidden="true" focusable="false">
       <defs>
-        <linearGradient id="aaGrad" x1="0" y1="0" x2="56" y2="48" gradientUnits="userSpaceOnUse">
+        <linearGradient id="engGrad" x1="0" y1="0" x2="72" y2="48" gradientUnits="userSpaceOnUse">
           <stop stop-color="#22d3ee"/>
           <stop offset="1" stop-color="#a855f7"/>
         </linearGradient>
       </defs>
-      <rect class="aa-frame" x="2" y="2" width="52" height="44" rx="12" stroke="url(#aaGrad)" stroke-width="1.5" opacity="0.5"/>
-      <path class="aa-bracket" d="M20 8 L7 23 M20 40 L7 23" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
-      <path class="aa-bar" d="M9 23 H17" stroke="url(#aaGrad)" stroke-width="3.4" stroke-linecap="round"/>
-      <path class="aa-slash" d="M29.4 7 L26.6 41" stroke="url(#aaGrad)" stroke-width="2.4" stroke-linecap="round"/>
-      <path class="aa-bracket" d="M36 8 L49 23 M36 40 L49 23" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
-      <path class="aa-bar" d="M39 23 H47" stroke="url(#aaGrad)" stroke-width="3.4" stroke-linecap="round"/>
+      <rect class="eng-frame" x="2" y="2" width="68" height="44" rx="12" stroke="url(#engGrad)" stroke-width="1.5" opacity="0.6"/>
+      <path class="eng-stroke" d="M8 10 v28 M8 10 h12 M8 24 h9 M8 38 h12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="eng-stroke" d="M27 10 v28 M27 10 l14 28 M41 10 v28" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="eng-stroke" d="M58 12 A12 12 0 1 0 58 36" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="eng-accent" d="M58 24 h6" stroke="url(#engGrad)" stroke-width="3.2" stroke-linecap="round"/>
+      <rect class="eng-cursor" x="64.5" y="14.5" width="3" height="9" rx="1.5" fill="url(#engGrad)"/>
     </svg>
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
