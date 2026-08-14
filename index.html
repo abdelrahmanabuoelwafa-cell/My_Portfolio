@@ -507,6 +507,30 @@ body::after{
   transition:all .3s cubic-bezier(.4,0,.2,1);
 }
 .btn-cv:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(168,85,247,.5)}
+.btn-contact-nav{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 18px;
+  border-radius:50px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border:2px solid var(--neon);
+  color:var(--neon);
+  background:rgba(168,85,247,.06);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.btn-contact-nav:hover{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  box-shadow:0 10px 25px rgba(168,85,247,.4);
+}
+[data-theme="light"] .btn-contact-nav{color:#6d28d9;border-color:#7c3aed;}
+[data-theme="light"] .btn-contact-nav:hover{color:#fff;}
 [data-theme="light"] #navbar{background:rgba(255,255,255,.8)}
 [data-theme="light"] #navbar.scrolled{background:rgba(255,255,255,.92)}
 [data-theme="light"] .brand{color:#0f172a}
@@ -549,6 +573,7 @@ body::after{
   .nav-menu .nav-links a.active{color:var(--neon);text-shadow:0 0 12px rgba(168,85,247,.4)}
   .nav-actions{flex-direction:column;align-items:stretch;gap:14px;margin-top:20px;width:100%}
   .nav-actions .btn-cv{justify-content:center}
+  .nav-actions .btn-contact-nav{justify-content:center}
   .theme-toggle-nav{align-self:flex-start}
 }
 
@@ -2524,6 +2549,21 @@ footer p{
   align-items: center;
 }
 
+/* Faint halo around the lamp, tinted with the current background color */
+.mini-lamp::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 230px;
+  height: 230px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--bg) 62%, transparent) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .mini-shade {
   width: 130px;
   height: 60px;
@@ -2604,15 +2644,24 @@ footer p{
 
 .mini-cord-handle {
   position: absolute;
-  bottom: -14px;
+  bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 22px;
+  padding: 6px 11px;
+  min-width: 46px;
+  text-align: center;
   background: linear-gradient(135deg, var(--neon), var(--secondary));
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--neon);
+  border-radius: 18px;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
   cursor: pointer;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  z-index: 7;
 }
 
 .mini-cord.pull {
@@ -3129,6 +3178,10 @@ body{overflow-x:hidden;}
       <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF"> 
         <span>Download CV</span> 
         <i class="fas fa-download" aria-hidden="true"></i> 
+      </a> 
+      <a href="#contact" class="btn-contact-nav" target="_self" aria-label="Contact Me"> 
+        <span>Contact Me</span> 
+        <i class="fas fa-paper-plane" aria-hidden="true"></i> 
       </a> 
       <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
         <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
@@ -3893,7 +3946,7 @@ body{overflow-x:hidden;}
           <div class="mini-base"></div>
 
           <div class="mini-cord" id="miniCord">
-            <div class="mini-cord-handle" id="miniCordHandle"></div>
+            <div class="mini-cord-handle" id="miniCordHandle">Pull</div>
           </div>
         </div>
       </div>
