@@ -386,70 +386,106 @@ body::after{
 } 
 
 /* Navbar */ 
-#navbar{ 
-  position:fixed; 
-  top:0; left:0; right:0; 
-  z-index:1000; 
-  display:flex; 
-  align-items:center; 
-  justify-content:space-between; 
-  padding:20px 60px; 
-  background:rgba(17,17,17,.9); 
-  backdrop-filter:blur(20px); 
-  border-bottom:1px solid var(--border); 
-  transition:all .3s; 
-} 
-#navbar.scrolled{padding:12px 60px;background:rgba(17,17,17,.95)} 
-.nav-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:26px;font-weight:800;color:#fff;letter-spacing:1px;transition:transform .3s ease}
-.nav-logo:hover{transform:scale(1.05)}
-.nav-logo .code-bracket{color:var(--muted);font-size:22px;font-weight:700;letter-spacing:0}
-.nav-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)} 
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;min-width:44px;min-height:44px;padding:10px;} 
-.hamburger span{width:25px;height:2px;background:var(--text);transition:all .3s} 
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)} 
-.hamburger.open span:nth-child(2){opacity:0} 
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)} 
-.nav-menu{display:flex;align-items:center;gap:40px} 
-.nav-menu ul{display:flex;gap:24px} 
-.nav-menu a{ 
-  font-size:14px; 
-  font-weight:600; 
-  color:var(--muted); 
-  position:relative; 
-  transition:all .3s; 
-} 
-.nav-menu a:hover,.nav-menu a.active{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)} 
-[data-theme="light"] .nav-menu a:hover,[data-theme="light"] .nav-menu a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)} 
-.nav-actions{display:flex;align-items:center;gap:12px}
-.btn-cv{
-  padding:8px 18px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  border-radius:50px;
-  font-size:13px;
-  font-weight:700;
-  color:#fff;
+/* --- Pill-style Navbar --- */
+#navbar.pill-navbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
   display:flex;
   align-items:center;
-  gap:6px;
-  transition:all .3s;
+  justify-content:space-between;
+  gap:16px;
+  padding:20px 5%;
+  background:transparent;
+  transition:padding .3s, background .3s;
 }
-.btn-cv:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 25px rgba(168,85,247,.5);
+#navbar.pill-navbar.scrolled{padding:12px 5%;background:rgba(10,10,15,.6);backdrop-filter:blur(16px)}
+.brand-pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(15,15,20,.6);
+  border:1px solid rgba(168,85,247,.2);
+  border-radius:40px;
+  padding:10px 24px;
+  backdrop-filter:blur(10px);
+  flex-shrink:0;
 }
-.nav-cta{ 
-  padding:8px 20px; 
-  background:var(--primary); 
-  border-radius:50px; 
-  font-size:13px; 
-  font-weight:700; 
-  color:#fff; 
-  transition:all .3s; 
-} 
-.nav-cta:hover{ 
-  transform:translateY(-2px); 
-  box-shadow:0 10px 30px rgba(168,85,247,.7); 
-} 
+.brand-link{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;min-height:44px}
+.brand-pill .code-bracket{color:var(--neon,#a855f7);font-weight:900;font-size:18px;font-family:inherit}
+.brand-pill .brand-name{color:#fff;font-weight:800;font-size:18px;letter-spacing:1px}
+.brand-pill .neon-dot{color:var(--neon,#a855f7)}
+.nav-pill{
+  background:rgba(15,15,20,.6);
+  border:1px solid rgba(168,85,247,.2);
+  border-radius:40px;
+  padding:12px 30px;
+  backdrop-filter:blur(10px);
+  flex:1;
+  min-width:0;
+  overflow-x:auto;
+  scrollbar-width:thin;
+}
+.pill-nav-links{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.pill-nav-links a{
+  color:#888;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  transition:all .3s ease;
+}
+.pill-nav-links a:hover,.pill-nav-links a.active{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
+/* Slightly tighter between 1025-1150 so 11 links fit before the scroll fallback kicks in */
+@media(min-width:1025px) and (max-width:1150px){
+  .pill-nav-links{gap:14px}
+  .nav-pill{padding:12px 20px}
+  .pill-nav-links a{font-size:11px}
+}
+/* Light theme overrides for the pill navbar */
+[data-theme="light"] #navbar.pill-navbar{background:transparent}
+[data-theme="light"] #navbar.pill-navbar.scrolled{background:rgba(255,255,255,.7)}
+[data-theme="light"] #navbar.pill-navbar .brand-pill,
+[data-theme="light"] #navbar.pill-navbar .nav-pill{background:rgba(255,255,255,.75);border-color:rgba(147,51,234,.15)}
+[data-theme="light"] .pill-nav-links a:hover,
+[data-theme="light"] .pill-nav-links a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)}
+[data-theme="light"] .brand-pill .brand-name{color:#0f172a}
+/* Mobile/Tablet: stack pills vertically, nav links scroll horizontally */
+@media(max-width:1024px){
+  #navbar.pill-navbar{
+    position:static;
+    flex-direction:column;
+    gap:12px;
+    padding:16px 16px 4px;
+    background:transparent;
+  }
+  #navbar.pill-navbar.scrolled{background:transparent;padding:16px 16px 4px}
+  .brand-pill{align-self:center}
+  .nav-pill{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:10px 18px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .pill-nav-links{justify-content:flex-start;gap:18px}
+  .pill-nav-links a{font-size:11px;min-height:40px}
+  .theme-toggle-nav{align-self:center;margin-bottom:8px}
+  .hero{padding-top:max(16px,env(safe-area-inset-top))}
+}
 
 /* Hero Section */ 
 .hero{ 
@@ -2161,10 +2197,10 @@ footer p{
 .author-info{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
 .avatar{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px;background-color:#a855f7;box-shadow:0 0 18px rgba(168,85,247,.5)}
 .details h4{color:var(--text);margin:0 0 5px 0;font-size:15px}
-.linkedin-link{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.linkedin-link i{color:#0077b5}
-.neon-link{color:var(--neon);text-decoration:none;font-weight:600;transition:color .3s;min-height:44px;display:inline-flex;align-items:center}
-.neon-link:hover{color:#c084fc;text-decoration:underline}
+.linkedin-link{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.recommendation-text{color:var(--muted);font-size:13px}
+.linkedin-icon-btn{color:#0077b5;font-size:20px;text-decoration:none;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;transition:all .3s ease}
+.linkedin-icon-btn:hover{color:#c084fc;transform:scale(1.15) translateY(-2px);text-shadow:0 5px 15px rgba(168,85,247,.4)}
 @media(max-width:480px){
   .premium-testimonial-card{padding:24px 18px}
 } 
@@ -3009,36 +3045,33 @@ body{overflow-x:hidden;}
   </div>
 </div>
 
-<!-- Navbar --> 
-<nav id="navbar" role="navigation" aria-label="Main navigation"> 
-  <a href="#hero" class="nav-logo" aria-label="Abdelrahman Abdullah Logo"><span class="code-bracket">&lt;/&gt;</span><span class="logo-name">A<span class="neon-dot">.</span>A</span></a> 
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
-    <span></span><span></span><span></span> 
-  </button> 
-  <div class="nav-menu" id="navMenu" role="menubar"> 
-    <ul role="menubar"> 
-      <li role="none"><a href="#about" onclick="closeMenu()" role="menuitem" target="_self">About</a></li> 
-      <li role="none"><a href="#services" onclick="closeMenu()" role="menuitem" target="_self">Services</a></li> 
-      <li role="none"><a href="#skills" onclick="closeMenu()" role="menuitem" target="_self">Skills</a></li> 
-      <li role="none"><a href="#experience" onclick="closeMenu()" role="menuitem" target="_self">Experience</a></li> 
-      <li role="none"><a href="#education" onclick="closeMenu()" role="menuitem" target="_self">Education</a></li> 
-      <li role="none"><a href="#stats" onclick="closeMenu()" role="menuitem" target="_self">Stats</a></li> 
-      <li role="none"><a href="#projects" onclick="closeMenu()" role="menuitem" target="_self">Projects</a></li> 
-      <li role="none"><a href="#testimonials" onclick="closeMenu()" role="menuitem" target="_self">Testimonials</a></li> 
-      <li role="none"><a href="#pricing" onclick="closeMenu()" role="menuitem" target="_self">Pricing</a></li> 
-      <li role="none"><a href="#contact" onclick="closeMenu()" role="menuitem" target="_self">Contact</a></li> 
-    </ul> 
-    <div class="nav-actions">
-      <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF">
-        <i class="fas fa-download" aria-hidden="true"></i> Download CV
-      </a>
-      <a href="https://wa.me/201123031944" class="nav-cta" aria-label="Contact via WhatsApp to hire">Hire Me</a> 
-      <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
-        <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
-        <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
-      </button>
-    </div>
+<!-- Navbar (Pill Style) --> 
+<nav id="navbar" class="pill-navbar" role="navigation" aria-label="Main navigation"> 
+  <div class="brand-pill"> 
+    <a href="#hero" class="brand-link" target="_self" aria-label="Abdelrahman Abdullah Home"> 
+      <span class="code-bracket">&lt;/&gt;</span> 
+      <span class="brand-name">A<span class="neon-dot">.</span>A</span> 
+    </a> 
   </div> 
+  <div class="nav-pill"> 
+    <ul class="pill-nav-links"> 
+      <li><a href="#hero" class="active" target="_self">HOME</a></li> 
+      <li><a href="#about" target="_self">ABOUT</a></li> 
+      <li><a href="#services" target="_self">SERVICES</a></li> 
+      <li><a href="#skills" target="_self">SKILLS</a></li> 
+      <li><a href="#experience" target="_self">EXPERIENCE</a></li> 
+      <li><a href="#education" target="_self">EDUCATION</a></li> 
+      <li><a href="#stats" target="_self">STATS</a></li> 
+      <li><a href="#projects" target="_self">PROJECTS</a></li> 
+      <li><a href="#testimonials" target="_self">TESTIMONIALS</a></li> 
+      <li><a href="#pricing" target="_self">PRICING</a></li> 
+      <li><a href="#contact" target="_self">CONTACT</a></li> 
+    </ul> 
+  </div> 
+  <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
+    <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
+    <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
+  </button> 
 </nav> 
 
 <!-- Hero Section --> 
@@ -3639,8 +3672,10 @@ body{overflow-x:hidden;}
         <div class="details">
           <h4>A. Amira · Flutter Mentor</h4>
           <div class="linkedin-link">
-            <i class="fab fa-linkedin" aria-hidden="true"></i> Recommendation —
-            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" class="neon-link">View on LinkedIn</a>
+            <span class="recommendation-text">Recommendation —</span>
+            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -3860,31 +3895,6 @@ body{overflow-x:hidden;}
 <script src="js/firework-cursor.js?v=21"></script>
 
 <script> 
-// Mobile Menu Toggle 
-function toggleMenu() { 
-  const menu = document.getElementById('navMenu'); 
-  const ham = document.querySelector('.hamburger'); 
-  const open = menu.classList.toggle('open'); 
-  ham.classList.toggle('open', open); 
-  ham.setAttribute('aria-expanded', open ? 'true' : 'false'); 
-} 
-function closeMenu() { 
-  const menu = document.getElementById('navMenu'); 
-  const ham = document.querySelector('.hamburger'); 
-  menu.classList.remove('open'); 
-  ham.classList.remove('open'); 
-  ham.setAttribute('aria-expanded', 'false'); 
-} 
-document.addEventListener('keydown', (e) => { 
-  if (e.key === 'Escape') closeMenu(); 
-}); 
-document.addEventListener('click', (e) => { 
-  const menu = document.getElementById('navMenu'); 
-  if (!menu.classList.contains('open')) return; 
-  if (menu.contains(e.target) || e.target.closest('.hamburger')) return; 
-  closeMenu(); 
-}); 
-
 // Navbar Scroll background change 
 window.addEventListener('scroll', () => { 
   const nav = document.getElementById('navbar'); 
@@ -3896,7 +3906,7 @@ window.addEventListener('scroll', () => {
 // Scroll-spy: highlight the active section link in the nav
 const spySections = ['hero','about','services','skills','experience','education','stats','projects','testimonials','pricing','contact'];
 function updateActiveLink() { 
-  const links = document.querySelectorAll('.nav-menu a'); 
+  const links = document.querySelectorAll('.pill-nav-links a'); 
   if (!links.length) return; 
   let current = 'hero'; 
   const pos = window.scrollY + 120; 
