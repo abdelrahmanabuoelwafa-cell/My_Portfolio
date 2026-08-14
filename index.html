@@ -3037,103 +3037,6 @@ body{overflow-x:hidden;}
   .demo-card:hover{box-shadow:0 10px 20px rgba(0,0,0,.3);}
 }
 
-/* ===== Contact: account cards + pull-to-connect lamp ===== */
-.contact-container.contact-premium{max-width:1100px;gap:52px;align-items:center}
-.contact-accounts-title{font-size:clamp(26px,3vw,32px);font-weight:800;margin-bottom:14px}
-.contact-subtitle{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:34px}
-.account-list{display:flex;flex-direction:column;gap:18px}
-.account-card{
-  display:flex;align-items:center;gap:18px;padding:20px 22px;
-  background:var(--card-bg);border:1px solid var(--border);border-radius:16px;
-  text-decoration:none;transition:all .3s cubic-bezier(.4,0,.2,1);
-}
-.account-card:hover{border-color:var(--neon);transform:translateY(-3px);box-shadow:0 12px 32px rgba(168,85,247,.28)}
-.account-icon{
-  width:52px;height:52px;border-radius:13px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);
-}
-.account-icon.whatsapp{background:linear-gradient(135deg,#25d366,#128c7e)}
-.account-icon.linkedin{background:linear-gradient(135deg,#0077b5,#005b8f)}
-.account-icon.email{background:linear-gradient(135deg,#a855f7,#7c3aed)}
-.account-info{display:flex;flex-direction:column;min-width:0}
-.account-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px}
-.account-value{font-size:14.5px;color:var(--text);font-weight:600;overflow-wrap:anywhere}
-
-/* Lamp */
-.lamp-section{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:520px}
-.lamp-container{
-  position:relative;width:400px;height:470px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity .5s ease, transform .5s ease;
-}
-.lamp-container.fade-out{opacity:0;transform:scale(.92);pointer-events:none}
-.background-animation{position:absolute;inset:0;pointer-events:none}
-.glow-circle{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle,rgba(168,85,247,.28) 0%,transparent 70%);
-  animation:pulseGlow 3s ease-in-out infinite;
-}
-.glow-circle{width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%)}
-.glow-circle-2{width:200px;height:200px;top:32%;left:32%;transform:translate(-50%,-50%);animation-delay:1s}
-.glow-circle-3{width:150px;height:150px;top:70%;left:70%;transform:translate(-50%,-50%);animation-delay:2s}
-@keyframes pulseGlow{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(1)}50%{opacity:.6;transform:translate(-50%,-50%) scale(1.12)}}
-.lamp{position:relative;width:180px;height:280px;display:flex;flex-direction:column;align-items:center;z-index:2}
-.lamp-shade{
-  width:104px;height:74px;border-radius:52px 52px 0 0;
-  background:linear-gradient(180deg,#8b4513 0%,#654321 100%);
-  box-shadow:0 8px 20px rgba(0,0,0,.4);transition:all .5s ease;
-}
-.lamp-bulb{width:52px;height:52px;background:#444;border-radius:50%;margin-top:-12px;transition:all .5s ease}
-.lamp-cord{width:2px;height:118px;background:#666;transition:all .3s ease}
-.pull-cord{position:absolute;right:26px;top:0;width:3px;height:80px;background:#666;cursor:pointer;transform-origin:top;transition:transform .3s ease, background .3s ease}
-.pull-cord:hover{background:#999}
-.pull-cord.pulled{transform:rotate(15deg)}
-.cord-handle{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:12px;height:12px;background:#ffd700;border-radius:50%;box-shadow:0 0 12px #ffd700}
-.cord-label{
-  position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
-  background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.5);
-  padding:8px 16px;border-radius:20px;color:var(--neon);
-  font-size:12px;font-weight:700;letter-spacing:.3px;white-space:nowrap;
-  animation:pulseLabel 2s ease-in-out infinite;
-}
-@keyframes pulseLabel{0%,100%{box-shadow:0 0 10px rgba(168,85,247,.25)}50%{box-shadow:0 0 22px rgba(168,85,247,.6)}}
-.lamp.lamp-on .lamp-shade{background:linear-gradient(180deg,#ffd700 0%,#ff9d00 100%);box-shadow:0 0 34px rgba(255,215,0,.55)}
-.lamp.lamp-on .lamp-bulb{background:#fff200;box-shadow:0 0 55px rgba(255,255,0,.85),0 0 90px rgba(255,215,0,.35)}
-[data-theme="light"] .lamp-shade{background:linear-gradient(180deg,#3b4a6b 0%,#1e293b 100%)}
-[data-theme="light"] .lamp-bulb{background:#8b9bb8}
-[data-theme="light"] .lamp.lamp-on .lamp-shade{background:linear-gradient(180deg,#ffd700 0%,#ff9d00 100%);box-shadow:0 0 30px rgba(255,215,0,.5)}
-[data-theme="light"] .lamp.lamp-on .lamp-bulb{background:#fff200;box-shadow:0 0 50px rgba(255,215,0,.8)}
-
-/* Send button */
-.send-button-container{
-  position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
-  opacity:0;pointer-events:none;z-index:3;
-  transition:opacity .5s ease, transform .5s ease;
-}
-.send-button-container.visible{opacity:1;pointer-events:auto}
-.send-button{
-  padding:15px 32px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;
-  border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;gap:10px;font-family:inherit;
-  transition:all .3s ease;box-shadow:0 8px 24px rgba(168,85,247,.35);
-}
-.send-button:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(168,85,247,.5)}
-@media(max-width:768px){
-  .lamp-section{min-height:440px}
-  .lamp-container{width:300px;height:380px}
-  .lamp{transform:scale(.82);transform-origin:center}
-  .send-button-container{bottom:24px}
-}
-@media(max-width:480px){
-  .account-card{padding:16px}
-  .account-icon{width:46px;height:46px;font-size:1.2rem}
-  .account-value{font-size:13px}
-  .lamp-section{min-height:400px}
-  .lamp-container{width:270px;height:350px}
-  .lamp{transform:scale(.74);transform-origin:center}
-}
-
 /* Respect reduced-motion preference */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
@@ -3920,55 +3823,63 @@ body{overflow-x:hidden;}
     <div class="section-label">Get In Touch</div> 
     <h2 class="section-title">Let's <span class="gradient-text">Work</span> Together</h2> 
   </div> 
-  <div class="contact-container contact-premium"> 
-    <div class="contact-accounts reveal"> 
-      <h3 class="contact-accounts-title">Contact Accounts</h3> 
-      <p class="contact-subtitle">I'm always open to discussing new projects, creative ideas or opportunities. Let's create something amazing together.</p> 
-      <div class="account-list"> 
-        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="account-card"> 
-          <div class="account-icon whatsapp"><i class="fab fa-whatsapp"></i></div> 
-          <div class="account-info"> 
-            <span class="account-label">WhatsApp</span> 
-            <span class="account-value">+20 112 303 1944</span> 
+  <div class="contact-container"> 
+    <div class="contact-info reveal"> 
+      <h3>Have a project in mind?</h3> 
+      <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Let's create something amazing together.</p> 
+      <div class="contact-links"> 
+        <a href="mailto:abdulrahman.abuoshaifa@gmail.com" class="contact-link"> 
+          <i class="fas fa-envelope"></i> 
+          <div> 
+            <strong>Email</strong> 
+            <span>abdulrahman.abuoshaifa@gmail.com</span> 
           </div> 
         </a> 
-        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" target="_blank" rel="noopener" class="account-card"> 
-          <div class="account-icon linkedin"><i class="fab fa-linkedin-in"></i></div> 
-          <div class="account-info"> 
-            <span class="account-label">LinkedIn</span> 
-            <span class="account-value">Abdelrahman Abdullah</span> 
+        <a href="https://wa.me/201123031944" class="contact-link"> 
+          <i class="fab fa-whatsapp" style="color:#25d366;"></i> 
+          <div> 
+            <strong>WhatsApp</strong> 
+            <span>+20 112 303 1944</span> 
           </div> 
         </a> 
-        <a href="mailto:abdulrahman.abuoshaifa@gmail.com" class="account-card"> 
-          <div class="account-icon email"><i class="fas fa-envelope"></i></div> 
-          <div class="account-info"> 
-            <span class="account-label">Email</span> 
-            <span class="account-value">abdulrahman.abuoshaifa@gmail.com</span> 
+        <a href="tel:+201123031944" class="contact-link"> 
+          <i class="fas fa-phone-alt"></i> 
+          <div> 
+            <strong>Phone</strong> 
+            <span>+20 112 303 1944</span> 
+          </div> 
+        </a> 
+        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" class="contact-link"> 
+          <i class="fab fa-linkedin-in" style="color:#0077b5;"></i> 
+          <div> 
+            <strong>LinkedIn</strong> 
+            <span>Abdulrahman Abdullah</span> 
+          </div> 
+        </a> 
+        <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="contact-link"> 
+          <i class="fab fa-github"></i> 
+          <div> 
+            <strong>GitHub</strong> 
+            <span>@abdelrahmanabuoelwafa-cell</span> 
           </div> 
         </a> 
       </div> 
     </div> 
 
-    <div class="lamp-section"> 
-      <div class="lamp-container" id="lampContainer"> 
-        <div class="background-animation"> 
-          <div class="glow-circle"></div> 
-          <div class="glow-circle glow-circle-2"></div> 
-          <div class="glow-circle glow-circle-3"></div> 
-        </div> 
-        <div class="lamp" id="lamp"> 
-          <div class="lamp-shade"></div> 
-          <div class="lamp-bulb"></div> 
-          <div class="lamp-cord"></div> 
-          <div class="pull-cord" id="pullCord"> 
-            <div class="cord-handle"></div> 
-            <div class="cord-label">pull to connect</div> 
-          </div> 
-        </div> 
-        <div class="send-button-container" id="sendButtonContainer"> 
-          <button class="send-button" id="sendButton"><i class="fas fa-paper-plane"></i> Send Message</button> 
-        </div> 
-      </div> 
+    <div class="interactive-lamp-side" id="interactiveSide">
+      <div class="lamp-scene-box" id="lampSceneBox">
+        <div class="mini-lamp">
+          <div class="mini-shade"></div>
+          <div class="mini-bulb" id="miniBulb"></div>
+          <div class="mini-stem"></div>
+          <div class="mini-base"></div>
+
+          <div class="mini-cord" id="miniCord">
+            <div class="mini-cord-handle" id="miniCordHandle"></div>
+          </div>
+        </div>
+      </div>
+
       <form class="contact-form compact-form hidden-form" id="actualContactForm" onsubmit="handleFormSubmit(event)"> 
         <div class="form-group"> 
           <label>Your Name</label> 
@@ -3984,7 +3895,7 @@ body{overflow-x:hidden;}
         </div> 
         <button type="submit" id="contactBtn" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button> 
       </form> 
-    </div> 
+    </div>
   </div> 
 </section> 
 
@@ -4433,36 +4344,30 @@ function sendLampMessage() {
   glow.classList.remove('on');
 }
 
-// ===== Interactive Contact Lamp (pull to connect) =====
+// ===== Interactive Contact Lamp (pull to reveal message form) =====
 document.addEventListener('DOMContentLoaded', () => {
-  const lampContainer = document.getElementById('lampContainer');
-  const lamp = document.getElementById('lamp');
-  const pullCord = document.getElementById('pullCord');
-  const sendButtonContainer = document.getElementById('sendButtonContainer');
-  const sendButton = document.getElementById('sendButton');
+  const lampSceneBox = document.getElementById('lampSceneBox');
+  const miniCord = document.getElementById('miniCord');
+  const miniCordHandle = document.getElementById('miniCordHandle');
   const actualContactForm = document.getElementById('actualContactForm');
-  if (!lamp || !pullCord || !sendButtonContainer || !sendButton) return;
+  if (!lampSceneBox || !miniCordHandle || !actualContactForm) return;
 
-  let isLampOn = false;
-  let formShown = false;
+  function triggerLampAction() {
+    miniCord.classList.add('pull');
+    setTimeout(() => miniCord.classList.remove('pull'), 200);
 
-  pullCord.addEventListener('click', () => {
-    if (isLampOn) return;
-    isLampOn = true;
-    pullCord.classList.add('pulled');
-    setTimeout(() => pullCord.classList.remove('pulled'), 300);
-    setTimeout(() => lamp.classList.add('lamp-on'), 500);
-    setTimeout(() => sendButtonContainer.classList.add('visible'), 1000);
-  });
+    lampSceneBox.classList.add('lit');
 
-  sendButton.addEventListener('click', () => {
-    if (formShown) return;
-    formShown = true;
-    if (lampContainer) lampContainer.classList.add('fade-out');
     setTimeout(() => {
-      if (actualContactForm) actualContactForm.classList.add('revealed');
-    }, 450);
-  });
+      lampSceneBox.classList.add('fade-out');
+      setTimeout(() => {
+        lampSceneBox.style.display = 'none';
+        actualContactForm.classList.add('revealed');
+      }, 500);
+    }, 600);
+  }
+
+  miniCordHandle.addEventListener('click', triggerLampAction);
 });
 
 </script>
