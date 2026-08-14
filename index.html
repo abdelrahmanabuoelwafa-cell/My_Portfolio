@@ -2062,6 +2062,91 @@ footer p{
   font-size:14px; 
 } 
 
+/* --- Premium Footer (3-column) --- */
+.premium-footer{
+  background:rgba(10,10,15,.92);
+  border-top:1px solid var(--border);
+  padding:60px 5% 40px;
+  text-align:left;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:40px;
+  max-width:1200px;
+  margin:0 auto 40px;
+}
+.footer-title{
+  color:var(--neon);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+.footer-col p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+.footer-social-icons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+.footer-social-icons a{
+  width:40px;height:40px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text);
+  text-decoration:none;
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.footer-social-icons a:hover{
+  background:rgba(168,85,247,.2);
+  border-color:var(--neon);
+  color:var(--neon);
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(168,85,247,.35);
+}
+.center-col{
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.footer-logo{
+  font-size:24px;font-weight:800;
+  color:#fff;letter-spacing:1px;
+  margin-bottom:10px;
+  font-family:var(--font-heading);
+}
+.footer-logo .code-bracket{color:var(--muted);font-size:20px;font-weight:700}
+.footer-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)}
+.footer-subtitle{margin-bottom:20px}
+.premium-footer .footer-platforms{gap:14px}
+.premium-footer .footer-platform-link{width:56px;height:56px;border-radius:14px}
+.premium-footer .footer-platform-link img{width:80%;height:80%;object-fit:contain}
+.footer-copy{
+  text-align:center;
+  border-top:1px solid var(--border);
+  padding-top:24px;
+  color:var(--muted);
+  font-size:14px;
+  margin:0;
+}
+[data-theme="light"] .premium-footer{background:rgba(248,250,252,.92)}
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr;gap:36px;text-align:center}
+  .footer-col{text-align:center}
+  .footer-social-icons{justify-content:center}
+}
+
+/* --- Premium touches: testimonial avatar + active nav link --- */
+.testimonial-card .author-avatar{background:#a855f7;box-shadow:0 0 18px rgba(168,85,247,.5)}
+.nav-menu a.active{color:var(--neon);text-shadow:0 0 12px rgba(168,85,247,.6)}
+.nav-menu a.active::after{width:100%} 
+
 /* ===== Complete Light (White) Mode ===== */
 [data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
 [data-theme="light"] #navbar{background:rgba(255,255,255,.85)}
@@ -3708,26 +3793,41 @@ body{overflow-x:hidden;}
 </section> 
 
 <!-- Footer --> 
-<footer> 
-  <div class="footer-name">Abdelrahman Abdullah</div> 
-  <div class="footer-freelance">
-    <span class="footer-freelance-label">Find me on:</span>
-    <div class="footer-platforms">
-      <a href="https://mostaql.com/onboarding/profile" class="footer-platform-link" target="_blank" rel="noopener" title="مستقل (Mostaql)" aria-label="Mostaql profile">
-        <img src="images/مستقل.jpeg" alt="مستقل (Mostaql)" loading="lazy">
-      </a>
-      <a href="https://nafezly.com/u/ENGabdelrahamn" class="footer-platform-link" target="_blank" rel="noopener" title="نفذلي (Nafzly)" aria-label="Nafzly profile">
-        <img src="images/نفذلي.jpg" alt="نفذلي (Nafzly)" loading="lazy">
-      </a>
-      <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="footer-platform-link" target="_blank" rel="noopener" title="خمسات (Khamsat)" aria-label="Khamsat profile">
-        <img src="images/خمسات.png" alt="خمسات (Khamsat)" loading="lazy">
-      </a>
-      <a href="https://www.freelancer.com/u/abdelrahmana089" class="footer-platform-link" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile">
-        <img src="images/فريلانسر.jpg" alt="Freelancer" loading="lazy">
-      </a>
+<footer class="premium-footer"> 
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4 class="footer-title">LET'S CONNECT</h4>
+      <p>I'm always open to discussing new Flutter projects, freelance opportunities, and collaborations to build great mobile experiences.</p>
+      <div class="footer-social-icons">
+        <a href="https://github.com/abdelrahmanabuoelwafa-cell" target="_blank" rel="noopener" aria-label="GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" target="_blank" rel="noopener" aria-label="LinkedIn profile"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="footer-col center-col">
+      <div class="footer-logo"><span class="code-bracket">&lt;/&gt;</span> A<span class="neon-dot">.</span>A</div>
+      <p class="footer-subtitle">Flutter Developer · Cairo, Egypt</p>
+      <div class="footer-platforms">
+        <a href="https://mostaql.com/onboarding/profile" class="footer-platform-link" target="_blank" rel="noopener" title="مستقل (Mostaql)" aria-label="Mostaql profile">
+          <img src="images/مستقل.jpeg" alt="مستقل (Mostaql)" loading="lazy">
+        </a>
+        <a href="https://nafezly.com/u/ENGabdelrahamn" class="footer-platform-link" target="_blank" rel="noopener" title="نفذلي (Nafzly)" aria-label="Nafzly profile">
+          <img src="images/نفذلي.jpg" alt="نفذلي (Nafzly)" loading="lazy">
+        </a>
+        <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="footer-platform-link" target="_blank" rel="noopener" title="خمسات (Khamsat)" aria-label="Khamsat profile">
+          <img src="images/خمسات.png" alt="خمسات (Khamsat)" loading="lazy">
+        </a>
+        <a href="https://www.freelancer.com/u/abdelrahmana089" class="footer-platform-link" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile">
+          <img src="images/فريلانسر.jpg" alt="Freelancer" loading="lazy">
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-title">WHO AM I?</h4>
+      <p>I'm <strong style="color:var(--text)">Abdelrahman Abdullah</strong>, a Flutter Developer passionate about building scalable, cross-platform mobile apps with clean architecture and seamless user experiences.</p>
     </div>
   </div>
-  <p>&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
+  <p class="footer-copy">&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
 </footer> 
 
 <!-- Project Detail Modal -->
@@ -3775,7 +3875,23 @@ window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar'); 
   if (window.scrollY > 50) nav.classList.add('scrolled'); 
   else nav.classList.remove('scrolled'); 
+  updateActiveLink(); 
 }); 
+
+// Scroll-spy: highlight the active section link in the nav
+const spySections = ['hero','about','services','skills','experience','education','stats','projects','testimonials','pricing','contact'];
+function updateActiveLink() { 
+  const links = document.querySelectorAll('.nav-menu a'); 
+  if (!links.length) return; 
+  let current = 'hero'; 
+  const pos = window.scrollY + 120; 
+  spySections.forEach(id => { 
+    const el = document.getElementById(id); 
+    if (el && el.offsetTop <= pos) current = id; 
+  }); 
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current)); 
+}
+updateActiveLink(); 
 
 // Typing effect 
 const words = ["Flutter Developer", "Mobile App Engineer", "UI/UX Enthusiast"]; 
