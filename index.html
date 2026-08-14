@@ -386,105 +386,170 @@ body::after{
 } 
 
 /* Navbar */ 
-/* --- Pill-style Navbar --- */
-#navbar.pill-navbar{
+/* --- Brand Navbar (Abdelrahman Abdullah personal logo) --- */
+#navbar{
   position:fixed;
   top:0; left:0; right:0;
   z-index:1000;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-  padding:20px 5%;
-  background:transparent;
-  transition:padding .3s, background .3s;
+  gap:20px;
+  padding:14px max(24px,3vw);
+  background:rgba(10,10,15,.55);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(168,85,247,.12);
+  transition:padding .3s, background .3s, box-shadow .3s;
 }
-#navbar.pill-navbar.scrolled{padding:12px 5%;background:rgba(10,10,15,.6);backdrop-filter:blur(16px)}
-.brand-pill{
+#navbar.scrolled{
+  padding:9px max(24px,3vw);
+  background:rgba(10,10,15,.92);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.brand{
   display:flex;
   align-items:center;
-  gap:8px;
-  background:rgba(15,15,20,.6);
-  border:1px solid rgba(168,85,247,.2);
-  border-radius:40px;
-  padding:10px 24px;
-  backdrop-filter:blur(10px);
+  gap:12px;
+  color:#fff;
+  text-decoration:none;
   flex-shrink:0;
+  min-height:48px;
 }
-.brand-link{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;min-height:44px}
-.brand-pill .code-bracket{color:var(--neon,#a855f7);font-weight:900;font-size:18px;font-family:inherit}
-.brand-pill .brand-name{color:#fff;font-weight:800;font-size:18px;letter-spacing:1px}
-.brand-pill .neon-dot{color:var(--neon,#a855f7)}
-.nav-pill{
-  background:rgba(15,15,20,.6);
-  border:1px solid rgba(168,85,247,.2);
-  border-radius:40px;
-  padding:12px 30px;
-  backdrop-filter:blur(10px);
-  flex:1;
-  min-width:0;
-  overflow-x:auto;
-  scrollbar-width:thin;
+.brand-mark{
+  width:clamp(32px,3vw,42px);
+  height:clamp(32px,3vw,42px);
+  color:#fff;
+  flex-shrink:0;
+  transition:transform .3s cubic-bezier(.4,0,.2,1), filter .3s;
 }
-.pill-nav-links{
+.brand-mark .aa-bar{transition:filter .3s}
+.brand-mark .aa-cursor{transition:opacity .3s}
+.brand:hover .brand-mark{transform:scale(1.06) rotate(-2deg);filter:drop-shadow(0 0 10px rgba(168,85,247,.65))}
+.brand:hover .brand-mark .aa-bar{filter:drop-shadow(0 0 5px rgba(34,211,238,.85))}
+.brand-name{
   display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+.brand-line{white-space:nowrap;font-family:var(--font-heading)}
+.brand-line:first-child{font-size:clamp(13px,1.1vw,16px);font-weight:800;letter-spacing:.5px;color:#fff}
+.brand-last{font-size:clamp(10px,.95vw,13px);font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:var(--neon,#a855f7)}
+.brand-underscore{display:inline-block;opacity:0;color:#22d3ee;transition:opacity .3s}
+.brand:hover .brand-underscore{opacity:1;animation:aaBlink 1s steps(2) infinite}
+@keyframes aaBlink{50%{opacity:0}}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  min-width:44px;min-height:44px;
+  padding:10px;
+  z-index:1001;
+}
+.hamburger span{width:25px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-menu{
+  display:flex;
+  align-items:center;
   justify-content:center;
-  gap:20px;
+  gap:24px;
+  flex:1;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:clamp(14px,1.5vw,22px);
   list-style:none;
   margin:0;
   padding:0;
 }
-.pill-nav-links a{
-  color:#888;
-  text-decoration:none;
-  font-size:12px;
+.nav-links a{
+  color:var(--muted);
+  font-size:clamp(10.5px,.95vw,12.5px);
   font-weight:700;
-  letter-spacing:1px;
+  letter-spacing:1.2px;
   text-transform:uppercase;
+  text-decoration:none;
   white-space:nowrap;
+  padding:6px 2px;
+  position:relative;
+  transition:color .3s;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0; bottom:0;
+  width:0; height:2px;
+  background:linear-gradient(90deg,#22d3ee,#a855f7);
+  border-radius:2px;
+  transition:width .3s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;text-shadow:0 0 12px rgba(168,85,247,.5)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.btn-cv{
   display:inline-flex;
   align-items:center;
-  min-height:44px;
-  transition:all .3s ease;
+  gap:8px;
+  padding:9px 18px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  border-radius:50px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#fff;
+  text-decoration:none;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
 }
-.pill-nav-links a:hover,.pill-nav-links a.active{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
-/* Slightly tighter between 1025-1150 so 11 links fit before the scroll fallback kicks in */
-@media(min-width:1025px) and (max-width:1150px){
-  .pill-nav-links{gap:14px}
-  .nav-pill{padding:12px 20px}
-  .pill-nav-links a{font-size:11px}
-}
-/* Light theme overrides for the pill navbar */
-[data-theme="light"] #navbar.pill-navbar{background:transparent}
-[data-theme="light"] #navbar.pill-navbar.scrolled{background:rgba(255,255,255,.7)}
-[data-theme="light"] #navbar.pill-navbar .brand-pill,
-[data-theme="light"] #navbar.pill-navbar .nav-pill{background:rgba(255,255,255,.75);border-color:rgba(147,51,234,.15)}
-[data-theme="light"] .pill-nav-links a:hover,
-[data-theme="light"] .pill-nav-links a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)}
-[data-theme="light"] .brand-pill .brand-name{color:#0f172a}
-/* Mobile/Tablet: stack pills vertically, nav links scroll horizontally */
-@media(max-width:1024px){
-  #navbar.pill-navbar{
-    position:static;
+.btn-cv:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(168,85,247,.5)}
+[data-theme="light"] #navbar{background:rgba(255,255,255,.8)}
+[data-theme="light"] #navbar.scrolled{background:rgba(255,255,255,.92)}
+[data-theme="light"] .brand{color:#0f172a}
+[data-theme="light"] .brand-line:first-child{color:#0f172a}
+[data-theme="light"] .brand-mark{color:#0f172a}
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)}
+/* Tablet/mobile: hamburger + slide-in drawer */
+@media(max-width:1100px){
+  .hamburger{display:flex}
+  .nav-menu{
+    position:fixed;
+    top:0; right:-100%;
+    width:min(85vw,340px);
+    height:100vh;
+    height:100dvh;
+    background:var(--card-bg);
+    backdrop-filter:blur(20px);
     flex-direction:column;
-    gap:12px;
-    padding:16px 16px 4px;
-    background:transparent;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:6px;
+    padding:96px 28px 32px;
+    transition:right .4s cubic-bezier(.4,0,.2,1);
+    border-left:1px solid rgba(168,85,247,.2);
+    overflow-y:auto;
+    z-index:999;
   }
-  #navbar.pill-navbar.scrolled{background:transparent;padding:16px 16px 4px}
-  .brand-pill{align-self:center}
-  .nav-pill{
-    width:100%;
-    max-width:100%;
-    overflow-x:auto;
-    white-space:nowrap;
-    padding:10px 18px;
-    -webkit-overflow-scrolling:touch;
+  .nav-menu.open{right:0}
+  .nav-menu .nav-links{flex-direction:column;align-items:stretch;gap:4px;width:100%}
+  .nav-menu .nav-links a{
+    font-size:15px;
+    padding:13px 6px;
+    border-bottom:1px solid rgba(128,128,128,.15);
+    display:block;
+    text-align:left;
   }
-  .pill-nav-links{justify-content:flex-start;gap:18px}
-  .pill-nav-links a{font-size:11px;min-height:40px}
-  .theme-toggle-nav{align-self:center;margin-bottom:8px}
-  .hero{padding-top:max(16px,env(safe-area-inset-top))}
+  .nav-menu .nav-links a::after{display:none}
+  .nav-menu .nav-links a:hover,
+  .nav-menu .nav-links a.active{color:var(--neon);text-shadow:0 0 12px rgba(168,85,247,.4)}
+  .nav-actions{flex-direction:column;align-items:stretch;gap:14px;margin-top:20px;width:100%}
+  .nav-actions .btn-cv{justify-content:center}
+  .theme-toggle-nav{align-self:flex-start}
 }
 
 /* Hero Section */ 
@@ -2212,9 +2277,11 @@ footer p{
 
 /* ===== Complete Light (White) Mode ===== */
 [data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
-[data-theme="light"] #navbar{background:rgba(255,255,255,.85)}
+[data-theme="light"] #navbar{background:rgba(255,255,255,.8)}
 [data-theme="light"] #navbar.scrolled{background:rgba(255,255,255,.92)}
-[data-theme="light"] .nav-logo{color:#0f172a}
+[data-theme="light"] .brand{color:#0f172a}
+[data-theme="light"] .brand-line:first-child{color:#0f172a}
+[data-theme="light"] .brand-mark{color:#0f172a}
 [data-theme="light"] .hero-name,
 [data-theme="light"] .project-content h3{
   background:linear-gradient(135deg,#1e293b 0%, var(--neon) 100%);
@@ -2795,22 +2862,6 @@ footer p{
   .future-grid{grid-template-columns:1fr}
   } 
 @media(max-width:768px){ 
-  #navbar{padding:16px 24px} 
-  .nav-menu{ 
-    position:fixed; 
-    top:0; right:-100%; 
-    width:80%; 
-    max-width:300px; 
-    height:100vh; 
-    background:var(--card-bg); 
-    flex-direction:column; 
-    padding:80px 40px; 
-    transition:right .4s; 
-    border-left:1px solid var(--border); 
-  } 
-  .nav-menu.open{right:0} 
-  .nav-menu ul{flex-direction:column;gap:24px} 
-  .hamburger{display:flex} 
   section{padding:80px 24px} 
   .about-grid{grid-template-columns:1fr;gap:60px} 
   .about-image{order:-1} 
@@ -2899,7 +2950,6 @@ body{overflow-x:hidden;}
   .video-modal-header{padding:12px 16px;}
   .form-group input,.form-group textarea{padding:13px;}
   .submit-btn{padding:14px;}
-  .nav-logo .logo-name{font-size:20px;}
   .footer-name{font-size:20px;}
 }
 
@@ -2956,42 +3006,16 @@ body{overflow-x:hidden;}
   .about-image{width:300px;height:300px;}
 }
 
-/* Tablet nav: use drawer up to 1024px (desktop nav needs ~1072px and would clip) */
-@media(max-width:1024px){
-  .hamburger{display:flex}
-  #navbar{padding:16px 28px}
-  #navbar.scrolled{padding:12px 28px}
-  .nav-menu{
-    position:fixed;
-    top:0; right:-100%;
-    width:min(85vw,320px);
-    height:100vh;
-    height:100dvh;
-    background:var(--card-bg);
-    flex-direction:column;
-    align-items:flex-start;
-    gap:28px;
-    padding:88px 32px 32px;
-    transition:right .4s;
-    border-left:1px solid var(--border);
-    overflow-y:auto;
-  }
-  .nav-menu.open{right:0}
-  .nav-menu ul{flex-direction:column;gap:16px;width:100%}
-  .nav-menu ul a{font-size:15px}
-  .nav-actions{flex-direction:column;align-items:stretch;width:100%;gap:14px}
-  .nav-actions .btn-cv,.nav-actions .nav-cta{justify-content:center}
-}
+/* Tablet nav: use drawer up to 1100px (desktop nav needs space and would clip) */
 
 /* Small Desktop/Laptop: shrink desktop nav so all links + actions fit */
-@media(min-width:1025px) and (max-width:1279px){
-  #navbar{padding:16px 32px}
-  #navbar.scrolled{padding:12px 32px}
-  .nav-menu{gap:22px}
-  .nav-menu ul{gap:14px}
-  .nav-menu a{font-size:13px}
-  .nav-actions{gap:8px}
-  .btn-cv{padding:7px 13px;font-size:12px}
+@media(min-width:1101px) and (max-width:1279px){
+  #navbar{padding:12px max(24px,3vw)}
+  #navbar.scrolled{padding:8px max(24px,3vw)}
+  .nav-menu{gap:16px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:10.5px}
+  .nav-actions{gap:10px}
 }
 
 /* Mobile landscape: keep usable, reduce hero height */
@@ -3050,32 +3074,52 @@ body{overflow-x:hidden;}
   </div>
 </div>
 
-<!-- Navbar (Pill Style) --> 
-<nav id="navbar" class="pill-navbar" role="navigation" aria-label="Main navigation"> 
-  <div class="brand-pill"> 
-    <a href="#hero" class="brand-link" target="_self" aria-label="Abdelrahman Abdullah Home"> 
-      <span class="code-bracket">&lt;/&gt;</span> 
-      <span class="brand-name">A<span class="neon-dot">.</span>A</span> 
-    </a> 
-  </div> 
-  <div class="nav-pill"> 
-    <ul class="pill-nav-links"> 
-      <li><a href="#hero" class="active" target="_self">HOME</a></li> 
-      <li><a href="#about" target="_self">ABOUT</a></li> 
-      <li><a href="#services" target="_self">SERVICES</a></li> 
-      <li><a href="#skills" target="_self">SKILLS</a></li> 
-      <li><a href="#experience" target="_self">EXPERIENCE</a></li> 
-      <li><a href="#education" target="_self">EDUCATION</a></li> 
-      <li><a href="#stats" target="_self">STATS</a></li> 
-      <li><a href="#projects" target="_self">PROJECTS</a></li> 
-      <li><a href="#testimonials" target="_self">TESTIMONIALS</a></li> 
-      <li><a href="#pricing" target="_self">PRICING</a></li> 
-      <li><a href="#contact" target="_self">CONTACT</a></li> 
+<!-- Navbar (Brand Logo) --> 
+<nav id="navbar" role="navigation" aria-label="Main navigation"> 
+  <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home"> 
+    <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="aaGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#22d3ee"/>
+          <stop offset="1" stop-color="#a855f7"/>
+        </linearGradient>
+      </defs>
+      <rect class="aa-frame" x="2" y="2" width="44" height="44" rx="12" stroke="url(#aaGrad)" stroke-width="1.5" opacity="0.6"/>
+      <path class="aa-leg" d="M17 10 L9 38 M17 10 L24 38" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="aa-bar" d="M12 26.5 L22 26.5" stroke="url(#aaGrad)" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="aa-leg" d="M31 10 L24 38 M31 10 L39 38" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="aa-bar" d="M26 26.5 L36 26.5" stroke="url(#aaGrad)" stroke-width="3.2" stroke-linecap="round"/>
+      <rect class="aa-cursor" x="41.2" y="11.5" width="3" height="8" rx="1.2" fill="url(#aaGrad)"/>
+    </svg>
+    <span class="brand-name">
+      <span class="brand-line">Abdelrahman</span>
+      <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
+    </span>
+  </a> 
+  <div class="nav-menu" id="navMenu"> 
+    <ul class="nav-links"> 
+      <li><a href="#hero" class="active" target="_self">Home</a></li> 
+      <li><a href="#about" target="_self">About</a></li> 
+      <li><a href="#education" target="_self">Education</a></li> 
+      <li><a href="#skills" target="_self">Skills</a></li> 
+      <li><a href="#experience" target="_self">Experience</a></li> 
+      <li><a href="#projects" target="_self">Projects</a></li> 
+      <li><a href="#services" target="_self">Services</a></li> 
+      <li><a href="#testimonials" target="_self">Testimonials</a></li> 
     </ul> 
+    <div class="nav-actions"> 
+      <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF"> 
+        <span>Download CV</span> 
+        <i class="fas fa-download" aria-hidden="true"></i> 
+      </a> 
+      <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
+        <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
+        <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
+      </button> 
+    </div> 
   </div> 
-  <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
-    <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
-    <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
+    <span></span><span></span><span></span> 
   </button> 
 </nav> 
 
@@ -3900,6 +3944,34 @@ body{overflow-x:hidden;}
 <script src="js/firework-cursor.js?v=21"></script>
 
 <script> 
+// Mobile Menu Toggle 
+function toggleMenu() { 
+  const menu = document.getElementById('navMenu'); 
+  const ham = document.querySelector('.hamburger'); 
+  if (!menu || !ham) return; 
+  const open = menu.classList.toggle('open'); 
+  ham.classList.toggle('open', open); 
+  ham.setAttribute('aria-expanded', open ? 'true' : 'false'); 
+  document.body.style.overflow = open ? 'hidden' : ''; 
+} 
+function closeMenu() { 
+  const menu = document.getElementById('navMenu'); 
+  const ham = document.querySelector('.hamburger'); 
+  if (!menu || !ham) return; 
+  menu.classList.remove('open'); 
+  ham.classList.remove('open'); 
+  ham.setAttribute('aria-expanded', 'false'); 
+  document.body.style.overflow = ''; 
+} 
+document.addEventListener('keydown', (e) => { 
+  if (e.key === 'Escape') closeMenu(); 
+}); 
+document.addEventListener('click', (e) => { 
+  const menu = document.getElementById('navMenu'); 
+  if (!menu || !menu.classList.contains('open')) return; 
+  if (menu.contains(e.target) || e.target.closest('.hamburger')) return; 
+  closeMenu(); 
+}); 
 // Navbar Scroll background change 
 window.addEventListener('scroll', () => { 
   const nav = document.getElementById('navbar'); 
@@ -3911,7 +3983,7 @@ window.addEventListener('scroll', () => {
 // Scroll-spy: highlight the active section link in the nav
 const spySections = ['hero','about','services','skills','experience','education','stats','projects','testimonials','pricing','contact'];
 function updateActiveLink() { 
-  const links = document.querySelectorAll('.pill-nav-links a'); 
+  const links = document.querySelectorAll('.nav-links a'); 
   if (!links.length) return; 
   let current = 'hero'; 
   const pos = window.scrollY + 120; 
