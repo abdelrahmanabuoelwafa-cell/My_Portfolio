@@ -1177,6 +1177,26 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   transition:width 1.5s cubic-bezier(.16,1,.3,1); 
 } 
 
+/* Skills Tabs */
+.skills-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px} 
+.skill-tab{ 
+  padding:11px 22px;border-radius:50px;cursor:pointer; 
+  background:var(--card-bg);border:2px solid var(--border); 
+  color:var(--text);font-family:var(--font-heading);font-size:13px;font-weight:800; 
+  letter-spacing:.4px;transition:all .3s; 
+} 
+.skill-tab:hover{border-color:var(--neon);transform:translateY(-2px)} 
+.skill-tab.active{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-color:transparent} 
+.skill-category.hidden{display:none} 
+.skills-desc{ 
+  max-width:680px;margin:0 auto 24px;text-align:center; 
+  padding:16px 22px;border-radius:14px; 
+  background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.22); 
+} 
+.skills-desc p{color:var(--muted);font-size:15px;line-height:1.7} 
+.skills-desc strong{color:var(--neon)} 
+[data-theme="light"] .skills-desc{background:rgba(147,51,234,.07);border-color:rgba(147,51,234,.25)} 
+
 /* Experience CAR Cards */
 .exp-cards-stack{
   max-width:900px;
@@ -3193,12 +3213,12 @@ body{overflow-x:hidden;}
     <ul class="nav-links"> 
       <li><a href="#hero" class="active" target="_self">Home</a></li> 
       <li><a href="#about" target="_self">About</a></li> 
-      <li><a href="#services" target="_self">Services</a></li> 
       <li><a href="#skills" target="_self">Skills</a></li> 
       <li><a href="#experience" target="_self">Experience</a></li> 
       <li><a href="#education" target="_self">Education</a></li> 
       <li><a href="#projects" target="_self">Projects</a></li> 
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
+      <li><a href="#services" target="_self">Services</a></li> 
     </ul> 
     <div class="nav-actions"> 
       <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF"> 
@@ -3317,40 +3337,7 @@ body{overflow-x:hidden;}
   </div> 
 </section> 
 
-<!-- Services Section (5 Cards) --> 
-<section id="services"> 
-  <div class="section-header reveal"> 
-    <div class="section-label">What I Do</div> 
-    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2> 
-  </div> 
-  <div class="services-grid"> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div> 
-      <h3 class="service-title">Mobile App Development</h3> 
-      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-paint-brush"></i></div> 
-      <h3 class="service-title">UI/UX Design</h3> 
-      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-plug"></i></div> 
-      <h3 class="service-title">API Integration</h3> 
-      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div> 
-      <h3 class="service-title">App Optimization</h3> 
-      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-globe"></i></div> 
-      <h3 class="service-title">Portfolio & Landing Pages</h3> 
-      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p> 
-    </div> 
-  </div> 
-</section> 
+ 
 
 <!-- Skills Section (5 Categories) --> 
 <section id="skills"> 
@@ -3360,12 +3347,17 @@ body{overflow-x:hidden;}
   </div> 
   <div class="skills-container"> 
 
-    <div class="skills-blurb reveal">
-      <p><i class="fas fa-quote-left"></i> I chose <strong>Flutter</strong> because it lets me build one beautiful, high-performance app for both Android and iOS from a single codebase — no compromises on speed, UI, or user experience. Every project I ship is a chance to blend clean architecture with pixel-perfect design.</p>
+    <div class="skills-tabs reveal" role="tablist" aria-label="Skill categories"> 
+      <button class="skill-tab active" data-skill-tab="mobile" role="tab" aria-selected="true">Mobile Development</button> 
+      <button class="skill-tab" data-skill-tab="languages" role="tab" aria-selected="false">Programming Languages</button> 
+      <button class="skill-tab" data-skill-tab="web" role="tab" aria-selected="false">Web Development</button> 
     </div>
 
     <!-- Cat 1 -->
-    <div class="skill-category reveal"> 
+    <div class="skill-category reveal" data-skill-panel="mobile"> 
+      <div class="skills-desc"> 
+        <p>I build <strong>cross-platform mobile apps</strong> for iOS &amp; Android from a single Flutter codebase — native-level performance, smooth 60fps animations, and pixel-perfect UI backed by clean architecture.</p> 
+      </div> 
       <div class="skill-header"> 
         <i class="fas fa-mobile-alt"></i> 
         <h3>Mobile Development</h3> 
@@ -3395,7 +3387,10 @@ body{overflow-x:hidden;}
     </div> 
 
     <!-- Cat 2 -->
-    <div class="skill-category reveal"> 
+    <div class="skill-category reveal hidden" data-skill-panel="languages"> 
+      <div class="skills-desc"> 
+        <p>The <strong>core languages</strong> behind my logic, algorithms, and problem-solving — sharp fundamentals that make my app architecture cleaner and my debugging faster.</p> 
+      </div> 
       <div class="skill-header"> 
         <i class="fas fa-code"></i> 
         <h3>Programming Languages</h3> 
@@ -3435,7 +3430,10 @@ body{overflow-x:hidden;}
     </div> 
 
     <!-- Cat 3 -->
-    <div class="skill-category reveal"> 
+    <div class="skill-category reveal hidden" data-skill-panel="web"> 
+      <div class="skills-desc"> 
+        <p>I craft <strong>fast, responsive web experiences</strong> with modern frontend stacks and a Laravel backend — clean markup, smooth interactions, and solid performance on every screen.</p> 
+      </div> 
       <div class="skill-header"> 
         <i class="fas fa-globe"></i> 
         <h3>Web Development</h3> 
@@ -3831,6 +3829,41 @@ body{overflow-x:hidden;}
   </div>
 </section>
 
+<!-- Services Section (5 Cards) --> 
+<section id="services"> 
+  <div class="section-header reveal"> 
+    <div class="section-label">What I Do</div> 
+    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2> 
+  </div> 
+  <div class="services-grid"> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div> 
+      <h3 class="service-title">Mobile App Development</h3> 
+      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div> 
+      <h3 class="service-title">UI/UX Design</h3> 
+      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-plug"></i></div> 
+      <h3 class="service-title">API Integration</h3> 
+      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div> 
+      <h3 class="service-title">App Optimization</h3> 
+      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p> 
+    </div> 
+    <div class="service-card reveal"> 
+      <div class="service-icon"><i class="fas fa-globe"></i></div> 
+      <h3 class="service-title">Portfolio & Landing Pages</h3> 
+      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p> 
+    </div> 
+  </div> 
+</section> 
+
 <!-- Pricing Section (3 Tiers) -->
 <section id="pricing">
   <div class="section-header reveal"> 
@@ -4135,6 +4168,32 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 }); 
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); 
+
+// Skills Tabs
+(function(){ 
+  const tabs = document.querySelectorAll('.skill-tab'); 
+  const panels = document.querySelectorAll('[data-skill-panel]'); 
+  if(!tabs.length || !panels.length) return; 
+  tabs.forEach(tab => { 
+    tab.addEventListener('click', () => { 
+      const key = tab.getAttribute('data-skill-tab'); 
+      tabs.forEach(t => { 
+        t.classList.toggle('active', t === tab); 
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); 
+      }); 
+      panels.forEach(p => { 
+        const show = p.getAttribute('data-skill-panel') === key; 
+        p.classList.toggle('hidden', !show); 
+        if(show){ 
+          p.classList.add('visible'); 
+          p.querySelectorAll('.skill-progress').forEach(bar => { 
+            bar.style.width = bar.getAttribute('data-width') + '%'; 
+          }); 
+        } 
+      }); 
+    }); 
+  }); 
+})(); 
 
 // Project Data & Modal System
 const projectDetails = [
@@ -4535,7 +4594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v21</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v22</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
