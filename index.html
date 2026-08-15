@@ -909,7 +909,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 .about-grid{ 
   display:grid; 
   grid-template-columns:1fr 1fr; 
-  gap:64px; 
+  gap:48px; 
   align-items:center; 
   max-width:1200px; 
   margin:0 auto; 
@@ -948,6 +948,35 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   height:100%; 
   object-fit:cover; 
   object-position:center center;
+} 
+/* Image protection: keep visuals identical, block casual download/drag/select */
+.protected-img{
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -webkit-user-drag:none;
+  user-drag:none;
+  -webkit-touch-callout:none;
+  -moz-touch-callout:none;
+  -khtml-user-drag:none;
+  pointer-events:none;
+  touch-action:manipulation;
+}
+.image-blocker{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  background:transparent;
+  cursor:default;
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -webkit-user-drag:none;
+  user-drag:none;
+  -webkit-touch-callout:none;
+  touch-action:manipulation;
 } 
 .about-content h3{ 
   font-size:28px; 
@@ -3292,7 +3321,8 @@ body{overflow-x:hidden;}
     <div class="hero-top-image"> 
       <div class="top-img-ring"></div> 
       <div class="top-img-container"> 
-        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="top-img" loading="eager" fetchpriority="high"> 
+        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" loading="eager" fetchpriority="high"> 
+        <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
       <div class="floating-badge">💻</div> 
     </div> 
@@ -3375,7 +3405,8 @@ body{overflow-x:hidden;}
     </div> 
     <div class="about-image reveal"> 
       <div class="about-img-container"> 
-        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img" loading="lazy"> 
+        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" loading="lazy"> 
+        <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
     </div> 
   </div> 
@@ -4213,6 +4244,17 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); 
 
+// Profile image protection (drag / right-click / middle-click)
+(function(){ 
+  function block(e){ e.preventDefault(); e.stopPropagation(); return false; }
+  document.querySelectorAll('.protected-img, .image-blocker').forEach(el => { 
+    el.addEventListener('dragstart', block);
+    el.addEventListener('contextmenu', block);
+    el.addEventListener('mousedown', function(e){ if (e.button === 1) block(e); });
+    el.addEventListener('touchstart', function(e){ if (e.touches.length > 1) e.preventDefault(); });
+  }); 
+})(); 
+
 // Skills Tabs
 (function(){ 
   const tabs = document.querySelectorAll('.skill-tab'); 
@@ -4638,7 +4680,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v23</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v24</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
