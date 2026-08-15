@@ -4331,9 +4331,9 @@ document.addEventListener("DOMContentLoaded", () => {
       hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
     };
     if (document.documentElement.getAttribute("data-theme") === "light") {
-      config.lineColor = "#2563eb";
-      config.dotColor = "#93c5fd";
-      config.cometColor = "#3b82f6";
+      config.lineColor = "#EAB308";
+      config.dotColor = "#FACC15";
+      config.cometColor = "#D97706";
     }
     window.vortexConfig = config;
     window.createVortex(canvas, container, { current: config });
@@ -4365,9 +4365,9 @@ function applyVortexTheme(theme) {
   const cfg = window.vortexConfig;
   if (!cfg) return;
   if (theme === 'light') {
-    cfg.lineColor = '#2563eb';
-    cfg.dotColor = '#93c5fd';
-    cfg.cometColor = '#3b82f6';
+    cfg.lineColor = '#EAB308';
+    cfg.dotColor = '#FACC15';
+    cfg.cometColor = '#D97706';
   } else {
     cfg.lineColor = '#A855F7';
     cfg.dotColor = '#C084FC';
