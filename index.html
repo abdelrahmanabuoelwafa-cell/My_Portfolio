@@ -509,6 +509,7 @@ body::after{
 .nav-links a:hover,.nav-links a.active{color:#fff;text-shadow:0 0 12px rgba(168,85,247,.5)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
 .nav-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.nav-tools{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .btn-cv{
   display:inline-flex;
   align-items:center;
@@ -592,7 +593,6 @@ body::after{
   .nav-actions{flex-direction:column;align-items:stretch;gap:14px;margin-top:20px;width:100%}
   .nav-actions .btn-cv{justify-content:center}
   .nav-actions .btn-contact-nav{justify-content:center}
-  .theme-toggle-nav{align-self:flex-start}
 }
 
 /* Hero Section */ 
@@ -3209,15 +3209,17 @@ body{overflow-x:hidden;}
         <span>Contact Me</span> 
         <i class="fas fa-paper-plane" aria-hidden="true"></i> 
       </a> 
-      <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
-        <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
-        <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
-      </button> 
     </div> 
   </div> 
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
-    <span></span><span></span><span></span> 
-  </button> 
+  <div class="nav-tools"> 
+    <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
+      <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
+      <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
+    </button> 
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navMenu"> 
+      <span></span><span></span><span></span> 
+    </button> 
+  </div> 
 </nav> 
 
 <!-- Hero Section --> 
