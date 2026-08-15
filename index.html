@@ -716,9 +716,10 @@ body::after{
 } 
 .typing-text{ 
   font-size:22px; 
-  font-weight:600; 
+  font-weight:700; 
   color:var(--neon); 
   font-family:var(--font-heading);
+  letter-spacing:.3px;
 } 
 .cursor{ 
   width:3px; 
@@ -739,7 +740,7 @@ body::after{
   border:1px solid rgba(168,85,247,.3); 
   border-radius:50px; 
   font-size:13px; 
-  font-weight:600; 
+  font-weight:700; 
   color:var(--accent); 
   margin-bottom:32px; 
   animation:fadeInUp 0.8s ease 0.7s both; 
@@ -763,7 +764,7 @@ body::after{
   margin-bottom:40px; 
   line-height:1.7; 
   animation:fadeInUp 0.8s ease 0.9s both; 
-  font-weight:400;
+  font-weight:600;
 } 
 .hero-buttons{ 
   display:flex; 
@@ -908,7 +909,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 .about-grid{ 
   display:grid; 
   grid-template-columns:1fr 1fr; 
-  gap:80px; 
+  gap:64px; 
   align-items:center; 
   max-width:1200px; 
   margin:0 auto; 
@@ -917,6 +918,10 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   position:relative; 
   display:flex; 
   justify-content:center; 
+  align-items:center;
+  justify-self:center;
+  align-self:center;
+  flex:none;
   width:380px;
   height:380px;
   margin: 0 auto;
