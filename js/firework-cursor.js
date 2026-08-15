@@ -15,7 +15,6 @@
   var dot = { x: -100, y: -100 };
   var colors = ['#A855F7', '#C084FC', '#E9D5FF', '#9333EA'];
   var rafId = null;
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -40,7 +39,7 @@
       });
     }
 
-    if (rafId === null && !reducedMotion) rafId = requestAnimationFrame(render);
+    if (rafId === null) rafId = requestAnimationFrame(render);
   });
 
   function render() {
@@ -97,19 +96,17 @@
       ctx.restore();
     }
 
-    var settled = particles.length === 0 &&
-      Math.abs(dot.x - mouse.x) < 1 && Math.abs(dot.y - mouse.y) < 1 &&
-      Math.abs(ring.x - mouse.x) < 1 && Math.abs(ring.y - mouse.y) < 1;
-    if (settled) {
-      rafId = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      return;
-    }
-
     rafId = requestAnimationFrame(render);
   }
 
-  if (!reducedMotion) {
-    render();
-  }
+  render();
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (!document.hidden && rafId === null) {
+      rafId = requestAnimationFrame(render);
+    }
+  });
 })();

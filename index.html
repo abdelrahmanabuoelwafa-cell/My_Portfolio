@@ -151,7 +151,7 @@
 }
 </script> 
 <style> 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap');
 
 :root { 
   --primary: #A855F7; 
@@ -230,6 +230,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .theme-toggle-nav .sun-icon{display:none}
 [data-theme="light"] .theme-toggle-nav .moon-icon{display:none}
 [data-theme="light"] .theme-toggle-nav .sun-icon{display:block}
+
+/* Language Toggle Button (navbar) */
+.lang-toggle-nav{
+  width:40px; height:40px;
+  border-radius:50%;
+  background:var(--card-bg);
+  border:2px solid var(--border);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  gap:4px;
+  font-size:12px; font-weight:800; color:var(--text);
+  font-family:var(--font-heading);
+  letter-spacing:.5px;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  flex-shrink:0;
+}
+.lang-toggle-nav:hover{
+  border-color:var(--primary);
+  box-shadow:0 4px 15px rgba(147,51,234,.25);
+}
+.lang-toggle-nav .globe-icon{font-size:14px;color:var(--neon)}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] input,html[lang="ar"] textarea{font-family:'Cairo',var(--font)}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3,html[lang="ar"] h4,html[lang="ar"] h5,html[lang="ar"] h6,html[lang="ar"] .lang-toggle-nav{font-family:'Cairo',var(--font-heading)}
 
 /* Focus visible styles for keyboard navigation */
 *:focus-visible {
@@ -3305,6 +3328,10 @@ body{overflow-x:hidden;}
     </div> 
   </div> 
   <div class="nav-tools"> 
+    <button class="lang-toggle-nav" id="langToggle" aria-label="Switch language" title="English / العربية"> 
+      <i class="fas fa-globe globe-icon" aria-hidden="true"></i> 
+      <span class="lang-label" id="langLabel">AR</span> 
+    </button> 
     <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"> 
       <i class="fas fa-moon moon-icon" aria-hidden="true"></i> 
       <i class="fas fa-sun sun-icon" aria-hidden="true"></i> 
@@ -4148,7 +4175,7 @@ body{overflow-x:hidden;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/neon-border.js?v=22"></script> 
 <script src="js/tornado.js?v=22"></script> 
-<script src="js/firework-cursor.js?v=22"></script>
+<script src="js/firework-cursor.js?v=23"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -4354,9 +4381,85 @@ const projectDetails = [
   }
 ];
 
+const projectDetailsAr = [
+  {
+    title: "MovieVerse — تطبيق استكشاف الأفلام",
+    subtitle: "منصة أفلام ومسلسلات",
+    image: "images/movie2.jpg",
+    video: "images/movieberse.mp4",
+    tech: ["Flutter", "REST API", "Firebase", "Hive"],
+    desc: "MovieVerse هو تطبيق لاكتشاف الأفلام يحوّل التصفح إلى تجربة سينمائية. يقدّم عناوين رائجة لحظيًا من TMDB API، مع مراجعات وإعلانات تشويقية غنية، وقائمة مشاهدة شخصية متزامنة عبر الأجهزة بواسطة Firebase. وذاكرة تخزين محلية بتقنية Hive تجعل قائمتك جاهزة دائمًا حتى على ارتفاع 30,000 قدم.",
+    challenge: "تطوير تطبيقات متعددة المنصات بدرجة استجابة عالية، ومنطق شبكات نظيف، وعمل دون اتصال، وتخزين سحابي متزامن — دون أي تقطّع في الأداء أثناء عرض قوائم مليئة بالوسائط.",
+    solution: "طبّقت Clean Architecture بفصل صارم للطبقات (Core, Data, Domain, Presentation)، واستخدمت BLoC لإدارة الحالة، وHive لقاعدة بيانات محلية تتيح وصولًا فوريًا دون اتصال، وشبكات تخطيط متجاوبة تضمن استمرارية العرض من الهواتف الصغيرة إلى الأجهزة اللوحية.",
+    results: "تكامل ديناميكي مع TMDB API للعروض والمراجعات وقواعد بيانات الأفلام لحظة بلحظة. ذاكرة تخزين محلية فائقة السرعة عبر Hive. مزامنة سحابية عبر Firebase للإشارات المرجعية. تكيّف كامل مع تغييرات التخطيط، وتفاعلات دقيقة، وثيم داكن يطابق مواصفات Material 3.",
+    features: [
+      "تكامل ديناميكي مع TMDB API للعروض والمراجعات وقواعد بيانات الأفلام.",
+      "ذاكرة تخزين محلية فائقة السرعة عبر محرك Hive.",
+      "مزامنة سحابية عبر Firebase للإشارات المرجعية المخصصة.",
+      "تكيّف كامل مع تغييرات التخطيط.",
+      "تفاعلات دقيقة وثيم داكن يطابق مواصفات Material 3."
+    ]
+  },
+  {
+    title: "Masrofy — تطبيق تتبع المصروفات",
+    subtitle: "تتبع • إدارة • نمو",
+    image: "images/masrofy2.png",
+    video: "images/masrofy.mp4",
+    tech: ["Flutter", "Dart", "Hive", "FL Chart"],
+    desc: "Masrofy هو تطبيق ذكي لتتبع المصروفات يجعل الوضوح المالي سهلًا. يصنف الإنفاق تلقائيًا، ويخطط للميزانيات مع تحليلات FL Chart حية، ويدعم عملات متعددة — وكل ذلك مخزّن بأمان على الجهاز عبر Hive. تنبيهات مخصصة ورؤى تفاعلية تساعدك على الإنفاق بوعي، لا بالتخمين.",
+    challenge: "بناء تطبيق شامل لتتبع المصروفات بواجهة بديهية ودعم عملات متعددة وإدارة آمنة للبيانات تعمل بسلاسة دون اتصال.",
+    solution: "Flutter بمعمارية نظيفة، وقاعدة بيانات محلية (Hive) لتجربة تعمل دون اتصال أولًا، وفئات ميزانية قابلة للتخصيص، وتحليلات لحظية للمصروفات برسوم بيانية واضحة.",
+    results: "تطبيق متكامل لتتبع المصروفات بدعم عملات متعددة (ريال سعودي، دولار أمريكي، درهم إماراتي، يورو)، وضبط ميزانية بحدود لكل فئة، وإحصاءات ورسوم بيانية تفصيلية، وواجهة داكنة أنيقة.",
+    features: [
+      "تتبع ذكي للمصروفات مع تصنيف تلقائي",
+      "ضبط ميزانية بحدود قابلة للتخصيص لكل فئة",
+      "تقارير تفصيلية برسوم بيانية وإحصاءات",
+      "دعم عملات متعددة (SAR, USD, AED, EUR)",
+      "بيانات آمنة وخاصة (تعمل محليًا أولًا دون سحابة)",
+      "ثيم داكن مع حركات سلسة"
+    ]
+  },
+  {
+    title: "StudySync — مخطط الدراسة الذكي",
+    subtitle: "تنظيم الدراسة • تركيز",
+    image: "images/STUDYSYNC.jpg",
+    tech: ["Flutter", "Firebase", "AI Integration", "REST APIs"],
+    desc: "StudySync هو رفيق دراسة مركّز يبقي تعلّمك على المسار الصحيح. يجمع الجداول والمهام والتقدم في واجهة هادئة خالية من المشتتات حتى تخطط بذكاء وتدرس بوعي.",
+    challenge: "تصميم مخطط بديهي يوازن بين غنى المزايا وواجهة هادئة بسيطة — دون إرباك الطلاب الذين يتنقلون بين عدة مقررات.",
+    solution: "بُني بـ Flutter و Dart بمعمارية نظيفة ومتدرجة، مع تركيز على تنقل سلس وتسلسل بصري واضح وإدارة جهد للجداول.",
+    results: "مخطط دراسة أنيق يحوّل المهام المتناثرة إلى إيقاع يومي منظم ومحفز.",
+    features: [
+      "جدولة الجلسات وتنظيم مهام الدراسة",
+      "تتبع التقدم عبر المقررات والمواد",
+      "واجهة نظيفة خالية من المشتتات",
+      "تجربة Flutter سريعة وسلسة"
+    ]
+  },
+  {
+    title: "MediMind — رفيق الصحة",
+    subtitle: "عافية • تذكير بالأدوية",
+    image: "images/MediMind.jpg",
+    tech: ["Flutter", "Dart"],
+    desc: "MediMind هو رفيق صحي بسيط ومهتم يساعدك على تذكّر مواعيد الأدوية والبقاء منتبهًا لروتين العافية اليومي — بتذكيرات لطيفة وواجهة سهلة الاستخدام مصممة حول راحتك.",
+    challenge: "بناء تطبيق صحي سهل الاستخدام حقًا للجميع — تذكيرات واضحة، بلا فوضى، وإشعارات موثوقة.",
+    solution: "طُوّر بـ Flutter و Dart، مع أولوية لواجهة دافئة وسهلة الوصول، وتدفقات تذكير موثوقة تتناسب طبيعيًا مع الحياة اليومية.",
+    results: "تطبيق عافية محبّب يساعد المستخدمين على المواظبة على أدويتهم وروتين العناية الذاتية.",
+    features: [
+      "تذكيرات بمواعيد الأدوية",
+      "تتبع روتين العافية اليومي",
+      "واجهة دافئة وسهلة الوصول",
+      "إشعارات محلية موثوقة"
+    ]
+  }
+];
+
 function openProjectModal(index) {
-  const p = projectDetails[index];
+  const isAr = document.documentElement.lang === 'ar';
+  const p = (isAr && typeof projectDetailsAr !== 'undefined' && projectDetailsAr[index]) ? projectDetailsAr[index] : projectDetails[index];
   if (!p) return;
+  const L = isAr
+    ? { challenge: 'التحدي', solution: 'الحل (الإجراء)', result: 'النتيجة', features: 'الميزات الرئيسية', source: 'الكود المصدري', watch: 'شاهد العرض', play: 'شاهد عرض' }
+    : { challenge: 'THE CHALLENGE', solution: 'THE SOLUTION (ACTION)', result: 'THE RESULT', features: 'KEY FEATURES', source: 'Source Code', watch: 'Watch Demo', play: 'Play the' };
   const badge = p.title.split(' — ')[0];
   const techPills = (p.tech || []).map(t => `<span class="tech-pill"><i class="fas fa-code"></i> ${t}</span>`).join('');
   const content = `
@@ -4370,27 +4473,27 @@ function openProjectModal(index) {
       <hr class="premium-divider">
       <div class="project-car-grid">
         <div class="car-box challenge-box">
-          <div class="box-header"><i class="fas fa-exclamation-triangle"></i><h4>THE CHALLENGE</h4></div>
+          <div class="box-header"><i class="fas fa-exclamation-triangle"></i><h4>${L.challenge}</h4></div>
           <p>${p.challenge}</p>
         </div>
         <div class="car-box action-box">
-          <div class="box-header"><i class="fas fa-tools"></i><h4>THE SOLUTION (ACTION)</h4></div>
+          <div class="box-header"><i class="fas fa-tools"></i><h4>${L.solution}</h4></div>
           <p>${p.solution}</p>
         </div>
         <div class="car-box result-box">
-          <div class="box-header"><i class="fas fa-check-circle"></i><h4>THE RESULT</h4></div>
+          <div class="box-header"><i class="fas fa-check-circle"></i><h4>${L.result}</h4></div>
           <p>${p.results}</p>
         </div>
       </div>
       <hr class="premium-divider">
       <div class="project-features-section">
-        <h4 class="section-micro-title">KEY FEATURES</h4>
+        <h4 class="section-micro-title">${L.features}</h4>
         <div class="features-grid">
           ${p.features.map(f => `<div class="feature-item"><i class="fas fa-check text-neon"></i><span>${f}</span></div>`).join('')}
         </div>
       </div>
       <div class="project-action-buttons">
-        <a href="#" class="btn-premium secondary-btn"><i class="fab fa-github"></i> Source Code</a>
+        <a href="#" class="btn-premium secondary-btn"><i class="fab fa-github"></i> ${L.source}</a>
       </div>
       ${p.video ? `
       <div class="demo-buttons-container">
@@ -4402,8 +4505,8 @@ function openProjectModal(index) {
             </div>
           </div>
           <div class="demo-info">
-            <h4>Watch Demo</h4>
-            <p>Play the ${String(p.title.split(' — ')[0]).replace(/'/g, '')} showcase</p>
+            <h4>${L.watch}</h4>
+            <p>${L.play} ${String(p.title.split(' — ')[0]).replace(/'/g, '')}</p>
           </div>
           <div class="demo-arrow">
             <i class="fas fa-arrow-right"></i>
@@ -4422,17 +4525,21 @@ function closeProjectModal() {
 
 function handleFormSubmit(e) {
   e.preventDefault();
+  const isAr = document.documentElement.lang === 'ar';
+  const sending = isAr ? '<i class="fas fa-spinner fa-spin"></i> جارٍ الإرسال...' : '<i class="fas fa-spinner fa-spin"></i> Sending message...';
+  const sent = isAr ? '<i class="fas fa-check"></i> تم إرسال الرسالة بنجاح!' : '<i class="fas fa-check"></i> Message Sent Successfully!';
+  const sendLabel = isAr ? 'إرسال الرسالة <i class="fas fa-paper-plane"></i>' : 'Send Message <i class="fas fa-paper-plane"></i>';
   const btn = document.getElementById('contactBtn');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending message...';
+  btn.innerHTML = sending;
   btn.style.background = '#9333EA';
   setTimeout(() => {
-    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+    btn.innerHTML = sent;
     btn.style.background = '#10b981';
     document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactMsg').value = '';
     setTimeout(() => {
-      btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+      btn.innerHTML = sendLabel;
       btn.style.background = 'var(--primary)';
     }, 3500);
   }, 1200);
@@ -4648,7 +4755,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoTitle = document.getElementById('videoModalTitle');
 
   window.openProjectVideo = function(videoSrc, projectName) {
-    videoTitle.textContent = projectName + " Demo";
+    videoTitle.textContent = projectName + (document.documentElement.lang === 'ar' ? ' — عرض' : ' Demo');
     videoPlayer.src = videoSrc;
 
     videoModal.classList.add('active');
@@ -4678,9 +4785,270 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+// ====== EN/AR Language System ======
+(function(){
+  var $  = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  function setText(s, t){ var el = $(s); if (el) el.textContent = t; }
+  function setHtml(s, h){ var el = $(s); if (el) el.innerHTML = h; }
+  function setAllText(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined) el.textContent = arr[i]; }); }
+  function setAllHtml(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined) el.innerHTML = arr[i]; }); }
+
+  function applyArabic(){
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+    var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'EN';
+
+    // Nav
+    setAllText('.nav-links a', ['الرئيسية','من أنا','المهارات','الخبرات','التعليم','المشاريع','آراء الآخرين','الخدمات']);
+
+    // Hero
+    setHtml('.hero-badge', '<span class="status-dot"></span> متاح لمشاريع جديدة');
+    setText('.hero-desc', 'مطوّر فلاتر متخصص في بناء تطبيقات موبايل عالية الأداء متعددة المنصات، بمعمارية نظيفة وممارسات تطوير حديثة.');
+    setHtml('.hero-buttons .btn-primary', '<i class="fas fa-rocket"></i> شاهد المشاريع');
+    setHtml('.hero-buttons .btn-outline', '<i class="fas fa-envelope"></i> تواصل معي');
+    setText('.hero-scroll-text', 'مرّر للاستكشاف');
+
+    // Typewriter words
+    try {
+      words.length = 0;
+      words.push('مطوّر فلاتر','مهندس تطبيقات موبايل','مهتم بالواجهات والتصميم');
+      i = 0; j = 0; isDeleting = false;
+      var te = document.getElementById('typingText'); if (te) te.textContent = '';
+    } catch(e){}
+
+    // About
+    setText('#about .section-label', 'من أنا');
+    setHtml('#about .section-title', 'تعرّف على <span class="gradient-text">قصتي أكثر</span>');
+    setText('.about-content h3', 'مطوّر فلاتر شغوف بصناعة التميّز الرقمي');
+    setAllHtml('.about-content > p', [
+      'أنا <strong>عبدالرحمن عبدالله</strong>، مطوّر فلاتر مقيم في القاهرة، مصر. أتخصص في تحويل الأفكار المعقدة إلى تطبيقات موبايل أنيقة عالية الأداء يحبها المستخدمون.',
+      'من خلال تدريب مكثف في <strong>ITI</strong> و<strong>DEPI</strong>، أتقنت مبادئ المعمارية النظيفة، وتكامل REST API، وأنماط تصميم الواجهات الحديثة. منهجي يجمع بين التميّز التقني وحل المشكلات الإبداعي.'
+    ]);
+    setText('.languages-title', 'اللغات');
+    setText('.language-card .lang-info h4', 'العربية');
+    setText('.language-card .lang-info p', 'اللغة الأم');
+    setText('.language-card .lang-level', 'أم');
+    setText('.language-card:nth-of-type(2) .lang-info h4', 'الإنجليزية');
+    setText('.language-card:nth-of-type(2) .lang-info p', 'إتقان مهني');
+    setText('.language-card:nth-of-type(2) .lang-level', 'احترافي');
+
+    // Skills
+    setText('#skills .section-label', 'الخبرات');
+    setHtml('#skills .section-title', 'المهارات و<span class="gradient-text">التقنيات</span>');
+    setAllText('.skill-tab', ['تطوير الموبايل','لغات البرمجة','تطوير الويب']);
+    setAllText('.skill-header h3', ['تطوير الموبايل','لغات البرمجة','تطوير الويب']);
+    setAllHtml('.skills-desc p', [
+      'لا أكتب التطبيقات فحسب — بل <strong>أُحيي الأفكار على كل هاتف</strong>. بـ Flutter أبني تجربة <strong>سلسة بشكل مذهل</strong> تعمل بشكل أصلي على iOS و Android من كود واحد، فيحصل مستخدموك على نفس الإحساس المثالي سواء ضغطوا على آيفون أو جالاكسي.',
+      'البرمجة ليست حفظ صيغ — بل <strong>طريقة تفكيرك</strong>. هذه اللغات هي نادٍ رياضي ذهني: تصقل منطقي، وتسرّع خوارزمياتي، وتحوّل أكثر المشكلات تعقيدًا إلى حلول أنيقة ونظيفة.',
+      'وراء كل تطبيق عظيم، تجربة ويب عظيمة مماثلة. أمزج <strong>واجهات أمامية حديثة ومتجاوبة</strong> مع خلفية Laravel صلبة — فموقعك لا يبدو مذهلًا فحسب، بل يحمّل بسرعة ويعمل بلا عيوب على كل شاشة.'
+    ]);
+
+    // Experience
+    setText('#experience .section-label', 'الرحلة');
+    setHtml('#experience .section-title', 'التدريب و<span class="gradient-text">الخبرة</span>');
+    setAllText('.exp-title-info h3', ['متدرب تطوير فلاتر','متدرب تطوير ويب متكامل']);
+    setAllHtml('.exp-title-info p', [
+      'مبادرة مصر الرقمية لرواد التكنولوجيا (DEPI) <span class="badge-type">تدريب</span>',
+      'معهد تكنولوجيا المعلومات (ITI) <span class="badge-type">تدريب</span>'
+    ]);
+    setAllHtml('.exp-cards-stack .pro-exp-card .meta-item', [
+      '<i class="far fa-calendar-alt"></i> نوفمبر 2024 – حتى الآن',
+      '<i class="fas fa-map-marker-alt"></i> هجين (أونلاين والقاهرة، النزهة)',
+      '<i class="far fa-calendar-alt"></i> 2023 – 2024',
+      '<i class="fas fa-globe"></i> أونلاين'
+    ]);
+    setAllText('#experience .car-box h4', ['التحدي','الإجراء','النتيجة','التحدي','الإجراء','النتيجة']);
+    setAllText('#experience .car-box.challenge-box p', [
+      'إتقان تطوير فلاتر المتقدم ومبادئ المعمارية النظيفة في بيئة سريعة الخطى مع بناء تطبيقات متعددة المنصات بمستوى إنتاجي.',
+      'إتقان سريع لتقنيات الواجهات الأمامية وأطر العمل الخلفية (Laravel) لبناء تطبيقات ويب متكاملة ضمن جدول تدريب مكثف سريع الخطى.'
+    ]);
+    setAllText('#experience .car-box.action-box li', [
+      'حضور جلسات أونلاين منظمة (بمعدل يومين أسبوعيًا).',
+      'المشاركة في جلسات تقنية حضورية مكثفة في مركز تأهيل الحاسبات (النزهة).',
+      'تطبيق المعمارية النظيفة وأنماط MVVM في تسليم مشاريع عملية وأعمال جماعية.',
+      'إكمال برنامج أونلاين دقيق يغطي أساسيات الواجهات والخلفيات الحديثة.',
+      'تطوير واجهات RESTful API ودمجها بسلاسة مع الواجهات الأمامية.',
+      'العمل الجماعي على بناء تطبيقات ويب متكاملة بتطبيق أفضل ممارسات البرمجة.'
+    ]);
+    setAllText('#experience .car-box.result-box li', [
+      'تسليم مشاريع فلاتر حقيقية قابلة للتوسع بكود قابل للصيانة.',
+      'اكتساب خبرة عملية شاملة في سير عمل تطوير الموبايل الحديث متعدد المنصات.',
+      'بناء تطبيقات ويب متكاملة وظيفيًا بهياكل قواعد بيانات قوية.',
+      'اكتساب خبرة عملية تغطي دورة تطوير البرمجيات الكاملة.'
+    ]);
+
+    // Education
+    setText('#education .section-label', 'التعليم');
+    setHtml('#education .section-title', 'الخلفية <span class="gradient-text">الأكاديمية</span>');
+    setText('.car-card .car-logo-info h3', 'بكالوريوس علوم الحاسب والذكاء الاصطناعي');
+    setText('.car-card .car-logo-info p', 'الجامعة الحديثة للتكنولوجيا والمعلومات (MTI)');
+    setAllHtml('.car-body p', [
+      '<strong>التركيز: </strong>أدرس بكالوريوس علوم الحاسب مع تخصص في الذكاء الاصطناعي، وأبني أساسًا قويًا في الخوارزميات وهياكل البيانات وتعلم الآلة وأساسيات هندسة البرمجيات.',
+      '<strong>الحالة: </strong>ملتحق حاليًا، وأوازن بين الدراسة الأكاديمية وتطوير فلاتر العملي والتدريب المهني عبر ITI و DEPI.'
+    ]);
+
+    // Stats
+    setText('#stats .section-label', 'بالأرقام');
+    setHtml('#stats .section-title', 'أثر <span class="gradient-text">بالأرقام</span>');
+    setAllText('.stat-label', ['مشروع مكتمل','سنوات من التعلم والبناء','برامج تدريبية مكثفة','التزام بالكود النظيف']);
+
+    // Projects
+    setText('#projects .section-label', 'أعمالي');
+    setHtml('#projects .section-title', 'مشاريع<span class="gradient-text">ي</span>');
+    setAllText('#projects .project-card h3', ['MovieVerse — تطبيق استكشاف الأفلام','Masrofy — متتبع المصروفات الذكي']);
+    setAllText('#projects .project-subtitle', ['منصة أفلام ومسلسلات','إدارة مالية شخصية']);
+    setAllText('#projects .project-card .project-content > p', [
+      'تطبيق لاكتشاف الأفلام يحوّل التصفح إلى تجربة سينمائية. يقدّم عناوين رائجة لحظيًا من TMDB API، وقائمة مشاهدة شخصية متزامنة عبر الأجهزة بواسطة Firebase، وذاكرة تخزين محلية بتقنية Hive تجعل قائمتك جاهزة دائمًا.',
+      'متتبع مصروفات ذكي يجعل الوضوح المالي سهلًا. يصنف الإنفاق تلقائيًا، ويخطط للميزانيات مع تحليلات FL Chart حية، ويدعم عملات متعددة — مخزّن بأمان على الجهاز عبر Hive.'
+    ]);
+    setAllHtml('#projects .project-btn.primary', ['<i class="fas fa-eye"></i> المزيد','<i class="fas fa-eye"></i> المزيد']);
+    setAllHtml('#projects .demo-info h4', ['شاهد مشروع<br>الويب','شاهد مشروع<br>الموبايل']);
+
+    // Future Projects
+    setText('#future-projects .section-label', 'قريبًا');
+    setHtml('#future-projects .section-title', 'مشاريع <span class="gradient-text">قادمة</span>');
+    setAllText('#future-projects .project-card h3', ['StudySync — مخطط الدراسة الذكي','MediMind — رفيق الصحة']);
+    setAllText('#future-projects .project-subtitle', ['تنظيم الدراسة والتركيز','تذكيرات بالعافية والأدوية']);
+    setAllText('#future-projects .project-card .project-content > p', [
+      'رفيق دراسة مركّز يبقي تعلّمك على المسار الصحيح. يجمع StudySync الجداول والمهام والتقدم في واجهة هادئة خالية من المشتتات حتى تخطط بذكاء وتدرس بوعي.',
+      'رفيق صحي بسيط ومهتم يساعدك على تذكّر مواعيد الأدوية والبقاء منتبهًا لروتين العافية اليومي — بتذكيرات لطيفة وواجهة سهلة الاستخدام مصممة حول راحتك.'
+    ]);
+    setAllHtml('#future-projects .project-btn.primary', ['<i class="fas fa-eye"></i> المزيد','<i class="fas fa-eye"></i> المزيد']);
+    setAllHtml('#future-projects .project-btn.secondary', ['<i class="fas fa-play"></i> عرض المشروع','<i class="fas fa-play"></i> عرض المشروع']);
+
+    // Future / Featured
+    setText('#future .section-label', 'ماذا بعد؟');
+    setHtml('#future .section-title', 'مستقبل و<span class="gradient-text">أعمال مميزة</span>');
+    setAllText('.future-title', ['تعميق الذكاء الاصطناعي وتعلم الآلة','تطبيقات تُطلق للعملاء','فلاتر متكامل المنصة']);
+    setAllText('.future-desc', [
+      'توسيع دراسات الذكاء الاصطناعي في MTI وتطبيق مفاهيم تعلم الآلة في تجارب موبايل ذكية مبنية بـ Flutter.',
+      'إطلاق تطبيقات فلاتر للعملاء إلى الإنتاج على Google Play و App Store — لعملاء عبر خمسات ونفذلي.',
+      'ربط الموبايل والخلفيات بواجهات REST API نظيفة و Firebase و Laravel لتقديم تجارب منتجات متكاملة من البداية للنهاية.'
+    ]);
+
+    // Testimonials
+    setText('#testimonials .section-label', 'آراء الآخرين');
+    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">معلمي</span>');
+    setText('.quote', '"تميّز عبدالرحمن خلال تدريب فلاتر كمتعلم سريع وشغوف حقيقي ببناء تطبيقات موبايل نظيفة ومهندسة جيدًا. كان يتجاوز باستمرار المهام المطلوبة، ويسلّم مشاريع مصقولة في الموعد، ويتعامل مع كل تحدٍّ بعقلية مهنية قائمة على حل المشكلات. أوصي به بثقة لأي فرصة تطوير موبايل."');
+    setText('.details h4', 'أ. أميرة · معلمة فلاتر');
+    setText('.recommendation-text', 'توصية —');
+
+    // Services
+    setText('#services .section-label', 'ماذا أقدم');
+    setHtml('#services .section-title', 'خدمات أ<span class="gradient-text">قدّمها</span>');
+    setAllText('.service-title', ['تطوير تطبيقات الموبايل','تصميم واجهات UX/UI','تكامل واجهات API','تحسين الأداء','مواقع البورتفوليو والصفحات الافتتاحية']);
+    setAllText('.service-desc', [
+      'تطبيقات فلاتر متعددة المنصات لـ iOS و Android بأداء قريب من الأصلي وتجربة مستخدم سلسة',
+      'واجهات جميلة ومتجاوبة بأنماط تصميم حديثة وحركات سلسة تُبهج المستخدمين',
+      'اتصال سلس بالخلفيات عبر REST APIs و Firebase وخدمات الطرف الثالث لإدارة بيانات قوية',
+      'ضبط الأداء وإعادة هيكلة الكود وتقنيات تحسين لتطبيقات قابلة للتوسع وفعالة',
+      'مواقع بورتفوليو احترافية وصفحات افتتاحية تحوّل الزوار إلى عملاء — مصممة لتبرز من المنافسة'
+    ]);
+
+    // Pricing
+    setText('#pricing .section-label', 'الأسعار');
+    setHtml('#pricing .section-title', 'باقات <span class="gradient-text">الأسعار</span>');
+    setAllText('.price-unit', ['من','إلى','من','إلى','من','إلى']);
+    setAllText('.price-header p', [
+      'تطبيقات بسيطة · مدة قصيرة',
+      'الأفضل للتطبيقات البسيطة أو الشخصية. واجهة نظيفة؛ تسليم في الموعد؛ كود المصدر مرفق.',
+      'تجارة إلكترونية ولوحات تحكم · تعقيد متوسط',
+      'مثالي للتجارة الإلكترونية ولوحات التحكم أو تطبيقات الإنتاجية مع بيانات لحظية ومعمارية نظيفة.',
+      'تطبيقات إنتاجية كاملة · للشركات الناشئة والإطلاق',
+      'تطبيق متكامل جاهز للإنتاج — متعدد المزايا، محسّن، ومنشور. مثالي للشركات الناشئة والإطلاقات.'
+    ]);
+    setText('.popular-badge', '⭐ الأكثر طلبًا');
+    setAllHtml('.btn-pricing', [
+      'ابدأ الآن',
+      'وظّفني ←',
+      'ابدأ الآن'
+    ]);
+    // price features (icons preserved)
+    var f1 = '<i class="fas fa-check" style="color:#10b981;"></i> ';
+    var f2 = '<i class="fas fa-times"></i> ';
+    setAllHtml('.price-card:nth-of-type(1) .price-feature-item', [
+      f1 + 'حتى 5 شاشات',
+      f1 + 'مصادقة Firebase (تسجيل الدخول/الاشتراك)',
+      f1 + 'إدارة حالة عبر Provider',
+      f1 + 'تسليم كود المصدر عبر GitHub',
+      f1 + 'جولة مراجعة واحدة',
+      f2 + 'Firestore / قاعدة بيانات لحظية',
+      f2 + 'نشر على المتاجر'
+    ]);
+    setAllHtml('.price-card:nth-of-type(2) .price-feature-item', [
+      f1 + 'حتى 12 شاشة',
+      f1 + 'مصادقة Firebase + Firestore',
+      f1 + 'Provider أو BLoC',
+      f1 + 'بيانات منتجات/طلبات لحظية',
+      f1 + 'واجهة مخصصة (بناءً على Figma)',
+      f1 + 'جولتا مراجعة',
+      f1 + 'بناء للأندرويد و iOS',
+      f2 + 'نشر على المتاجر'
+    ]);
+    setAllHtml('.price-card:nth-of-type(3) .price-feature-item', [
+      f1 + 'شاشات غير محدودة',
+      f1 + 'تكامل Firebase كامل',
+      f1 + 'معمارية BLoC',
+      f1 + 'كود محسّن الأداء',
+      f1 + 'إعداد الإشعارات الفورية',
+      f1 + 'رفع على المتاجر',
+      f1 + '3 جولات مراجعة'
+    ]);
+
+    // Contact
+    setText('#contact .section-label', 'تواصل معي');
+    setHtml('#contact .section-title', 'لنعمل <span class="gradient-text">معًا</span>');
+    setText('.contact-info h3', 'لديك مشروع في ذهنك؟');
+    setText('.contact-info > p', 'أنا دائمًا منفتح لمناقشة مشاريع جديدة وأفكار إبداعية وفرص لتكون جزءًا من رؤيتك. لنصنع شيئًا مذهلًا معًا.');
+    setAllText('.contact-link strong', ['البريد الإلكتروني','واتساب','الهاتف','لينكد إن','جيت هاب']);
+    setAllText('.form-group label', ['اسمك','بريدك الإلكتروني','رسالتك']);
+    var nameIn = document.getElementById('contactName'); if (nameIn) nameIn.placeholder = 'مثال: أحمد محمد';
+    var emailIn = document.getElementById('contactEmail'); if (emailIn) emailIn.placeholder = 'example@email.com';
+    var msgIn = document.getElementById('contactMsg'); if (msgIn) msgIn.placeholder = 'حدثني عن مشروعك...';
+    setHtml('#contactBtn', 'إرسال الرسالة <i class="fas fa-paper-plane"></i>');
+    setText('.mini-cord-handle', 'اسحب');
+
+    // Footer
+    setAllText('.footer-title', ['لنتواصل','من أنا؟']);
+    setText('.footer-col.left-col p', 'أنا دائمًا منفتح لمناقشة مشاريع فلاتر جديدة وفرص العمل الحر والتعاون لبناء تجارب موبايل رائعة.');
+    setHtml('.footer-col.right-col p', 'أنا <strong style="color:var(--text)">عبدالرحمن عبدالله</strong>، مطوّر فلاتر شغوف ببناء تطبيقات موبايل متعددة المنصات قابلة للتوسع بمعمارية نظيفة وتجارب مستخدم سلسة.');
+    setText('.footer-subtitle', 'مطوّر فلاتر · القاهرة، مصر');
+    setText('.footer-copy', '© 2026 عبدالرحمن عبدالله. جميع الحقوق محفوظة.');
+  }
+
+  function switchLang(){
+    if (document.documentElement.lang === 'ar') {
+      try { localStorage.setItem('lang', 'en'); } catch(e){}
+      location.reload();
+    } else {
+      try { localStorage.setItem('lang', 'ar'); } catch(e){}
+      applyArabic();
+    }
+  }
+
+  window.switchLang = switchLang;
+  window.applyArabic = applyArabic;
+
+  var langBtn = document.getElementById('langToggle');
+  if (langBtn) langBtn.addEventListener('click', switchLang);
+
+  // Apply persisted language on load
+  var saved = 'en';
+  try { saved = localStorage.getItem('lang') || 'en'; } catch(e){}
+  if (saved === 'ar') {
+    applyArabic();
+  } else {
+    var lbl = document.getElementById('langLabel');
+    if (lbl) lbl.textContent = 'AR';
+  }
+})();
+</script>
+
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v24</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v25</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
