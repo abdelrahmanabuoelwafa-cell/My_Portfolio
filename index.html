@@ -172,7 +172,7 @@
   --card-bg: #FFFBE8;
   --border: #F3E6C9;
   --text: #0F172A;
-  --muted: #334155;
+  --muted: #1E293B;
   --primary: #9333EA;
   --secondary: #7C3AED;
   --neon: #7C3AED;
@@ -198,7 +198,7 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
 html{scroll-behavior:smooth;scroll-padding-top:90px;width:100%;overflow-x:hidden} 
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%;font-weight:600} 
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%;font-weight:700} 
 img{max-width:100%;height:auto;display:block} 
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:800} 
 a{text-decoration:none;color:inherit} 
@@ -787,7 +787,7 @@ body::after{
   margin-bottom:40px; 
   line-height:1.7; 
   animation:fadeInUp 0.8s ease 0.9s both; 
-  font-weight:600;
+  font-weight:700;
 } 
 .hero-buttons{ 
   display:flex; 
@@ -932,7 +932,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 .about-grid{ 
   display:grid; 
   grid-template-columns:1fr 1fr; 
-  gap:48px; 
+  gap:40px; 
   align-items:center; 
   max-width:1200px; 
   margin:0 auto; 
@@ -965,6 +965,9 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 } 
 .about-image:hover {
   transform:scale(1.03); 
+}
+.about-image{
+  box-shadow:0 0 22px rgba(168,85,247,.22),0 0 60px rgba(168,85,247,.12);
 }
 .about-img{ 
   width:100%; 
@@ -4559,9 +4562,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     new VanillaNeonBorder(document.querySelector('.about-image'), {
       color: '#A855F7',
-      thickness: 4,
+      thickness: 5,
       borderSize: 45,
-      glow: 100,
+      glow: 140,
       speed: 10,
       rounded: 100
     });
@@ -5048,7 +5051,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v25</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v26</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
