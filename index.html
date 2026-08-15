@@ -163,8 +163,8 @@
   --bg: #FFFFFF;
   --card-bg: #FFFBE8;
   --border: #F3E6C9;
-  --text: #1E293B;
-  --muted: #64748B;
+  --text: #0F172A;
+  --muted: #475569;
   --primary: #9333EA;
   --secondary: #7C3AED;
   --neon: #7C3AED;
@@ -177,20 +177,20 @@
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 12% 18%, rgba(255,193,7,.22) 0%, transparent 40%),
-    radial-gradient(circle at 88% 28%, rgba(255,196,0,.16) 0%, transparent 40%),
-    radial-gradient(circle at 50% 95%, rgba(255,193,7,.14) 0%, transparent 45%);
+    radial-gradient(circle at 12% 18%, rgba(255,193,7,.32) 0%, transparent 40%),
+    radial-gradient(circle at 88% 28%, rgba(255,196,0,.24) 0%, transparent 40%),
+    radial-gradient(circle at 50% 95%, rgba(255,193,7,.20) 0%, transparent 45%);
   animation: goldBgDrift 14s ease-in-out infinite;
   will-change: transform, opacity;
 }
 @keyframes goldBgDrift{
-  0%,100%{opacity:.5;transform:translate(0,0) scale(1)}
+  0%,100%{opacity:.55;transform:translate(0,0) scale(1)}
   50%{opacity:1;transform:translate(0,-24px) scale(1.06)}
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
 html{scroll-behavior:smooth;scroll-padding-top:90px;width:100%;overflow-x:hidden} 
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%} 
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%;font-weight:500} 
 img{max-width:100%;height:auto;display:block} 
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700} 
 a{text-decoration:none;color:inherit} 
@@ -890,7 +890,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 } 
 .section-title{ 
   font-size:clamp(32px,4vw,42px); 
-  font-weight:700; 
+  font-weight:800; 
   line-height:1.5; 
   font-family:var(--font-heading);
   letter-spacing:-1px;
@@ -4331,9 +4331,12 @@ document.addEventListener("DOMContentLoaded", () => {
       hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
     };
     if (document.documentElement.getAttribute("data-theme") === "light") {
-      config.lineColor = "#EAB308";
-      config.dotColor = "#FACC15";
-      config.cometColor = "#D97706";
+      config.lineColor = "#F5B301";
+      config.dotColor = "#FFD23F";
+      config.cometColor = "#E8910D";
+      config.lineGlow = 1.1;
+      config.dotGlow = 1.6;
+      config.cometGlow = 1.1;
     }
     window.vortexConfig = config;
     window.createVortex(canvas, container, { current: config });
@@ -4365,9 +4368,12 @@ function applyVortexTheme(theme) {
   const cfg = window.vortexConfig;
   if (!cfg) return;
   if (theme === 'light') {
-    cfg.lineColor = '#EAB308';
-    cfg.dotColor = '#FACC15';
-    cfg.cometColor = '#D97706';
+    cfg.lineColor = '#F5B301';
+    cfg.dotColor = '#FFD23F';
+    cfg.cometColor = '#E8910D';
+    if (cfg.lineGlow !== undefined) cfg.lineGlow = 1.1;
+    if (cfg.dotGlow !== undefined) cfg.dotGlow = 1.6;
+    if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.1;
   } else {
     cfg.lineColor = '#A855F7';
     cfg.dotColor = '#C084FC';
