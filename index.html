@@ -2437,6 +2437,9 @@ footer p{
 .recommendation-text{color:var(--muted);font-size:13px}
 .linkedin-icon-btn{color:#0077b5;font-size:20px;text-decoration:none;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;transition:all .3s ease}
 .linkedin-icon-btn:hover{color:#c084fc;transform:scale(1.15) translateY(-2px);text-shadow:0 5px 15px rgba(168,85,247,.4)}
+.quote.clamped{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:2px}
+.quote-more-btn{display:inline-block;background:none;border:none;color:var(--neon);font-weight:800;font-size:14px;cursor:pointer;padding:0 0 23px 0;letter-spacing:.3px;transition:opacity .2s}
+.quote-more-btn:hover{text-decoration:underline;opacity:.85}
 @media(max-width:480px){
   .premium-testimonial-card{padding:24px 18px}
 } 
@@ -3943,9 +3946,10 @@ body{overflow-x:hidden;}
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
       </div>
-      <p class="quote">"I had the pleasure of working with Abdelrahman for seven months as Freelancing &amp; Coaching Instructor, and what makes his journey stand out to me is that he didn't stop when the program ended.<br><br>Throughout our journey, he consistently applied what we worked on and kept looking for real opportunities to put it into practice. He was able to work with clients outside Egypt, which was a great reflection of the effort and consistency he put into his development.<br><br>What I appreciate even more is what happened after the journey. Abdelrahman continued looking for new opportunities, exploring different platforms and areas, and working on himself without needing someone to push him. He even explored AI training and evaluation platforms such as Outlier and kept reaching out to me for guidance and sharing his progress.<br><br>For me, this says a lot about his mindset. He is not someone who stops at reaching one goal; he keeps looking for the next opportunity to learn, improve, and grow.<br><br>I'm genuinely proud of the progress Abdelrahman has made and happy that I had the chance to be part of his journey. I'm confident that his persistence and continuous drive to improve will take him much further."</p>
+      <p class="quote clamped">"I had the pleasure of working with Abdelrahman for seven months as Freelancing &amp; Coaching Instructor, and what makes his journey stand out to me is that he didn't stop when the program ended.<br><br>Throughout our journey, he consistently applied what we worked on and kept looking for real opportunities to put it into practice. He was able to work with clients outside Egypt, which was a great reflection of the effort and consistency he put into his development.<br><br>What I appreciate even more is what happened after the journey. Abdelrahman continued looking for new opportunities, exploring different platforms and areas, and working on himself without needing someone to push him. He even explored AI training and evaluation platforms such as Outlier and kept reaching out to me for guidance and sharing his progress.<br><br>For me, this says a lot about his mindset. He is not someone who stops at reaching one goal; he keeps looking for the next opportunity to learn, improve, and grow.<br><br>I'm genuinely proud of the progress Abdelrahman has made and happy that I had the chance to be part of his journey. I'm confident that his persistence and continuous drive to improve will take him much further."</p>
+      <button class="quote-more-btn" type="button" aria-expanded="false">more</button>
       <div class="author-info">
-        <div class="avatar" style="background-color: #22d3ee;">م.ع</div>
+        <div class="avatar" style="background-color: #22d3ee;">M</div>
         <div class="details">
           <h4>Menna Omar · Freelancing &amp; Coaching Instructor</h4>
           <div class="linkedin-link">
@@ -4966,6 +4970,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ]);
     setAllText('.details h4', ['أ. أميرة · مُرشدة المهارات الناعمة', 'منى عمر · مدربة العمل الحر والتأهيل']);
     setAllText('.recommendation-text', ['توصية —', 'توصية —']);
+    document.querySelectorAll('.quote-more-btn').forEach(function(btn){
+      var q = btn.previousElementSibling;
+      btn.textContent = (q && !q.classList.contains('clamped')) ? 'عرض أقل' : 'المزيد';
+    });
 
     // Services
     setText('#services .section-label', 'ماذا أقدم');
@@ -5066,6 +5074,18 @@ document.addEventListener('DOMContentLoaded', () => {
   var langBtn = document.getElementById('langToggle');
   if (langBtn) langBtn.addEventListener('click', switchLang);
 
+  // Testimonial "more" expand/collapse
+  document.querySelectorAll('.quote-more-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var quote = btn.previousElementSibling;
+      if(!quote || !quote.classList.contains('quote')) return;
+      var nowClamped = quote.classList.toggle('clamped');
+      var isAr = document.documentElement.lang === 'ar';
+      btn.textContent = nowClamped ? (isAr ? 'المزيد' : 'more') : (isAr ? 'عرض أقل' : 'less');
+      btn.setAttribute('aria-expanded', String(!nowClamped));
+    });
+  });
+
   // Apply persisted language on load
   var saved = 'en';
   try { saved = localStorage.getItem('lang') || 'en'; } catch(e){}
@@ -5080,7 +5100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v29</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v30</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
