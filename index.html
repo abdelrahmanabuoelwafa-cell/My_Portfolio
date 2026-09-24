@@ -3910,7 +3910,7 @@ body{overflow-x:hidden;}
 <section id="testimonials">
   <div class="section-header reveal">
     <div class="section-label">Testimonials</div>
-    <h2 class="section-title">A Word From <span class="gradient-text">My Mentor</span></h2>
+    <h2 class="section-title">Words From <span class="gradient-text">My Mentors</span></h2>
   </div>
   <div class="testimonials-grid">
     <div class="premium-testimonial-card reveal" style="grid-column:1/-1;width:100%;">
@@ -3929,6 +3929,28 @@ body{overflow-x:hidden;}
           <div class="linkedin-link">
             <span class="recommendation-text">Recommendation —</span>
             <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="premium-testimonial-card reveal" style="grid-column:1/-1;width:100%;">
+      <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <p class="quote">"I had the pleasure of working with Abdelrahman for seven months as Freelancing &amp; Coaching Instructor, and what makes his journey stand out to me is that he didn't stop when the program ended.<br><br>Throughout our journey, he consistently applied what we worked on and kept looking for real opportunities to put it into practice. He was able to work with clients outside Egypt, which was a great reflection of the effort and consistency he put into his development.<br><br>What I appreciate even more is what happened after the journey. Abdelrahman continued looking for new opportunities, exploring different platforms and areas, and working on himself without needing someone to push him. He even explored AI training and evaluation platforms such as Outlier and kept reaching out to me for guidance and sharing his progress.<br><br>For me, this says a lot about his mindset. He is not someone who stops at reaching one goal; he keeps looking for the next opportunity to learn, improve, and grow.<br><br>I'm genuinely proud of the progress Abdelrahman has made and happy that I had the chance to be part of his journey. I'm confident that his persistence and continuous drive to improve will take him much further."</p>
+      <div class="author-info">
+        <div class="avatar" style="background-color: #22d3ee;">م.ع</div>
+        <div class="details">
+          <h4>Menna Omar · Freelancing &amp; Coaching Instructor</h4>
+          <div class="linkedin-link">
+            <span class="recommendation-text">Recommendation —</span>
+            <a href="https://www.linkedin.com/in/mennaomar/" target="_blank" class="linkedin-icon-btn" title="View Profile on LinkedIn">
               <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
           </div>
@@ -4937,10 +4959,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Testimonials
     setText('#testimonials .section-label', 'آراء الآخرين');
-    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">معلمي</span>');
-    setText('.quote', '"تميّز عبدالرحمن خلال تدريب فلاتر كمتعلم سريع وشغوف حقيقي ببناء تطبيقات موبايل نظيفة ومهندسة جيدًا. كان يتجاوز باستمرار المهام المطلوبة، ويسلّم مشاريع مصقولة في الموعد، ويتعامل مع كل تحدٍّ بعقلية مهنية قائمة على حل المشكلات. أوصي به بثقة لأي فرصة تطوير موبايل."');
-    setText('.details h4', 'أ. أميرة · معلمة فلاتر');
-    setText('.recommendation-text', 'توصية —');
+    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">مُعلّمَيَّ</span>');
+    setAllHtml('.quote', [
+      '"تميّز عبدالرحمن خلال تدريب فلاتر كمتعلم سريع وشغوف حقيقي ببناء تطبيقات موبايل نظيفة ومهندسة جيدًا. كان يتجاوز باستمرار المهام المطلوبة، ويسلّم مشاريع مصقولة في الموعد، ويتعامل مع كل تحدٍّ بعقلية مهنية قائمة على حل المشكلات. أوصي به بثقة لأي فرصة تطوير موبايل."',
+      '"لقد كان لديّ الشرف في العمل مع عبدالرحمن لمدة سبعة أشهر بصفتي مدربة للعمل الحر والتأهيل، وما يميز رحلته عندي أنه لم يتوقف عندما انتهى البرنامج.<br><br>طوال رحلتنا، طبّق بثبات ما عملنا عليه وظل يبحث عن فرص حقيقية ليُطبّقها. تمكّن من العمل مع عملاء خارج مصر، وهو ما يعكس بوضوح الجهد والاستمرارية الذي بذله في تطوّره.<br><br>ما أقدّره أكثر هو ما حدث بعد الرحلة. استمر عبدالرحمن في البحث عن فرص جديدة، واستكشاف منصات ومجالات مختلفة، والعمل على نفسه دون أن يحتاج لأن يدفعه أحد. استكشف حتى منصات تدريب وتقييم الذكاء الاصطناعي مثل Outlier، وظل يتواصل معي طلبًا للإرشاد ويشاركني تقدّمه.<br><br>هذا بالنسبة لي يعكس كثيرًا عن عقلية. ليس شخصًا يتوقف عند تحقيق هدف واحد؛ بل يواصل البحث عن الفرصة التالية للتعلّم والتحسّن والنمو.<br><br>أنا فخورة حقًا بالتقدّم الذي حقّقه عبدالرحمن، وسعيدة لأنني أتيحت لي الفرصة أن أكون جزءًا من رحلته. أنا واثقة من أن إصراره ودفعه المستمر للتحسّن سيأخذانه بعيدًا جدًا."'
+    ]);
+    setAllText('.details h4', ['أ. أميرة · معلمة فلاتر', 'منى عمر · مدربة العمل الحر والتأهيل']);
+    setAllText('.recommendation-text', ['توصية —', 'توصية —']);
 
     // Services
     setText('#services .section-label', 'ماذا أقدم');
@@ -5055,7 +5080,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v28</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v29</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
