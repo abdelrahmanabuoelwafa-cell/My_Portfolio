@@ -1,6 +1,7 @@
 /* ============================================================
    AI Business Planner — Professional Sales Assistant
-   - Real AI via Pollinations.ai (FREE, no login, no API key)
+   - Real AI via secure backend (Groq GPT-OSS-120B)
+   - API key hidden in Vercel serverless function
    - Advanced persuasion & closing techniques
    - Arabic-first, can answer any customer question
    - Fallback: local rule-based mode if API unavailable
@@ -20,12 +21,12 @@
 
   if (!chatEl || !inputEl || !btnEl) return;
 
-  /* ---- AI: send conversation to Pollinations.ai ---- */
-  var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
-  var AI_MODEL = 'Qwen3.6-27B';
+  /* ---- AI: calls secure backend (Vercel serverless function) ---- */
+  var AI_ENDPOINT = '/api/analyze';
+  var AI_MODEL = 'openai/gpt-oss-120b';
 
-  /* Detect AI availability by checking if endpoint is set */
-  var aiMode = !!AI_ENDPOINT;
+  /* Detect AI availability */
+  var aiMode = true; /* Always try AI - backend handles the key */
   if (modeEl) {
     modeEl.textContent = aiMode
       ? 'المساعد الذكي — متصل بالذكاء الاصطناعي'
