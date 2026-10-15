@@ -290,22 +290,22 @@ body::after{
   background-clip:text; 
 } 
 
-/* Reveal Animation */ 
-.reveal{opacity:0;transform:translateY(52px) scale(.975);filter:blur(6px)}
-.reveal.visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0);animation:revealIn 1.5s cubic-bezier(.16,1,.3,1)}
+/* Reveal Animation — SLOW MOTION on scroll */
+.reveal{opacity:0;transform:translateY(80px) scale(.95);filter:blur(12px)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0);animation:revealIn 2.2s cubic-bezier(.16,1,.3,1)}
 @keyframes revealIn{
-  from{opacity:0;transform:translateY(52px) scale(.975);filter:blur(6px)}
+  from{opacity:0;transform:translateY(80px) scale(.95);filter:blur(12px)}
   to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 
 /* Staggered slow-motion delays */
-.reveal:nth-child(1) { animation-delay: 0.08s; }
-.reveal:nth-child(2) { animation-delay: 0.22s; }
-.reveal:nth-child(3) { animation-delay: 0.36s; }
-.reveal:nth-child(4) { animation-delay: 0.5s; }
-.reveal:nth-child(5) { animation-delay: 0.64s; }
-.reveal:nth-child(6) { animation-delay: 0.78s; }
-.reveal:nth-child(7) { animation-delay: 0.92s; }
+.reveal:nth-child(1) { animation-delay: .1s; }
+.reveal:nth-child(2) { animation-delay: .35s; }
+.reveal:nth-child(3) { animation-delay: .6s; }
+.reveal:nth-child(4) { animation-delay: .85s; }
+.reveal:nth-child(5) { animation-delay: 1.1s; }
+.reveal:nth-child(6) { animation-delay: 1.35s; }
+.reveal:nth-child(7) { animation-delay: 1.6s; }
 
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}
@@ -598,8 +598,8 @@ body::after{
 [data-theme="light"] .brand-mark{color:#0f172a}
 [data-theme="light"] .nav-links a:hover,
 [data-theme="light"] .nav-links a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)}
-/* Tablet/mobile + small laptops: hamburger + slide-in drawer (full desktop nav needs ~1460px to fit brand + 8 links + buttons + tools) */
-@media(max-width:1399px){
+/* Tablet/mobile: hamburger + slide-in drawer */
+@media(max-width:1100px){
   .hamburger{display:flex}
   .nav-menu{
     position:fixed;
@@ -3219,16 +3219,23 @@ body{overflow-x:hidden;}
   .about-image{width:300px;height:300px;}
 }
 
-/* Tablet nav: use drawer up to 1399px (desktop nav needs space and would clip) */
+/* Tablet nav: drawer up to 1100px */
 
-/* Small Desktop/Laptop: shrink desktop nav so all links + actions fit */
-@media(min-width:1400px) and (max-width:1499px){
-  #navbar{padding:12px max(24px,3vw)}
-  #navbar.scrolled{padding:8px max(24px,3vw)}
-  .nav-menu{gap:16px}
-  .nav-links{gap:12px}
-  .nav-links a{font-size:10.5px}
-  .nav-actions{gap:10px}
+/* Small Desktop/Laptop: compress desktop nav so ALL links + buttons fit (was clipping below 1450px) */
+@media(min-width:1101px) and (max-width:1499px){
+  #navbar{padding:12px max(18px,2.2vw);gap:12px}
+  #navbar.scrolled{padding:8px max(18px,2.2vw)}
+  .nav-menu{gap:12px}
+  .nav-links{gap:10px}
+  .nav-links a{font-size:10.5px;letter-spacing:.8px}
+  .nav-actions{gap:8px}
+  .btn-cv{padding:8px 13px;font-size:11px;gap:6px}
+  .btn-contact-nav{padding:8px 13px;font-size:11px;gap:6px}
+}
+/* Tighter below 1280px (common 1920@150% scaling): CV becomes icon-only */
+@media(min-width:1101px) and (max-width:1279px){
+  .btn-cv span{display:none}
+  .btn-cv{padding:8px 11px}
 }
 
 /* Mobile landscape: keep usable, reduce hero height */
@@ -4314,7 +4321,7 @@ const observer = new IntersectionObserver((entries) => {
       }); 
     } 
   }); 
-}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.05, rootMargin: '0px 0px 60px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -5126,7 +5133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v31</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v32</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
