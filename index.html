@@ -198,7 +198,7 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box} 
 html{scroll-behavior:smooth;scroll-padding-top:90px;width:100%;overflow-x:hidden} 
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%;font-weight:800} 
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;width:100%;min-height:100%;font-weight:800;font-size:clamp(15px,12px + .35vw,17.5px)} 
 img{max-width:100%;height:auto;display:block} 
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:800} 
 a{text-decoration:none;color:inherit} 
@@ -291,15 +291,25 @@ body::after{
 } 
 
 /* Reveal Animation */ 
-.reveal{opacity:0;transform:translateY(30px);transition:all 1s cubic-bezier(.16,1,.3,1)} 
-.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translateY(52px) scale(.975);filter:blur(6px)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0);animation:revealIn 1.5s cubic-bezier(.16,1,.3,1)}
+@keyframes revealIn{
+  from{opacity:0;transform:translateY(52px) scale(.975);filter:blur(6px)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
 
-/* Staggered Animations */
-.reveal:nth-child(1) { transition-delay: 0.1s; }
-.reveal:nth-child(2) { transition-delay: 0.2s; }
-.reveal:nth-child(3) { transition-delay: 0.3s; }
-.reveal:nth-child(4) { transition-delay: 0.4s; }
-.reveal:nth-child(5) { transition-delay: 0.5s; }
+/* Staggered slow-motion delays */
+.reveal:nth-child(1) { animation-delay: 0.08s; }
+.reveal:nth-child(2) { animation-delay: 0.22s; }
+.reveal:nth-child(3) { animation-delay: 0.36s; }
+.reveal:nth-child(4) { animation-delay: 0.5s; }
+.reveal:nth-child(5) { animation-delay: 0.64s; }
+.reveal:nth-child(6) { animation-delay: 0.78s; }
+.reveal:nth-child(7) { animation-delay: 0.92s; }
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}
+}
 
 /* Smooth Parallax Effect */
 .parallax-slow {
@@ -588,8 +598,8 @@ body::after{
 [data-theme="light"] .brand-mark{color:#0f172a}
 [data-theme="light"] .nav-links a:hover,
 [data-theme="light"] .nav-links a.active{color:#111;text-shadow:0 0 12px rgba(147,51,234,.35)}
-/* Tablet/mobile: hamburger + slide-in drawer */
-@media(max-width:1100px){
+/* Tablet/mobile + small laptops: hamburger + slide-in drawer (full desktop nav needs ~1460px to fit brand + 8 links + buttons + tools) */
+@media(max-width:1399px){
   .hamburger{display:flex}
   .nav-menu{
     position:fixed;
@@ -738,7 +748,7 @@ body::after{
   animation:fadeInUp 0.8s ease 0.5s both; 
 } 
 .typing-text{ 
-  font-size:22px; 
+  font-size:clamp(17px,1.7vw,26px); 
   font-weight:800; 
   color:var(--neon); 
   font-family:var(--font-heading);
@@ -781,9 +791,9 @@ body::after{
   50%{opacity:.6;transform:scale(1.2)} 
 } 
 .hero-desc{ 
-  font-size:18px; 
+  font-size:clamp(16px,1.35vw,21px); 
   color:var(--muted); 
-  max-width:650px; 
+  max-width:min(760px,92vw); 
   margin-bottom:40px; 
   line-height:1.7; 
   animation:fadeInUp 0.8s ease 0.9s both; 
@@ -921,9 +931,9 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   box-shadow:0 0 10px var(--neon); 
 } 
 .section-title{ 
-  font-size:clamp(32px,4vw,42px); 
+  font-size:clamp(32px,4vw,58px); 
   font-weight:800; 
-  line-height:1.5; 
+  line-height:1.4; 
   font-family:var(--font-heading);
   letter-spacing:-1px;
 } 
@@ -1009,7 +1019,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   touch-action:manipulation;
 } 
 .about-content h3{ 
-  font-size:28px; 
+  font-size:clamp(23px,2.1vw,32px); 
   font-weight:800; 
   margin-bottom:24px; 
   line-height:1.3; 
@@ -3179,14 +3189,18 @@ body{overflow-x:hidden;}
 
 /* Wide screens: contained content width, centered */
 @media(min-width:1440px){
-  .services-grid{grid-template-columns:repeat(5,1fr);max-width:1280px;margin:0 auto;}
-  .skills-row{grid-template-columns:repeat(3,1fr);max-width:1280px;margin:0 auto;}
-  .projects-grid{max-width:1280px;margin:0 auto;}
-  .future-grid{max-width:1100px;margin:0 auto;}
-  .testimonials-grid{max-width:1100px;margin:0 auto;}
-  .pricing-grid{max-width:1100px;margin:0 auto;}
-  .contact-container{max-width:1000px;}
-  .hero-content{max-width:1000px;}
+  .services-grid{grid-template-columns:repeat(5,1fr);max-width:min(94vw,1640px);margin:0 auto;}
+  .skills-row{grid-template-columns:repeat(3,1fr);max-width:min(94vw,1560px);margin:0 auto;}
+  .projects-grid{max-width:min(94vw,1640px);margin:0 auto;}
+  .future-grid{max-width:min(94vw,1500px);margin:0 auto;}
+  .testimonials-grid{max-width:min(94vw,1500px);margin:0 auto;}
+  .pricing-grid{max-width:min(94vw,1500px);margin:0 auto;}
+  .stats-grid{max-width:min(94vw,1500px);margin:0 auto;}
+  .about-grid{max-width:min(94vw,1560px);}
+  .exp-cards-stack{max-width:min(94vw,1300px);}
+  .contact-container{max-width:min(94vw,1240px);}
+  .hero-content{max-width:min(94vw,1300px);}
+  .section-header{max-width:min(94vw,1640px);margin-left:auto;margin-right:auto;}
 }
 
 /* Small Desktop / Laptop: 3-col projects, 4-col services */
@@ -3205,10 +3219,10 @@ body{overflow-x:hidden;}
   .about-image{width:300px;height:300px;}
 }
 
-/* Tablet nav: use drawer up to 1100px (desktop nav needs space and would clip) */
+/* Tablet nav: use drawer up to 1399px (desktop nav needs space and would clip) */
 
 /* Small Desktop/Laptop: shrink desktop nav so all links + actions fit */
-@media(min-width:1101px) and (max-width:1279px){
+@media(min-width:1400px) and (max-width:1499px){
   #navbar{padding:12px max(24px,3vw)}
   #navbar.scrolled{padding:8px max(24px,3vw)}
   .nav-menu{gap:16px}
@@ -4300,9 +4314,21 @@ const observer = new IntersectionObserver((entries) => {
       }); 
     } 
   }); 
-}, { threshold: 0.1 }); 
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); 
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Slow-motion reveal for extra elements (below fold, no flash)
+(function(){
+  ['.language-card', '.contact-info > *', '.languages-grid > *'].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el, i){
+      if (el.classList.contains('reveal')) return;
+      el.classList.add('reveal');
+      el.style.animationDelay = (0.1 + i * 0.16) + 's';
+      observer.observe(el);
+    });
+  });
+})();
 
 // Profile image protection (drag / right-click / middle-click)
 (function(){ 
@@ -4968,7 +4994,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '"تميّز عبدالرحمن خلال تدريب فلاتر كمتعلم سريع وشغوف حقيقي ببناء تطبيقات موبايل نظيفة ومهندسة جيدًا. كان يتجاوز باستمرار المهام المطلوبة، ويسلّم مشاريع مصقولة في الموعد، ويتعامل مع كل تحدٍّ بعقلية مهنية قائمة على حل المشكلات. أوصي به بثقة لأي فرصة تطوير موبايل."',
       '"لقد كان لديّ الشرف في العمل مع عبدالرحمن لمدة سبعة أشهر بصفتي مدربة للعمل الحر والتأهيل، وما يميز رحلته عندي أنه لم يتوقف عندما انتهى البرنامج.<br><br>طوال رحلتنا، طبّق بثبات ما عملنا عليه وظل يبحث عن فرص حقيقية ليُطبّقها. تمكّن من العمل مع عملاء خارج مصر، وهو ما يعكس بوضوح الجهد والاستمرارية الذي بذله في تطوّره.<br><br>ما أقدّره أكثر هو ما حدث بعد الرحلة. استمر عبدالرحمن في البحث عن فرص جديدة، واستكشاف منصات ومجالات مختلفة، والعمل على نفسه دون أن يحتاج لأن يدفعه أحد. استكشف حتى منصات تدريب وتقييم الذكاء الاصطناعي مثل Outlier، وظل يتواصل معي طلبًا للإرشاد ويشاركني تقدّمه.<br><br>هذا بالنسبة لي يعكس كثيرًا عن عقلية. ليس شخصًا يتوقف عند تحقيق هدف واحد؛ بل يواصل البحث عن الفرصة التالية للتعلّم والتحسّن والنمو.<br><br>أنا فخورة حقًا بالتقدّم الذي حقّقه عبدالرحمن، وسعيدة لأنني أتيحت لي الفرصة أن أكون جزءًا من رحلته. أنا واثقة من أن إصراره ودفعه المستمر للتحسّن سيأخذانه بعيدًا جدًا."'
     ]);
-    setAllText('.details h4', ['أ. أميرة · مُرشدة المهارات الناعمة', 'منى عمر · مدربة العمل الحر والتأهيل']);
+    setAllText('.details h4', ['أ. أميرة · مُرشدة المهارات الناعمة', 'منة عمر · مدربة العمل الحر والتأهيل']);
     setAllText('.recommendation-text', ['توصية —', 'توصية —']);
     document.querySelectorAll('.quote-more-btn').forEach(function(btn){
       var q = btn.previousElementSibling;
@@ -5100,7 +5126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v30</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v31</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
