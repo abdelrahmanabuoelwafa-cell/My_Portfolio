@@ -7,12 +7,12 @@
 /* --- Initial hidden state (only when JS is ON) --- */
 html.js-enabled .reveal {
   opacity: 0;
-  transform: translateY(60px) scale(0.98);
-  filter: blur(8px);
+  transform: translateY(100px) scale(0.93);
+  filter: blur(16px);
   transition:
-    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform, filter;
 }
 
@@ -26,10 +26,10 @@ html.js-enabled .reveal.is-visible {
 
 /* --- Stagger delays via data-reveal-delay (per sibling group) --- */
 html.js-enabled .reveal[data-reveal-delay="0"] { transition-delay: 0s; }
-html.js-enabled .reveal[data-reveal-delay="1"] { transition-delay: 0.25s; }
-html.js-enabled .reveal[data-reveal-delay="2"] { transition-delay: 0.5s; }
-html.js-enabled .reveal[data-reveal-delay="3"] { transition-delay: 0.75s; }
-html.js-enabled .reveal[data-reveal-delay="4"] { transition-delay: 1s; }
+html.js-enabled .reveal[data-reveal-delay="1"] { transition-delay: 0.3s; }
+html.js-enabled .reveal[data-reveal-delay="2"] { transition-delay: 0.6s; }
+html.js-enabled .reveal[data-reveal-delay="3"] { transition-delay: 0.9s; }
+html.js-enabled .reveal[data-reveal-delay="4"] { transition-delay: 1.2s; }
 
 /* --- JS disabled / failed: force everything visible --- */
 html:not(.js-enabled) .reveal {
@@ -51,7 +51,7 @@ html:not(.js-enabled) .reveal {
 }
 
 /* ============================================================
-   AI Business Planner — section styles
+   AI Business Planner — interactive chat assistant
    Uses existing theme variables (--neon, --card-bg, --muted...)
    ============================================================ */
 .planner-box {
@@ -60,81 +60,179 @@ html:not(.js-enabled) .reveal {
   background: var(--card-bg);
   border: 1px solid rgba(168, 85, 247, 0.22);
   border-radius: 18px;
-  padding: 28px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow: hidden;
 }
-.planner-box textarea {
-  width: 100%;
-  min-height: 140px;
-  resize: vertical;
+
+/* Mode badge */
+.planner-badge {
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  background: rgba(168, 85, 247, 0.1);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+  color: var(--neon);
+}
+.planner-badge.ai-connected {
+  background: rgba(34, 211, 238, 0.1);
+  border-bottom-color: rgba(34, 211, 238, 0.25);
+  color: #22d3ee;
+}
+
+/* Chat area */
+.planner-chat {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.4) transparent;
+}
+.planner-chat::-webkit-scrollbar { width: 6px; }
+.planner-chat::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.4); border-radius: 3px; }
+
+/* Chat bubbles */
+.planner-msg {
+  max-width: 88%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  animation: msgIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.planner-msg.bot {
+  align-self: flex-start;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-bottom-left-radius: 4px;
+  color: var(--text);
+}
+.planner-msg.user {
+  align-self: flex-end;
+  background: rgba(168, 85, 247, 0.22);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-bottom-right-radius: 4px;
+  color: var(--text);
+}
+.planner-msg.system {
+  align-self: center;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+.planner-msg.plan {
+  align-self: stretch;
+  max-width: 100%;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Typing indicator */
+.planner-typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 5px;
+  padding: 14px 18px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+}
+.planner-typing span {
+  width: 7px;
+  height: 7px;
+  background: var(--neon);
+  border-radius: 50%;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.planner-typing span:nth-child(2) { animation-delay: 0.15s; }
+.planner-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Input row */
+.planner-input-row {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  align-items: flex-end;
+}
+.planner-input-row textarea {
+  flex: 1;
+  min-height: 48px;
+  max-height: 120px;
+  resize: none;
   background: rgba(168, 85, 247, 0.05);
   border: 1px solid rgba(168, 85, 247, 0.25);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 12px 14px;
   color: var(--text);
   font-family: var(--font);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14.5px;
+  line-height: 1.6;
   outline: none;
   transition: border-color 0.3s;
 }
-.planner-box textarea:focus {
+.planner-input-row textarea:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
 }
-.planner-box #planner-btn {
-  align-self: flex-start;
+.planner-input-row button {
+  flex-shrink: 0;
   cursor: pointer;
+  padding: 12px 22px;
 }
-.planner-box #planner-btn:disabled {
-  opacity: 0.6;
+.planner-input-row button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
 }
-.planner-loading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--neon);
-  font-weight: 700;
-  font-size: 14px;
-}
-.planner-spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(168, 85, 247, 0.25);
-  border-top-color: var(--neon);
-  border-radius: 50%;
-  animation: plannerSpin 0.8s linear infinite;
-}
-@keyframes plannerSpin { to { transform: rotate(360deg); } }
+
+/* Error */
 .planner-error {
+  margin: 0 20px;
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.35);
   color: #f87171;
   border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 14px;
+  padding: 10px 14px;
+  font-size: 13px;
   font-weight: 700;
+  text-align: center;
 }
-.planner-result {
-  background: rgba(168, 85, 247, 0.06);
-  border: 1px solid rgba(168, 85, 247, 0.22);
-  border-radius: 12px;
-  padding: 20px;
-  color: var(--text);
-  font-size: 15px;
-  line-height: 1.9;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
+
+/* Light theme */
+[data-theme="light"] .planner-msg.bot { background: rgba(147, 51, 234, 0.07); color: #1e293b; }
+[data-theme="light"] .planner-msg.user { background: rgba(147, 51, 234, 0.18); color: #1e293b; }
+[data-theme="light"] .planner-msg.plan { background: rgba(147, 51, 234, 0.05); color: #1e293b; }
+[data-theme="light"] .planner-input-row { background: rgba(0, 0, 0, 0.03); }
+[data-theme="light"] .planner-input-row textarea { background: rgba(147, 51, 234, 0.04); color: #1e293b; }
 [data-theme="light"] .planner-error { color: #dc2626; }
-[data-theme="light"] .planner-box textarea { background: rgba(147, 51, 234, 0.05); color: #1e293b; }
-[data-theme="light"] .planner-result { color: #1e293b; }
 
 @media (max-width: 600px) {
-  .planner-box { padding: 20px 16px; }
-  .planner-box #planner-btn { width: 100%; justify-content: center; }
+  .planner-chat { padding: 14px; max-height: 340px; }
+  .planner-input-row { padding: 12px 14px; flex-direction: column; }
+  .planner-input-row button { width: 100%; justify-content: center; }
+  .planner-msg { max-width: 94%; font-size: 13.5px; }
 }
