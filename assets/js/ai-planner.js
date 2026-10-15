@@ -1,24 +1,12 @@
 /* ============================================================
-   AI Business Planner — Interactive Chat Assistant
-   - Conversational flow: asks 1-2 clarifying questions at a time
-   - Remembers answers, never re-asks known info
-   - Summary → confirmation → full plan
-   - When YOUR_AI_API_ENDPOINT is empty: local rule-based mode
-     (clearly labeled, NOT pretending to be AI)
-   - When endpoint is set: AI drives every response
+   AI Business Planner — Interactive Chat Assistant (Puter.js)
+   - Real AI via Puter.js (free, no API key needed)
+   - User-Pays model: visitors sign in to Puter once (free)
+   - Fallback: local rule-based mode if Puter.js unavailable
    - Safe rendering: textContent only (no innerHTML → no XSS)
    ============================================================ */
 (function () {
   'use strict';
-
-  /* --------------------------------------------------------
-     IMPORTANT: Put your secure backend URL here.
-     This must be a serverless function (Vercel / Netlify /
-     Cloudflare Workers) that holds the real AI API key and
-     forwards the request.  NEVER put an API key in this file.
-     Leave empty → local rule-based assistant (no fake AI).
-     -------------------------------------------------------- */
-  var YOUR_AI_API_ENDPOINT = '';
 
   var MAX_CHARS = 4000;
 
@@ -31,7 +19,12 @@
 
   if (!chatEl || !inputEl || !btnEl) return;
 
-  var aiMode = !!YOUR_AI_API_ENDPOINT;
+  /* ---- Detect Puter.js availability ---- */
+  function puterAvailable() {
+    return typeof window.puter !== 'undefined' && window.puter.ai && typeof window.puter.ai.chat === 'function';
+  }
+
+  var aiMode = puterAvailable();
   if (modeEl) {
     modeEl.textContent = aiMode
       ? 'المساعد الذكي — متصل بالذكاء الاصطناعي'
@@ -39,19 +32,12 @@
     modeEl.classList.toggle('ai-connected', aiMode);
   }
 
-  /* ---- Conversation state ---- */
+  /* ---- Conversation state (local mode) ---- */
   var state = {
-    phase: 'greeting',       // greeting | collecting | confirming | planning | done
-    answers: {
-      idea: '',              // فكرة المشروع والمشكلة
-      users: '',             // المستخدمون المستهدفون
-      features: '',          // أهم الوظائف
-      platform: '',          // المنصة
-      budget: '',            // الميزانية
-      timeline: ''           // الموعد التقريبي
-    },
-    queue: [],               // أسئلة متبقية
-    history: []              // سجل المحادثة {role, text}
+    phase: 'greeting',
+    answers: { idea: '', users: '', features: '', platform: '', budget: '', timeline: '' },
+    queue: [],
+    history: []
   };
 
   /* ---- Question sequence (local mode) ---- */
@@ -64,8 +50,6 @@
     { key: 'timeline', q: 'ما الموعد التقريبي الذي تود التسليم قبله؟ (مثال: شهران، أو مرونة كاملة)' }
   ];
 
-  /* Keyword hints → skip questions already answered in free text
-     (only applied to the FIRST user message to avoid false positives) */
   var HINTS = {
     idea:     /تطبيق|موقع|منصة|نظام|مشروع|أريد|ابغى|أبغى/,
     users:    /مستخدمين|جمهور|عملاء|زبائن|طلاب|موظفين|أطفال|رجال|نساء|شباب|عيادة|مدرس|شركة/,
@@ -79,7 +63,7 @@
   function addMsg(role, text) {
     var div = document.createElement('div');
     div.className = 'planner-msg ' + role;
-    div.textContent = text; /* safe — no innerHTML */
+    div.textContent = text;
     chatEl.appendChild(div);
     chatEl.scrollTop = chatEl.scrollHeight;
     state.history.push({ role: role, text: text });
@@ -116,7 +100,45 @@
     return new Promise(function (r) { setTimeout(r, ms); });
   }
 
-  /* Detect which topics are already covered in a free-text answer */
+  /* ---- AI mode: send conversation to Puter.js ---- */
+  function callAI(userText) {
+    var sysPrompt =
+      'أنت مساعد أعمال تفاعلي ذكي. مهمتك:' +
+      '\n1) إذا كان طلب العميل عامًا، اسأل سؤالًا توضيحيًا واحدًا فقط في كل رد.' +
+      '\n2) لا تسأل عن معلومات ذكرها العميل سابقًا — تتذكر كل ما قاله.' +
+      '\n3) عندما تكتمل المعلومات (فكرة، مستخدمين، وظائف، منصة، ميزانية، موعد)، اعرض ملخص فهمك واطلب التأكيد.' +
+      '\n4) بعد التأكيد ("نعم" أو ما شابه)، اعرض خطة عمل تشمل: ملخص المشروع، نطاق MVP، مراحل التنفيذ، الأدوات المقترحة، تقدير المدة، ونقاط مفتوحة تحتاج قرارًا.' +
+      '\n5) استخدم أرقامًا وتوقعات واقعية، واذكر المخاطر المحتملة.' +
+      '\nاكتب بالعربية فقط، بأسلوب مختصر وواضح، بدون Markdown (استخدم أرقامًا ومسافات بسيطة للتنسيق).';
+
+    /* Build messages array with full conversation context */
+    var messages = [{ role: 'system', content: sysPrompt }];
+    state.history.forEach(function (m) {
+      if (m.role === 'user') messages.push({ role: 'user', content: m.text });
+      else if (m.role === 'bot') messages.push({ role: 'assistant', content: m.text });
+    });
+    messages.push({ role: 'user', content: userText });
+
+    /* Call Puter.js AI */
+    return window.puter.ai.chat(messages, { model: 'gpt-4o-mini' }).then(function (response) {
+      /* Puter.js response can be string or object with .message.content */
+      var reply;
+      if (typeof response === 'string') {
+        reply = response;
+      } else if (response && response.message && response.message.content) {
+        reply = response.message.content;
+      } else if (response && response.text) {
+        reply = response.text;
+      } else if (response && response.content) {
+        reply = response.content;
+      } else {
+        reply = String(response);
+      }
+      return reply.trim();
+    });
+  }
+
+  /* ---- Local mode: next step in the flow ---- */
   function detectTopics(text) {
     var found = [];
     var lower = text.toLowerCase();
@@ -126,14 +148,12 @@
     return found;
   }
 
-  /* Build the remaining question queue, skipping known topics */
   function buildQueue(knownKeys) {
     state.queue = ALL_QUESTIONS.filter(function (item) {
       return knownKeys.indexOf(item.key) === -1 && !state.answers[item.key];
     });
   }
 
-  /* Generate summary from collected answers */
   function buildSummary() {
     var a = state.answers;
     var lines = [];
@@ -150,7 +170,6 @@
     return lines.join('\n');
   }
 
-  /* Generate the final plan (local mode — structured template) */
   function buildPlan() {
     var a = state.answers;
     var lines = [];
@@ -221,49 +240,9 @@
     return lines.join('\n');
   }
 
-  /* ---- AI mode: send conversation to backend ---- */
-  function callAI(userText) {
-    var convo = state.history.map(function (m) {
-      return (m.role === 'user' ? 'العميل' : 'المساعد') + ': ' + m.text;
-    }).join('\n');
-    convo += '\nالعميل: ' + userText;
-
-    var sysPrompt =
-      'أنت مساعد أعمال تفاعلي. مهمتك:' +
-      '\n1) إذا كان طلب العميل عامًا، اسأل سؤالًا توضيحيًا واحدًا فقط في كل رد.' +
-      '\n2) لا تسأل عن معلومات ذكرها العميل سابقًا.' +
-      '\n3) عندما تكتمل المعلومات (فكرة، مستخدمون، وظائف، منصة، ميزانية، موعد)، اعرض ملخص فهمك واطلب التأكيد.' +
-      '\n4) بعد التأكيد، اعرض خطة عمل تشمل: ملخص، MVP، مراحل، أدوات، مدة، نقاط مفتوحة.' +
-      '\nاكتب بالعربية فقط، بأسلوب مختصر وواضح، بدون Markdown.';
-
-    return fetch(YOUR_AI_API_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        prompt: sysPrompt + '\n\nالمحادثة:\n' + convo + '\n\nردك:'
-      })
-    }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.text();
-    }).then(function (raw) {
-      var out = raw;
-      try {
-        var parsed = JSON.parse(raw);
-        if (parsed && typeof parsed.result === 'string') out = parsed.result;
-        else if (parsed && typeof parsed.content === 'string') out = parsed.content;
-        else if (parsed && parsed.choices && parsed.choices[0]) {
-          out = parsed.choices[0].message ? parsed.choices[0].message.content : raw;
-        }
-      } catch (e) { /* not JSON */ }
-      return out.trim();
-    });
-  }
-
-  /* ---- Local mode: next step in the flow ---- */
   function localNext(userText) {
     var lower = userText.toLowerCase();
 
-    /* Confirm phase */
     if (state.phase === 'confirming') {
       if (/نعم|صح|موافق|تمام|oui|yes|ok/.test(lower)) {
         state.phase = 'planning';
@@ -276,7 +255,6 @@
           });
         });
       } else {
-        /* Correction — update answer, then re-show summary */
         state.phase = 'collecting';
         var detected = detectTopics(userText);
         var updated = false;
@@ -300,9 +278,7 @@
       }
     }
 
-    /* Collecting phase */
     if (state.phase === 'collecting' || state.phase === 'greeting') {
-      /* FIRST message: detect topics to skip answered questions */
       if (state.history.filter(function (h) { return h.role === 'user'; }).length <= 1) {
         var detected0 = detectTopics(userText);
         detected0.forEach(function (k) {
@@ -310,20 +286,17 @@
             state.answers[k] = userText;
           }
         });
-        /* Store idea as the full first message if detected */
         if (!state.answers.idea && detected0.indexOf('idea') !== -1) {
           state.answers.idea = userText;
         }
         buildQueue([]);
       } else if (state.queue.length > 0) {
-        /* Subsequent messages: answer current question directly */
         var current = state.queue[0];
         state.answers[current.key] = userText;
         state.queue.shift();
         buildQueue([]);
       }
 
-      /* If all answered → summary */
       if (state.queue.length === 0) {
         state.phase = 'confirming';
         return Promise.resolve().then(function () {
@@ -336,7 +309,6 @@
       return askNext();
     }
 
-    /* Done phase — free chat */
     if (state.phase === 'done') {
       return Promise.resolve().then(function () {
         addMsg('bot', 'الخطة جاهزة أعلاه. إذا أردت تعديل أي نقطة أو بدء مشروع جديد، اكتب "مشروع جديد".');
@@ -363,7 +335,6 @@
     buildQueue([]);
   }
 
-  /* Ask next question from queue (1 question at a time) */
   function askNext() {
     if (state.queue.length === 0) {
       buildQueue([]);
@@ -395,7 +366,6 @@
       return;
     }
 
-    /* Reset for new project */
     if (state.phase === 'done' && /مشروع جديد|جديد|restart/.test(text.toLowerCase())) {
       chatEl.innerHTML = '';
       state.history = [];
@@ -423,7 +393,19 @@
     result.catch(function (err) {
       typing.remove();
       console.error('[AI Planner]', err);
-      addMsg('system', 'تعذر تحليل الطلب الآن، حاول مرة أخرى.');
+
+      /* If Puter.js failed (e.g. user cancelled sign-in), show helpful message */
+      if (aiMode) {
+        addMsg('system', 'تعذر الاتصال بالذكاء الاصطناعي. تأكد من تسجيل الدخول إلى Puter ثم حاول مرة أخرى.');
+        /* Fallback to local mode for this session */
+        aiMode = false;
+        if (modeEl) {
+          modeEl.textContent = 'المساعد الإرشادي — بدون ذكاء اصطناعي متصل';
+          modeEl.classList.remove('ai-connected');
+        }
+      } else {
+        addMsg('system', 'تعذر تحليل الطلب الآن، حاول مرة أخرى.');
+      }
     }).finally(function () {
       setBusy(false);
       inputEl.focus();
@@ -438,8 +420,8 @@
     }
   });
 
-  /* ---- Boot: greeting only (first question asked after user replies) ---- */
+  /* ---- Boot ---- */
   addMsg('bot', GREETING);
   state.phase = 'collecting';
-  buildQueue([]); /* all questions pending */
+  buildQueue([]);
 })();
