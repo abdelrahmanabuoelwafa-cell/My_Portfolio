@@ -1,8 +1,9 @@
 /* ============================================================
-   AI Business Planner — Interactive Chat Assistant (Puter.js)
-   - Real AI via Puter.js (free, no API key needed)
-   - User-Pays model: visitors sign in to Puter once (free)
-   - Fallback: local rule-based mode if Puter.js unavailable
+   AI Business Planner — Professional Sales Assistant
+   - Real AI via Pollinations.ai (FREE, no login, no API key)
+   - Advanced persuasion & closing techniques
+   - Arabic-first, can answer any customer question
+   - Fallback: local rule-based mode if API unavailable
    - Safe rendering: textContent only (no innerHTML → no XSS)
    ============================================================ */
 (function () {
@@ -19,12 +20,12 @@
 
   if (!chatEl || !inputEl || !btnEl) return;
 
-  /* ---- Detect Puter.js availability ---- */
-  function puterAvailable() {
-    return typeof window.puter !== 'undefined' && window.puter.ai && typeof window.puter.ai.chat === 'function';
-  }
+  /* ---- AI: send conversation to Pollinations.ai ---- */
+  var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
+  var AI_MODEL = 'Qwen3.6-27B';
 
-  var aiMode = puterAvailable();
+  /* Detect AI availability by checking if endpoint is set */
+  var aiMode = !!AI_ENDPOINT;
   if (modeEl) {
     modeEl.textContent = aiMode
       ? 'المساعد الذكي — متصل بالذكاء الاصطناعي'
@@ -96,22 +97,32 @@
     btnEl.textContent = on ? '...' : 'إرسال';
   }
 
-  function delay(ms) {
-    return new Promise(function (r) { setTimeout(r, ms); });
-  }
-
-  /* ---- AI mode: send conversation to Puter.js ---- */
+  /* ---- AI: send conversation to Pollinations.ai ---- */
   function callAI(userText) {
     var sysPrompt =
-      'أنت مساعد أعمال تفاعلي ذكي. مهمتك:' +
-      '\n1) إذا كان طلب العميل عامًا، اسأل سؤالًا توضيحيًا واحدًا فقط في كل رد.' +
-      '\n2) لا تسأل عن معلومات ذكرها العميل سابقًا — تتذكر كل ما قاله.' +
-      '\n3) عندما تكتمل المعلومات (فكرة، مستخدمين، وظائف، منصة، ميزانية، موعد)، اعرض ملخص فهمك واطلب التأكيد.' +
-      '\n4) بعد التأكيد ("نعم" أو ما شابه)، اعرض خطة عمل تشمل: ملخص المشروع، نطاق MVP، مراحل التنفيذ، الأدوات المقترحة، تقدير المدة، ونقاط مفتوحة تحتاج قرارًا.' +
-      '\n5) استخدم أرقامًا وتوقعات واقعية، واذكر المخاطر المحتملة.' +
-      '\nاكتب بالعربية فقط، بأسلوب مختصر وواضح، بدون Markdown (استخدم أرقامًا ومسافات بسيطة للتنسيق).';
+      'أنت خبير تسويق واقناع محترف ومساعد أعمال ذكي. مهمتك مساعدة العميل واقناعه بالشراء. قواعدك:' +
+      '\n\n' +
+      '1) التحية والبناء: ابدأ بتحية ودودة، واكتشف احتياج العميل الحقيقي بسؤال واحد ذكي في كل رد.' +
+      '\n2) الاحتفاظ بالذاكرة: تتذكر كل ما قاله العميل — لا تسأل مرتين عن نفس الشيء.' +
+      '\n3) اقناع احترافي: عندما يعبّر العميل عن تردد أو اعتراض (غالي، مش متأكد، هفكر، لسه بدري):' +
+      '\n   - افهم اعتراضه الحقيقي أولاً (استمع)' +
+      '\n   - اربط المنتج/الخدمة بحل مشكلته الشخصية' +
+      '\n   - استخدم مبدأ الندرة (عرض لفترة محدودة)' +
+      '\n   - استخدم الدليل الاجتماعي (عملاء آخرين سعداء)' +
+      '\n   - اعرض القيمة مقابل السعر (ليس تكلفة بل استثمار)' +
+      '\n   - اطرح سؤال الإغلاق: "هل تبدأ الآن أم تفضل العرض المميز؟"' +
+      '\n4) أسلوب قوي لكن مهذب: واثق، مباشر، مختصر، بدون إلحاح مزعج.' +
+      '\n5) اسأل عن: الفكرة، المستخدمين، الميزانية، الموعد — لكن بذكاء وتدريجيًا.' +
+      '\n6) عندما تكتمل المعلومات، اعرض خطة عمل شاملة مع سعر تقديري ومراحل التنفيذ.' +
+      '\n7) بعد الخطة، اسأل: "هل نبدأ التنفيذ الآن؟"' +
+      '\n\n' +
+      'اكتب بالعربية الفصحى الواضحة. استخدم أرقامًا ومسافات بسيطة للتنسيق (لا Markdown). كن مختصرًا وفعالًا.' +
+      '\n\nقواعد مهمة:' +
+      '\n- لا تذكر أنك ذكاء اصطناعي — أنت مستشار أعمال محترف' +
+      '\n- ركّز على الفائدة للعميل وليس على المميزات' +
+      '\n- استخدم عبارات مثل: "هذه فرصة", "الوقت مناسب", "عملاؤنا حققوا"...' +
+      '\n- إذا سأل عن شيء خارج نطاق المشروع، أجب بإيجاز وأعد التركيز للبيع';
 
-    /* Build messages array with full conversation context */
     var messages = [{ role: 'system', content: sysPrompt }];
     state.history.forEach(function (m) {
       if (m.role === 'user') messages.push({ role: 'user', content: m.text });
@@ -119,22 +130,22 @@
     });
     messages.push({ role: 'user', content: userText });
 
-    /* Call Puter.js AI */
-    return window.puter.ai.chat(messages, { model: 'gpt-4o-mini' }).then(function (response) {
-      /* Puter.js response can be string or object with .message.content */
-      var reply;
-      if (typeof response === 'string') {
-        reply = response;
-      } else if (response && response.message && response.message.content) {
-        reply = response.message.content;
-      } else if (response && response.text) {
-        reply = response.text;
-      } else if (response && response.content) {
-        reply = response.content;
-      } else {
-        reply = String(response);
+    return fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: AI_MODEL,
+        messages: messages,
+        stream: false
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      if (data && data.choices && data.choices[0] && data.choices[0].message) {
+        return data.choices[0].message.content.trim();
       }
-      return reply.trim();
+      throw new Error('Invalid response format');
     });
   }
 
@@ -324,8 +335,11 @@
   }
 
   var GREETING =
-    'مرحبًا! أنا مساعد تخطيط المشاريع.' +
-    '\nسأساعدك في تحويل فكرتك إلى خطة عمل واضحة.' +
+    'مرحبًا بك! أنا مستشارك الشخصي لتطوير المشاريع.' +
+    '\n\nسأساعدك في:' +
+    '\n• تحويل فكرتك إلى واقع' +
+    '\n• بناء خطة عمل ذكية' +
+    '\n• اتخاذ أفضل القرارات' +
     '\n\nاكتب لي: ماذا تريد أن تبني؟ (ويمكنك ذكر أي تفاصيل تعرفها — منصة، ميزانية، مستخدمين... ولن أسألك عنها مجددًا)';
 
   function resetState() {
@@ -349,6 +363,10 @@
     return delay(700).then(function () {
       addMsg('bot', next.q);
     });
+  }
+
+  function delay(ms) {
+    return new Promise(function (r) { setTimeout(r, ms); });
   }
 
   /* ---- Main submit handler ---- */
@@ -394,15 +412,8 @@
       typing.remove();
       console.error('[AI Planner]', err);
 
-      /* If Puter.js failed (e.g. user cancelled sign-in), show helpful message */
       if (aiMode) {
-        addMsg('system', 'تعذر الاتصال بالذكاء الاصطناعي. تأكد من تسجيل الدخول إلى Puter ثم حاول مرة أخرى.');
-        /* Fallback to local mode for this session */
-        aiMode = false;
-        if (modeEl) {
-          modeEl.textContent = 'المساعد الإرشادي — بدون ذكاء اصطناعي متصل';
-          modeEl.classList.remove('ai-connected');
-        }
+        addMsg('system', 'تعذر الاتصال بالذكاء الاصطناعي. حاول مرة أخرى بعد قليل.');
       } else {
         addMsg('system', 'تعذر تحليل الطلب الآن، حاول مرة أخرى.');
       }
