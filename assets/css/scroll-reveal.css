@@ -1,0 +1,140 @@
+/* ============================================================
+   Scroll Reveal — Cinematic slow-motion on scroll
+   Rules only apply when html.js-enabled is present (set by JS).
+   If JS fails/disabled, elements stay fully visible.
+   ============================================================ */
+
+/* --- Initial hidden state (only when JS is ON) --- */
+html.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  filter: blur(8px);
+  transition:
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+/* --- Visible state --- */
+html.js-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  will-change: auto;
+}
+
+/* --- Stagger delays via data-reveal-delay (per sibling group) --- */
+html.js-enabled .reveal[data-reveal-delay="0"] { transition-delay: 0s; }
+html.js-enabled .reveal[data-reveal-delay="1"] { transition-delay: 0.25s; }
+html.js-enabled .reveal[data-reveal-delay="2"] { transition-delay: 0.5s; }
+html.js-enabled .reveal[data-reveal-delay="3"] { transition-delay: 0.75s; }
+html.js-enabled .reveal[data-reveal-delay="4"] { transition-delay: 1s; }
+
+/* --- JS disabled / failed: force everything visible --- */
+html:not(.js-enabled) .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* --- Reduced motion preference --- */
+@media (prefers-reduced-motion: reduce) {
+  html.js-enabled .reveal,
+  html.js-enabled .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+}
+
+/* ============================================================
+   AI Business Planner — section styles
+   Uses existing theme variables (--neon, --card-bg, --muted...)
+   ============================================================ */
+.planner-box {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.planner-box textarea {
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  background: rgba(168, 85, 247, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.7;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.planner-box textarea:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+}
+.planner-box #planner-btn {
+  align-self: flex-start;
+  cursor: pointer;
+}
+.planner-box #planner-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+.planner-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--neon);
+  font-weight: 700;
+  font-size: 14px;
+}
+.planner-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(168, 85, 247, 0.25);
+  border-top-color: var(--neon);
+  border-radius: 50%;
+  animation: plannerSpin 0.8s linear infinite;
+}
+@keyframes plannerSpin { to { transform: rotate(360deg); } }
+.planner-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.planner-result {
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+[data-theme="light"] .planner-error { color: #dc2626; }
+[data-theme="light"] .planner-box textarea { background: rgba(147, 51, 234, 0.05); color: #1e293b; }
+[data-theme="light"] .planner-result { color: #1e293b; }
+
+@media (max-width: 600px) {
+  .planner-box { padding: 20px 16px; }
+  .planner-box #planner-btn { width: 100%; justify-content: center; }
+}

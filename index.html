@@ -3264,6 +3264,8 @@ footer p{
 [data-theme="light"] .footer-logo .code-bracket{color:#94a3b8;}
 
 </style> 
+<script>document.documentElement.classList.add('js-enabled');</script>
+<link rel="stylesheet" href="assets/css/scroll-reveal.css">
 <base target="_blank"> 
 </head> 
 <body>
@@ -4166,6 +4168,26 @@ footer p{
   </div> 
 </section> 
 
+<!-- AI Business Planner -->
+<section id="ai-planner" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">AI Business Planner</h2>
+      <p class="section-subtitle">اكتب طلبك وسنحلله ونقترح لك خطة عمل.</p>
+    </div>
+    <div class="planner-box reveal">
+      <textarea id="planner-input" rows="6" maxlength="4000"
+        placeholder="مثال: أريد تطبيق لحجز مواعيد عيادة طبية يعمل على أندرويد و iOS مع نظام إشعارات وتقارير..."></textarea>
+      <button type="button" id="planner-btn" class="btn-primary">حلل طلبي واعمل خطة عمل</button>
+      <div id="planner-loading" class="planner-loading" hidden>
+        <span class="planner-spinner"></span> جارٍ التحليل...
+      </div>
+      <div id="planner-error" class="planner-error" hidden></div>
+      <div id="planner-result" class="planner-result" hidden></div>
+    </div>
+  </div>
+</section>
+
 <!-- Footer --> 
 <footer class="premium-footer"> 
   <div class="footer-grid">
@@ -4291,6 +4313,7 @@ type();
 
 // Cinematic scroll reveals — progress follows scroll position (all browsers)
 (function(){
+  if (window.__skipOldReveal) return; /* disabled in favor of assets/js/scroll-reveal.js */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
   }
@@ -5161,6 +5184,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
   }
 </script>
+<script src="assets/js/scroll-reveal.js" defer></script>
+<script src="assets/js/ai-planner.js" defer></script>
 </body> 
 </html>
 
