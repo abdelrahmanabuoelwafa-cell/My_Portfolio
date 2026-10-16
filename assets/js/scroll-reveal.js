@@ -30,9 +30,11 @@
   document.documentElement.classList.add('js-enabled');
   gsap.registerPlugin(ScrollTrigger);
 
-  var SCRUB = mobile ? 0.7 : 0.9;          /* Enhanced smoothing for smoother feel */
-  var HDR_Y = mobile ? 64 : 120;            /* Longer header travel for drama */
-  var CARD_Y = mobile ? 48 : 80;            /* Longer card travel */
+  var SCRUB = mobile ? 1.2 : 1.8;          /* Heavy smoothing = slow-motion cinematic trail */
+  var HDR_Y = mobile ? 110 : 200;          /* Dramatic header travel */
+  var CARD_Y = mobile ? 90 : 140;          /* Dramatic card travel */
+  var HDR_BLUR = mobile ? 10 : 16;         /* Deep blur for slow-motion focus pull */
+  var CARD_BLUR = mobile ? 9 : 14;
 
   /* ============================================================
      HERO ENTRANCE — on page load (above the fold)
@@ -60,25 +62,25 @@
   };
 
   gsap.to('.hero-content', {
-    yPercent: mobile ? -15 : -30,
-    opacity: 0.1,
-    scale: 0.95,
+    yPercent: mobile ? -22 : -45,
+    opacity: 0,
+    scale: 0.9,
     ease: 'none',
     scrollTrigger: heroTrigger
   });
 
   if (!mobile) {
     gsap.to('.hero-top-image', {
-      yPercent: -20,
-      scale: 1.05,
+      yPercent: -38,
+      scale: 1.15,
       ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
     });
     var ring = document.querySelector('.top-img-ring');
     if (ring) {
       gsap.to(ring, {
-        rotate: 60,
-        scale: 1.18,
+        rotate: 120,
+        scale: 1.45,
         ease: 'none',
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
       });
@@ -86,9 +88,9 @@
     var badge = document.querySelector('.floating-badge');
     if (badge) {
       gsap.to(badge, {
-        yPercent: 70,
-        rotate: 25,
-        scale: 1.1,
+        yPercent: 130,
+        rotate: 40,
+        scale: 1.15,
         ease: 'none',
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
       });
@@ -109,7 +111,7 @@
      ============================================================ */
   document.querySelectorAll('.section-header.reveal').forEach(function (el) {
     gsap.fromTo(el,
-      { opacity: 0, y: HDR_Y, scale: 0.95, filter: 'blur(8px)' },
+      { opacity: 0, y: HDR_Y, scale: 0.92, filter: 'blur(' + HDR_BLUR + 'px)' },
       {
         opacity: 1,
         y: 0,
@@ -118,8 +120,8 @@
         ease: 'none',
         scrollTrigger: {
           trigger: el,
-          start: 'top 100%',
-          end: 'top 40%',
+          start: 'top 120%',
+          end: 'top 25%',
           scrub: SCRUB
         }
       }
@@ -143,10 +145,10 @@
 
     Object.keys(groups).forEach(function (k) {
       groups[k].items.forEach(function (el, i) {
-        var startPct = Math.max(50, 96 - i * 7);
-        var endPct = Math.max(10, startPct - 48);
+        var startPct = Math.max(50, 98 - i * 7);
+        var endPct = Math.max(8, startPct - 55);
         gsap.fromTo(el,
-          { opacity: 0, y: CARD_Y, scale: scaleFrom, filter: 'blur(6px)' },
+          { opacity: 0, y: CARD_Y, scale: scaleFrom, filter: 'blur(' + CARD_BLUR + 'px)' },
           {
             opacity: 1,
             y: 0,
@@ -165,28 +167,28 @@
     });
   }
 
-  scrubGroup('.about-content.reveal', 0.95);
-  scrubGroup('.skills-tabs.reveal', 0.95);
-  scrubGroup('.skill-category.reveal', 0.95);
-  scrubGroup('.car-card.reveal', 0.92);
-  scrubGroup('.stat-card.reveal', 0.90);
-  scrubGroup('.premium-testimonial-card.reveal', 0.93);
-  scrubGroup('.service-card.reveal', 0.92);
-  scrubGroup('.price-card.reveal', 0.92);
-  scrubGroup('.future-card.reveal', 0.92);
-  scrubGroup('.pro-exp-card.reveal', 0.92);
-  scrubGroup('.contact-info.reveal', 0.95);
-  scrubGroup('.planner-box.reveal', 0.93);
+  scrubGroup('.about-content.reveal', 0.90);
+  scrubGroup('.skills-tabs.reveal', 0.92);
+  scrubGroup('.skill-category.reveal', 0.92);
+  scrubGroup('.car-card.reveal', 0.86);
+  scrubGroup('.stat-card.reveal', 0.85);
+  scrubGroup('.premium-testimonial-card.reveal', 0.88);
+  scrubGroup('.service-card.reveal', 0.86);
+  scrubGroup('.price-card.reveal', 0.86);
+  scrubGroup('.future-card.reveal', 0.86);
+  scrubGroup('.pro-exp-card.reveal', 0.86);
+  scrubGroup('.contact-info.reveal', 0.90);
+  scrubGroup('.planner-box.reveal', 0.88);
 
   /* ============================================================
      FEATURED PROJECT CARDS — longest range
      Enhanced with image scale and blur
      ============================================================ */
   document.querySelectorAll('.project-card.reveal').forEach(function (el, idx) {
-    var startPct = Math.max(55, 96 - idx * 4);
+    var startPct = Math.max(55, 98 - idx * 4);
 
     gsap.fromTo(el,
-      { opacity: 0, y: CARD_Y + 32, scale: 0.92, filter: 'blur(8px)' },
+      { opacity: 0, y: CARD_Y + 40, scale: 0.85, filter: 'blur(16px)' },
       {
         opacity: 1,
         y: 0,
@@ -196,7 +198,7 @@
         scrollTrigger: {
           trigger: el,
           start: 'top ' + startPct + '%',
-          end: 'center 48%',
+          end: 'center 35%',
           scrub: SCRUB
         }
       }
@@ -205,15 +207,15 @@
     var img = el.querySelector('.project-image img');
     if (img) {
       gsap.fromTo(img,
-        { scale: 0.88, filter: 'blur(4px)' },
+        { scale: 0.72, filter: 'blur(10px)' },
         {
           scale: 1,
           filter: 'blur(0px)',
           ease: 'none',
           scrollTrigger: {
             trigger: el,
-            start: 'top 110%',
-            end: 'center 42%',
+            start: 'top 120%',
+            end: 'center 30%',
             scrub: SCRUB
           }
         }
@@ -229,17 +231,17 @@
   if (aboutImg) {
     var aboutWrap = aboutImg.closest('.about-grid') || aboutImg;
     gsap.fromTo(aboutImg,
-      { opacity: 0, yPercent: mobile ? 0 : -12, scale: 0.90, filter: 'blur(8px)' },
+      { opacity: 0, yPercent: mobile ? 0 : -18, scale: 0.84, filter: 'blur(14px)' },
       {
         opacity: 1,
-        yPercent: mobile ? 0 : 12,
+        yPercent: mobile ? 0 : 18,
         scale: 1,
         filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: aboutWrap,
-          start: 'top 95%',
-          end: 'bottom 25%',
+          start: 'top 105%',
+          end: 'bottom 15%',
           scrub: SCRUB
         }
       }
@@ -260,8 +262,8 @@
         ease: 'none',
         scrollTrigger: {
           trigger: host,
-          start: 'top 95%',
-          end: 'top 48%',
+          start: 'top 100%',
+          end: 'top 40%',
           scrub: SCRUB
         }
       }
@@ -279,6 +281,16 @@
 
   /* Recalculate positions once everything (images/fonts) is loaded */
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+
+  /* ============================================================
+     IDLE BREATHING — slow continuous motion so the page feels
+     alive even when the user is not scrolling
+     ============================================================ */
+  if (!mobile) {
+    gsap.to('.hero-scroll-cue', { y: 14, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.top-img-container', { scale: 1.035, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.hero-badge', { y: 8, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.4 });
+  }
 
   /* ============================================================
      SMOOTH SCROLL for anchor links

@@ -4276,10 +4276,13 @@ function updateActiveLink() {
   if (!links.length) return; 
   let current = 'hero'; 
   const pos = window.scrollY + 120; 
-  spySections.forEach(id => { 
-    const el = document.getElementById(id); 
-    if (el && el.offsetTop <= pos) current = id; 
-  }); 
+  spySections
+    .map(id => document.getElementById(id))
+    .filter(Boolean)
+    .sort((a, b) => a.offsetTop - b.offsetTop)
+    .forEach(el => {
+      if (el.offsetTop <= pos) current = el.id;
+    }); 
   links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current)); 
 }
 updateActiveLink(); 
@@ -5187,8 +5190,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=5" defer></script>
-<script src="assets/js/ai-planner.js?v=10" defer></script>
+<script src="assets/js/scroll-reveal.js?v=6" defer></script>
+<script src="assets/js/ai-planner.js?v=11" defer></script>
 </body> 
 </html>
 
