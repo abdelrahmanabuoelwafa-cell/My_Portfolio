@@ -1,16 +1,19 @@
 /* ============================================================
    AI Business Planner — Professional Sales Assistant
-   - Real AI via secure backend (Groq GPT-OSS-120B)
-   - API key hidden in Vercel serverless function
+   - Real AI via secure Cloudflare Worker (holds API key)
+   - API key never exposed in frontend code
    - Advanced persuasion & closing techniques
    - Arabic-first, can answer any customer question
    - Fallback: local rule-based mode if API unavailable
    - Safe rendering: textContent only (no innerHTML → no XSS)
+   - Timeout protection: 30s AbortController
+   - Clear error states with retry support
    ============================================================ */
 (function () {
   'use strict';
 
   var MAX_CHARS = 4000;
+  var AI_TIMEOUT_MS = 30000;
 
   /* ---- DOM ---- */
   var chatEl = document.getElementById('planner-chat');
@@ -21,12 +24,10 @@
 
   if (!chatEl || !inputEl || !btnEl) return;
 
-  /* ---- AI: calls secure backend (Vercel serverless function) ---- */
-  var AI_ENDPOINT = '/api/analyze';
-  var AI_MODEL = 'openai/gpt-oss-120b';
+  /* ---- AI: calls secure Cloudflare Worker (holds API key) ---- */
+  var AI_ENDPOINT = 'https://my-portfolio.mohammed-galalxc1.workers.dev/';
 
-  /* Detect AI availability */
-  var aiMode = true; /* Always try AI - backend handles the key */
+  var aiMode = true;
   if (modeEl) {
     modeEl.textContent = aiMode
       ? 'المساعد الذكي — متصل بالذكاء الاصطناعي'
@@ -34,7 +35,7 @@
     modeEl.classList.toggle('ai-connected', aiMode);
   }
 
-  /* ---- Conversation state (local mode) ---- */
+  /* ---- Conversation state ---- */
   var state = {
     phase: 'greeting',
     answers: { idea: '', users: '', features: '', platform: '', budget: '', timeline: '' },
@@ -98,56 +99,53 @@
     btnEl.textContent = on ? '...' : 'إرسال';
   }
 
-  /* ---- AI: send conversation to Pollinations.ai ---- */
+  /* ---- AI: send conversation to Cloudflare Worker ---- */
   function callAI(userText) {
-    var sysPrompt =
-      'أنت خبير تسويق واقناع محترف ومساعد أعمال ذكي. مهمتك مساعدة العميل واقناعه بالشراء. قواعدك:' +
-      '\n\n' +
-      '1) التحية والبناء: ابدأ بتحية ودودة، واكتشف احتياج العميل الحقيقي بسؤال واحد ذكي في كل رد.' +
-      '\n2) الاحتفاظ بالذاكرة: تتذكر كل ما قاله العميل — لا تسأل مرتين عن نفس الشيء.' +
-      '\n3) اقناع احترافي: عندما يعبّر العميل عن تردد أو اعتراض (غالي، مش متأكد، هفكر، لسه بدري):' +
-      '\n   - افهم اعتراضه الحقيقي أولاً (استمع)' +
-      '\n   - اربط المنتج/الخدمة بحل مشكلته الشخصية' +
-      '\n   - استخدم مبدأ الندرة (عرض لفترة محدودة)' +
-      '\n   - استخدم الدليل الاجتماعي (عملاء آخرين سعداء)' +
-      '\n   - اعرض القيمة مقابل السعر (ليس تكلفة بل استثمار)' +
-      '\n   - اطرح سؤال الإغلاق: "هل تبدأ الآن أم تفضل العرض المميز؟"' +
-      '\n4) أسلوب قوي لكن مهذب: واثق، مباشر، مختصر، بدون إلحاح مزعج.' +
-      '\n5) اسأل عن: الفكرة، المستخدمين، الميزانية، الموعد — لكن بذكاء وتدريجيًا.' +
-      '\n6) عندما تكتمل المعلومات، اعرض خطة عمل شاملة مع سعر تقديري ومراحل التنفيذ.' +
-      '\n7) بعد الخطة، اسأل: "هل نبدأ التنفيذ الآن؟"' +
-      '\n\n' +
-      'اكتب بالعربية الفصحى الواضحة. استخدم أرقامًا ومسافات بسيطة للتنسيق (لا Markdown). كن مختصرًا وفعالًا.' +
-      '\n\nقواعد مهمة:' +
-      '\n- لا تذكر أنك ذكاء اصطناعي — أنت مستشار أعمال محترف' +
-      '\n- ركّز على الفائدة للعميل وليس على المميزات' +
-      '\n- استخدم عبارات مثل: "هذه فرصة", "الوقت مناسب", "عملاؤنا حققوا"...' +
-      '\n- إذا سأل عن شيء خارج نطاق المشروع، أجب بإيجاز وأعد التركيز للبيع';
-
-    var messages = [{ role: 'system', content: sysPrompt }];
+    var messages = [];
     state.history.forEach(function (m) {
       if (m.role === 'user') messages.push({ role: 'user', content: m.text });
       else if (m.role === 'bot') messages.push({ role: 'assistant', content: m.text });
     });
-    messages.push({ role: 'user', content: userText });
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function () { controller.abort(); }, AI_TIMEOUT_MS);
 
     return fetch(AI_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: AI_MODEL,
-        messages: messages,
-        stream: false
-      })
+      body: JSON.stringify({ messages: messages }),
+      signal: controller.signal
     }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      clearTimeout(timeoutId);
+      if (!res.ok) {
+        var err = new Error('HTTP ' + res.status);
+        err.status = res.status;
+        throw err;
+      }
       return res.json();
     }).then(function (data) {
-      if (data && data.choices && data.choices[0] && data.choices[0].message) {
+      if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
         return data.choices[0].message.content.trim();
       }
       throw new Error('Invalid response format');
     });
+  }
+
+  /* ---- Error messages by status ---- */
+  function getErrorMessage(err) {
+    if (err.name === 'AbortError') {
+      return 'استغرق الرد وقتًا طويلاً. حاول مرة أخرى.';
+    }
+    if (err.status === 429) {
+      return 'الخدمة مضغوطة حاليًا. أعد المحاولة بعد دقيقة.';
+    }
+    if (err.status === 400) {
+      return 'تعذر معالجة الرسالة. أعد كتابتها من فضلك.';
+    }
+    if (err.status === 504) {
+      return 'انتهت مهلة الاتصال بالخادم. حاول مرة أخرى.';
+    }
+    return 'تعذر الاتصال بالمساعد الآن. حاول مرة أخرى بعد قليل.';
   }
 
   /* ---- Local mode: next step in the flow ---- */
@@ -413,11 +411,11 @@
       typing.remove();
       console.error('[AI Planner]', err);
 
-      if (aiMode) {
-        addMsg('system', 'تعذر الاتصال بالذكاء الاصطناعي. حاول مرة أخرى بعد قليل.');
-      } else {
-        addMsg('system', 'تعذر تحليل الطلب الآن، حاول مرة أخرى.');
-      }
+      var last = state.history[state.history.length - 1];
+      if (last && last.role === 'user') state.history.pop();
+
+      var msg = getErrorMessage(err);
+      addMsg('system', msg);
     }).finally(function () {
       setBusy(false);
       inputEl.focus();

@@ -3264,8 +3264,8 @@ footer p{
 [data-theme="light"] .footer-logo .code-bracket{color:#94a3b8;}
 
 </style> 
-<script>document.documentElement.classList.add('js-enabled');</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=2">
+<script>document.documentElement.classList.add('js-enabled');window.__skipOldReveal=true;</script>
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=3">
 <base target="_blank"> 
 </head> 
 <body>
@@ -5175,7 +5175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v34</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v36</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
@@ -5184,8 +5184,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
   }
 </script>
-<script src="assets/js/scroll-reveal.js?v=2" defer></script>
-<script src="assets/js/ai-planner.js?v=6" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="assets/js/scroll-reveal.js?v=4" defer></script>
+<script src="assets/js/ai-planner.js?v=7" defer></script>
 </body> 
 </html>
 
