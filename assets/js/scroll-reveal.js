@@ -2,9 +2,10 @@
    Cinematic Scroll-Linked Motion — GSAP + ScrollTrigger (scrub)
    - Motion progress is CONNECTED to scroll progress (scrub),
      not timed one-shot reveals.
-   - Long scroll ranges + smoothing for a cinematic feel.
+   - Long scroll ranges + SMOOTHING for a cinematic feel.
    - Layered parallax: hero content, image ring, badges,
      project media, about image move at different speeds.
+   - Enhanced slow-motion reveals with blur and scale
    - prefers-reduced-motion / no GSAP / no JS: content visible.
    ============================================================ */
 (function () {
@@ -20,95 +21,105 @@
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
+    document.querySelectorAll('.skill-progress[data-width]').forEach(function (bar) {
+      bar.style.width = bar.getAttribute('data-width') + '%';
+    });
     return;
   }
 
   document.documentElement.classList.add('js-enabled');
   gsap.registerPlugin(ScrollTrigger);
 
-  var SCRUB = mobile ? 0.6 : 0.85;          /* smoothing */
-  var HDR_Y = mobile ? 48 : 92;             /* section header travel */
-  var CARD_Y = mobile ? 36 : 64;            /* card travel */
+  var SCRUB = mobile ? 0.7 : 0.9;          /* Enhanced smoothing for smoother feel */
+  var HDR_Y = mobile ? 64 : 120;            /* Longer header travel for drama */
+  var CARD_Y = mobile ? 48 : 80;            /* Longer card travel */
 
   /* ============================================================
      HERO ENTRANCE — on page load (above the fold)
+     Enhanced with glow and blur
      ============================================================ */
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
-    .from('.hero-top-image', { duration: mobile ? 0.6 : 1.0, opacity: 0, scale: 0.5, y: -40, filter: 'blur(10px)' })
-    .from('.hero-name', { duration: mobile ? 0.6 : 0.9, opacity: 0, y: 50, scale: 0.9, filter: 'blur(8px)' }, '-=0.4')
-    .from('.typing-container', { duration: mobile ? 0.5 : 0.7, opacity: 0, y: 30, scale: 0.95 }, '-=0.3')
-    .from('.hero-badge', { duration: mobile ? 0.5 : 0.7, opacity: 0, y: 30, scale: 0.95 }, '-=0.2')
-    .from('.hero-desc', { duration: mobile ? 0.5 : 0.7, opacity: 0, y: 30, scale: 0.95 }, '-=0.2')
-    .from('.hero-buttons', { duration: mobile ? 0.5 : 0.7, opacity: 0, y: 30, scale: 0.95 }, '-=0.2')
-    .from('.hero-scroll-cue', { duration: mobile ? 0.4 : 0.6, opacity: 0, y: 20 }, '-=0.2');
+    .from('.hero-top-image', { duration: mobile ? 0.8 : 1.4, opacity: 0, scale: 0.4, y: -60, filter: 'blur(20px)' })
+    .from('.hero-name', { duration: mobile ? 0.7 : 1.2, opacity: 0, y: 70, scale: 0.85, filter: 'blur(16px)' }, '-=0.5')
+    .from('.typing-container', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.4')
+    .from('.hero-badge', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-desc', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-buttons', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-scroll-cue', { duration: mobile ? 0.5 : 0.8, opacity: 0, y: 30, filter: 'blur(8px)' }, '-=0.3');
 
   /* ============================================================
      HERO SCROLL-OUT — layered scrubbed parallax
-     (content, photo, ring and badge move at different speeds)
+     Enhanced with longer ranges and smoother motion
      ============================================================ */
   var heroTrigger = {
     trigger: '.hero',
     start: 'top top',
-    end: 'bottom 12%',
+    end: 'bottom 8%',
     scrub: SCRUB
   };
 
   gsap.to('.hero-content', {
-    yPercent: mobile ? -10 : -22,
-    opacity: 0.15,
+    yPercent: mobile ? -15 : -30,
+    opacity: 0.1,
+    scale: 0.95,
     ease: 'none',
     scrollTrigger: heroTrigger
   });
 
   if (!mobile) {
     gsap.to('.hero-top-image', {
-      yPercent: -14,
+      yPercent: -20,
+      scale: 1.05,
       ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 12%', scrub: SCRUB }
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
     });
     var ring = document.querySelector('.top-img-ring');
     if (ring) {
       gsap.to(ring, {
-        rotate: 45,
-        scale: 1.12,
+        rotate: 60,
+        scale: 1.18,
         ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 12%', scrub: SCRUB }
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
       });
     }
     var badge = document.querySelector('.floating-badge');
     if (badge) {
       gsap.to(badge, {
-        yPercent: 55,
-        rotate: 18,
+        yPercent: 70,
+        rotate: 25,
+        scale: 1.1,
         ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 12%', scrub: SCRUB }
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
       });
     }
   }
 
-  /* scroll cue fades out quickly as motion begins */
+  /* scroll cue fades out slowly */
   gsap.to(['.hero-scroll-cue', '.scroll-indicator'], {
     opacity: 0,
+    scale: 0.8,
     ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: '22% top', scrub: true }
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: '25% top', scrub: true }
   });
 
   /* ============================================================
      SECTION HEADERS — long-range scrubbed rise-in
+     Enhanced with blur for slow-motion effect
      ============================================================ */
   document.querySelectorAll('.section-header.reveal').forEach(function (el) {
     gsap.fromTo(el,
-      { opacity: 0, y: HDR_Y, scale: 0.97 },
+      { opacity: 0, y: HDR_Y, scale: 0.95, filter: 'blur(8px)' },
       {
         opacity: 1,
         y: 0,
         scale: 1,
+        filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: el,
-          start: 'top 97%',
-          end: 'top 44%',
+          start: 'top 100%',
+          end: 'top 40%',
           scrub: SCRUB
         }
       }
@@ -117,7 +128,7 @@
 
   /* ============================================================
      GENERIC CARDS / BLOCKS — staggered scrubbed ranges
-     (each sibling starts slightly later → cascade while scrolling)
+     Enhanced with blur and scale for dramatic reveals
      ============================================================ */
   function scrubGroup(selector, scaleFrom) {
     var els = Array.prototype.slice.call(document.querySelectorAll(selector));
@@ -132,14 +143,15 @@
 
     Object.keys(groups).forEach(function (k) {
       groups[k].items.forEach(function (el, i) {
-        var startPct = Math.max(54, 94 - i * 6);
-        var endPct = Math.max(14, startPct - 42);
+        var startPct = Math.max(50, 96 - i * 7);
+        var endPct = Math.max(10, startPct - 48);
         gsap.fromTo(el,
-          { opacity: 0, y: CARD_Y, scale: scaleFrom },
+          { opacity: 0, y: CARD_Y, scale: scaleFrom, filter: 'blur(6px)' },
           {
             opacity: 1,
             y: 0,
             scale: 1,
+            filter: 'blur(0px)',
             ease: 'none',
             scrollTrigger: {
               trigger: el,
@@ -153,37 +165,38 @@
     });
   }
 
-  scrubGroup('.about-content.reveal', 0.97);
-  scrubGroup('.skills-tabs.reveal', 0.97);
-  scrubGroup('.skill-category.reveal:not(.hidden)', 0.97);
-  scrubGroup('.car-card.reveal', 0.95);
-  scrubGroup('.stat-card.reveal', 0.93);
-  scrubGroup('.premium-testimonial-card.reveal', 0.96);
-  scrubGroup('.service-card.reveal', 0.95);
-  scrubGroup('.price-card.reveal', 0.95);
-  scrubGroup('.future-card.reveal', 0.95);
-  scrubGroup('.pro-exp-card.reveal', 0.95);
-  scrubGroup('.contact-info.reveal', 0.97);
-  scrubGroup('.planner-box.reveal', 0.96);
+  scrubGroup('.about-content.reveal', 0.95);
+  scrubGroup('.skills-tabs.reveal', 0.95);
+  scrubGroup('.skill-category.reveal', 0.95);
+  scrubGroup('.car-card.reveal', 0.92);
+  scrubGroup('.stat-card.reveal', 0.90);
+  scrubGroup('.premium-testimonial-card.reveal', 0.93);
+  scrubGroup('.service-card.reveal', 0.92);
+  scrubGroup('.price-card.reveal', 0.92);
+  scrubGroup('.future-card.reveal', 0.92);
+  scrubGroup('.pro-exp-card.reveal', 0.92);
+  scrubGroup('.contact-info.reveal', 0.95);
+  scrubGroup('.planner-box.reveal', 0.93);
 
   /* ============================================================
      FEATURED PROJECT CARDS — longest range
-     card rises + media image scales 0.92 → 1.0 with scroll
+     Enhanced with image scale and blur
      ============================================================ */
   document.querySelectorAll('.project-card.reveal').forEach(function (el, idx) {
-    var startPct = Math.max(60, 96 - idx * 3);
+    var startPct = Math.max(55, 96 - idx * 4);
 
     gsap.fromTo(el,
-      { opacity: 0, y: CARD_Y + 24, scale: 0.94 },
+      { opacity: 0, y: CARD_Y + 32, scale: 0.92, filter: 'blur(8px)' },
       {
         opacity: 1,
         y: 0,
         scale: 1,
+        filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: el,
           start: 'top ' + startPct + '%',
-          end: 'center 52%',
+          end: 'center 48%',
           scrub: SCRUB
         }
       }
@@ -192,14 +205,15 @@
     var img = el.querySelector('.project-image img');
     if (img) {
       gsap.fromTo(img,
-        { scale: 0.92 },
+        { scale: 0.88, filter: 'blur(4px)' },
         {
           scale: 1,
+          filter: 'blur(0px)',
           ease: 'none',
           scrollTrigger: {
             trigger: el,
-            start: 'top 100%',
-            end: 'center 46%',
+            start: 'top 110%',
+            end: 'center 42%',
             scrub: SCRUB
           }
         }
@@ -209,27 +223,50 @@
 
   /* ============================================================
      ABOUT IMAGE — scroll-through parallax + scale
-     (drifts from -8% to +8% while passing through the section)
+     Enhanced with longer range and blur
      ============================================================ */
   var aboutImg = document.querySelector('.about-image.reveal');
   if (aboutImg) {
     var aboutWrap = aboutImg.closest('.about-grid') || aboutImg;
     gsap.fromTo(aboutImg,
-      { opacity: 0, yPercent: mobile ? 0 : -8, scale: 0.94 },
+      { opacity: 0, yPercent: mobile ? 0 : -12, scale: 0.90, filter: 'blur(8px)' },
       {
         opacity: 1,
-        yPercent: mobile ? 0 : 8,
+        yPercent: mobile ? 0 : 12,
         scale: 1,
+        filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: aboutWrap,
-          start: 'top 92%',
-          end: 'bottom 30%',
+          start: 'top 95%',
+          end: 'bottom 25%',
           scrub: SCRUB
         }
       }
     );
   }
+
+  /* ============================================================
+     SKILL PROGRESS BARS — width fills gradually with scroll
+     Enhanced with longer range
+     ============================================================ */
+  document.querySelectorAll('.skill-progress[data-width]').forEach(function (bar) {
+    var target = bar.getAttribute('data-width') || '0';
+    var host = bar.closest('.skill-item') || bar.closest('.skill-category') || bar;
+    gsap.fromTo(bar,
+      { width: '0%' },
+      {
+        width: target + '%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: host,
+          start: 'top 95%',
+          end: 'top 48%',
+          scrub: SCRUB
+        }
+      }
+    );
+  });
 
   /* ============================================================
      SKILL TABS — refresh triggers when a panel is shown/hidden
@@ -252,7 +289,7 @@
       if (target) {
         e.preventDefault();
         gsap.to(window, {
-          duration: 0.8,
+          duration: 1.0,
           scrollTo: { y: target, offsetY: 80 },
           ease: 'power2.inOut'
         });
