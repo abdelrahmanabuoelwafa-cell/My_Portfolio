@@ -3265,7 +3265,7 @@ footer p{
 
 </style> 
 <script>document.documentElement.classList.add('js-enabled');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=5">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=7">
 <base target="_blank"> 
 </head> 
 <body>
@@ -3972,7 +3972,71 @@ footer p{
     <div class="section-label">What I Do</div> 
     <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2> 
   </div> 
-  <div class="services-grid"> 
+  
+    <!-- Cinematic services showcase (slide-wipe) -->
+    <div class="svc-cinema" id="svcCinema" aria-label="Cinematic services showcase">
+      <div class="cinema-count"><span class="cinema-count-num">1</span>/<span>4</span></div>
+      <div class="cinema-stage">
+        <div class="slide">
+          <div class="slide__outer">
+            <div class="slide__inner">
+              <div class="slide__content">
+                <div class="slide__container">
+                  <h3 class="slide__heading" data-pf="cineH1">MOBILE</h3>
+                  <figure class="slide__img-cont">
+                    <img class="slide__img" src="images/MediMind.jpg" alt="MediMind mobile application project">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide__outer">
+            <div class="slide__inner">
+              <div class="slide__content">
+                <div class="slide__container">
+                  <h3 class="slide__heading" data-pf="cineH2">DESIGN</h3>
+                  <figure class="slide__img-cont">
+                    <img class="slide__img" src="images/STUDYSYNC.jpg" alt="StudySync application design">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide__outer">
+            <div class="slide__inner">
+              <div class="slide__content">
+                <div class="slide__container">
+                  <h3 class="slide__heading" data-pf="cineH3">BUILD</h3>
+                  <figure class="slide__img-cont">
+                    <img class="slide__img" src="images/masrofy2.png" alt="Masrofy expense tracker project">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide__outer">
+            <div class="slide__inner">
+              <div class="slide__content">
+                <div class="slide__container">
+                  <h3 class="slide__heading" data-pf="cineH4">PLAN</h3>
+                  <figure class="slide__img-cont">
+                    <img class="slide__img" src="images/movie2.jpg" alt="Planning your next product">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-grid"> 
     <div class="service-card reveal"> 
       <div class="service-icon"><i class="fas fa-mobile-alt"></i></div> 
       <h3 class="service-title">Mobile App Development</h3> 
@@ -3999,7 +4063,81 @@ footer p{
       <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p> 
     </div> 
   </div> 
-</section> 
+
+    <!-- AI Business Planner (inside Services, follows site language) -->
+    <div class="services-planner">
+<!-- AI Business Planner -->
+<div class="section-header reveal">
+      <h2 class="section-title">AI Business Planner</h2>
+      <p class="section-subtitle" id="planner-subtitle">Turn a rough idea into a structured project brief in under a minute.</p>
+    </div>
+    <div class="planner-box reveal" id="planner-box">
+      <div class="planner-badge ai-connected" id="planner-mode" data-pf="badge">AI-assisted planning &mdash; free, no sign-up</div>
+      <form class="planner-form" id="planner-form" novalidate>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
+          <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
+            placeholder="Describe your app or business idea in a few sentences..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
+            <input id="planner-audience" class="pf-input" type="text" maxlength="200"
+              placeholder="e.g. medical clinics, university students, local shops...">
+          </div>
+          <div class="pf-field">
+            <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
+            <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
+              <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
+              <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
+              <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
+              <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
+            </div>
+          </div>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
+          <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
+            placeholder="e.g. login, appointments, payments, notifications..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
+            <select id="planner-budget" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="small" data-pf="optSmall">Small</option>
+              <option value="medium" data-pf="optMedium">Medium</option>
+              <option value="large" data-pf="optLarge">Large</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
+            <select id="planner-deadline" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="flexible" data-pf="dlFlexible">Flexible</option>
+              <option value="1-2m" data-pf="dlSoon">1&ndash;2 months</option>
+              <option value="3-4m" data-pf="dlSoon2">3&ndash;4 months</option>
+              <option value="asap" data-pf="dlUrgent">ASAP</option>
+            </select>
+          </div>
+        </div>
+        <div class="pf-actions">
+          <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
+          <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
+        </div>
+      </form>
+      <div class="planner-result" id="planner-result">
+        <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">Fill in your idea (other fields optional) and generate a structured plan here.</div>
+        <div class="pr-state pr-loading" id="planner-loading" hidden>
+          <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
+          <span data-pf="loading">Analyzing your brief and building the plan...</span>
+        </div>
+        <div class="pr-state pr-error" id="planner-error" hidden></div>
+        <div class="pr-body" id="planner-body" dir="auto" hidden></div>
+      </div>
+    </div>
+    </div>
+  </section> 
 
 <!-- Pricing Section (3 Tiers) -->
 <section id="pricing">
@@ -4167,26 +4305,6 @@ footer p{
     </div>
   </div> 
 </section> 
-
-<!-- AI Business Planner -->
-<section id="ai-planner" class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">AI Business Planner</h2>
-      <p class="section-subtitle">مساعد تفاعلي لفهم متطلبات مشروعك وإنشاء خطة عمل.</p>
-    </div>
-    <div class="planner-box reveal">
-      <div class="planner-badge" id="planner-mode">المساعد الإرشادي — بدون ذكاء اصطناعي متصل</div>
-      <div class="planner-chat" id="planner-chat" aria-live="polite" aria-label="محادثة المساعد"></div>
-      <div class="planner-error" id="planner-error" hidden></div>
-      <div class="planner-input-row">
-        <textarea id="planner-input" rows="2" maxlength="4000"
-          placeholder="اكتب طلبك أو رديك هنا..." aria-label="رسالتك"></textarea>
-        <button type="button" id="planner-btn" class="btn-primary">إرسال</button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Footer --> 
 <footer class="premium-footer"> 
@@ -4901,10 +5019,20 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   var $  = function(s){ return document.querySelector(s); };
   var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
-  function setText(s, t){ var el = $(s); if (el) el.textContent = t; }
-  function setHtml(s, h){ var el = $(s); if (el) el.innerHTML = h; }
-  function setAllText(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined) el.textContent = arr[i]; }); }
-  function setAllHtml(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined) el.innerHTML = arr[i]; }); }
+  var EN = { lang: document.documentElement.lang, dir: document.documentElement.dir || 'ltr' };
+  var memoEls = [];
+  function memo(el, kind){
+    if (!el || el.__enSaved) return;
+    memoEls.push(el);
+    if (kind === 'ph') el.__enSaved = { k: 'ph', v: el.placeholder };
+    else if (kind === 'html') el.__enSaved = { k: 'html', v: el.innerHTML };
+    else el.__enSaved = { k: 'text', v: el.textContent };
+  }
+  function setText(s, t){ var el = $(s); if (el){ memo(el, 'text'); el.textContent = t; } }
+  function setHtml(s, h){ var el = $(s); if (el){ memo(el, 'html'); el.innerHTML = h; } }
+  function setAllText(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'text'); el.textContent = arr[i]; } }); }
+  function setAllHtml(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'html'); el.innerHTML = arr[i]; } }); }
+  function setPh(id, v){ var el = document.getElementById(id); if (el){ memo(el, 'ph'); el.placeholder = v; } }
 
   function applyArabic(){
     document.documentElement.lang = 'ar';
@@ -5122,9 +5250,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setText('.contact-info > p', 'أنا دائمًا منفتح لمناقشة مشاريع جديدة وأفكار إبداعية وفرص لتكون جزءًا من رؤيتك. لنصنع شيئًا مذهلًا معًا.');
     setAllText('.contact-link strong', ['البريد الإلكتروني','واتساب','الهاتف','لينكد إن','جيت هاب']);
     setAllText('.form-group label', ['اسمك','بريدك الإلكتروني','رسالتك']);
-    var nameIn = document.getElementById('contactName'); if (nameIn) nameIn.placeholder = 'مثال: أحمد محمد';
-    var emailIn = document.getElementById('contactEmail'); if (emailIn) emailIn.placeholder = 'example@email.com';
-    var msgIn = document.getElementById('contactMsg'); if (msgIn) msgIn.placeholder = 'حدثني عن مشروعك...';
+    setPh('contactName', 'مثال: أحمد محمد');
+    setPh('contactEmail', 'example@email.com');
+    setPh('contactMsg', 'حدثني عن مشروعك...');
     setHtml('#contactBtn', 'إرسال الرسالة <i class="fas fa-paper-plane"></i>');
     setText('.mini-cord-handle', 'اسحب');
 
@@ -5134,17 +5262,47 @@ document.addEventListener('DOMContentLoaded', () => {
     setHtml('.footer-col.right-col p', 'أنا <strong style="color:var(--text)">عبدالرحمن عبدالله</strong>، مطوّر فلاتر شغوف ببناء تطبيقات موبايل متعددة المنصات قابلة للتوسع بمعمارية نظيفة وتجارب مستخدم سلسة.');
     setText('.footer-subtitle', 'مطوّر فلاتر · القاهرة، مصر');
     setText('.footer-copy', '© 2026 عبدالرحمن عبدالله. جميع الحقوق محفوظة.');
+
+    // AI Planner follows the site language
+    setText('#planner-subtitle', 'حوّل فكرتك الأولية إلى ملخص مشروع منظّم في أقل من دقيقة.');
+    if (typeof window.__plannerI18n === 'function') window.__plannerI18n('ar');
+  }
+
+  function applyEnglish(){
+    document.documentElement.lang = EN.lang || 'en';
+    document.documentElement.dir = EN.dir || 'ltr';
+    var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'AR';
+    try {
+      words.length = 0;
+      words.push('Flutter Developer', 'Mobile App Engineer', 'UI/UX Enthusiast');
+      i = 0; j = 0; isDeleting = false;
+      var te = document.getElementById('typingText'); if (te) te.textContent = '';
+    } catch(e){}
+    memoEls.forEach(function(el){
+      var s = el.__enSaved;
+      if (!s) return;
+      if (s.k === 'html') el.innerHTML = s.v;
+      else if (s.k === 'ph') el.placeholder = s.v;
+      else el.textContent = s.v;
+    });
+    document.querySelectorAll('.quote-more-btn').forEach(function(btn){
+      var q = btn.previousElementSibling;
+      btn.textContent = (q && !q.classList.contains('clamped')) ? 'less' : 'more';
+    });
+    if (typeof window.__plannerI18n === 'function') window.__plannerI18n();
   }
 
   function switchLang(){
     if (document.documentElement.lang === 'ar') {
       try { localStorage.setItem('lang', 'en'); } catch(e){}
-      location.reload();
+      applyEnglish();
     } else {
       try { localStorage.setItem('lang', 'ar'); } catch(e){}
       applyArabic();
     }
   }
+
+  window.applyEnglish = applyEnglish;
 
   window.switchLang = switchLang;
   window.applyArabic = applyArabic;
@@ -5190,8 +5348,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=6" defer></script>
-<script src="assets/js/ai-planner.js?v=11" defer></script>
+<script src="assets/js/scroll-reveal.js?v=8" defer></script>
+<script src="assets/js/ai-planner.js?v=21" defer></script>
 </body> 
 </html>
 

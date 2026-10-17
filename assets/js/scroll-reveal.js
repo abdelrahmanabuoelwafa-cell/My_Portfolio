@@ -1,5 +1,6 @@
 /* ============================================================
    Cinematic Scroll-Linked Motion — GSAP + ScrollTrigger (scrub)
+   - Content DESCENDS from above into place (cinematic sky-fall),
    - Motion progress is CONNECTED to scroll progress (scrub),
      not timed one-shot reveals.
    - Long scroll ranges + SMOOTHING for a cinematic feel.
@@ -43,12 +44,12 @@
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
     .from('.hero-top-image', { duration: mobile ? 0.8 : 1.4, opacity: 0, scale: 0.4, y: -60, filter: 'blur(20px)' })
-    .from('.hero-name', { duration: mobile ? 0.7 : 1.2, opacity: 0, y: 70, scale: 0.85, filter: 'blur(16px)' }, '-=0.5')
-    .from('.typing-container', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.4')
-    .from('.hero-badge', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-desc', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-buttons', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: 50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-scroll-cue', { duration: mobile ? 0.5 : 0.8, opacity: 0, y: 30, filter: 'blur(8px)' }, '-=0.3');
+    .from('.hero-name', { duration: mobile ? 0.7 : 1.2, opacity: 0, y: -70, scale: 0.85, filter: 'blur(16px)' }, '-=0.5')
+    .from('.typing-container', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.4')
+    .from('.hero-badge', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-desc', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-buttons', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
+    .from('.hero-scroll-cue', { duration: mobile ? 0.5 : 0.8, opacity: 0, y: -24, filter: 'blur(8px)' }, '-=0.3');
 
   /* ============================================================
      HERO SCROLL-OUT — layered scrubbed parallax
@@ -111,7 +112,7 @@
      ============================================================ */
   document.querySelectorAll('.section-header.reveal').forEach(function (el) {
     gsap.fromTo(el,
-      { opacity: 0, y: HDR_Y, scale: 0.92, filter: 'blur(' + HDR_BLUR + 'px)' },
+      { opacity: 0, y: -HDR_Y, scale: 0.92, filter: 'blur(' + HDR_BLUR + 'px)' },
       {
         opacity: 1,
         y: 0,
@@ -148,7 +149,7 @@
         var startPct = Math.max(50, 98 - i * 7);
         var endPct = Math.max(8, startPct - 55);
         gsap.fromTo(el,
-          { opacity: 0, y: CARD_Y, scale: scaleFrom, filter: 'blur(' + CARD_BLUR + 'px)' },
+          { opacity: 0, y: -CARD_Y, scale: scaleFrom, filter: 'blur(' + CARD_BLUR + 'px)' },
           {
             opacity: 1,
             y: 0,
@@ -188,7 +189,7 @@
     var startPct = Math.max(55, 98 - idx * 4);
 
     gsap.fromTo(el,
-      { opacity: 0, y: CARD_Y + 40, scale: 0.85, filter: 'blur(16px)' },
+      { opacity: 0, y: -(CARD_Y + 40), scale: 0.85, filter: 'blur(16px)' },
       {
         opacity: 1,
         y: 0,
@@ -231,7 +232,7 @@
   if (aboutImg) {
     var aboutWrap = aboutImg.closest('.about-grid') || aboutImg;
     gsap.fromTo(aboutImg,
-      { opacity: 0, yPercent: mobile ? 0 : -18, scale: 0.84, filter: 'blur(14px)' },
+      { opacity: 0, yPercent: mobile ? 0 : -24, scale: 0.84, filter: 'blur(14px)' },
       {
         opacity: 1,
         yPercent: mobile ? 0 : 18,
@@ -291,6 +292,64 @@
     gsap.to('.top-img-container', { scale: 1.035, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     gsap.to('.hero-badge', { y: 8, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.4 });
   }
+
+
+  /* ============================================================
+     SERVICES CINEMA — slide-wipe sequence (GSAP demo style)
+     Scroll-linked via sticky stage + scrub timeline.
+     Desktop only; mobile / reduced-motion keep stacked fallback.
+     ============================================================ */
+  (function initServicesCinema() {
+    var cinema = document.getElementById('svcCinema');
+    if (!cinema) return;
+    var slides = Array.prototype.slice.call(cinema.querySelectorAll('.slide'));
+    var N = slides.length;
+    if (N < 2) return;
+    if (window.innerWidth < 768) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    cinema.classList.add('cinema-ready');
+    cinema.style.height = (N * 100) + 'vh';
+
+    var outers = slides.map(function (s) { return s.querySelector('.slide__outer'); });
+    var inners = slides.map(function (s) { return s.querySelector('.slide__inner'); });
+    var heads = slides.map(function (s) { return s.querySelector('.slide__heading'); });
+    var imgs = slides.map(function (s) { return s.querySelector('.slide__img'); });
+    var countEl = cinema.querySelector('.cinema-count-num');
+
+    slides.forEach(function (s, i) { gsap.set(s, { zIndex: i + 1 }); });
+    gsap.set(outers, { xPercent: 100 });
+    gsap.set(inners, { xPercent: -100 });
+    gsap.set(outers[0], { xPercent: 0 });
+    gsap.set(inners[0], { xPercent: 0 });
+    gsap.set(imgs, { transformOrigin: '50% 50%' });
+    heads.forEach(function (h, i) { if (h && i > 0) h.style.setProperty('--width', 800); });
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'power2.inOut', duration: 1 },
+      scrollTrigger: {
+        trigger: cinema,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.8,
+        onUpdate: function (self) {
+          if (countEl) countEl.textContent = String(Math.min(N, 1 + Math.round(self.progress * (N - 1))));
+        }
+      }
+    });
+
+    for (var i = 1; i < N; i++) {
+      var seg = i - 1;
+      tl.fromTo(outers[i], { xPercent: 100 }, { xPercent: 0 }, seg)
+        .fromTo(inners[i], { xPercent: -100 }, { xPercent: 0 }, seg)
+        .fromTo(heads[i - 1], { '--width': 200, xPercent: 0 }, { '--width': 800, xPercent: 24 }, seg)
+        .fromTo(heads[i], { '--width': 800, xPercent: -24 }, { '--width': 200, xPercent: 0 }, seg)
+        .fromTo(imgs[i], { xPercent: 125, scaleX: 1.5, scaleY: 1.3 }, { xPercent: 0, scaleX: 1, scaleY: 1 }, seg)
+        .fromTo(imgs[i - 1], { xPercent: 0, scaleX: 1, scaleY: 1 }, { xPercent: -125, scaleX: 1.5, scaleY: 1.3 }, seg);
+    }
+
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  })();
 
   /* ============================================================
      SMOOTH SCROLL for anchor links

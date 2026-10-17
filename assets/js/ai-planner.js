@@ -1,446 +1,376 @@
 /* ============================================================
-   AI Business Planner — Professional Sales Assistant
-   - Real AI via OVHcloud (FREE, no login, no API key)
-   - Advanced persuasion & closing techniques
-   - Arabic-first, can answer any customer question
-   - Fallback: local rule-based mode if API unavailable
-   - Safe rendering: textContent only (no innerHTML → no XSS)
+   AI Business Planner — premium guided brief (bilingual)
+   - Real AI via OVHcloud endpoint (FREE, no login, no API key)
+   - Guided form -> structured 9-section project plan
+   - Follows the site language (ar/en) with RTL/LTR support
+   - Safe rendering: textContent only (no innerHTML -> no XSS)
    ============================================================ */
 (function () {
   'use strict';
 
-  var MAX_CHARS = 4000;
-
-  /* ---- DOM ---- */
-  var chatEl = document.getElementById('planner-chat');
-  var inputEl = document.getElementById('planner-input');
-  var btnEl = document.getElementById('planner-btn');
-  var errorEl = document.getElementById('planner-error');
-  var modeEl = document.getElementById('planner-mode');
-
-  if (!chatEl || !inputEl || !btnEl) return;
-
-  /* ---- AI: send conversation to OVHcloud ---- */
   var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
   var AI_MODEL = 'Qwen3.6-27B';
+  var TIMEOUT_MS = 90000;
+  var MAX_IDEA = 2500;
 
-  /* Detect AI availability by checking if endpoint is set */
-  var aiMode = !!AI_ENDPOINT;
-  if (modeEl) {
-    modeEl.textContent = aiMode
-      ? 'المساعد الذكي — متصل بالذكاء الاصطناعي'
-      : 'المساعد الإرشادي — بدون ذكاء اصطناعي متصل';
-    modeEl.classList.toggle('ai-connected', aiMode);
-  }
+  var form = document.getElementById('planner-form');
+  if (!form) return;
 
-  /* ---- Conversation state (local mode) ---- */
-  var state = {
-    phase: 'greeting',
-    answers: { idea: '', users: '', features: '', platform: '', budget: '', timeline: '' },
-    queue: [],
-    history: []
+  var ideaEl = document.getElementById('planner-idea');
+  var audEl = document.getElementById('planner-audience');
+  var featEl = document.getElementById('planner-features');
+  var budgetEl = document.getElementById('planner-budget');
+  var deadlineEl = document.getElementById('planner-deadline');
+  var btn = document.getElementById('planner-btn');
+  var emptyEl = document.getElementById('planner-empty');
+  var loadingEl = document.getElementById('planner-loading');
+  var errorEl = document.getElementById('planner-error');
+  var bodyEl = document.getElementById('planner-body');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#planner-platform .pf-chip'));
+
+  var STR = {
+    en: {
+      badge: 'AI-assisted planning — free, no sign-up',
+      ideaLabel: 'Project idea',
+      ideaPh: 'Describe your app or business idea in a few sentences...',
+      audLabel: 'Target audience (optional)',
+      audPh: 'e.g. medical clinics, university students, local shops...',
+      platLabel: 'Platform (optional)',
+      platMobile: 'Mobile',
+      platWeb: 'Web',
+      platDesktop: 'Desktop',
+      platUnsure: 'Not sure',
+      featLabel: 'Key features (optional)',
+      featPh: 'e.g. login, appointments, payments, notifications...',
+      budgetLabel: 'Budget range (optional)',
+      optUnknown: 'Prefer not to say',
+      optSmall: 'Small',
+      optMedium: 'Medium',
+      optLarge: 'Large',
+      deadlineLabel: 'Timeline (optional)',
+      dlFlexible: 'Flexible',
+      dlSoon: '1–2 months',
+      dlSoon2: '3–4 months',
+      dlUrgent: 'ASAP',
+      generate: 'Generate plan',
+      generating: 'Generating...',
+      note: 'Estimates are preliminary planning guidance, not guarantees.',
+      empty: 'Fill in your idea (other fields optional) and generate a structured plan here.',
+      loading: 'Analyzing your brief and building the plan...',
+      errIdea: 'Please describe your project idea first.',
+      errNetwork: 'Could not reach the AI service. Check your connection and try again.',
+      errTimeout: 'The AI took too long to respond. Please try again.',
+      errGeneric: 'Something went wrong while generating the plan. Please try again.',
+      errCancelled: 'Request cancelled because the language was switched.',
+      sectionFallback: 'Plan',
+      cineH1: 'MOBILE',
+      cineH2: 'DESIGN',
+      cineH3: 'BUILD',
+      cineH4: 'PLAN'
+    },
+    ar: {
+      badge: 'تخطيط بمساعدة الذكاء الاصطناعي — مجاني وبلا تسجيل',
+      ideaLabel: 'فكرة المشروع',
+      ideaPh: 'اوصف تطبيقك أو فكرة مشروعك في بضع جمل...',
+      audLabel: 'الجمهور المستهدف (اختياري)',
+      audPh: 'مثال: عيادات طبية، طلاب جامعات، متاجر محلية...',
+      platLabel: 'المنصة (اختياري)',
+      platMobile: 'موبايل',
+      platWeb: 'ويب',
+      platDesktop: 'سطح مكتب',
+      platUnsure: 'لست متأكدًا',
+      featLabel: 'المميزات الأساسية (اختياري)',
+      featPh: 'مثال: تسجيل دخول، مواعيد، دفع، إشعارات...',
+      budgetLabel: 'نطاق الميزانية (اختياري)',
+      optUnknown: 'أفضل عدم الذكر',
+      optSmall: 'صغيرة',
+      optMedium: 'متوسطة',
+      optLarge: 'كبيرة',
+      deadlineLabel: 'الجدول الزمني (اختياري)',
+      dlFlexible: 'مرن',
+      dlSoon: 'شهر إلى شهرين',
+      dlSoon2: '3 إلى 4 أشهر',
+      dlUrgent: 'في أقرب وقت',
+      generate: 'أنشئ الخطة',
+      generating: 'جارٍ التوليد...',
+      note: 'التقديرات إرشادية أولية وليست ضمانات.',
+      empty: 'اكتب فكرتك (والحقول الأخرى اختيارية) لتوليد خطة مشروع منظمة هنا.',
+      loading: 'جارٍ تحليل طلبك وبناء الخطة...',
+      errIdea: 'من فضلك اكتب فكرة مشروعك أولًا.',
+      errNetwork: 'تعذر الوصول لخدمة الذكاء الاصطناعي. تحقق من اتصالك وحاول مجددًا.',
+      errTimeout: 'استغرق الذكاء الاصطناعي وقتًا طويلاً. حاول مرة أخرى.',
+      errGeneric: 'حدث خطأ أثناء إنشاء الخطة. حاول مرة أخرى.',
+      errCancelled: 'تم إلغاء الطلب بسبب تبديل اللغة.',
+      sectionFallback: 'الخطة',
+      cineH1: 'موبايل',
+      cineH2: 'تصميم',
+      cineH3: 'تنفيذ',
+      cineH4: 'تخطيط'
+    }
   };
 
-  /* ---- Question sequence (local mode) ---- */
-  var ALL_QUESTIONS = [
-    { key: 'idea',     q: 'ما فكرة المشروع والمشكلة التي يحلها؟' },
-    { key: 'users',    q: 'من المستخدمون المستهدفون لهذا المشروع؟' },
-    { key: 'features', q: 'ما أهم 3 وظائف أو مميزات تحتاجها؟' },
-    { key: 'platform', q: 'هل تريده Android أم iOS أم موقع ويب أم الثلاثة؟' },
-    { key: 'budget',   q: 'هل لديك ميزانية تقريبية؟ (مثال: 5000-10000 دولار، أو لم أقرر بعد)' },
-    { key: 'timeline', q: 'ما الموعد التقريبي الذي تود التسليم قبله؟ (مثال: شهران، أو مرونة كاملة)' }
-  ];
+  function lang() { return document.documentElement.lang === 'ar' ? 'ar' : 'en'; }
+  function t(key) { var s = STR[lang()]; return (s && s[key] != null) ? s[key] : STR.en[key]; }
 
-  var HINTS = {
-    idea:     /تطبيق|موقع|منصة|نظام|مشروع|أريد|ابغى|أبغى/,
-    users:    /مستخدمين|جمهور|عملاء|زبائن|طلاب|موظفين|أطفال|رجال|نساء|شباب|عيادة|مدرس|شركة/,
-    features: /تسجيل|إشعارات|محادثة|سلة|تقرير يومي|تقرير أسبوعي|لوحة تحكم|حساب شخصي|تتبع|خرائط|دفع إلكتروني/,
-    platform: /android|ios|أيفون|أندرويد|flutter|react native|موقع ويب/,
-    budget:   /ميزانية|مبلغ|budget|تكلفة|أدفع|كم يكلف/,
-    timeline: /موعد|مدة|شهر|أسبوع|سنة|deadline|تسليم|مستعجل/
-  };
+  var currentAbort = null;
+  var cancelledByLang = false;
 
-  /* ---- Helpers ---- */
-  function addMsg(role, text) {
-    var div = document.createElement('div');
-    div.className = 'planner-msg ' + role;
-    div.textContent = text;
-    chatEl.appendChild(div);
-    chatEl.scrollTop = chatEl.scrollHeight;
-    state.history.push({ role: role, text: text });
-    return div;
+  /* ---- i18n: apply strings to all [data-pf] nodes + controls ---- */
+  function applyStrings() {
+    if (currentAbort) {
+      cancelledByLang = true;
+      try { currentAbort.abort(); } catch (e) {}
+    }
+    var L = STR[lang()];
+    document.querySelectorAll('[data-pf]').forEach(function (el) {
+      var k = el.getAttribute('data-pf');
+      if (L[k] != null) el.textContent = L[k];
+    });
+    if (ideaEl) ideaEl.placeholder = t('ideaPh');
+    if (audEl) audEl.placeholder = t('audPh');
+    if (featEl) featEl.placeholder = t('featPh');
+    if (btn && !btn.disabled) btn.textContent = t('generate');
+    if (bodyEl) bodyEl.setAttribute('dir', 'auto');
+    document.querySelectorAll('#planner-result .pr-sec-text').forEach(function (el) { el.setAttribute('dir', 'auto'); });
   }
+  window.__plannerI18n = applyStrings;
 
-  function addTyping() {
-    var div = document.createElement('div');
-    div.className = 'planner-typing';
-    div.innerHTML = '<span></span><span></span><span></span>';
-    chatEl.appendChild(div);
-    chatEl.scrollTop = chatEl.scrollHeight;
-    return div;
+  /* ---- states ---- */
+  function showState(which) {
+    if (emptyEl) emptyEl.hidden = which !== 'empty';
+    if (loadingEl) loadingEl.hidden = which !== 'loading';
+    if (errorEl) errorEl.hidden = which !== 'error';
+    if (bodyEl) bodyEl.hidden = which !== 'body';
   }
-
   function showError(msg) {
     if (!errorEl) return;
     errorEl.textContent = msg;
-    errorEl.hidden = false;
+    showState('error');
   }
-  function hideError() {
-    if (!errorEl) return;
-    errorEl.hidden = true;
-    errorEl.textContent = '';
-  }
-
   function setBusy(on) {
-    btnEl.disabled = on;
-    inputEl.disabled = on;
-    btnEl.textContent = on ? '...' : 'إرسال';
+    if (btn) {
+      btn.disabled = on;
+      btn.textContent = on ? t('generating') : t('generate');
+    }
   }
 
-  /* ---- AI: send conversation to Pollinations.ai ---- */
-  function callAI(userText) {
-    var sysPrompt =
-      'أنت خبير تسويق واقناع محترف ومساعد أعمال ذكي. مهمتك مساعدة العميل واقناعه بالشراء. قواعدك:' +
-      '\n\n' +
-      '1) التحية والبناء: ابدأ بتحية ودودة، واكتشف احتياج العميل الحقيقي بسؤال واحد ذكي في كل رد.' +
-      '\n2) الاحتفاظ بالذاكرة: تتذكر كل ما قاله العميل — لا تسأل مرتين عن نفس الشيء.' +
-      '\n3) اقناع احترافي: عندما يعبّر العميل عن تردد أو اعتراض (غالي، مش متأكد، هفكر، لسه بدري):' +
-      '\n   - افهم اعتراضه الحقيقي أولاً (استمع)' +
-      '\n   - اربط المنتج/الخدمة بحل مشكلته الشخصية' +
-      '\n   - استخدم مبدأ الندرة (عرض لفترة محدودة)' +
-      '\n   - استخدم الدليل الاجتماعي (عملاء آخرين سعداء)' +
-      '\n   - اعرض القيمة مقابل السعر (ليس تكلفة بل استثمار)' +
-      '\n   - اطرح سؤال الإغلاق: "هل تبدأ الآن أم تفضل العرض المميز؟"' +
-      '\n4) أسلوب قوي لكن مهذب: واثق، مباشر، مختصر، بدون إلحاح مزعج.' +
-      '\n5) اسأل عن: الفكرة، المستخدمين، الميزانية، الموعد — لكن بذكاء وتدريجيًا.' +
-      '\n6) عندما تكتمل المعلومات، اعرض خطة عمل شاملة مع سعر تقديري ومراحل التنفيذ.' +
-      '\n7) بعد الخطة، اسأل: "هل نبدأ التنفيذ الآن؟"' +
-      '\n\n' +
-      'اكتب بالعربية الفصحى الواضحة. استخدم أرقامًا ومسافات بسيطة للتنسيق (لا Markdown). كن مختصرًا وفعالًا.' +
-      '\n\nقواعد مهمة:' +
-      '\n- لا تذكر أنك ذكاء اصطناعي — أنت مستشار أعمال محترف' +
-      '\n- ركّز على الفائدة للعميل وليس على المميزات' +
-      '\n- استخدم عبارات مثل: "هذه فرصة", "الوقت مناسب", "عملاؤنا حققوا"...' +
-      '\n- إذا سأل عن شيء خارج نطاق المشروع، أجب بإيجاز وأعد التركيز للبيع';
-
-    var messages = [{ role: 'system', content: sysPrompt }];
-    state.history.forEach(function (m) {
-      if (m.role === 'user') messages.push({ role: 'user', content: m.text });
-      else if (m.role === 'bot') messages.push({ role: 'assistant', content: m.text });
+  /* ---- platform chips (toggle) ---- */
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      c.classList.toggle('on');
+      c.setAttribute('aria-pressed', c.classList.contains('on') ? 'true' : 'false');
     });
-    messages.push({ role: 'user', content: userText });
+  });
+  function platforms() {
+    return chips.filter(function (c) { return c.classList.contains('on'); })
+      .map(function (c) { return c.getAttribute('data-v'); }).join(', ');
+  }
 
+  /* ---- AI ---- */
+  function buildSystem() {
+    if (lang() === 'ar') {
+      return 'أنت مستشار تقنية ومشاريع محترف. مهمتك تحويل فكرة عميل إلى خطة مشروع واضحة.' +
+        '\nاكتب الرد بالعربية الفصحى الواضحة فقط.' +
+        '\nقسّم ردك بالضبط إلى 9 أقسام، كل قسم في سطر يبدأ بالشكل: 1) عنوان القسم' +
+        '\nالأقسام: 1) ملخص المشروع 2) المشكلة والحل 3) المستخدمون المستهدفون 4) مميزات النسخة الأولية MVP' +
+        ' 5) مميزات مستقبلية 6) التقنيات المقترحة مع سبب الاختيار 7) مراحل التنفيذ والجدول الزمني' +
+        ' 8) المخاطر والافتراضات والأسئلة المفتوحة 9) الخطوات التالية' +
+        '\nقواعد مهمة: لا تستخدم Markdown؛ لا تخترع ميزانية مؤكدة أو مواعيد تسليم محددة؛ علّم كل تقدير بأنه مبدئي' +
+        '؛ إذا كانت معلومة ناقصة فاذكرها في قسم المخاطر؛ كن مختصرًا وعمليًا (3-6 أسطر لكل قسم).';
+    }
+    return 'You are a professional technology and product consultant. Your job is to turn a client idea into a clear project plan.' +
+      '\nReply in clear English only.' +
+      '\nStructure your reply into exactly 9 sections, each starting on its own line in the form: 1) Section title' +
+      '\nThe sections: 1) Project summary 2) Problem & solution 3) Target users 4) Core MVP features' +
+      ' 5) Potential future features 6) Suggested technology stack with reasons 7) Development phases & rough timeline' +
+      ' 8) Risks, assumptions & open questions 9) Recommended next steps' +
+      '\nRules: plain text only, no Markdown; never invent a confirmed budget or guaranteed delivery dates; label every estimate as preliminary' +
+      '; list missing information under risks; be concise and practical (3-6 lines per section).';
+  }
+
+  function buildUserMessage() {
+    var isAr = lang() === 'ar';
+    var L = [];
+    L.push(isAr ? 'فكرة المشروع:' : 'Project idea:');
+    L.push((ideaEl && ideaEl.value.trim()) || '');
+    var aud = audEl && audEl.value.trim();
+    if (aud) { L.push(isAr ? 'الجمهور المستهدف:' : 'Target audience:'); L.push(aud); }
+    var plat = platforms();
+    if (plat) { L.push(isAr ? 'المنصة:' : 'Platform:'); L.push(plat); }
+    var feats = featEl && featEl.value.trim();
+    if (feats) { L.push(isAr ? 'مميزات مطلوبة:' : 'Requested features:'); L.push(feats); }
+    if (budgetEl && budgetEl.value) { L.push(isAr ? 'الميزانية:' : 'Budget:'); L.push(budgetEl.options[budgetEl.selectedIndex].text); }
+    if (deadlineEl && deadlineEl.value) { L.push(isAr ? 'الجدول الزمني:' : 'Timeline:'); L.push(deadlineEl.options[deadlineEl.selectedIndex].text); }
+    L.push(isAr ? 'أنشئ خطة العمل كاملة حسب الأقسام المطلوبة.' : 'Produce the full plan using the required sections.');
+    return L.join('\n');
+  }
+
+  function callAI(userText) {
     var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 90000) : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : null;
+    currentAbort = ctrl;
+    function clear() { if (timer) clearTimeout(timer); currentAbort = null; }
 
     return fetch(AI_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: AI_MODEL,
-        messages: messages,
+        messages: [
+          { role: 'system', content: buildSystem() },
+          { role: 'user', content: userText }
+        ],
         stream: false
       }),
       signal: ctrl ? ctrl.signal : undefined
     }).then(function (res) {
-      if (timer) clearTimeout(timer);
+      clear();
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     }).then(function (data) {
-      if (data && data.choices && data.choices[0] && data.choices[0].message) {
+      if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
         return data.choices[0].message.content.trim();
       }
-      throw new Error('Invalid response format');
+      throw new Error('bad-format');
     }, function (err) {
-      if (timer) clearTimeout(timer);
+      clear();
       throw err;
     });
   }
 
-  /* ---- Local mode: next step in the flow ---- */
-  function detectTopics(text) {
-    var found = [];
-    var lower = text.toLowerCase();
-    Object.keys(HINTS).forEach(function (key) {
-      if (HINTS[key].test(lower)) found.push(key);
-    });
-    return found;
+  /* ---- structured rendering (textContent only) ---- */
+  function parseSections(text) {
+    var lines = text.split(/\r?\n/);
+    var secs = [];
+    var cur = null;
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var m = line.match(/^\s*(?:\*\*)?\s*(\d)\s*[).\-:]\s*\*?\*?\s*(\S.*)$/);
+      if (m && +m[1] >= 1 && +m[1] <= 9) {
+        if (cur) secs.push(cur);
+        cur = { title: m[2].replace(/\*+$/, '').trim(), body: [] };
+      } else if (cur) {
+        cur.body.push(line);
+      }
+    }
+    if (cur) secs.push(cur);
+    return secs;
   }
 
-  function buildQueue(knownKeys) {
-    state.queue = ALL_QUESTIONS.filter(function (item) {
-      return knownKeys.indexOf(item.key) === -1 && !state.answers[item.key];
-    });
-  }
-
-  function buildSummary() {
-    var a = state.answers;
-    var lines = [];
-    lines.push('ملخص فهمي للمشروع:');
-    lines.push('');
-    lines.push('• الفكرة: ' + (a.idea || '—'));
-    lines.push('• المستخدمون: ' + (a.users || '—'));
-    lines.push('• الوظائف المطلوبة: ' + (a.features || '—'));
-    lines.push('• المنصة: ' + (a.platform || '—'));
-    lines.push('• الميزانية: ' + (a.budget || 'لم تُحدد بعد'));
-    lines.push('• الموعد التقريبي: ' + (a.timeline || 'مرونة كاملة'));
-    lines.push('');
-    lines.push('هل هذا الفهم صحيح؟ اكتب "نعم" للتأكيد، أو اذكر أي تصحيح.');
-    return lines.join('\n');
-  }
-
-  function buildPlan() {
-    var a = state.answers;
-    var lines = [];
-
-    lines.push('=== خطة العمل المقترحة ===');
-    lines.push('');
-
-    lines.push('1) ملخص المشروع');
-    lines.push(a.idea || '—');
-    lines.push('');
-
-    lines.push('2) نطاق النسخة الأولى (MVP)');
-    if (a.features) {
-      a.features.split(/[,،;\n]/).forEach(function (f, i) {
-        f = f.trim();
-        if (f) lines.push('   ' + (i + 1) + '. ' + f);
+  function renderPlan(text) {
+    if (!bodyEl) return;
+    bodyEl.textContent = '';
+    var secs = parseSections(text);
+    if (secs.length >= 3) {
+      secs.forEach(function (s) {
+        var wrap = document.createElement('div');
+        wrap.className = 'pr-section';
+        var h = document.createElement('div');
+        h.className = 'pr-sec-title';
+        h.textContent = s.title;
+        var p = document.createElement('div');
+        p.className = 'pr-sec-text';
+        p.setAttribute('dir', 'auto');
+        p.textContent = s.body.join('\n').trim();
+        wrap.appendChild(h);
+        wrap.appendChild(p);
+        bodyEl.appendChild(wrap);
       });
     } else {
-      lines.push('   - تحديد الوظائف الأساسية مع العميل');
+      var p = document.createElement('div');
+      p.className = 'pr-sec-text';
+      p.setAttribute('dir', 'auto');
+      p.textContent = text.trim();
+      bodyEl.appendChild(p);
     }
-    lines.push('');
-
-    lines.push('3) مراحل التنفيذ');
-    lines.push('   المرحلة 1: التحليل والتصميم (1-2 أسبوع)');
-    lines.push('   المرحلة 2: التطوير الأساسي (حسب النطاق)');
-    lines.push('   المرحلة 3: الاختبار والمراجعة');
-    lines.push('   المرحلة 4: الإطلاق والنشر');
-    lines.push('');
-
-    lines.push('4) الأدوات المقترحة');
-    var plat = (a.platform || '').toLowerCase();
-    if (/flutter|كلا|الثلاثة|android.*ios|ios.*android/.test(plat)) {
-      lines.push('   - Flutter (أندرويد + iOS بكود واحد)');
-      lines.push('   - Firebase (المصادقة + القواعد + الإشعارات)');
-    } else if (/android|أندرويد/.test(plat)) {
-      lines.push('   - Kotlin + Jetpack Compose للأندرويد');
-      lines.push('   - Firebase للمصادقة والبيانات');
-    } else if (/ios|أيفون|آيفون/.test(plat)) {
-      lines.push('   - Swift + SwiftUI لنظام iOS');
-      lines.push('   - CloudKit أو Firebase للباك إند');
-    } else if (/ويب|موقع|web/.test(plat)) {
-      lines.push('   - React أو Next.js للواجهة');
-      lines.push('   - Node.js + PostgreSQL للباك إند');
-    } else {
-      lines.push('   - حسب المنصة المختارة — يمكن التوصية بعد تحديدها');
-    }
-    lines.push('   - Git للتحكم بالإصدارات + Figma للتصميم');
-    lines.push('');
-
-    lines.push('5) تقدير المدة');
-    var featCount = a.features ? a.features.split(/[,،;\n]/).filter(function (f) { return f.trim(); }).length : 0;
-    if (featCount <= 2) lines.push('   - 3 إلى 6 أسابيع (نطاق بسيط)');
-    else if (featCount <= 4) lines.push('   - 6 إلى 12 أسبوع (نطاق متوسط)');
-    else lines.push('   - 3 إلى 6 أشهر (نطاق كبير — يُنصح بتقسيمه لمراحل)');
-    lines.push('   * الافتراضات: تصميم جاهز + مراجعة سريعة + موارد متوفرة');
-    lines.push('');
-
-    lines.push('6) نقاط ما زالت تحتاج قرارًا');
-    var open = [];
-    if (!a.budget || /لم أقرر|غير/.test(a.budget)) open.push('   - تثبيت الميزانية النهائية');
-    if (!a.timeline || /مرونة/.test(a.timeline)) open.push('   - تثبيت موعد التسليم');
-    open.push('   - هوية بصرية (شعار + ألوان)');
-    open.push('   - سياسة المحتوى والبيانات المعتمدة');
-    lines.push(open.join('\n'));
-    lines.push('');
-    lines.push('=== نهاية الخطة ===');
-
-    return lines.join('\n');
+    showState('body');
   }
 
-  function localNext(userText) {
-    var lower = userText.toLowerCase();
+  /* ---- submit ---- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (btn && btn.disabled) return;
 
-    if (state.phase === 'confirming') {
-      if (/نعم|صح|موافق|تمام|oui|yes|ok/.test(lower)) {
-        state.phase = 'planning';
-        return Promise.resolve().then(function () {
-          addMsg('bot', 'ممتاز! جارٍ إعداد خطة العمل بناءً على إجاباتك...');
-          return delay(1200).then(function () {
-            addMsg('plan', buildPlan());
-            state.phase = 'done';
-            addMsg('bot', 'انتهت الخطة. يمكنك كتابة أي سؤال أو طلب تعديل.');
-          });
-        });
-      } else {
-        state.phase = 'collecting';
-        var detected = detectTopics(userText);
-        var updated = false;
-        detected.forEach(function (k) {
-          if (state.answers.hasOwnProperty(k)) {
-            state.answers[k] = userText;
-            updated = true;
-          }
-        });
-        buildQueue([]);
-        if (state.queue.length === 0) {
-          state.phase = 'confirming';
-          return delay(400).then(function () {
-            addMsg('bot', updated ? 'تم التحديث. هذا ملخص محدث:' : 'فهمت. هذا الملخص المحدث:');
-            return delay(300).then(function () {
-              addMsg('bot', buildSummary());
-            });
-          });
-        }
-        return askNext();
-      }
-    }
-
-    if (state.phase === 'collecting' || state.phase === 'greeting') {
-      if (state.history.filter(function (h) { return h.role === 'user'; }).length <= 1) {
-        var detected0 = detectTopics(userText);
-        detected0.forEach(function (k) {
-          if (state.answers.hasOwnProperty(k) && !state.answers[k]) {
-            state.answers[k] = userText;
-          }
-        });
-        if (!state.answers.idea && detected0.indexOf('idea') !== -1) {
-          state.answers.idea = userText;
-        }
-        buildQueue([]);
-      } else if (state.queue.length > 0) {
-        var current = state.queue[0];
-        state.answers[current.key] = userText;
-        state.queue.shift();
-        buildQueue([]);
-      }
-
-      if (state.queue.length === 0) {
-        state.phase = 'confirming';
-        return Promise.resolve().then(function () {
-          return delay(600).then(function () {
-            addMsg('bot', buildSummary());
-          });
-        });
-      }
-
-      return askNext();
-    }
-
-    if (state.phase === 'done') {
-      return Promise.resolve().then(function () {
-        addMsg('bot', 'الخطة جاهزة أعلاه. إذا أردت تعديل أي نقطة أو بدء مشروع جديد، اكتب "مشروع جديد".');
-        if (/مشروع جديد|جديد|restart/.test(lower)) {
-          resetState();
-          addMsg('bot', GREETING);
-          return askNext();
-        }
-      });
-    }
-
-    return askNext();
-  }
-
-  var GREETING =
-    'مرحبًا بك! أنا مستشارك الشخصي لتطوير المشاريع.' +
-    '\n\nسأساعدك في:' +
-    '\n• تحويل فكرتك إلى واقع' +
-    '\n• بناء خطة عمل ذكية' +
-    '\n• اتخاذ أفضل القرارات' +
-    '\n\nاكتب لي: ماذا تريد أن تبني؟ (ويمكنك ذكر أي تفاصيل تعرفها — منصة، ميزانية، مستخدمين... ولن أسألك عنها مجددًا)';
-
-  function resetState() {
-    state.phase = 'collecting';
-    state.answers = { idea: '', users: '', features: '', platform: '', budget: '', timeline: '' };
-    state.queue = [];
-    buildQueue([]);
-  }
-
-  function askNext() {
-    if (state.queue.length === 0) {
-      buildQueue([]);
-      if (state.queue.length === 0) {
-        state.phase = 'confirming';
-        return delay(500).then(function () {
-          addMsg('bot', buildSummary());
-        });
-      }
-    }
-    var next = state.queue[0];
-    return delay(700).then(function () {
-      addMsg('bot', next.q);
-    });
-  }
-
-  function delay(ms) {
-    return new Promise(function (r) { setTimeout(r, ms); });
-  }
-
-  /* ---- Main submit handler ---- */
-  function submit() {
-    var text = inputEl.value.trim();
-    hideError();
-
-    if (!text) {
-      showError('اكتب شيئًا أولًا.');
-      inputEl.focus();
+    var idea = ideaEl ? ideaEl.value.trim() : '';
+    if (!idea) {
+      showError(t('errIdea'));
+      if (ideaEl) ideaEl.focus();
       return;
     }
-    if (text.length > MAX_CHARS) {
-      showError('النص طويل جدًا. الحد الأقصى ' + MAX_CHARS + ' حرفًا.');
-      return;
-    }
+    if (idea.length > MAX_IDEA) idea = idea.slice(0, MAX_IDEA);
 
-    if (state.phase === 'done' && /مشروع جديد|جديد|restart/.test(text.toLowerCase())) {
-      chatEl.innerHTML = '';
-      state.history = [];
-      resetState();
-    }
-
-    inputEl.value = '';
-    addMsg('user', text);
+    if (errorEl) errorEl.hidden = true;
+    showState('loading');
     setBusy(true);
 
-    var typing = addTyping();
-
-    var result;
-    if (aiMode) {
-      result = callAI(text).then(function (reply) {
-        typing.remove();
-        addMsg('bot', reply);
-      });
-    } else {
-      result = localNext(text).then(function () {
-        typing.remove();
-      });
-    }
-
-    result.catch(function (err) {
-      typing.remove();
-      console.error('[AI Planner]', err);
-
-      if (aiMode) {
-        addMsg('system', 'تعذر الاتصال بالذكاء الاصطناعي. حاول مرة أخرى بعد قليل.');
+    callAI(buildUserMessage()).then(function (reply) {
+      renderPlan(reply);
+    }).catch(function (err) {
+      if (cancelledByLang) {
+        cancelledByLang = false;
+        showError(t('errCancelled'));
       } else {
-        addMsg('system', 'تعذر تحليل الطلب الآن، حاول مرة أخرى.');
+        var isTimeout = err && (err.name === 'AbortError' || /abort/i.test(err.message || ''));
+        if (isTimeout) showError(t('errTimeout'));
+        else if (err && /HTTP/.test(err.message || '')) showError(t('errNetwork'));
+        else showError(t('errGeneric'));
       }
-    }).finally(function () {
+      if (err) console.error('[AI Planner]', err);
+    }).then(function () {
       setBusy(false);
-      inputEl.focus();
+      currentAbort = null;
     });
-  }
-
-  btnEl.addEventListener('click', submit);
-  inputEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      submit();
-    }
   });
 
-  /* ---- Boot ---- */
-  addMsg('bot', GREETING);
-  state.phase = 'collecting';
-  buildQueue([]);
+  /* ---- language switches ---- */
+  /* ---- persist drafts across the English-mode reload ---- */
+  (function persistDrafts() {
+    try {
+      var textIds = ['planner-idea', 'planner-audience', 'planner-features'];
+      textIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var key = 'pfDraft:' + id;
+        var saved = sessionStorage.getItem(key);
+        if (saved && !el.value) el.value = saved;
+        el.addEventListener('input', function () {
+          try { sessionStorage.setItem(key, el.value); } catch (e) {}
+        });
+      });
+      ['planner-budget', 'planner-deadline'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var key = 'pfDraft:' + id;
+        var saved = sessionStorage.getItem(key);
+        if (saved) el.value = saved;
+        el.addEventListener('change', function () {
+          try { sessionStorage.setItem(key, el.value); } catch (e) {}
+        });
+      });
+      var chipKey = 'pfDraft:chips';
+      var savedChips = sessionStorage.getItem(chipKey);
+      if (savedChips) {
+        var on = savedChips.split('|');
+        chips.forEach(function (c) {
+          var v = c.getAttribute('data-v');
+          if (on.indexOf(v) !== -1) {
+            c.classList.add('on');
+            c.setAttribute('aria-pressed', 'true');
+          }
+        });
+      }
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () {
+          try {
+            sessionStorage.setItem(chipKey, chips.filter(function (x) { return x.classList.contains('on'); })
+              .map(function (x) { return x.getAttribute('data-v'); }).join('|'));
+          } catch (e) {}
+        });
+      });
+    } catch (e) {}
+  })();
+
+  /* ---- init ---- */
+  applyStrings();
+  showState('empty');
 })();
