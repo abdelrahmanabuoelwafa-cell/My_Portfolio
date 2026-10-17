@@ -10,8 +10,16 @@
 
   var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
   var AI_MODEL = 'Qwen3.6-27B';
-  var TIMEOUT_MS = 90000;
+  var TIMEOUT_MS = 120000;
   var MAX_IDEA = 2500;
+  var PREFILL = {
+    ar: '1) ملخص المشروع\n2) المشكلة والحل\n3) المستخدمون المستهدفون\n4) مميزات النسخة الأولية MVP\n5) مميزات مستقبلية\n6) التقنيات المقترحة مع سبب الاختيار\n7) مراحل التنفيذ والجدول الزمني\n8) المخاطر والافتراضات والأسئلة المفتوحة\n9) الخطوات التالية\n',
+    en: '1) Project summary\n2) Problem & solution\n3) Target users\n4) Core MVP features\n5) Potential future features\n6) Suggested technology stack with reasons\n7) Development phases & rough timeline\n8) Risks, assumptions & open questions\n9) Recommended next steps\n'
+  };
+  var PREFILL_NOTE = {
+    ar: '\nالعناوين التالية مكتوبة مسبقًا — اكتب فقط محتوى كل قسم أسفل عنوانه مباشرة، ولا تكرر العناوين ولا تضف مقدمات.',
+    en: '\nThe section headers below are already written — output ONLY each section content directly under its header; do not repeat headers and do not add preambles.'
+  };
 
   var form = document.getElementById('planner-form');
   if (!form) return;
@@ -141,16 +149,41 @@
     if (loadingEl) loadingEl.hidden = which !== 'loading';
     if (errorEl) errorEl.hidden = which !== 'error';
     if (bodyEl) bodyEl.hidden = which !== 'body';
+    var pv = document.getElementById('planner-preview');
+    if (pv && which !== 'loading') pv.hidden = true;
   }
   function showError(msg) {
     if (!errorEl) return;
     errorEl.textContent = msg;
     showState('error');
   }
+  var elapsedTimer = null;
   function setBusy(on) {
     if (btn) {
       btn.disabled = on;
       btn.textContent = on ? t('generating') : t('generate');
+    }
+    var loadEl = document.getElementById('planner-loading');
+    if (on) {
+      if (loadEl && !document.getElementById('planner-elapsed')) {
+        var sp = document.createElement('span');
+        sp.id = 'planner-elapsed';
+        sp.style.cssText = 'font-variant-numeric:tabular-nums;opacity:.85;margin-inline-start:6px;';
+        loadEl.appendChild(sp);
+      }
+      var t0 = Date.now();
+      if (elapsedTimer) clearInterval(elapsedTimer);
+      elapsedTimer = setInterval(function () {
+        var sp2 = document.getElementById('planner-elapsed');
+        if (sp2) sp2.textContent = Math.round((Date.now() - t0) / 1000) + 's';
+      }, 500);
+    } else if (elapsedTimer) {
+      clearInterval(elapsedTimer);
+      elapsedTimer = null;
+      if (loadEl) {
+        var sp3 = document.getElementById('planner-elapsed');
+        if (sp3 && sp3.parentNode) sp3.parentNode.removeChild(sp3);
+      }
     }
   }
 
@@ -167,7 +200,7 @@
   }
 
   /* ---- AI ---- */
-  function buildSystem() {
+  function buildSystem(withPrefill) {
     if (lang() === 'ar') {
       return 'أنت مستشار تقنية ومشاريع محترف. مهمتك تحويل فكرة عميل إلى خطة مشروع واضحة.' +
         '\nاكتب الرد بالعربية الفصحى الواضحة فقط.' +
@@ -176,7 +209,8 @@
         ' 5) مميزات مستقبلية 6) التقنيات المقترحة مع سبب الاختيار 7) مراحل التنفيذ والجدول الزمني' +
         ' 8) المخاطر والافتراضات والأسئلة المفتوحة 9) الخطوات التالية' +
         '\nقواعد مهمة: لا تستخدم Markdown؛ لا تخترع ميزانية مؤكدة أو مواعيد تسليم محددة؛ علّم كل تقدير بأنه مبدئي' +
-        '؛ إذا كانت معلومة ناقصة فاذكرها في قسم المخاطر؛ كن مختصرًا وعمليًا (3-6 أسطر لكل قسم).';
+        '؛ إذا كانت معلومة ناقصة فاذكرها في قسم المخاطر؛ كن مختصرًا وعمليًا (3-6 أسطر لكل قسم).' +
+        (withPrefill ? PREFILL_NOTE.ar : '');
     }
     return 'You are a professional technology and product consultant. Your job is to turn a client idea into a clear project plan.' +
       '\nReply in clear English only.' +
@@ -185,7 +219,8 @@
       ' 5) Potential future features 6) Suggested technology stack with reasons 7) Development phases & rough timeline' +
       ' 8) Risks, assumptions & open questions 9) Recommended next steps' +
       '\nRules: plain text only, no Markdown; never invent a confirmed budget or guaranteed delivery dates; label every estimate as preliminary' +
-      '; list missing information under risks; be concise and practical (3-6 lines per section).';
+      '; list missing information under risks; be concise and practical (3-6 lines per section).' +
+        (withPrefill ? PREFILL_NOTE.en : '');
   }
 
   function buildUserMessage() {
@@ -205,33 +240,91 @@
     return L.join('\n');
   }
 
-  function callAI(userText) {
+  function callAI(userText, onDelta) {
     var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : null;
     currentAbort = ctrl;
     function clear() { if (timer) clearTimeout(timer); currentAbort = null; }
 
-    return fetch(AI_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: AI_MODEL,
-        messages: [
-          { role: 'system', content: buildSystem() },
-          { role: 'user', content: userText }
-        ],
-        stream: false
-      }),
-      signal: ctrl ? ctrl.signal : undefined
-    }).then(function (res) {
-      clear();
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    }).then(function (data) {
-      if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-        return data.choices[0].message.content.trim();
-      }
+    function delay(ms) {
+      return new Promise(function (resolve) { setTimeout(resolve, ms); });
+    }
+
+    function run(withPrefill, effort, maxTok, retry429Count) {
+      var msgs = [
+        { role: 'system', content: buildSystem(withPrefill) },
+        { role: 'user', content: userText }
+      ];
+      if (withPrefill) msgs.push({ role: 'assistant', content: PREFILL[lang()] });
+      var bodyObj = { model: AI_MODEL, messages: msgs, stream: true };
+      if (effort) bodyObj.reasoning_effort = effort;
+      if (maxTok) bodyObj.max_tokens = maxTok;
+
+      return fetch(AI_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bodyObj),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (res) {
+        if (res.status === 429 && retry429Count < 2) {
+          return delay(10000).then(function () { return run(withPrefill, effort, maxTok, retry429Count + 1); });
+        }
+        if (!res.ok) {
+          if (withPrefill && res.status >= 400 && res.status < 500) return null;
+          throw new Error('HTTP ' + res.status);
+        }
+        if (!res.body) return res.json().then(function (j) {
+          return j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || '';
+        });
+
+        var reader = res.body.getReader();
+        var decoder = new TextDecoder();
+        var buf = '';
+        var content = '';
+        function pump() {
+          return reader.read().then(function (step) {
+            if (step.done) return content;
+            buf += decoder.decode(step.value, { stream: true });
+            var lines = buf.split('\n');
+            buf = lines.pop();
+            for (var i2 = 0; i2 < lines.length; i2++) {
+              var ln = lines[i2].trim();
+              if (ln.indexOf('data:') !== 0) continue;
+              var payload = ln.slice(5).trim();
+              if (payload === '[DONE]') continue;
+              try {
+                var j2 = JSON.parse(payload);
+                var d = j2.choices && j2.choices[0] && j2.choices[0].delta;
+                if (d && d.content) {
+                  content += d.content;
+                  if (onDelta) { try { onDelta(content); } catch (e) {} }
+                }
+              } catch (e) {}
+            }
+            return pump();
+          });
+        }
+        return pump();
+      }).then(function (txt) {
+        if (txt === null) return attemptNext();
+        txt = (txt || '').trim();
+        if (txt) return txt;
+        return attemptNext();
+      });
+    }
+
+    var rung = 0;
+    function attemptNext() {
+      rung++;
+      if (rung === 1) return run(false, 'minimal', 6000, 0);
+      if (rung === 2) return run(false, null, null, 0);
       throw new Error('bad-format');
+    }
+
+    /* speed ladder: prefill+minimal thinking -> plain+minimal -> plain no-cap */
+    return run(true, 'minimal', 6000, 0).then(function (txt) {
+      clear();
+      return txt;
     }, function (err) {
       clear();
       throw err;
@@ -302,8 +395,17 @@
     if (errorEl) errorEl.hidden = true;
     showState('loading');
     setBusy(true);
+    var pv = document.getElementById('planner-preview');
+    if (pv) { pv.hidden = true; pv.textContent = ''; }
 
-    callAI(buildUserMessage()).then(function (reply) {
+    callAI(buildUserMessage(), function (partial) {
+      var pv2 = document.getElementById('planner-preview');
+      if (pv2) {
+        pv2.hidden = false;
+        pv2.textContent = partial;
+        pv2.scrollTop = pv2.scrollHeight;
+      }
+    }).then(function (reply) {
       renderPlan(reply);
     }).catch(function (err) {
       if (cancelledByLang) {

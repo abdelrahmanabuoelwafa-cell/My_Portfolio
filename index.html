@@ -3265,7 +3265,7 @@ footer p{
 
 </style> 
 <script>document.documentElement.classList.add('js-enabled');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=7">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=9">
 <base target="_blank"> 
 </head> 
 <body>
@@ -3975,8 +3975,8 @@ footer p{
   
     <!-- Cinematic services showcase (slide-wipe) -->
     <div class="svc-cinema" id="svcCinema" aria-label="Cinematic services showcase">
-      <div class="cinema-count"><span class="cinema-count-num">1</span>/<span>4</span></div>
       <div class="cinema-stage">
+        <div class="cinema-count"><span class="cinema-count-num">1</span>/<span>4</span></div>
         <div class="slide">
           <div class="slide__outer">
             <div class="slide__inner">
@@ -4064,80 +4064,7 @@ footer p{
     </div> 
   </div> 
 
-    <!-- AI Business Planner (inside Services, follows site language) -->
-    <div class="services-planner">
-<!-- AI Business Planner -->
-<div class="section-header reveal">
-      <h2 class="section-title">AI Business Planner</h2>
-      <p class="section-subtitle" id="planner-subtitle">Turn a rough idea into a structured project brief in under a minute.</p>
-    </div>
-    <div class="planner-box reveal" id="planner-box">
-      <div class="planner-badge ai-connected" id="planner-mode" data-pf="badge">AI-assisted planning &mdash; free, no sign-up</div>
-      <form class="planner-form" id="planner-form" novalidate>
-        <div class="pf-field">
-          <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
-          <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
-            placeholder="Describe your app or business idea in a few sentences..."></textarea>
-        </div>
-        <div class="pf-grid2">
-          <div class="pf-field">
-            <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
-            <input id="planner-audience" class="pf-input" type="text" maxlength="200"
-              placeholder="e.g. medical clinics, university students, local shops...">
-          </div>
-          <div class="pf-field">
-            <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
-            <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
-              <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
-              <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
-              <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
-              <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
-            </div>
-          </div>
-        </div>
-        <div class="pf-field">
-          <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
-          <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
-            placeholder="e.g. login, appointments, payments, notifications..."></textarea>
-        </div>
-        <div class="pf-grid2">
-          <div class="pf-field">
-            <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
-            <select id="planner-budget" class="pf-input">
-              <option value="" data-pf="optUnknown">Prefer not to say</option>
-              <option value="small" data-pf="optSmall">Small</option>
-              <option value="medium" data-pf="optMedium">Medium</option>
-              <option value="large" data-pf="optLarge">Large</option>
-            </select>
-          </div>
-          <div class="pf-field">
-            <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
-            <select id="planner-deadline" class="pf-input">
-              <option value="" data-pf="optUnknown">Prefer not to say</option>
-              <option value="flexible" data-pf="dlFlexible">Flexible</option>
-              <option value="1-2m" data-pf="dlSoon">1&ndash;2 months</option>
-              <option value="3-4m" data-pf="dlSoon2">3&ndash;4 months</option>
-              <option value="asap" data-pf="dlUrgent">ASAP</option>
-            </select>
-          </div>
-        </div>
-        <div class="pf-actions">
-          <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
-          <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
-        </div>
-      </form>
-      <div class="planner-result" id="planner-result">
-        <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">Fill in your idea (other fields optional) and generate a structured plan here.</div>
-        <div class="pr-state pr-loading" id="planner-loading" hidden>
-          <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
-          <span data-pf="loading">Analyzing your brief and building the plan...</span>
-        </div>
-        <div class="pr-state pr-error" id="planner-error" hidden></div>
-        <div class="pr-body" id="planner-body" dir="auto" hidden></div>
-      </div>
-    </div>
-    </div>
-  </section> 
+    </section> 
 
 <!-- Pricing Section (3 Tiers) -->
 <section id="pricing">
@@ -4222,6 +4149,83 @@ footer p{
     </div>
 
   </div>
+</section>
+
+<section id="ai-planner-section">
+<!-- AI Business Planner (below Pricing, follows site language) -->
+    <div class="services-planner">
+<!-- AI Business Planner -->
+<div class="section-header reveal">
+      <h2 class="section-title">AI Business Planner</h2>
+      <p class="section-subtitle" id="planner-subtitle">Turn a rough idea into a structured project brief in under a minute.</p>
+    </div>
+    <div class="planner-box reveal" id="planner-box">
+      <div class="planner-badge ai-connected" id="planner-mode" data-pf="badge">AI-assisted planning &mdash; free, no sign-up</div>
+      <form class="planner-form" id="planner-form" novalidate>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
+          <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
+            placeholder="Describe your app or business idea in a few sentences..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
+            <input id="planner-audience" class="pf-input" type="text" maxlength="200"
+              placeholder="e.g. medical clinics, university students, local shops...">
+          </div>
+          <div class="pf-field">
+            <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
+            <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
+              <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
+              <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
+              <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
+              <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
+            </div>
+          </div>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
+          <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
+            placeholder="e.g. login, appointments, payments, notifications..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
+            <select id="planner-budget" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="small" data-pf="optSmall">Small</option>
+              <option value="medium" data-pf="optMedium">Medium</option>
+              <option value="large" data-pf="optLarge">Large</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
+            <select id="planner-deadline" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="flexible" data-pf="dlFlexible">Flexible</option>
+              <option value="1-2m" data-pf="dlSoon">1&ndash;2 months</option>
+              <option value="3-4m" data-pf="dlSoon2">3&ndash;4 months</option>
+              <option value="asap" data-pf="dlUrgent">ASAP</option>
+            </select>
+          </div>
+        </div>
+        <div class="pf-actions">
+          <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
+          <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
+        </div>
+      </form>
+      <div class="planner-result" id="planner-result">
+        <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">Fill in your idea (other fields optional) and generate a structured plan here.</div>
+        <div class="pr-state pr-loading" id="planner-loading" hidden>
+          <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
+          <span data-pf="loading">Analyzing your brief and building the plan...</span>
+        </div>
+        <pre class="pr-preview" id="planner-preview" dir="auto" hidden></pre>
+        <div class="pr-state pr-error" id="planner-error" hidden></div>
+        <div class="pr-body" id="planner-body" dir="auto" hidden></div>
+      </div>
+    </div>
+    </div>
 </section>
 
 <!-- Contact Section (5 Cards + Form) --> 
@@ -5336,7 +5340,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v36</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v37</div>
 <script>
   var bn = document.getElementById('build-note');
   if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
@@ -5348,8 +5352,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=8" defer></script>
-<script src="assets/js/ai-planner.js?v=21" defer></script>
+<script src="assets/js/scroll-reveal.js?v=9" defer></script>
+<script src="assets/js/ai-planner.js?v=23" defer></script>
 </body> 
 </html>
 

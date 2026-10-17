@@ -8,8 +8,8 @@
 /* --- Initial hidden state (only when JS is ON) --- */
 html.js-enabled .reveal {
   opacity: 0;
-  transform: translateY(-60px) scale(0.97);
-  filter: blur(12px);
+  transform: translateY(-80px) scale(0.96);
+  filter: blur(14px);
   will-change: opacity, transform, filter;
 }
 
@@ -611,7 +611,10 @@ select.pf-input option {
 
 .svc-cinema {
   position: relative;
+  width: 100vw;
   margin: 40px 0 60px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .cinema-stage {
@@ -671,7 +674,7 @@ html.js-enabled .cinema-ready .slide__heading {
   padding: 0;
   color: #f2f1fc;
   z-index: 5;
-  mix-blend-mode: difference;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.4);
   grid-area: 1 / 1 / 5 / 11;
   align-self: end;
   line-height: 0.95;
@@ -685,6 +688,7 @@ html.js-enabled [dir='rtl'] .cinema-ready .slide__heading {
 }
 
 html.js-enabled .cinema-ready .slide__img-cont {
+  position: relative;
   margin: 0;
   grid-area: 4 / 2 / 10 / 9;
   overflow: hidden;
@@ -693,8 +697,17 @@ html.js-enabled .cinema-ready .slide__img-cont {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
+html.js-enabled .cinema-ready .slide__img-cont::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 46%;
+  background: linear-gradient(180deg, rgba(14, 6, 28, 0.6), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
 html.js-enabled .cinema-ready .slide__img {
-  width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -802,3 +815,30 @@ html.js-enabled .cinema-ready .slide:nth-of-type(4) .slide__content { background
 @media (prefers-reduced-motion: reduce) {
   .cinema-count { display: none !important; }
 }
+
+/* AI planner standalone section (moved below Pricing) */
+#ai-planner-section .services-planner {
+  margin-top: 0;
+}
+
+/* Live streaming preview while AI generates */
+.pr-preview {
+  display: block;
+  max-height: 230px;
+  overflow: auto;
+  margin-top: 12px;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  background: rgba(124, 58, 237, 0.07);
+  border: 1px dashed rgba(124, 58, 237, 0.35);
+  border-radius: 12px;
+  direction: ltr;
+  text-align: left;
+}
+.pr-preview[hidden] { display: none; }
+[dir='rtl'] .pr-preview { direction: rtl; text-align: right; }

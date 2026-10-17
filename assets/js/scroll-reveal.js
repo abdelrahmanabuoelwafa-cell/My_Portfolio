@@ -31,11 +31,11 @@
   document.documentElement.classList.add('js-enabled');
   gsap.registerPlugin(ScrollTrigger);
 
-  var SCRUB = mobile ? 1.2 : 1.8;          /* Heavy smoothing = slow-motion cinematic trail */
-  var HDR_Y = mobile ? 110 : 200;          /* Dramatic header travel */
-  var CARD_Y = mobile ? 90 : 140;          /* Dramatic card travel */
-  var HDR_BLUR = mobile ? 10 : 16;         /* Deep blur for slow-motion focus pull */
-  var CARD_BLUR = mobile ? 9 : 14;
+  var SCRUB = mobile ? 1.6 : 2.4;          /* Heavy smoothing = slow-motion cinematic trail */
+  var HDR_Y = mobile ? 130 : 260;          /* Dramatic header travel */
+  var CARD_Y = mobile ? 110 : 200;         /* Dramatic card travel */
+  var HDR_BLUR = mobile ? 12 : 22;         /* Deep blur for slow-motion focus pull */
+  var CARD_BLUR = mobile ? 11 : 18;
 
   /* ============================================================
      HERO ENTRANCE — on page load (above the fold)
@@ -121,8 +121,8 @@
         ease: 'none',
         scrollTrigger: {
           trigger: el,
-          start: 'top 120%',
-          end: 'top 25%',
+          start: 'top 140%',
+          end: 'top 12%',
           scrub: SCRUB
         }
       }
@@ -146,8 +146,8 @@
 
     Object.keys(groups).forEach(function (k) {
       groups[k].items.forEach(function (el, i) {
-        var startPct = Math.max(50, 98 - i * 7);
-        var endPct = Math.max(8, startPct - 55);
+        var startPct = Math.max(45, 108 - i * 9);
+        var endPct = Math.max(4, startPct - 100);
         gsap.fromTo(el,
           { opacity: 0, y: -CARD_Y, scale: scaleFrom, filter: 'blur(' + CARD_BLUR + 'px)' },
           {
