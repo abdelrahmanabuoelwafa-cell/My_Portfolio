@@ -9,8 +9,7 @@
 html.js-enabled .reveal {
   opacity: 0;
   transform: translateY(-80px) scale(0.96);
-  filter: blur(14px);
-  will-change: opacity, transform, filter;
+  will-change: opacity, transform;
 }
 
 html.js-enabled .reveal.is-visible {
@@ -20,10 +19,8 @@ html.js-enabled .reveal.is-visible {
   will-change: auto;
 }
 
-/* Blur is animated by GSAP scrub tweens (inline filter).
-   Do NOT put filter:none !important here — it would override GSAP.
-   Permanent-blur regression is prevented by the tweens ending at blur(0)
-   and by the reduced-motion / no-JS hard resets below. */
+/* LIGHT MODE: blur removed from scroll reveals — GSAP scrub tweens
+   own opacity/transform only, so no CSS blur can linger after reveal */
 
 /* GSAP owns hero entrance + scrubbed scroll-out; disable CSS
    keyframes to avoid double animation and scrub handoff glitches */
