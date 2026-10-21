@@ -31,11 +31,11 @@
   document.documentElement.classList.add('js-enabled');
   gsap.registerPlugin(ScrollTrigger);
 
-  var SCRUB = mobile ? 1.6 : 2.4;          /* Heavy smoothing = slow-motion cinematic trail */
-  var HDR_Y = mobile ? 130 : 260;          /* Dramatic header travel */
-  var CARD_Y = mobile ? 110 : 200;         /* Dramatic card travel */
-  var HDR_BLUR = mobile ? 12 : 22;         /* Deep blur for slow-motion focus pull */
-  var CARD_BLUR = mobile ? 11 : 18;
+  var SCRUB = mobile ? 0.3 : 0.3;          /* LIGHT MODE: minimal smoothing */
+  var HDR_Y = mobile ? 18 : 30;            /* LIGHT MODE: short travel */
+  var CARD_Y = mobile ? 14 : 24;           /* LIGHT MODE: short travel */
+  var HDR_BLUR = 0;                        /* LIGHT MODE: no blur */
+  var CARD_BLUR = 0;                       /* LIGHT MODE: no blur */
 
   /* ============================================================
      HERO ENTRANCE — on page load (above the fold)
@@ -43,13 +43,13 @@
      ============================================================ */
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
-    .from('.hero-top-image', { duration: mobile ? 0.8 : 1.4, opacity: 0, scale: 0.4, y: -60, filter: 'blur(20px)' })
-    .from('.hero-name', { duration: mobile ? 0.7 : 1.2, opacity: 0, y: -70, scale: 0.85, filter: 'blur(16px)' }, '-=0.5')
-    .from('.typing-container', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.4')
-    .from('.hero-badge', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-desc', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-buttons', { duration: mobile ? 0.6 : 1.0, opacity: 0, y: -50, scale: 0.9, filter: 'blur(12px)' }, '-=0.3')
-    .from('.hero-scroll-cue', { duration: mobile ? 0.5 : 0.8, opacity: 0, y: -24, filter: 'blur(8px)' }, '-=0.3');
+    .from('.hero-top-image', { duration: mobile ? 0.4 : 0.6, opacity: 0, scale: 0.94, y: -12 })
+    .from('.hero-name', { duration: mobile ? 0.35 : 0.5, opacity: 0, y: -14 }, '-=0.25')
+    .from('.typing-container', { duration: mobile ? 0.3 : 0.45, opacity: 0, y: -10 }, '-=0.15')
+    .from('.hero-badge', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
+    .from('.hero-desc', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
+    .from('.hero-buttons', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
+    .from('.hero-scroll-cue', { duration: 0.3, opacity: 0, y: -6 }, '-=0.15');
 
   /* ============================================================
      HERO SCROLL-OUT — layered scrubbed parallax
@@ -107,12 +107,12 @@
   });
 
   /* ============================================================
-     SECTION HEADERS — long-range scrubbed rise-in
-     Enhanced with blur for slow-motion effect
+     SECTION HEADERS — lightweight scrubbed rise-in
+     Reduced blur and range for better performance
      ============================================================ */
   document.querySelectorAll('.section-header.reveal').forEach(function (el) {
     gsap.fromTo(el,
-      { opacity: 0, y: -HDR_Y, scale: 0.92, filter: 'blur(' + HDR_BLUR + 'px)' },
+      { opacity: 0, y: -HDR_Y * 0.5, scale: 0.96, filter: 'blur(' + HDR_BLUR * 0.5 + 'px)' },
       {
         opacity: 1,
         y: 0,
@@ -121,8 +121,8 @@
         ease: 'none',
         scrollTrigger: {
           trigger: el,
-          start: 'top 140%',
-          end: 'top 12%',
+          start: 'top 110%',
+          end: 'top 70%',
           scrub: SCRUB
         }
       }
@@ -131,7 +131,6 @@
 
   /* ============================================================
      GENERIC CARDS / BLOCKS — staggered scrubbed ranges
-     Enhanced with blur and scale for dramatic reveals
      ============================================================ */
   function scrubGroup(selector, scaleFrom) {
     var els = Array.prototype.slice.call(document.querySelectorAll(selector));
@@ -146,10 +145,10 @@
 
     Object.keys(groups).forEach(function (k) {
       groups[k].items.forEach(function (el, i) {
-        var startPct = Math.max(45, 108 - i * 9);
-        var endPct = Math.max(4, startPct - 100);
+        var startPct = Math.max(80, 98 - i * 6);
+        var endPct = Math.max(45, startPct - 25);
         gsap.fromTo(el,
-          { opacity: 0, y: -CARD_Y, scale: scaleFrom, filter: 'blur(' + CARD_BLUR + 'px)' },
+          { opacity: 0, y: -CARD_Y * 0.6, scale: Math.max(scaleFrom, 0.97), filter: 'blur(' + CARD_BLUR * 0.5 + 'px)' },
           {
             opacity: 1,
             y: 0,
@@ -189,17 +188,16 @@
     var startPct = Math.max(55, 98 - idx * 4);
 
     gsap.fromTo(el,
-      { opacity: 0, y: -(CARD_Y + 40), scale: 0.85, filter: 'blur(16px)' },
+      { opacity: 0, y: -(CARD_Y + 10), scale: 0.96 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: el,
           start: 'top ' + startPct + '%',
-          end: 'center 35%',
+          end: 'top 65%',
           scrub: SCRUB
         }
       }
@@ -208,15 +206,14 @@
     var img = el.querySelector('.project-image img');
     if (img) {
       gsap.fromTo(img,
-        { scale: 0.72, filter: 'blur(10px)' },
+        { scale: 0.96 },
         {
           scale: 1,
-          filter: 'blur(0px)',
           ease: 'none',
           scrollTrigger: {
             trigger: el,
-            start: 'top 120%',
-            end: 'center 30%',
+            start: 'top 110%',
+            end: 'top 55%',
             scrub: SCRUB
           }
         }
@@ -232,17 +229,16 @@
   if (aboutImg) {
     var aboutWrap = aboutImg.closest('.about-grid') || aboutImg;
     gsap.fromTo(aboutImg,
-      { opacity: 0, yPercent: mobile ? 0 : -24, scale: 0.84, filter: 'blur(14px)' },
+      { opacity: 0, yPercent: mobile ? 0 : -8, scale: 0.96 },
       {
         opacity: 1,
-        yPercent: mobile ? 0 : 18,
+        yPercent: mobile ? 0 : 6,
         scale: 1,
-        filter: 'blur(0px)',
         ease: 'none',
         scrollTrigger: {
           trigger: aboutWrap,
           start: 'top 105%',
-          end: 'bottom 15%',
+          end: 'bottom 25%',
           scrub: SCRUB
         }
       }
@@ -284,14 +280,8 @@
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 
   /* ============================================================
-     IDLE BREATHING — slow continuous motion so the page feels
-     alive even when the user is not scrolling
+     IDLE BREATHING — disabled (LIGHT MODE, temporary)
      ============================================================ */
-  if (!mobile) {
-    gsap.to('.hero-scroll-cue', { y: 14, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.top-img-container', { scale: 1.035, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.hero-badge', { y: 8, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.4 });
-  }
 
 
   /* ============================================================
@@ -331,7 +321,7 @@
         trigger: cinema,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.8,
+        scrub: 0.35,
         onUpdate: function (self) {
           if (countEl) countEl.textContent = String(Math.min(N, 1 + Math.round(self.progress * (N - 1))));
         }
@@ -360,7 +350,7 @@
       if (target) {
         e.preventDefault();
         gsap.to(window, {
-          duration: 1.0,
+          duration: 0.6,
           scrollTo: { y: target, offsetY: 80 },
           ease: 'power2.inOut'
         });

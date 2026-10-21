@@ -715,7 +715,7 @@ html.js-enabled .cinema-ready .slide__img {
 
 .cinema-count {
   position: absolute;
-  top: 6vh;
+  top: 96px;
   right: 4vw;
   z-index: 20;
   font-family: 'Bandeins Strange', var(--font);

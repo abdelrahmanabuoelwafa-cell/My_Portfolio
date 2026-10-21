@@ -10,7 +10,7 @@
 
   var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
   var AI_MODEL = 'Qwen3.6-27B';
-  var TIMEOUT_MS = 120000;
+  var TIMEOUT_MS = 30000;
   var MAX_IDEA = 2500;
   var PREFILL = {
     ar: '1) ملخص المشروع\n2) المشكلة والحل\n3) المستخدمون المستهدفون\n4) مميزات النسخة الأولية MVP\n5) مميزات مستقبلية\n6) التقنيات المقترحة مع سبب الاختيار\n7) مراحل التنفيذ والجدول الزمني\n8) المخاطر والافتراضات والأسئلة المفتوحة\n9) الخطوات التالية\n',
@@ -425,54 +425,25 @@
   });
 
   /* ---- language switches ---- */
-  /* ---- persist drafts across the English-mode reload ---- */
-  (function persistDrafts() {
+
+  /* ---- clear form on fresh load (client requested) ---- */
+  function clearForm() {
+    if (ideaEl) ideaEl.value = '';
+    if (audEl) audEl.value = '';
+    if (featEl) featEl.value = '';
+    if (budgetEl) budgetEl.value = '';
+    if (deadlineEl) deadlineEl.value = '';
+    chips.forEach(function (c) {
+      c.classList.remove('on');
+      c.setAttribute('aria-pressed', 'false');
+    });
     try {
-      var textIds = ['planner-idea', 'planner-audience', 'planner-features'];
-      textIds.forEach(function (id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        var key = 'pfDraft:' + id;
-        var saved = sessionStorage.getItem(key);
-        if (saved && !el.value) el.value = saved;
-        el.addEventListener('input', function () {
-          try { sessionStorage.setItem(key, el.value); } catch (e) {}
-        });
-      });
-      ['planner-budget', 'planner-deadline'].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        var key = 'pfDraft:' + id;
-        var saved = sessionStorage.getItem(key);
-        if (saved) el.value = saved;
-        el.addEventListener('change', function () {
-          try { sessionStorage.setItem(key, el.value); } catch (e) {}
-        });
-      });
-      var chipKey = 'pfDraft:chips';
-      var savedChips = sessionStorage.getItem(chipKey);
-      if (savedChips) {
-        var on = savedChips.split('|');
-        chips.forEach(function (c) {
-          var v = c.getAttribute('data-v');
-          if (on.indexOf(v) !== -1) {
-            c.classList.add('on');
-            c.setAttribute('aria-pressed', 'true');
-          }
-        });
-      }
-      chips.forEach(function (c) {
-        c.addEventListener('click', function () {
-          try {
-            sessionStorage.setItem(chipKey, chips.filter(function (x) { return x.classList.contains('on'); })
-              .map(function (x) { return x.getAttribute('data-v'); }).join('|'));
-          } catch (e) {}
-        });
-      });
+      sessionStorage.clear();
     } catch (e) {}
-  })();
+  }
 
   /* ---- init ---- */
   applyStrings();
+  clearForm();
   showState('empty');
 })();
