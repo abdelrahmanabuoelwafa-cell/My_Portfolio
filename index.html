@@ -460,15 +460,17 @@ body::after{
 .brand-mark{
   width:clamp(42px,3.6vw,54px);
   height:clamp(42px,3.6vw,54px);
-  object-fit:contain;
-  background:#fff;
-  border-radius:10px;
+  object-fit:cover;
+  background:transparent;
+  border-radius:50%;
+  border:2px solid rgba(168,85,247,.45);
+  box-shadow:0 0 0 3px rgba(168,85,247,.12), 0 4px 14px rgba(0,0,0,.35);
   flex-shrink:0;
-  transition:transform .3s cubic-bezier(.4,0,.2,1), filter .3s;
+  transition:transform .3s cubic-bezier(.4,0,.2,1), filter .3s, box-shadow .3s, border-color .3s;
 }
 .brand-mark .eng-accent{transition:filter .3s}
 .brand-mark .eng-cursor{transition:opacity .3s}
-.brand:hover .brand-mark{transform:scale(1.06) rotate(-2deg);filter:drop-shadow(0 0 10px rgba(168,85,247,.65))}
+.brand:hover .brand-mark{transform:scale(1.06) rotate(-2deg);filter:drop-shadow(0 0 10px rgba(168,85,247,.65));border-color:var(--neon,#a855f7);box-shadow:0 0 0 3px rgba(168,85,247,.25), 0 6px 20px rgba(168,85,247,.35)}
 .brand:hover .brand-mark .eng-accent{filter:drop-shadow(0 0 5px rgba(34,211,238,.85))}
 .brand-name{
   display:flex;
@@ -2427,7 +2429,7 @@ footer p{
 }
 .footer-logo .code-bracket{color:var(--muted);font-size:20px;font-weight:700}
 .footer-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)}
-.footer-logo-img{width:72px;height:72px;object-fit:contain;background:#fff;border-radius:14px;margin-bottom:10px}
+.footer-logo-img{width:72px;height:72px;object-fit:cover;background:transparent;border-radius:50%;border:2px solid rgba(168,85,247,.45);box-shadow:0 0 0 3px rgba(168,85,247,.12);margin-bottom:10px}
 .footer-subtitle{margin-bottom:20px}
 .right-col{text-align:right}
 .freelance-platforms{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
@@ -3632,7 +3634,7 @@ footer p{
 }
 </style> 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=9">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=10">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -3665,7 +3667,7 @@ footer p{
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <img class="brand-mark" src="images/logo.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024">
+    <img class="brand-mark" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024">
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
       <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
@@ -4616,7 +4618,7 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <img class="footer-logo-img" src="images/logo.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
+      <img class="footer-logo-img" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
@@ -4653,9 +4655,9 @@ footer p{
 </div>
 
 <!-- Three.js & Libraries --> 
-<script src="js/neon-border.js?v=24"></script> 
-<script src="js/tornado.js?v=24"></script> 
-<script src="js/firework-cursor.js?v=25"></script>
+<script src="js/neon-border.js?v=25"></script> 
+<script src="js/tornado.js?v=25"></script> 
+<script src="js/firework-cursor.js?v=26"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -5392,8 +5394,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function setAllText(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'text'); el.textContent = arr[i]; } }); }
   function setAllHtml(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'html'); el.innerHTML = arr[i]; } }); }
   function setPh(id, v){ var el = document.getElementById(id); if (el){ memo(el, 'ph'); el.placeholder = v; } }
-  function setAttr(selector, name, value){ $(selector).forEach(function(el){ var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, value); }); }
-  function setAllAttr(selector, name, values){ $(selector).forEach(function(el,i){ if (values[i] === undefined) return; var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, values[i]); }); }
+  function setAttr(selector, name, value){ $$(selector).forEach(function(el){ var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, value); }); }
+  function setAllAttr(selector, name, values){ $$(selector).forEach(function(el,i){ if (values[i] === undefined) return; var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, values[i]); }); }
   function restoreAttrs(){ memoAttrs.forEach(function(item){ if (item.value === null) item.el.removeAttribute(item.name); else item.el.setAttribute(item.name, item.value); }); memoAttrs.length = 0; }
 
   function applyArabic(){
@@ -5754,8 +5756,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=13" defer></script>
-<script src="assets/js/ai-planner.js?v=28" defer></script>
+<script src="assets/js/scroll-reveal.js?v=14" defer></script>
+<script src="assets/js/ai-planner.js?v=29" defer></script>
 </body> 
 </html>
 
