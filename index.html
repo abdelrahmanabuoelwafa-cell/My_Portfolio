@@ -690,22 +690,21 @@ body::after{
   position:absolute; 
   bottom:0; 
   right:0; 
-  min-width:92px;
-  min-height:36px;
-  padding:6px 10px;
+  width:46px;
+  height:46px;
+  padding:0;
   background:var(--card-bg); 
   border:2px solid var(--neon); 
-  border-radius:999px;
+  border-radius:50%;
   display:flex; 
   align-items:center; 
   justify-content:center; 
-  font-size:11px;
-  font-weight:800;
-  white-space:nowrap;
+  font-size:20px;
   box-shadow:0 0 20px rgba(168,85,247,.5); 
-  animation:bounce 2s infinite; 
   z-index:10; 
 } 
+.lab-icon{color:var(--accent);animation:labIconPulse 2.2s ease-in-out infinite}
+@keyframes labIconPulse{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-3px) rotate(-8deg) scale(1.12)}}
 @keyframes bounce{ 
   0%,100%{transform:translateY(0)} 
   50%{transform:translateY(-10px)} 
@@ -899,8 +898,8 @@ body::after{
 } 
 
 /* Sections */ 
-section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-index:1} 
-.section-header{text-align:center;margin-bottom:60px} 
+section{padding:clamp(40px,6vw,72px) clamp(16px,5vw,60px);position:relative;z-index:1} 
+.section-header{text-align:center;margin-bottom:36px} 
 .section-label{ 
   display:inline-flex; 
   align-items:center; 
@@ -962,10 +961,10 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   z-index: 2;
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 } 
-.about-detail-stack{display:grid;gap:10px;margin:18px 0}
-.about-detail-stack>div{padding:12px 14px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px}
-.about-detail-label{font-size:14px;color:var(--accent);margin-bottom:3px}
-.about-detail-copy{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.about-detail-stack{display:grid;gap:14px;margin:24px 0}
+.about-detail-stack>div{position:relative;overflow:hidden;padding:22px 24px;background:linear-gradient(135deg,#0B0F1E 0%,#141033 55%,#1E1040 100%);border:1px solid rgba(168,85,247,.28);border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,.16)}
+.about-detail-label{font-size:21px;color:#C084FC;margin:0 0 8px}
+.about-detail-stack .about-detail-copy{margin:0;color:var(--text);font-size:19px;line-height:1.7}
 .about-image:hover {
   transform:scale(1.03); 
 }
@@ -980,7 +979,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   width:100%; 
   height:100%; 
   object-fit:cover; 
-  object-position:center 18%;
+  object-position:center 28%;
 } 
 /* Image protection: keep visuals identical, block casual download/drag/select */
 .protected-img{
@@ -1023,6 +1022,34 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   line-height:1.8; 
   margin-bottom:20px; 
 } 
+/* --- Who I Am banner --- */
+.whoiam-banner{position:relative;overflow:hidden;border:1px solid rgba(168,85,247,.28);border-radius:20px;background:linear-gradient(135deg,#0B0F1E 0%,#141033 55%,#1E1040 100%);padding:clamp(28px,3.6vw,42px) clamp(24px,4vw,48px);margin-bottom:28px}
+.whoiam-banner::before{content:"";position:absolute;top:-70px;left:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.28),transparent 70%);pointer-events:none}
+.whoiam-banner::after{content:"";position:absolute;bottom:-80px;right:-50px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.16),transparent 70%);pointer-events:none}
+.whoiam-label{display:inline-block;font-size:14px;letter-spacing:2px;font-weight:800;color:#C084FC;border:1px solid rgba(192,132,252,.4);border-radius:999px;padding:7px 16px;margin-bottom:20px}
+.whoiam-banner .whoiam-line1{font-family:var(--font-heading);font-size:clamp(22px,2.7vw,34px);font-weight:900;color:var(--text);line-height:1.4;margin:0 0 16px}
+.whoiam-banner .whoiam-line2,.whoiam-banner .whoiam-line3{font-size:clamp(17px,1.65vw,20px);color:var(--muted);line-height:1.8;margin:0 0 12px}
+.whoiam-banner .whoiam-line3{margin-bottom:0}
+.whoiam-edge{color:var(--text)}
+.hl-cyan{color:#22D3EE;font-weight:700}
+.hl-purple{color:#C084FC;font-weight:700}
+.hl-green{color:#34D399;font-weight:700}
+.hl-orange{color:#FB923C;font-weight:700}
+[data-theme="light"] .whoiam-banner,[data-theme="light"] .about-detail-stack>div{background:linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 60%,#E0E7FF 100%);border-color:rgba(147,51,234,.25)}
+[data-theme="light"] .whoiam-line1,[data-theme="light"] .whoiam-edge{color:#1E293B}
+[data-theme="light"] .whoiam-line2,[data-theme="light"] .whoiam-line3{color:#475569}
+[data-theme="light"] .hl-cyan{color:#0891B2}
+[data-theme="light"] .hl-purple{color:#7C3AED}
+[data-theme="light"] .hl-green{color:#059669}
+[data-theme="light"] .hl-orange{color:#C2410C}
+@media(max-width:600px){
+  .whoiam-banner{padding:26px 22px}
+  .whoiam-banner .whoiam-line1{font-size:23px}
+  .whoiam-banner .whoiam-line2,.whoiam-banner .whoiam-line3{font-size:17px}
+  .about-detail-stack>div{padding:20px}
+  .about-detail-label{font-size:20px}
+  .about-detail-stack .about-detail-copy{font-size:18px}
+}
 .languages-section{ 
   margin-top:40px; 
   padding-top:40px; 
@@ -1293,11 +1320,6 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
 .soft-skill-card > i{font-size:22px;color:#22D3EE}
 .soft-skill-card h4{font-size:16px}
 .soft-skill-tag{width:max-content;padding:3px 9px;border:1px solid rgba(34,211,238,.35);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700}
-.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.achievement-cert{display:flex;align-items:center;gap:16px;min-height:108px}
-.achievement-cert img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:10px;padding:5px}
-.achievement-cert h3{font-size:18px;margin-bottom:4px}
-.achievement-cert p{font-size:13px;color:var(--muted)}
 .skills-desc{ 
   max-width:680px;margin:0 auto 24px;text-align:center; 
   padding:16px 22px;border-radius:14px; 
@@ -2138,6 +2160,12 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   flex-direction:column; 
   gap:16px; 
 } 
+/* --- Contact social icons --- */
+.contact-social-row{display:flex;gap:14px;margin-top:20px}
+.social-pill{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:21px;color:var(--text);background:var(--card-bg);border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s,color .2s}
+.social-pill.social-whatsapp:hover{color:#25D366;border-color:#25D366;box-shadow:0 10px 24px rgba(37,211,102,.35);transform:translateY(-4px)}
+.social-pill.social-linkedin:hover{color:#0A66C2;border-color:#0A66C2;box-shadow:0 10px 24px rgba(10,102,194,.35);transform:translateY(-4px)}
+.social-pill.social-github:hover{color:var(--neon);border-color:var(--neon);box-shadow:0 10px 24px rgba(168,85,247,.35);transform:translateY(-4px)}
 .contact-link{ 
   display:flex; 
   align-items:center; 
@@ -2403,21 +2431,9 @@ footer p{
 .footer-subtitle{margin-bottom:20px}
 .right-col{text-align:right}
 .freelance-platforms{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.platform-icon{
-  width:50px;height:50px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  padding:4px;
-  overflow:hidden;
-  transition:all .3s cubic-bezier(0.4,0,0.2,1);
-}
-.platform-icon:hover{border-color:var(--platform-color,var(--neon));transform:translateY(-4px);box-shadow:0 12px 28px color-mix(in srgb,var(--platform-color,var(--neon)) 45%,transparent)}
-.platform-icon img{width:100%;height:100%;object-fit:cover;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
-.platform-icon svg{width:100%;height:100%;display:block;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
-.platform-icon:hover img{transform:scale(1.12)}
-.platform-icon:hover svg{transform:scale(1.08)}
+.platform-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s}
+.platform-icon img{width:100%;height:100%;object-fit:contain;padding:6px;box-sizing:border-box}
+.platform-icon:hover{transform:translateY(-4px);border-color:var(--platform-color,var(--neon));box-shadow:0 10px 24px color-mix(in srgb,var(--platform-color,var(--neon)) 45%,transparent)}
 .contact-link-actions a{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:rgba(168,85,247,.08);color:var(--text);border-radius:9px;padding:8px 12px;font-weight:700;min-height:40px}
 .contact-link-actions a:hover{border-color:var(--neon);color:var(--neon)}
 .footer-copy{
@@ -2428,12 +2444,6 @@ footer p{
   font-size:14px;
   margin:0;
 }
-.find-me{position:relative;z-index:1;padding:34px 5%;text-align:center;border-top:1px solid var(--border);background:rgba(10,10,15,.72)}
-.find-me h2{font-size:clamp(19px,2vw,25px);margin-bottom:18px}
-.find-me-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;max-width:820px;margin:auto}
-.find-me-tile{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:15px;background:var(--card-bg);color:var(--text);font-weight:800;transition:transform .2s,box-shadow .2s,border-color .2s}
-.find-me-tile:hover{transform:translateY(-4px);border-color:var(--platform-color,var(--neon));box-shadow:0 10px 24px color-mix(in srgb,var(--platform-color,var(--neon)) 45%,transparent)}
-.find-me-tile span{font-size:12px}
 [data-theme="light"] .premium-footer{background:rgba(255,251,232,.94)}
 @media(max-width:768px){
   .footer-grid{grid-template-columns:1fr;gap:36px;text-align:center}
@@ -3622,7 +3632,7 @@ footer p{
 }
 </style> 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=7">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=8">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -3685,7 +3695,7 @@ footer p{
     </div> 
   </div> 
   <div class="nav-tools"> 
-    <button class="lang-toggle-nav" id="langToggle" aria-label="Switch language" title="English / ???????"> 
+    <button class="lang-toggle-nav" id="langToggle" aria-label="Switch language" title="English / Arabic">
       <i class="fas fa-globe globe-icon" aria-hidden="true"></i> 
       <span class="lang-label" id="langLabel">AR</span> 
     </button> 
@@ -3708,7 +3718,7 @@ footer p{
         <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
-      <div class="floating-badge">متاح للعمل</div>
+      <div class="floating-badge" role="img" aria-label="Development workspace"><i class="fas fa-laptop-code lab-icon" aria-hidden="true"></i></div>
     </div> 
 
     <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
@@ -3756,41 +3766,18 @@ footer p{
   </div> 
   <div class="about-grid"> 
     <div class="about-content reveal"> 
-      <p class="about-hook">Cross-platform MVPs, built with clean architecture and delivered fast.</p>
-      <h3>Who I Am</h3>
-      <p> 
-        I'm <strong>Abdelrahman Abdullah</strong>, a dedicated Flutter developer based in Cairo, Egypt. I specialize in transforming complex ideas into elegant, high-performance mobile applications that users love. 
-      </p> 
-      <p class="about-usp">I help startups and small businesses turn ideas into reliable cross-platform MVPs—using clean architecture, ITI and DEPI training, and a fast, focused delivery process.</p>
+      <div class="whoiam-banner reveal">
+        <div class="whoiam-label">WHO I AM</div>
+        <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
+        <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
+        <p class="whoiam-line3"><strong class="whoiam-edge">My Edge:</strong> practical, verified training — Full-Stack &amp; Flutter at <span class="hl-orange">DEPI</span> and <span class="hl-cyan">ITI</span>, plus a <span class="hl-purple">B.Sc. in Computer Science &amp; AI</span> at <strong class="whoiam-edge">MTI</strong>.</p>
+      </div>
       <div class="about-detail-stack">
         <div><h4 class="about-detail-label">Experience</h4><p class="about-detail-copy">Training through ITI and DEPI in full-stack development and Flutter.</p></div>
         <div><h4 class="about-detail-label">Tech Stack</h4><p class="about-detail-copy">Flutter, Dart, Firebase, REST APIs, and clean architecture.</p></div>
         <div><h4 class="about-detail-label">Education</h4><p class="about-detail-copy">B.Sc. Computer Science &amp; Artificial Intelligence at MTI, 2024 — 2028.</p></div>
       </div>
 
-      <div class="languages-section"> 
-        <div class="languages-title"> 
-          <i class="fas fa-language"></i> Languages 
-        </div> 
-        <div class="languages-grid"> 
-          <div class="language-card"> 
-            <div class="lang-icon">ع</div>
-            <div class="lang-info"> 
-              <h4>العربية</h4>
-              <p>Native Language</p> 
-              <span class="lang-level">Native</span> 
-            </div> 
-          </div> 
-          <div class="language-card"> 
-            <div class="lang-icon">EN</div>
-            <div class="lang-info"> 
-              <h4>الإنجليزية</h4>
-              <p>Professional Proficiency</p> 
-              <span class="lang-level">Professional</span> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
     </div> 
     <div class="about-image reveal"> 
       <div class="about-img-container"> 
@@ -4258,10 +4245,6 @@ footer p{
     <div class="stat-card reveal"><div class="stat-value">2</div><div class="stat-label">Intensive Training Programs</div></div>
     <div class="stat-card reveal"><div class="stat-value">100%</div><div class="stat-label">Commitment to Clean Code</div></div>
   </div>
-  <div class="achievement-grid" style="margin-top:24px">
-    <article class="car-card reveal achievement-cert"><img src="images/iti.png" alt="ITI logo" width="750" height="430" loading="lazy"><div><h3>ITI</h3><p>Full-Stack Development Training</p></div></article>
-    <article class="car-card reveal achievement-cert"><img src="images/depi.png" alt="DEPI logo" width="558" height="558" loading="lazy"><div><h3>DEPI</h3><p>Flutter Development Training</p></div></article>
-  </div>
 </section>
 
 <!-- Testimonials Section -->
@@ -4569,14 +4552,6 @@ footer p{
           <div class="contact-link-actions"><button type="button" data-copy="abdulrahman.abuoshaifa@gmail.com">Copy</button><a href="mailto:abdulrahman.abuoshaifa@gmail.com">Open</a></div>
         </div>
         <div class="contact-link contact-link-card">
-          <i class="fab fa-whatsapp" style="color:#25d366;"></i> 
-          <div class="contact-link-copy">
-            <strong>WhatsApp</strong> 
-            <span>+20 112 303 1944</span> 
-          </div> 
-          <div class="contact-link-actions"><button type="button" data-copy="+201123031944">Copy</button><a href="https://wa.me/201123031944" target="_blank" rel="noopener">Open</a></div>
-        </div>
-        <div class="contact-link contact-link-card">
           <i class="fas fa-phone-alt"></i> 
           <div class="contact-link-copy">
             <strong>Phone</strong> 
@@ -4584,21 +4559,12 @@ footer p{
           </div> 
           <div class="contact-link-actions"><button type="button" data-copy="+201123031944">Copy</button><a href="tel:+201123031944">Open</a></div>
         </div>
-        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" class="contact-link"> 
-          <i class="fab fa-linkedin-in" style="color:#0077b5;"></i> 
-          <div> 
-            <strong>LinkedIn</strong> 
-            <span>Abdulrahman Abdullah</span> 
-          </div> 
-        </a> 
-        <a href="https://github.com/abdelrahmanabuoelwafa-cell" class="contact-link"> 
-          <i class="fab fa-github"></i> 
-          <div> 
-            <strong>GitHub</strong> 
-            <span>@abdelrahmanabuoelwafa-cell</span> 
-          </div> 
-        </a> 
       </div> 
+      <div class="contact-social-row">
+        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="social-pill social-whatsapp" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" target="_blank" rel="noopener" class="social-pill social-linkedin" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://github.com/abdelrahmanabuoelwafa-cell" target="_blank" rel="noopener" class="social-pill social-github" aria-label="GitHub" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      </div>
     </div> 
 
     <div class="interactive-lamp-side" id="interactiveSide">
@@ -4637,23 +4603,6 @@ footer p{
   </div> 
 </section> 
 
-<!-- Find Me On -->
-<section class="find-me" aria-labelledby="find-me-title">
-  <h2 id="find-me-title">Find Me <span class="gradient-text">On</span></h2>
-  <div class="find-me-grid">
-    <a class="find-me-tile" href="#" target="_self" data-platform="Upwork" rel="noopener" aria-label="Upwork profile URL placeholder" style="--platform-color:#14a800"><span>Up</span></a>
-    <a class="find-me-tile" href="#" data-platform="Fiverr" rel="noopener" aria-label="Fiverr profile URL placeholder" style="--platform-color:#1dbf73"><span>Fi</span></a>
-    <a class="find-me-tile" href="#" data-platform="Freelancer" rel="noopener" aria-label="Freelancer profile URL placeholder" style="--platform-color:#1686d9"><span>Fr</span></a>
-    <a class="find-me-tile" href="#" data-platform="Khamsat" rel="noopener" aria-label="Khamsat profile URL placeholder" style="--platform-color:#f6a623"><span>5</span></a>
-    <a class="find-me-tile" href="#" target="_self" data-platform="Mostaql" rel="noopener" aria-label="Mostaql profile URL placeholder" style="--platform-color:#25a9e0"><span>Mo</span></a>
-    <a class="find-me-tile" href="#" data-platform="Nafezly" rel="noopener" aria-label="Nafezly profile URL placeholder" style="--platform-color:#14b8a6"><span>Na</span></a>
-    <a class="find-me-tile" href="#" data-platform="Guru" rel="noopener" aria-label="Guru profile URL placeholder" style="--platform-color:#4d8b31"><span>Gu</span></a>
-    <a class="find-me-tile" href="#" data-platform="LinkedIn" rel="noopener" aria-label="LinkedIn profile URL placeholder" style="--platform-color:#0a66c2"><span>in</span></a>
-    <a class="find-me-tile" href="#" data-platform="GitHub" rel="noopener" aria-label="GitHub profile URL placeholder" style="--platform-color:#8b5cf6"><span>GH</span></a>
-    <a class="find-me-tile" href="#" data-platform="YouTube" rel="noopener" aria-label="YouTube channel URL placeholder" style="--platform-color:#ff0033"><span>YT</span></a>
-  </div>
-</section>
-
 <!-- Footer --> 
 <footer class="premium-footer"> 
   <div class="footer-grid">
@@ -4671,19 +4620,16 @@ footer p{
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Khamsat"><title>Khamsat</title><rect width="64" height="64" rx="14" fill="#f6a623"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">5</text></svg>
+          <img src="images/platforms/khamsat.png" alt="Khamsat" loading="lazy" width="52" height="52">
         </a>
         <a href="https://nafezly.com/u/ENGabdelrahamn" class="platform-icon" target="_blank" rel="noopener" title="Nafezly" aria-label="Nafezly" style="--platform-color:#14b8a6">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Nafezly"><title>Nafezly</title><rect width="64" height="64" rx="14" fill="#14b8a6"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#fff">ن</text></svg>
-        </a>
-        <a href="MOSTAQL_URL_HERE" class="platform-icon" target="_blank" rel="noopener" title="Mostaql" aria-label="Mostaql" style="--platform-color:#25a9e0">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Mostaql"><title>Mostaql</title><rect width="64" height="64" rx="14" fill="#25a9e0"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#fff">م</text></svg>
+          <img src="images/platforms/nafezly.png" alt="Nafezly" loading="lazy" width="52" height="52">
         </a>
         <a href="https://www.freelancer.com/u/abdelrahmana089" class="platform-icon" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer" style="--platform-color:#1686d9">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Freelancer"><title>Freelancer</title><rect width="64" height="64" rx="14" fill="#1686d9"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">F</text></svg>
+          <img src="images/platforms/freelancer.png" alt="Freelancer" loading="lazy" width="52" height="52">
         </a>
         <a href="https://rebhy.com/freelancers/abdelrahman_aboelwafa" class="platform-icon" target="_blank" rel="noopener" title="Rebhy" aria-label="Rebhy" style="--platform-color:#8b5cf6">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Rebhy"><title>Rebhy</title><rect width="64" height="64" rx="14" fill="#8b5cf6"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">R</text></svg>
+          <img src="images/platforms/rebhy.png" alt="Rebhy" loading="lazy" width="52" height="52">
         </a>
       </div>
     </div>
@@ -4704,9 +4650,9 @@ footer p{
 </div>
 
 <!-- Three.js & Libraries --> 
-<script src="js/neon-border.js?v=22"></script> 
-<script src="js/tornado.js?v=22"></script> 
-<script src="js/firework-cursor.js?v=23"></script>
+<script src="js/neon-border.js?v=23"></script> 
+<script src="js/tornado.js?v=23"></script> 
+<script src="js/firework-cursor.js?v=24"></script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -5021,7 +4967,7 @@ function openProjectModal(index) {
   const p = (isAr && typeof projectDetailsAr !== 'undefined' && projectDetailsAr[index]) ? projectDetailsAr[index] : projectDetails[index];
   if (!p) return;
   const L = isAr
-    ? { challenge: '??????', solution: '???? (???????)', result: '???????', features: '??????? ????????', source: '????? ???????', watch: '???? ?????', play: '???? ???' }
+    ? { challenge: 'التحدي', solution: 'الحل (الإجراء)', result: 'النتيجة', features: 'المميزات الأساسية', source: 'الكود المصدري', watch: 'مشاهدة العرض', play: 'تشغيل' }
     : { challenge: 'THE CHALLENGE', solution: 'THE SOLUTION (ACTION)', result: 'THE RESULT', features: 'KEY FEATURES', source: 'Source Code', watch: 'Watch Demo', play: 'Play the' };
   const badge = p.title.split(' — ')[0];
   const techPills = (p.tech || []).map(t => `<span class="tech-pill"><i class="fas fa-code"></i> ${t}</span>`).join('');
@@ -5430,6 +5376,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
   var EN = { lang: document.documentElement.lang, dir: document.documentElement.dir || 'ltr' };
   var memoEls = [];
+  var memoAttrs = [];
   function memo(el, kind){
     if (!el || el.__enSaved) return;
     memoEls.push(el);
@@ -5442,293 +5389,288 @@ document.addEventListener('DOMContentLoaded', () => {
   function setAllText(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'text'); el.textContent = arr[i]; } }); }
   function setAllHtml(s, arr){ $$(s).forEach(function(el,i){ if (arr[i] !== undefined){ memo(el, 'html'); el.innerHTML = arr[i]; } }); }
   function setPh(id, v){ var el = document.getElementById(id); if (el){ memo(el, 'ph'); el.placeholder = v; } }
+  function setAttr(selector, name, value){ $(selector).forEach(function(el){ var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, value); }); }
+  function setAllAttr(selector, name, values){ $(selector).forEach(function(el,i){ if (values[i] === undefined) return; var saved = memoAttrs.some(function(item){ return item.el === el && item.name === name; }); if (!saved) memoAttrs.push({ el: el, name: name, value: el.getAttribute(name) }); el.setAttribute(name, values[i]); }); }
+  function restoreAttrs(){ memoAttrs.forEach(function(item){ if (item.value === null) item.el.removeAttribute(item.name); else item.el.setAttribute(item.name, item.value); }); memoAttrs.length = 0; }
 
   function applyArabic(){
     document.documentElement.lang = 'ar';
     document.documentElement.dir = 'rtl';
     var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'EN';
+    setAttr('#langToggle', 'title', 'التبديل بين العربية والإنجليزية');
+    setAttr('#langToggle', 'aria-label', 'التبديل بين العربية والإنجليزية');
+    setAttr('#themeToggle', 'title', 'تبديل الوضع الفاتح والداكن');
+    setAttr('#themeToggle', 'aria-label', 'تبديل الوضع الفاتح والداكن');
 
+    // Nav
     setAllText('.nav-links a', ['الرئيسية','من أنا','التعليم','المهارات','الخبرة','الخدمات','المشاريع','الإنجازات','آراء الآخرين']);
+
+    // Hero
     setHtml('.hero-badge', '<span class="status-dot"></span> متاح لمشاريع جديدة');
-    setText('.hero-hook', 'أبني تطبيقات أولية متعددة المنصات للشركات الناشئة — بمعمارية نظيفة وتسليم سريع.');
-    setText('.hero-desc', 'مطوّر Flutter متخصص في تطبيقات الموبايل متعددة المنصات عالية الأداء، بمعمارية نظيفة وممارسات تطوير حديثة.');
+    setText('.hero-desc', 'مطوّر Flutter متخصص في بناء تطبيقات موبايل عالية الأداء ومتعددة المنصات، بمعمارية نظيفة وممارسات تطوير حديثة.');
+    setText('.hero-hook', 'أحوّل الأفكار المعقدة إلى تطبيقات Flutter جاهزة للإنتاج.');
     setHtml('.hero-buttons .btn-primary', '<i class="fas fa-rocket"></i> شاهد المشاريع');
     setHtml('.hero-buttons .btn-outline', '<i class="fas fa-envelope"></i> تواصل معي');
     setText('.hero-scroll-text', 'مرّر للاستكشاف');
-    try { words.length = 0; words.push('مطوّر Flutter','مهندس تطبيقات موبايل','مهتم بتجربة المستخدم'); i = 0; j = 0; isDeleting = false; } catch (e) {}
-    setText('#about .section-label', 'من أنا');
-    setHtml('#about .section-title', 'تعرّف على <span class="gradient-text">قصتي أكثر</span>');
-    setText('.about-content h3', 'من أنا');
-    setText('.about-hook', 'أبني تطبيقات أولية متعددة المنصات بمعمارية نظيفة وتسليم سريع.');
-    setHtml('.about-content > p:not(.about-hook):not(.about-usp)', 'أنا <strong>عبدالرحمن عبدالله</strong>، مطوّر Flutter مقيم في القاهرة، مصر. أحوّل الأفكار إلى تطبيقات موبايل أنيقة وعالية الأداء.');
-    setText('.about-usp', 'أساعد الشركات الناشئة والصغيرة على تحويل أفكارها إلى تطبيقات MVP متعددة المنصات — بمعمارية نظيفة وتدريب ITI وDEPI وتسليم سريع ومنظّم.');
-    setAllText('.about-detail-label', ['الخبرة','التقنيات','التعليم']);
-    setAllText('.about-detail-copy', ['تدريب عبر ITI وDEPI في تطوير الويب المتكامل وFlutter.','Flutter وDart وFirebase وREST APIs والمعمارية النظيفة.','بكالوريوس علوم الحاسب والذكاء الاصطناعي في MTI، 2024 — 2028.']);
-    setText('.languages-title', 'اللغات');
-    setAllText('.language-card .lang-info h4', ['العربية','الإنجليزية']);
-    setAllText('.language-card .lang-info p', ['اللغة الأم','إتقان مهني']);
-    setAllText('.language-card .lang-level', ['أم','احترافي']);
-    setText('#education .section-label', 'التعليم');
-    setHtml('#education .section-title', 'الخلفية <span class="gradient-text">الأكاديمية</span>');
-    setText('#skills .section-label', 'المهارات');
-    setHtml('#skills .section-title', 'المهارات و<span class="gradient-text">التقنيات</span>');
-    setAllText('.skill-tab', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
-    setAllText('.skill-header h3', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
-    setText('[data-skill-panel="soft-skills"] .skills-desc p', 'تكمل الدقة التقنية بالعمل التعاوني، وتحليل المشكلات المنظّم، والتنفيذ الموثوق.');
-    setAllText('[data-skill-panel="soft-skills"] .soft-skill-card h4', ['العمل الجماعي','حل المشكلات','إدارة الوقت','تعدد المهام','التواصل','سرعة التعلم']);
-    setAllText('[data-skill-panel="soft-skills"] .soft-skill-tag', ['التعاون','تحليلي','التنظيم','التنفيذ','التواصل الشخصي','التطور']);
-    setAllText('[data-skill-panel="spoken-languages"] h4', ['العربية','الإنجليزية']);
-    setAllText('[data-skill-panel="spoken-languages"] .soft-skill-tag', ['إتقان اللغة الأم','إتقان مهني']);
-    setText('#experience .section-label', 'الخبرة');
-    setHtml('#experience .section-title', 'التدريب و<span class="gradient-text">الخبرة</span>');
-    setText('#services .section-label', 'الخدمات');
-    setHtml('#services .section-title', 'الخدمات التي <span class="gradient-text">أقدمها</span>');
-    setAllText('.service-title', ['تطوير تطبيقات الموبايل','تصميم واجهات المستخدم','تكامل واجهات API','تحسين التطبيقات','مواقع وصفحات تعريفية']);
-    setText('#projects .section-label', 'أعمالي');
-    setHtml('#projects .section-title', 'مشاريعي <span class="gradient-text">العملية</span>');
-    setAllText('.project-card h3', ['MovieVerse — مستكشف الأفلام','Masrofy — متتبع المصروفات الذكي','StudySync — مخطط الدراسة الذكي','MediMind — رفيق الصحة']);
-    setText('#achievements .section-label', 'الإنجازات');
-    setHtml('#achievements .section-title', 'التقدم و<span class="gradient-text">التدريب</span>');
-    setText('#testimonials .section-label', 'آراء الآخرين');
-    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">مُعلّمَيَّ</span>');
-    setText('#future-projects .section-label', 'ماذا بعد؟');
-    setHtml('#future-projects .section-title', 'ماذا <span class="gradient-text">بعد؟</span>');
-    setAllText('.future-title', ['تعميق الذكاء الاصطناعي وتعلم الآلة','تطبيقات تُطلق للعملاء','فلاتر متكامل المنصة']);
-    setText('#contact .section-label', 'تواصل معي');
-    setAllText('.contact-link-actions button', ['نسخ','نسخ','نسخ']);
-    setAllText('.contact-link-actions a', ['فتح','فتح','فتح']);
-    setText('#contact .section-label', 'تواصل معي');
-    setHtml('#contact .section-title', 'لنعمل <span class="gradient-text">معًا</span>');
-    if (typeof window.__plannerI18n === 'function') window.__plannerI18n();
-    return;
-
-    // Nav
-    setAllText('.nav-links a', ['????????','?? ???','????????','???????','???????','????????','???? ???????','???????']);
-
-    // Hero
-    setHtml('.hero-badge', '<span class="status-dot"></span> ???? ??????? ?????');
-    setText('.hero-desc', '????? ????? ????? ?? ???? ??????? ?????? ????? ?????? ?????? ???????? ???????? ????? ???????? ????? ?????.');
-    setHtml('.hero-buttons .btn-primary', '<i class="fas fa-rocket"></i> ???? ????????');
-    setHtml('.hero-buttons .btn-outline', '<i class="fas fa-envelope"></i> ????? ???');
-    setText('.hero-scroll-text', '???? ?????????');
 
     // Typewriter words
     try {
       words.length = 0;
-      words.push('????? ?????','????? ??????? ??????','???? ????????? ????????');
+      words.push('مطوّر فلاتر','مهندس تطبيقات موبايل','مهتم بالواجهات والتصميم');
       i = 0; j = 0; isDeleting = false;
       var te = document.getElementById('typingText'); if (te) te.textContent = '';
     } catch(e){}
 
     // About
-    setText('#about .section-label', '?? ???');
-    setHtml('#about .section-title', '????? ??? <span class="gradient-text">???? ????</span>');
-    setText('.about-content h3', '????? ????? ???? ?????? ??????? ??????');
-    setAllHtml('.about-content > p', [
-      '??? <strong>????????? ???????</strong>? ????? ????? ???? ?? ???????? ???. ????? ?? ????? ??????? ??????? ??? ??????? ?????? ????? ????? ?????? ????? ??????????.',
-      '?? ???? ????? ???? ?? <strong>ITI</strong> ?<strong>DEPI</strong>? ????? ????? ????????? ???????? ?????? REST API? ?????? ????? ???????? ???????. ????? ???? ??? ??????? ?????? ??? ???????? ????????.'
-    ]);
-    setText('.languages-title', '??????');
-    setText('.language-card .lang-info h4', '???????');
-    setText('.language-card .lang-info p', '????? ????');
-    setText('.language-card .lang-level', '??');
-    setText('.language-card:nth-of-type(2) .lang-info h4', '??????????');
-    setText('.language-card:nth-of-type(2) .lang-info p', '????? ????');
-    setText('.language-card:nth-of-type(2) .lang-level', '???????');
+    setText('#about .section-label', 'من أنا');
+    setHtml('#about .section-title', 'تعرّف عليّ <span class="gradient-text">عن قرب</span>');
+    setText('.about-content h3', 'من أنا');
+    setText('.about-hook', 'أحوّل الأفكار المعقدة إلى تطبيقات Flutter جاهزة للإنتاج.');
+    setHtml('.about-content > p:not(.about-hook):not(.about-usp)', 'أنا <strong>عبدالرحمن عبدالله</strong>، مطوّر Flutter من القاهرة، مصر. أعمل على تحويل الأفكار إلى تطبيقات موبايل عملية وسهلة الاستخدام.');
+    setText('.about-usp', 'أساعد الشركات الناشئة والأعمال الصغيرة على إطلاق نسخ أولية متعددة المنصات، بمعمارية نظيفة وتدريب من ITI وDEPI وتنفيذ سريع.');
+    setAllText('.about-detail-label', ['الخبرة','التقنيات','التعليم']);
+    setAllText('.about-detail-copy', ['تدريب في تطوير الويب المتكامل وتطبيقات Flutter عبر ITI وDEPI.','Flutter وDart وFirebase وواجهات REST API والمعمارية النظيفة.','بكالوريوس علوم الحاسب والذكاء الاصطناعي في MTI، 2024 — 2028.']);
 
     // Skills
-    setText('#skills .section-label', '???????');
-    setHtml('#skills .section-title', '???????? ?<span class="gradient-text">????????</span>');
-    setAllText('.skill-tab', ['????? ????????','???? ???????','????? ?????']);
-    setAllText('.skill-header h3', ['????? ????????','???? ???????','????? ?????']);
+    setText('#skills .section-label', 'المهارات');
+    setHtml('#skills .section-title', 'المهارات و<span class="gradient-text">التقنيات</span>');
+    setAllText('.skill-tab', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
+    setAllText('.skill-header h3', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
     setAllHtml('.skills-desc p', [
-      '?? ???? ????????? ???? — ?? <strong>????? ??????? ??? ?? ????</strong>. ?? Flutter ???? ????? <strong>???? ???? ????</strong> ???? ???? ???? ??? iOS ? Android ?? ??? ????? ????? ???????? ??? ??? ??????? ??????? ???? ????? ??? ????? ?? ???????.',
-      '??????? ???? ??? ??? — ?? <strong>????? ??????</strong>. ??? ?????? ?? ???? ????? ????: ???? ?????? ?????? ??????????? ?????? ???? ???????? ??????? ??? ???? ????? ??????.',
-      '???? ?? ????? ????? ????? ??? ????? ??????. ???? <strong>?????? ?????? ????? ????????</strong> ?? ????? Laravel ???? — ?????? ?? ???? ?????? ????? ?? ????? ????? ????? ??? ???? ??? ?? ????.'
+      'لا أكتب التطبيقات فحسب — بل <strong>أُحيي الأفكار على كل هاتف</strong>. بـ Flutter أبني تجربة <strong>سلسة بشكل مذهل</strong> تعمل بشكل أصلي على iOS و Android من كود واحد، فيحصل مستخدموك على نفس الإحساس المثالي سواء ضغطوا على آيفون أو جالاكسي.',
+      'البرمجة ليست حفظ صيغ — بل <strong>طريقة تفكيرك</strong>. هذه اللغات هي نادٍ رياضي ذهني: تصقل منطقي، وتسرّع خوارزمياتي، وتحوّل أكثر المشكلات تعقيدًا إلى حلول أنيقة ونظيفة.',
+      'وراء كل تطبيق عظيم تجربة ويب جيدة. أمزج <strong>واجهات أمامية حديثة ومتجاوبة</strong> مع خلفية Laravel متينة — لتعمل المواقع بسرعة وعلى مختلف الشاشات.',
+      'أوازن بين الدقة التقنية والتعاون، وتحليل المشكلات بطريقة منظمة، والالتزام بالتنفيذ.'
     ]);
+    setAllText('[data-skill-panel="soft-skills"] .soft-skill-card h4', ['العمل الجماعي','حل المشكلات','إدارة الوقت','تعدد المهام','التواصل','سرعة التعلم']);
+    setAllText('[data-skill-panel="soft-skills"] .soft-skill-tag', ['التعاون','التحليل','التنظيم','التنفيذ','التواصل الشخصي','التطور']);
+    setAllText('[data-skill-panel="spoken-languages"] h4', ['العربية','الإنجليزية']);
+    setAllText('[data-skill-panel="spoken-languages"] .soft-skill-tag', ['اللغة الأم','إتقان مهني']);
 
     // Experience
-    setText('#experience .section-label', '??????');
-    setHtml('#experience .section-title', '??????? ?<span class="gradient-text">??????</span>');
-    setAllText('.exp-title-info h3', ['????? ????? ?????','????? ????? ??? ??????']);
+    setAllText('.exp-tech-tags span', ['Flutter','Dart','المعمارية النظيفة','واجهات REST API','Laravel','PHP','MySQL','HTML/CSS/JS']);
+    setText('#experience .section-label', 'الرحلة');
+    setHtml('#experience .section-title', 'التدريب و<span class="gradient-text">الخبرة</span>');
+    setAllText('.exp-title-info h3', ['متدرب تطوير فلاتر','متدرب تطوير ويب متكامل']);
     setAllHtml('.exp-title-info p', [
-      '?????? ??? ??????? ????? ??????????? (DEPI) <span class="badge-type">?????</span>',
-      '???? ????????? ????????? (ITI) <span class="badge-type">?????</span>'
+      'مبادرة مصر الرقمية لرواد التكنولوجيا (DEPI) <span class="badge-type">تدريب</span>',
+      'معهد تكنولوجيا المعلومات (ITI) <span class="badge-type">تدريب</span>'
     ]);
     setAllHtml('.exp-cards-stack .pro-exp-card .meta-item', [
-      '<i class="far fa-calendar-alt"></i> ?????? 2024 — ??? ????',
-      '<i class="fas fa-map-marker-alt"></i> ???? (??????? ????????? ??????)',
-      '<i class="far fa-calendar-alt"></i> 2023 — 2024',
-      '<i class="fas fa-globe"></i> ???????'
+      '<i class="far fa-calendar-alt"></i> نوفمبر 2024 – حتى الآن',
+      '<i class="fas fa-map-marker-alt"></i> هجين (أونلاين والقاهرة، النزهة)',
+      '<i class="far fa-calendar-alt"></i> 2023 – 2024',
+      '<i class="fas fa-globe"></i> أونلاين'
     ]);
-    setAllText('#experience .car-box h4', ['??????','???????','???????','??????','???????','???????']);
+    setAllText('#experience .car-box h4', ['التحدي','الإجراء','النتيجة','التحدي','الإجراء','النتيجة']);
     setAllText('#experience .car-box.challenge-box p', [
-      '????? ????? ????? ??????? ?????? ????????? ??????? ?? ???? ????? ????? ?? ???? ??????? ?????? ??????? ?????? ??????.',
-      '????? ???? ??????? ???????? ???????? ???? ????? ??????? (Laravel) ????? ??????? ??? ??????? ??? ???? ????? ???? ???? ?????.'
+      'إتقان تطوير فلاتر المتقدم ومبادئ المعمارية النظيفة في بيئة سريعة الخطى مع بناء تطبيقات متعددة المنصات بمستوى إنتاجي.',
+      'إتقان سريع لتقنيات الواجهات الأمامية وأطر العمل الخلفية (Laravel) لبناء تطبيقات ويب متكاملة ضمن جدول تدريب مكثف سريع الخطى.'
     ]);
     setAllText('#experience .car-box.action-box li', [
-      '???? ????? ??????? ????? (????? ????? ????????).',
-      '???????? ?? ????? ????? ?????? ????? ?? ???? ????? ???????? (??????).',
-      '????? ????????? ??????? ?????? MVVM ?? ????? ?????? ????? ?????? ??????.',
-      '????? ?????? ??????? ???? ???? ??????? ???????? ????????? ???????.',
-      '????? ?????? RESTful API ?????? ?????? ?? ???????? ????????.',
-      '????? ??????? ??? ???? ??????? ??? ??????? ?????? ???? ??????? ???????.'
+      'حضور جلسات أونلاين منظمة (بمعدل يومين أسبوعيًا).',
+      'المشاركة في جلسات تقنية حضورية مكثفة في مركز تأهيل الحاسبات (النزهة).',
+      'تطبيق المعمارية النظيفة وأنماط MVVM في تسليم مشاريع عملية وأعمال جماعية.',
+      'إكمال برنامج أونلاين دقيق يغطي أساسيات الواجهات والخلفيات الحديثة.',
+      'تطوير واجهات RESTful API ودمجها بسلاسة مع الواجهات الأمامية.',
+      'العمل الجماعي على بناء تطبيقات ويب متكاملة بتطبيق أفضل ممارسات البرمجة.'
     ]);
     setAllText('#experience .car-box.result-box li', [
-      '????? ?????? ????? ?????? ????? ?????? ???? ???? ???????.',
-      '?????? ???? ????? ????? ?? ??? ??? ????? ???????? ?????? ????? ???????.',
-      '???? ??????? ??? ??????? ??????? ?????? ????? ?????? ????.',
-      '?????? ???? ????? ???? ???? ????? ????????? ???????.'
+      'تسليم مشاريع فلاتر حقيقية قابلة للتوسع بكود قابل للصيانة.',
+      'اكتساب خبرة عملية شاملة في سير عمل تطوير الموبايل الحديث متعدد المنصات.',
+      'بناء تطبيقات ويب متكاملة وظيفيًا بهياكل قواعد بيانات قوية.',
+      'اكتساب خبرة عملية تغطي دورة تطوير البرمجيات الكاملة.'
     ]);
 
     // Education
-    setText('#education .section-label', '???????');
-    setHtml('#education .section-title', '??????? <span class="gradient-text">??????????</span>');
-    setText('.car-card .car-logo-info h3', '????????? ???? ?????? ??????? ?????????');
-    setText('.car-card .car-logo-info p', '??????? ??????? ??????????? ?????????? (MTI)');
+    setText('#education .section-label', 'التعليم');
+    setHtml('#education .section-title', 'الخلفية <span class="gradient-text">الأكاديمية</span>');
+    setText('.car-card .car-logo-info h3', 'بكالوريوس علوم الحاسب والذكاء الاصطناعي');
+    setText('.car-card .car-logo-info p', 'الجامعة الحديثة للتكنولوجيا والمعلومات (MTI)');
     setAllHtml('.car-body p', [
-      '<strong>???????: </strong>???? ????????? ???? ?????? ?? ???? ?? ?????? ?????????? ????? ?????? ????? ?? ??????????? ?????? ???????? ????? ????? ???????? ????? ?????????.',
-      '<strong>??????: </strong>????? ??????? ?????? ??? ??????? ?????????? ?????? ????? ?????? ???????? ?????? ??? ITI ? DEPI.'
+      '<strong>التركيز: </strong>أدرس بكالوريوس علوم الحاسب مع تخصص في الذكاء الاصطناعي، وأبني أساسًا قويًا في الخوارزميات وهياكل البيانات وتعلم الآلة وأساسيات هندسة البرمجيات.',
+      '<strong>الحالة: </strong>ملتحق حاليًا، وأوازن بين الدراسة الأكاديمية وتطوير فلاتر العملي والتدريب المهني عبر ITI و DEPI.'
     ]);
 
     // Stats
-    setText('#stats .section-label', '????????');
-    setHtml('#stats .section-title', '??? <span class="gradient-text">????????</span>');
-    setAllText('.stat-label', ['????? ?????','????? ?? ?????? ???????','????? ??????? ?????','?????? ?????? ??????']);
+    setText('#stats .section-label', 'بالأرقام');
+    setHtml('#stats .section-title', 'أثر <span class="gradient-text">بالأرقام</span>');
+    setAllText('.stat-label', ['مشاريع مكتملة','سنوات من التعلم والبناء','برامج تدريبية مكثفة','الالتزام بالكود النظيف','مشاريع مكتملة','سنوات من التعلم والبناء','برامج تدريبية مكثفة','الالتزام بالكود النظيف']);
+    setText('#achievements .section-label', 'الإنجازات');
+    setHtml('#achievements .section-title', 'التقدم و<span class="gradient-text">التدريب</span>');
 
     // Projects
-    setText('#projects .section-label', '??????');
-    setHtml('#projects .section-title', '??????<span class="gradient-text">?</span>');
-    setAllText('#projects .project-card h3', ['MovieVerse — ????? ??????? ???????','Masrofy — ????? ????????? ?????']);
-    setAllText('#projects .project-subtitle', ['???? ????? ????????','????? ????? ?????']);
+    setText('#projects .section-label', 'أعمالي');
+    setHtml('#projects .section-title', 'مشاريع<span class="gradient-text">ي</span>');
+    setAllText('#projects .project-card h3', ['MovieVerse — تطبيق استكشاف الأفلام','Masrofy — متتبع المصروفات الذكي']);
+    setAllText('#projects .project-subtitle', ['منصة أفلام ومسلسلات','إدارة مالية شخصية']);
     setAllText('#projects .project-card .project-content > p', [
-      '????? ??????? ??????? ????? ?????? ??? ????? ????????. ????? ?????? ????? ?????? ?? TMDB API? ?????? ?????? ????? ??????? ??? ??????? ?????? Firebase? ?????? ????? ????? ?????? Hive ???? ?????? ????? ??????.',
-      '????? ??????? ??? ???? ?????? ?????? ?????. ???? ??????? ????????? ????? ?????????? ?? ??????? FL Chart ???? ????? ????? ?????? — ????? ????? ??? ?????? ??? Hive.'
+      'تطبيق لاكتشاف الأفلام يحوّل التصفح إلى تجربة سينمائية. يقدّم عناوين رائجة لحظيًا من TMDB API، وقائمة مشاهدة شخصية متزامنة عبر الأجهزة بواسطة Firebase، وذاكرة تخزين محلية بتقنية Hive تجعل قائمتك جاهزة دائمًا.',
+      'متتبع مصروفات ذكي يجعل الوضوح المالي سهلًا. يصنف الإنفاق تلقائيًا، ويخطط للميزانيات مع تحليلات FL Chart حية، ويدعم عملات متعددة — مخزّن بأمان على الجهاز عبر Hive.'
     ]);
-    setAllHtml('#projects .project-btn.primary', ['<i class="fas fa-eye"></i> ??????','<i class="fas fa-eye"></i> ??????']);
-    setAllHtml('#projects .demo-info h4', ['???? ?????<br>?????','???? ?????<br>????????']);
+    setAllHtml('#projects .project-btn.primary', ['<i class="fas fa-eye"></i> المزيد','<i class="fas fa-eye"></i> المزيد']);
+    setAllHtml('#projects .demo-info h4', ['شاهد مشروع<br>الويب','شاهد مشروع<br>الموبايل']);
 
     // Future Projects
-    setText('#future-projects .section-label', '??????');
-    setHtml('#future-projects .section-title', '?????? <span class="gradient-text">?????</span>');
-    setAllText('#future-projects .project-card h3', ['StudySync — ???? ??????? ?????','MediMind — ???? ?????']);
-    setAllText('#future-projects .project-subtitle', ['????? ??????? ????????','??????? ???????? ????????']);
+    setText('#future-projects .section-label', 'ماذا بعد؟');
+    setHtml('#future-projects .section-title', 'ماذا <span class="gradient-text">بعد؟</span>');
+    setAllText('#future-projects .project-card h3', ['StudySync — مخطط الدراسة الذكي','MediMind — رفيق الصحة']);
+    setAllText('#future-projects .project-subtitle', ['تنظيم الدراسة والتركيز','تذكيرات بالعافية والأدوية']);
     setAllText('#future-projects .project-card .project-content > p', [
-      '???? ????? ????? ???? ?????? ??? ?????? ??????. ???? StudySync ??????? ??????? ??????? ?? ????? ????? ????? ?? ???????? ??? ???? ????? ????? ????.',
-      '???? ??? ???? ????? ?????? ??? ????? ?????? ??????? ??????? ??????? ?????? ??????? ?????? — ???????? ????? ?????? ???? ????????? ????? ??? ?????.'
+      'رفيق دراسة مركّز يبقي تعلّمك على المسار الصحيح. يجمع StudySync الجداول والمهام والتقدم في واجهة هادئة خالية من المشتتات حتى تخطط بذكاء وتدرس بوعي.',
+      'رفيق صحي بسيط ومهتم يساعدك على تذكّر مواعيد الأدوية والبقاء منتبهًا لروتين العافية اليومي — بتذكيرات لطيفة وواجهة سهلة الاستخدام مصممة حول راحتك.'
     ]);
-    setAllHtml('#future-projects .project-btn.primary', ['<i class="fas fa-eye"></i> ??????','<i class="fas fa-eye"></i> ??????']);
-    setAllHtml('#future-projects .project-btn.secondary', ['<i class="fas fa-play"></i> ??? ???????','<i class="fas fa-play"></i> ??? ???????']);
+    setAllHtml('#future-projects .project-btn.primary', ['<i class="fas fa-eye"></i> المزيد','<i class="fas fa-eye"></i> المزيد']);
+    setAllHtml('#future-projects .project-btn.secondary', ['<i class="fas fa-play"></i> عرض المشروع','<i class="fas fa-play"></i> عرض المشروع']);
 
     // Future / Featured
-    setText('#future .section-label', '???? ????');
-    setHtml('#future .section-title', '?????? ?<span class="gradient-text">????? ?????</span>');
-    setAllText('.future-title', ['????? ?????? ????????? ????? ?????','??????? ????? ???????','????? ?????? ??????']);
+    setText('#future .section-label', 'ماذا بعد؟');
+    setHtml('#future .section-title', 'مستقبل و<span class="gradient-text">أعمال مميزة</span>');
+    setAllText('.future-title', ['تعميق الذكاء الاصطناعي وتعلم الآلة','تطبيقات تُطلق للعملاء','فلاتر متكامل المنصة']);
     setAllText('.future-desc', [
-      '????? ?????? ?????? ????????? ?? MTI ?????? ?????? ???? ????? ?? ????? ?????? ???? ????? ?? Flutter.',
-      '????? ??????? ????? ??????? ??? ??????? ??? Google Play ? App Store — ?????? ??? ????? ??????.',
-      '??? ???????? ????????? ??????? REST API ????? ? Firebase ? Laravel ?????? ????? ?????? ??????? ?? ??????? ???????.'
+      'توسيع دراسات الذكاء الاصطناعي في MTI وتطبيق مفاهيم تعلم الآلة في تجارب موبايل ذكية مبنية بـ Flutter.',
+      'إطلاق تطبيقات فلاتر للعملاء إلى الإنتاج على Google Play و App Store — لعملاء عبر خمسات ونفذلي.',
+      'ربط الموبايل والخلفيات بواجهات REST API نظيفة و Firebase و Laravel لتقديم تجارب منتجات متكاملة من البداية للنهاية.'
     ]);
 
     // Testimonials
-    setText('#testimonials .section-label', '???? ???????');
-    setHtml('#testimonials .section-title', '???? ?? <span class="gradient-text">??????????</span>');
+    setText('#testimonials .section-label', 'آراء الآخرين');
+    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">مُعلّمَيَّ</span>');
     setAllHtml('.quote', [
-      '"????? ????????? ???? ????? ????? ?????? ???? ????? ????? ????? ??????? ?????? ????? ??????? ?????. ??? ?????? ???????? ?????? ????????? ?????? ?????? ?????? ?? ??????? ??????? ?? ?? ????? ?????? ????? ????? ??? ?? ????????. ???? ?? ???? ??? ???? ????? ??????."',
-      '"??? ??? ???? ????? ?? ????? ?? ????????? ???? ???? ???? ????? ????? ????? ???? ????????? ??? ???? ????? ???? ??? ?? ????? ????? ????? ????????.<br><br>???? ??????? ???? ????? ?? ????? ???? ??? ???? ?? ??? ?????? ?????????. ????? ?? ????? ?? ????? ???? ???? ??? ?? ???? ????? ????? ???????????? ???? ???? ?? ??????.<br><br>?? ?????? ???? ?? ?? ??? ??? ??????. ????? ????????? ?? ????? ?? ??? ?????? ???????? ????? ??????? ??????? ?????? ??? ???? ??? ?? ????? ??? ????? ???. ?????? ??? ????? ????? ?????? ?????? ????????? ??? Outlier? ??? ?????? ??? ????? ??????? ???????? ??????.<br><br>??? ??????? ?? ???? ?????? ?? ?????. ??? ????? ????? ??? ????? ??? ????? ?? ????? ????? ?? ?????? ??????? ??????? ???????? ??????.<br><br>??? ????? ???? ???????? ???? ????? ?????????? ?????? ????? ????? ?? ?????? ?? ???? ????? ?? ?????. ??? ????? ?? ?? ?????? ????? ??????? ??????? ???????? ?????? ????."'
+      '"تميّز عبدالرحمن خلال تدريب فلاتر كمتعلم سريع وشغوف حقيقي ببناء تطبيقات موبايل نظيفة ومهندسة جيدًا. كان يتجاوز باستمرار المهام المطلوبة، ويسلّم مشاريع مصقولة في الموعد، ويتعامل مع كل تحدٍّ بعقلية مهنية قائمة على حل المشكلات. أوصي به بثقة لأي فرصة تطوير موبايل."',
+      '"لقد كان لديّ الشرف في العمل مع عبدالرحمن لمدة سبعة أشهر بصفتي مدربة للعمل الحر والتأهيل، وما يميز رحلته عندي أنه لم يتوقف عندما انتهى البرنامج.<br><br>طوال رحلتنا، طبّق بثبات ما عملنا عليه وظل يبحث عن فرص حقيقية ليُطبّقها. تمكّن من العمل مع عملاء خارج مصر، وهو ما يعكس بوضوح الجهد والاستمرارية الذي بذله في تطوّره.<br><br>ما أقدّره أكثر هو ما حدث بعد الرحلة. استمر عبدالرحمن في البحث عن فرص جديدة، واستكشاف منصات ومجالات مختلفة، والعمل على نفسه دون أن يحتاج لأن يدفعه أحد. استكشف حتى منصات تدريب وتقييم الذكاء الاصطناعي مثل Outlier، وظل يتواصل معي طلبًا للإرشاد ويشاركني تقدّمه.<br><br>هذا بالنسبة لي يعكس كثيرًا عن عقلية. ليس شخصًا يتوقف عند تحقيق هدف واحد؛ بل يواصل البحث عن الفرصة التالية للتعلّم والتحسّن والنمو.<br><br>أنا فخورة حقًا بالتقدّم الذي حقّقه عبدالرحمن، وسعيدة لأنني أتيحت لي الفرصة أن أكون جزءًا من رحلته. أنا واثقة من أن إصراره ودفعه المستمر للتحسّن سيأخذانه بعيدًا جدًا."'
     ]);
-    setAllText('.details h4', ['?. ????? — ?????? ???????? ???????', '??? ??? — ????? ????? ???? ????????']);
-    setAllText('.recommendation-text', ['????? —', '????? —']);
+    setAllText('.details h4', ['أ. أميرة · مُرشدة المهارات الناعمة', 'منة عمر · مدربة العمل الحر والتأهيل']);
+    setAllText('.recommendation-text', ['توصية —', 'توصية —']);
     document.querySelectorAll('.quote-more-btn').forEach(function(btn){
       var q = btn.previousElementSibling;
-      btn.textContent = (q && !q.classList.contains('clamped')) ? '??? ???' : '??????';
+      btn.textContent = (q && !q.classList.contains('clamped')) ? 'عرض أقل' : 'المزيد';
     });
 
     // Services
-    setText('#services .section-label', '???? ????');
-    setHtml('#services .section-title', '????? ?<span class="gradient-text">??????</span>');
-    setAllText('.service-title', ['????? ??????? ????????','????? ?????? UX/UI','????? ?????? API','????? ??????','????? ??????????? ???????? ??????????']);
+    setText('#services .section-label', 'ماذا أقدم');
+    setHtml('#services .section-title', 'خدمات أ<span class="gradient-text">قدّمها</span>');
+    setAllText('.service-title', ['تطوير تطبيقات الموبايل','تصميم واجهات UX/UI','تكامل واجهات API','تحسين الأداء','مواقع البورتفوليو والصفحات الافتتاحية']);
     setAllText('.service-desc', [
-      '??????? ????? ?????? ??????? ?? iOS ? Android ????? ???? ?? ?????? ?????? ?????? ????',
-      '?????? ????? ???????? ?????? ????? ????? ?????? ???? ????? ??????????',
-      '????? ??? ????????? ??? REST APIs ? Firebase ?????? ????? ?????? ?????? ?????? ????',
-      '??? ?????? ?????? ????? ????? ??????? ????? ???????? ????? ?????? ??????',
-      '????? ????????? ???????? ?????? ???????? ????? ?????? ??? ????? — ????? ????? ?? ????????'
+      'تطبيقات فلاتر متعددة المنصات لـ iOS و Android بأداء قريب من الأصلي وتجربة مستخدم سلسة',
+      'واجهات جميلة ومتجاوبة بأنماط تصميم حديثة وحركات سلسة تُبهج المستخدمين',
+      'اتصال سلس بالخلفيات عبر REST APIs و Firebase وخدمات الطرف الثالث لإدارة بيانات قوية',
+      'ضبط الأداء وإعادة هيكلة الكود وتقنيات تحسين لتطبيقات قابلة للتوسع وفعالة',
+      'مواقع بورتفوليو احترافية وصفحات افتتاحية تحوّل الزوار إلى عملاء — مصممة لتبرز من المنافسة'
     ]);
 
     // Pricing
-    setText('#pricing .section-label', '???????');
-    setHtml('#pricing .section-title', '????? <span class="gradient-text">???????</span>');
-    setAllText('.price-unit', ['??','???','??','???','??','???']);
+    setText('#pricing .section-label', 'الأسعار');
+    setHtml('#pricing .section-title', 'باقات <span class="gradient-text">الأسعار</span>');
+    setAllText('.price-unit', ['من','إلى','من','إلى','من','إلى']);
     setAllText('.price-header p', [
-      '??????? ????? — ??? ?????',
-      '?????? ????????? ??????? ?? ???????. ????? ?????? ????? ?? ??????? ??? ?????? ????.',
-      '????? ????????? ?????? ???? — ????? ?????',
-      '????? ??????? ??????????? ?????? ?????? ?? ??????? ????????? ?? ?????? ????? ???????? ?????.',
-      '??????? ??????? ????? — ??????? ??????? ????????',
-      '????? ?????? ???? ??????? — ????? ???????? ?????? ??????. ????? ??????? ??????? ??????????.'
+      'تطبيقات بسيطة · مدة قصيرة',
+      'الأفضل للتطبيقات البسيطة أو الشخصية. واجهة نظيفة؛ تسليم في الموعد؛ كود المصدر مرفق.',
+      'تجارة إلكترونية ولوحات تحكم · تعقيد متوسط',
+      'مثالي للتجارة الإلكترونية ولوحات التحكم أو تطبيقات الإنتاجية مع بيانات لحظية ومعمارية نظيفة.',
+      'تطبيقات إنتاجية كاملة · للشركات الناشئة والإطلاق',
+      'تطبيق متكامل جاهز للإنتاج — متعدد المزايا، محسّن، ومنشور. مثالي للشركات الناشئة والإطلاقات.'
     ]);
-    setText('.popular-badge', '? ?????? ?????');
+    setText('.popular-badge', '⭐ الأكثر طلبًا');
     setAllHtml('.btn-pricing', [
-      '???? ????',
-      '?????? ?',
-      '???? ????'
+      'ابدأ الآن',
+      'وظّفني ←',
+      'ابدأ الآن'
     ]);
     // price features (icons preserved)
     var f1 = '<i class="fas fa-check" style="color:#10b981;"></i> ';
     var f2 = '<i class="fas fa-times"></i> ';
     setAllHtml('.price-card:nth-of-type(1) .price-feature-item', [
-      f1 + '??? 5 ?????',
-      f1 + '?????? Firebase (????? ??????/????????)',
-      f1 + '????? ???? ??? Provider',
-      f1 + '????? ??? ?????? ??? GitHub',
-      f1 + '???? ?????? ?????',
-      f2 + 'Firestore / ????? ?????? ?????',
-      f2 + '??? ??? ???????'
+      f1 + 'حتى 5 شاشات',
+      f1 + 'مصادقة Firebase (تسجيل الدخول/الاشتراك)',
+      f1 + 'إدارة حالة عبر Provider',
+      f1 + 'تسليم كود المصدر عبر GitHub',
+      f1 + 'جولة مراجعة واحدة',
+      f2 + 'Firestore / قاعدة بيانات لحظية',
+      f2 + 'نشر على المتاجر'
     ]);
     setAllHtml('.price-card:nth-of-type(2) .price-feature-item', [
-      f1 + '??? 12 ????',
-      f1 + '?????? Firebase + Firestore',
-      f1 + 'Provider ?? BLoC',
-      f1 + '?????? ??????/????? ?????',
-      f1 + '????? ????? (????? ??? Figma)',
-      f1 + '????? ??????',
-      f1 + '???? ????????? ? iOS',
-      f2 + '??? ??? ???????'
+      f1 + 'حتى 12 شاشة',
+      f1 + 'مصادقة Firebase + Firestore',
+      f1 + 'Provider أو BLoC',
+      f1 + 'بيانات منتجات/طلبات لحظية',
+      f1 + 'واجهة مخصصة (بناءً على Figma)',
+      f1 + 'جولتا مراجعة',
+      f1 + 'بناء للأندرويد و iOS',
+      f2 + 'نشر على المتاجر'
     ]);
     setAllHtml('.price-card:nth-of-type(3) .price-feature-item', [
-      f1 + '????? ??? ??????',
-      f1 + '????? Firebase ????',
-      f1 + '??????? BLoC',
-      f1 + '??? ????? ??????',
-      f1 + '????? ????????? ???????',
-      f1 + '??? ??? ???????',
-      f1 + '3 ????? ??????'
+      f1 + 'شاشات غير محدودة',
+      f1 + 'تكامل Firebase كامل',
+      f1 + 'معمارية BLoC',
+      f1 + 'كود محسّن الأداء',
+      f1 + 'إعداد الإشعارات الفورية',
+      f1 + 'رفع على المتاجر',
+      f1 + '3 جولات مراجعة'
     ]);
 
     // Contact
-    setText('#contact .section-label', '????? ???');
-    setHtml('#contact .section-title', '????? <span class="gradient-text">????</span>');
-    setText('.contact-info h3', '???? ????? ?? ?????');
-    setText('.contact-info > p', '??? ?????? ????? ??????? ?????? ????? ?????? ??????? ???? ????? ????? ?? ?????. ????? ????? ?????? ????.');
-    setAllText('.contact-link strong', ['?????? ??????????','??????','??????','????? ??','??? ???']);
-    setAllText('.form-group label', ['????','????? ??????????','??????']);
-    setPh('contactName', '????: ???? ????');
+    setText('#contact .section-label', 'تواصل معي');
+    setAllText('.contact-link-actions button', ['نسخ','نسخ','نسخ']);
+    setAllText('.contact-link-actions a', ['فتح','فتح','فتح']);
+    setHtml('#find-me-title', 'اعثر عليّ <span class="gradient-text">على</span>');
+    setAllText('.footer-subtitle', ['مطوّر Flutter — القاهرة، مصر']);
+    setText('.skip-link', 'انتقل إلى المحتوى الرئيسي');
+    var langToggle = document.getElementById('langToggle'); if (langToggle) langToggle.title = 'التبديل بين العربية والإنجليزية';
+    var labIcon = document.querySelector('.floating-badge'); if (labIcon) labIcon.setAttribute('aria-label', 'بيئة التطوير');
+    document.querySelectorAll('.find-me-tile').forEach(function (tile) { tile.setAttribute('aria-label', 'حساب ' + (tile.getAttribute('data-platform') || '')); });
+    setHtml('#contact .section-title', 'لنعمل <span class="gradient-text">معًا</span>');
+    setText('.lamp-form-title', 'رسالة سريعة');
+    setPh('lampName', 'اسمك');
+    setPh('lampMsg', 'كيف أستطيع مساعدتك؟');
+    setHtml('.lamp-send', '<i class="fas fa-paper-plane"></i> إرسال');
+    setAttr('.btn-cv', 'aria-label', 'تنزيل السيرة الذاتية PDF');
+    setAttr('.btn-contact-nav', 'aria-label', 'تواصل معي');
+    setAttr('.hamburger', 'aria-label', 'فتح أو إغلاق القائمة');
+    setAttr('#navbar', 'aria-label', 'القائمة الرئيسية');
+    setAttr('.skills-tabs', 'aria-label', 'فئات المهارات');
+    setAllAttr('.footer-social-icons a', 'aria-label', ['حساب GitHub','حساب LinkedIn','واتساب']);
+    setAllAttr('.platform-icon', 'aria-label', ['حساب خمسات','حساب نفذلي','حساب Freelancer','حساب ربحي']);
+    setText('.contact-info h3', 'لديك مشروع في ذهنك؟');
+    setText('.contact-info > p', 'أنا دائمًا منفتح لمناقشة مشاريع جديدة وأفكار إبداعية وفرص لتكون جزءًا من رؤيتك. لنصنع شيئًا مذهلًا معًا.');
+    setAllText('.contact-link strong', ['البريد الإلكتروني','واتساب','الهاتف','لينكد إن','جيت هاب']);
+    setAllText('.form-group label', ['اسمك','بريدك الإلكتروني','رسالتك']);
+    setPh('contactName', 'مثال: أحمد محمد');
     setPh('contactEmail', 'example@email.com');
-    setPh('contactMsg', '????? ?? ??????...');
-    setHtml('#contactBtn', '????? ??????? <i class="fas fa-paper-plane"></i>');
-    setText('.mini-cord-handle', '????');
+    setPh('contactMsg', 'حدثني عن مشروعك...');
+    setHtml('#contactBtn', 'إرسال الرسالة <i class="fas fa-paper-plane"></i>');
+    setText('.mini-cord-handle', 'اسحب');
 
     // Footer
-    setAllText('.footer-title', ['???????','?? ????']);
-    setText('.footer-col.left-col p', '??? ?????? ????? ??????? ?????? ????? ????? ???? ????? ???? ???????? ????? ????? ?????? ?????.');
-    setHtml('.footer-col.right-col p', '??? <strong style="color:var(--text)">????????? ???????</strong>? ????? ????? ???? ????? ??????? ?????? ?????? ??????? ????? ?????? ???????? ????? ?????? ?????? ????.');
-    setText('.footer-subtitle', '????? ????? — ???????? ???');
-    setText('.footer-copy', '© 2026 ????????? ???????. ???? ?????? ??????.');
+    setAllText('.footer-title', ['لنتواصل','من أنا؟']);
+    setText('.footer-col.left-col p', 'أنا دائمًا منفتح لمناقشة مشاريع فلاتر جديدة وفرص العمل الحر والتعاون لبناء تجارب موبايل رائعة.');
+    setHtml('.footer-col.right-col p', 'أنا <strong style="color:var(--text)">عبدالرحمن عبدالله</strong>، مطوّر فلاتر شغوف ببناء تطبيقات موبايل متعددة المنصات قابلة للتوسع بمعمارية نظيفة وتجارب مستخدم سلسة.');
+    setText('.footer-subtitle', 'مطوّر Flutter — القاهرة، مصر');
+    setText('.footer-copy', '© 2026 عبدالرحمن عبدالله. جميع الحقوق محفوظة.');
 
     // AI Planner follows the site language
-    setText('#planner-subtitle', '???? ????? ??????? ??? ???? ????? ????? ?? ??? ?? ?????.');
-    if (typeof window.__plannerI18n === 'function') window.__plannerI18n('ar');
+    setText('#planner-subtitle', 'حوّل فكرتك الأولية إلى ملخص مشروع منظّم في أقل من دقيقة.');
+    setText('.whoiam-label', 'من أنا');
+    setHtml('.whoiam-line1', 'أحوّل <span class="hl-cyan">الأفكار المعقدة</span> إلى <span class="hl-purple">تطبيقات Flutter جاهزة للإنتاج</span>.');
+    setHtml('.whoiam-line2', '<span class="hl-orange">مطوّر Flutter</span> متخصص في <span class="hl-cyan">نسخ أولية قابلة للتوسع</span>، و<span class="hl-purple">المعمارية النظيفة</span>، و<span class="hl-green">التنفيذ السريع والمنظّم</span>.');
+    setHtml('.whoiam-line3', '<strong class="whoiam-edge">ما يميزني:</strong> تدريب عملي موثوق في تطوير الويب المتكامل وFlutter لدى <span class="hl-orange">DEPI</span> و<span class="hl-cyan">ITI</span>، إلى جانب دراسة علوم الحاسب والذكاء الاصطناعي في <strong class="whoiam-edge">MTI</strong>.');
+    setAllText('.btn-cv span', ['تنزيل السيرة الذاتية']);
+    setAllText('.btn-contact-nav span', ['تواصل معي']);
+    setText('.scroll-indicator span', 'مرّر للأسفل');
+    setText('.skip-link', 'انتقل إلى المحتوى الرئيسي');
+    setHtml('#ai-planner-section .section-title', 'مخطط المشاريع <span class="gradient-text">بالذكاء الاصطناعي</span>');
+    setAllText('.price-tier-name', ['الباقة الأساسية','الباقة القياسية','الباقة الاحترافية']);
+    setText('#videoModalTitle', 'عرض المشروع');
+    setAttr('.whoiam-banner', 'role', 'group');
+    setAttr('.whoiam-banner', 'aria-label', 'نبذة عن عبدالرحمن');
+    setAttr('.floating-badge', 'aria-label', 'أدوات التطوير');
+    setAttr('.top-img', 'alt', 'صورة عبدالرحمن عبدالله');
+    setAttr('.about-img', 'alt', 'صورة عبدالرحمن عبدالله');
+    setAttr('.lang-toggle-nav', 'title', 'التبديل بين العربية والإنجليزية');
+    setAttr('.lang-toggle-nav', 'aria-label', 'التبديل بين العربية والإنجليزية');
+    document.querySelectorAll('.find-me-tile').forEach(function(tile){ setAttr('.find-me-tile:nth-of-type(' + (Array.prototype.indexOf.call(tile.parentNode.children, tile) + 1) + ')', 'aria-label', 'حساب ' + (tile.getAttribute('data-platform') || '')); });
+    setText('#projectVideoPlayer', 'متصفحك لا يدعم تشغيل الفيديو.');
+    if (typeof window.__plannerI18n === 'function') window.__plannerI18n();
   }
 
   function applyEnglish(){
@@ -5748,6 +5690,7 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (s.k === 'ph') el.placeholder = s.v;
       else el.textContent = s.v;
     });
+    restoreAttrs();
     document.querySelectorAll('.quote-more-btn').forEach(function(btn){
       var q = btn.previousElementSibling;
       btn.textContent = (q && !q.classList.contains('clamped')) ? 'less' : 'more';
@@ -5808,8 +5751,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=11" defer></script>
-<script src="assets/js/ai-planner.js?v=26" defer></script>
+<script src="assets/js/scroll-reveal.js?v=12" defer></script>
+<script src="assets/js/ai-planner.js?v=27" defer></script>
 </body> 
 </html>
 
