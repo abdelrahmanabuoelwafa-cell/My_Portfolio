@@ -3,13 +3,10 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0"> 
 
 <!-- Primary Meta Tags -->
-<title>Abdelrahman Abdullah � Flutter Developer | Mobile App Development Expert</title>
-<meta name="title" content="Abdelrahman Abdullah � Flutter Developer | Mobile App Development Expert">
+<title>Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert</title>
+<meta name="title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
 <meta name="description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development. Transform your ideas into beautiful, high-performance mobile apps.">
 <meta name="keywords" content="Flutter Developer, Mobile App Development, Cross-Platform Apps, UI/UX Design, Dart, Firebase, App Development, Cairo, Egypt">
 <meta name="author" content="Abdelrahman Abdullah">
@@ -17,30 +14,30 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://abdelrahman.dev/">
-<meta property="og:title" content="Abdelrahman Abdullah � Flutter Developer">
+<meta property="og:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
+<meta property="og:title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
 <meta property="og:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
-<meta property="og:image" content="https://abdelrahman.dev/images/6037452442028413306.jpg">
+<meta property="og:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/icon-512.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://abdelrahman.dev/">
-<meta property="twitter:title" content="Abdelrahman Abdullah � Flutter Developer">
+<meta property="twitter:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
+<meta property="twitter:title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
 <meta property="twitter:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
-<meta property="twitter:image" content="https://abdelrahman.dev/images/6037452442028413306.jpg">
+<meta property="twitter:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/icon-512.png">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://abdelrahman.dev/">
+<link rel="canonical" href="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="images/6037452442028413306.jpg">
+<link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
 
 <!-- PWA Manifest -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#A855F7">
 
 <!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" href="images/6037452442028413306.jpg">
+<link rel="apple-touch-icon" href="images/icon-192.png">
 
 <!-- Performance: preconnect to third-party origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -126,8 +123,8 @@
   "@type": "Person",
   "name": "Abdelrahman Abdullah",
   "jobTitle": "Flutter Developer",
-  "url": "https://abdelrahman.dev/",
-  "image": "https://abdelrahman.dev/images/6037452442028413306.jpg",
+  "url": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/",
+  "image": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/logo.png",
   "sameAs": [
     "https://github.com/abdelrahmanabuoelwafa-cell",
     "https://linkedin.com/in/abdelrahman-abdullah",
@@ -290,8 +287,8 @@ body::after{
   background-clip:text; 
 } 
 
-/* Cinematic scroll reveal � initial hidden state (JS drives the animation) */
-.reveal{opacity:0;transform:translateY(110px) scale(.92)}
+/* Cinematic scroll reveal — initial hidden state (JS drives the animation) */
+.reveal{opacity:1;transform:none}
 .reveal.revealed{opacity:1;transform:none;filter:none}
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1!important;transform:none!important;filter:none!important}
@@ -462,8 +459,10 @@ body::after{
 }
 .brand-mark{
   width:clamp(42px,3.6vw,54px);
-  height:clamp(28px,2.4vw,36px);
-  color:#fff;
+  height:clamp(42px,3.6vw,54px);
+  object-fit:contain;
+  background:#fff;
+  border-radius:10px;
   flex-shrink:0;
   transition:transform .3s cubic-bezier(.4,0,.2,1), filter .3s;
 }
@@ -644,8 +643,8 @@ body::after{
 } 
 .hero-top-image{ 
   position:relative; 
-  width:clamp(100px,18vw,180px); 
-  height:clamp(100px,18vw,180px); 
+  width:clamp(155px,22vw,245px);
+  height:clamp(155px,22vw,245px);
   margin-bottom:24px; 
   animation:fadeInDown 1s ease; 
   border-radius:50%;
@@ -675,7 +674,7 @@ body::after{
   width:100%; 
   height:100%; 
   object-fit:cover; 
-  object-position:center center; 
+  object-position:center 42%;
 } 
 .top-img-ring{ 
   position:absolute; 
@@ -691,15 +690,18 @@ body::after{
   position:absolute; 
   bottom:0; 
   right:0; 
-  width:45px; 
-  height:45px; 
+  min-width:92px;
+  min-height:36px;
+  padding:6px 10px;
   background:var(--card-bg); 
   border:2px solid var(--neon); 
-  border-radius:50%; 
+  border-radius:999px;
   display:flex; 
   align-items:center; 
   justify-content:center; 
-  font-size:20px; 
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
   box-shadow:0 0 20px rgba(168,85,247,.5); 
   animation:bounce 2s infinite; 
   z-index:10; 
@@ -842,6 +844,7 @@ body::after{
   cursor:pointer;
   animation:fadeInUp 0.8s ease 1.3s both;
 }
+.hero-hook{color:var(--muted);font-size:clamp(15px,1.4vw,19px);font-weight:700;margin:-8px 0 16px;max-width:680px;animation:fadeInUp .8s ease .4s both}
 .hero-scroll-mouse{
   width:24px;
   height:38px;
@@ -941,8 +944,8 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   justify-self:center;
   align-self:center;
   flex:none;
-  width:380px;
-  height:380px;
+  width:456px;
+  height:456px;
   margin: 0 auto;
   border-radius: 50%;
   overflow: visible;
@@ -959,6 +962,10 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   z-index: 2;
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 } 
+.about-detail-stack{display:grid;gap:10px;margin:18px 0}
+.about-detail-stack>div{padding:12px 14px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px}
+.about-detail-label{font-size:14px;color:var(--accent);margin-bottom:3px}
+.about-detail-copy{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
 .about-image:hover {
   transform:scale(1.03); 
 }
@@ -973,7 +980,7 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   width:100%; 
   height:100%; 
   object-fit:cover; 
-  object-position:center center;
+  object-position:center 18%;
 } 
 /* Image protection: keep visuals identical, block casual download/drag/select */
 .protected-img{
@@ -1281,6 +1288,16 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   box-shadow:0 0 22px rgba(147,51,234,.6),inset 0 0 10px rgba(255,255,255,.3); 
 } 
 .skill-category.hidden{display:none} 
+.soft-skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.soft-skill-card{min-height:125px;display:flex;flex-direction:column;gap:8px}
+.soft-skill-card > i{font-size:22px;color:#22D3EE}
+.soft-skill-card h4{font-size:16px}
+.soft-skill-tag{width:max-content;padding:3px 9px;border:1px solid rgba(34,211,238,.35);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700}
+.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.achievement-cert{display:flex;align-items:center;gap:16px;min-height:108px}
+.achievement-cert img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:10px;padding:5px}
+.achievement-cert h3{font-size:18px;margin-bottom:4px}
+.achievement-cert p{font-size:13px;color:var(--muted)}
 .skills-desc{ 
   max-width:680px;margin:0 auto 24px;text-align:center; 
   padding:16px 22px;border-radius:14px; 
@@ -2131,6 +2148,13 @@ section{padding:clamp(64px,10vw,120px) clamp(16px,5vw,60px);position:relative;z-
   border-radius:16px; 
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 } 
+.contact-link-card{flex-wrap:wrap;}
+.contact-link-copy{flex:1;min-width:150px;overflow-wrap:anywhere}
+.contact-link-actions{display:flex;gap:8px;margin-left:auto}
+.contact-link-actions button{border:1px solid var(--border);background:rgba(168,85,247,.08);color:var(--text);border-radius:9px;padding:8px 12px;cursor:pointer;font-weight:700;min-height:40px}
+.contact-link-actions button:hover{border-color:var(--neon);color:var(--neon)}
+.form-status{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.5}
+.form-status a{color:var(--neon);text-decoration:underline}
 .contact-link:hover{ 
   border-color:var(--neon); 
   transform:translateY(-2px); 
@@ -2375,6 +2399,7 @@ footer p{
 }
 .footer-logo .code-bracket{color:var(--muted);font-size:20px;font-weight:700}
 .footer-logo .neon-dot{color:var(--neon);text-shadow:0 0 10px rgba(168,85,247,.5)}
+.footer-logo-img{width:72px;height:72px;object-fit:contain;background:#fff;border-radius:14px;margin-bottom:10px}
 .footer-subtitle{margin-bottom:20px}
 .right-col{text-align:right}
 .freelance-platforms{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
@@ -2388,9 +2413,13 @@ footer p{
   overflow:hidden;
   transition:all .3s cubic-bezier(0.4,0,0.2,1);
 }
-.platform-icon:hover{border-color:var(--neon);transform:translateY(-4px);box-shadow:0 12px 28px rgba(168,85,247,.45)}
+.platform-icon:hover{border-color:var(--platform-color,var(--neon));transform:translateY(-4px);box-shadow:0 12px 28px color-mix(in srgb,var(--platform-color,var(--neon)) 45%,transparent)}
 .platform-icon img{width:100%;height:100%;object-fit:cover;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
+.platform-icon svg{width:100%;height:100%;display:block;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
 .platform-icon:hover img{transform:scale(1.12)}
+.platform-icon:hover svg{transform:scale(1.08)}
+.contact-link-actions a{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:rgba(168,85,247,.08);color:var(--text);border-radius:9px;padding:8px 12px;font-weight:700;min-height:40px}
+.contact-link-actions a:hover{border-color:var(--neon);color:var(--neon)}
 .footer-copy{
   text-align:center;
   border-top:1px solid var(--border);
@@ -2399,6 +2428,12 @@ footer p{
   font-size:14px;
   margin:0;
 }
+.find-me{position:relative;z-index:1;padding:34px 5%;text-align:center;border-top:1px solid var(--border);background:rgba(10,10,15,.72)}
+.find-me h2{font-size:clamp(19px,2vw,25px);margin-bottom:18px}
+.find-me-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;max-width:820px;margin:auto}
+.find-me-tile{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:15px;background:var(--card-bg);color:var(--text);font-weight:800;transition:transform .2s,box-shadow .2s,border-color .2s}
+.find-me-tile:hover{transform:translateY(-4px);border-color:var(--platform-color,var(--neon));box-shadow:0 10px 24px color-mix(in srgb,var(--platform-color,var(--neon)) 45%,transparent)}
+.find-me-tile span{font-size:12px}
 [data-theme="light"] .premium-footer{background:rgba(255,251,232,.94)}
 @media(max-width:768px){
   .footer-grid{grid-template-columns:1fr;gap:36px;text-align:center}
@@ -3059,7 +3094,7 @@ footer p{
   .testimonials-grid{grid-template-columns:1fr}
   .contact-container{grid-template-columns:1fr} 
   .hero-name{font-size:38px} 
-  .about-image{width:280px;height:280px}
+  .about-image{width:min(336px,88vw);height:min(336px,88vw)}
   .project-image{height:260px;}
 }
 
@@ -3123,7 +3158,7 @@ footer p{
   .hero-buttons > *{width:100%;max-width:100%;}
   section{padding:56px 14px;}
   .hero-name{font-size:27px;}
-  .about-image{width:240px;height:240px;}
+  .about-image{width:min(288px,88vw);height:min(288px,88vw);}
   .stats-grid{grid-template-columns:1fr 1fr;gap:12px;}
   .stat-card{padding:20px 12px;}
   .stat-card h3{font-size:26px;}
@@ -3195,7 +3230,7 @@ footer p{
   .skills-row{grid-template-columns:repeat(2,1fr);}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .contact-container{gap:40px;}
-  .about-image{width:300px;height:300px;}
+  .about-image{width:min(360px,88vw);height:min(360px,88vw);}
 }
 
 /* Tablet nav: drawer up to 1100px */
@@ -3220,7 +3255,7 @@ footer p{
 /* Mobile landscape: keep usable, reduce hero height */
 @media(max-height:500px) and (orientation:landscape){
   .hero{min-height:100svh;padding-top:140px;padding-bottom:40px;}
-  .hero-top-image{width:100px;height:100px;margin-bottom:12px;}
+  .hero-top-image{width:clamp(155px,42vw,190px);height:clamp(155px,42vw,190px);margin-bottom:16px;}
   .hero-name{font-size:clamp(24px,5vw,40px);}
   .hero-desc{font-size:14px;margin-bottom:20px;}
   .hero-buttons{flex-direction:row;flex-wrap:wrap;}
@@ -3586,9 +3621,9 @@ footer p{
   }
 }
 </style> 
-<script>document.documentElement.classList.add('js-enabled');window.__skipOldReveal=true;</script>
+<script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
 <link rel="stylesheet" href="assets/css/scroll-reveal.css?v=7">
-<base target="_blank"> 
+<base target="_blank" rel="noopener">
 </head> 
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -3620,20 +3655,7 @@ footer p{
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <svg class="brand-mark" viewBox="0 0 72 48" fill="none" aria-hidden="true" focusable="false">
-      <defs>
-        <linearGradient id="brandGrad" x1="0" y1="0" x2="72" y2="48" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#22d3ee"/>
-          <stop offset="1" stop-color="#a855f7"/>
-        </linearGradient>
-      </defs>
-      <!-- Code brackets icon -->
-      <path d="M20 16 L10 24 L20 32" stroke="url(#brandGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M52 16 L62 24 L52 32" stroke="url(#brandGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <!-- Flutter/Dart symbol (stylized arrow) -->
-      <path d="M28 32 L32 16 L44 16 L40 32 Z" fill="url(#brandGrad)" opacity="0.9"/>
-      <path d="M36 24 L40 32 L44 24 L40 16 Z" fill="currentColor" opacity="0.8"/>
-    </svg>
+    <img class="brand-mark" src="images/logo.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024">
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
       <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
@@ -3643,15 +3665,16 @@ footer p{
     <ul class="nav-links"> 
       <li><a href="#hero" class="active" target="_self">Home</a></li> 
       <li><a href="#about" target="_self">About</a></li> 
+      <li><a href="#education" target="_self">Education</a></li>
       <li><a href="#skills" target="_self">Skills</a></li> 
       <li><a href="#experience" target="_self">Experience</a></li> 
-      <li><a href="#education" target="_self">Education</a></li> 
+      <li><a href="#services" target="_self">Services</a></li>
       <li><a href="#projects" target="_self">Projects</a></li> 
+      <li><a href="#achievements" target="_self">Achievements</a></li>
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
-      <li><a href="#services" target="_self">Services</a></li> 
     </ul> 
     <div class="nav-actions"> 
-      <a href="images/Abdelrahman_Abdullah_ATS_CV (3).pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF"> 
+      <a href="images/Abdelrahman-Abdullah-CV.pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF">
         <span>Download CV</span> 
         <i class="fas fa-download" aria-hidden="true"></i> 
       </a> 
@@ -3682,13 +3705,14 @@ footer p{
     <div class="hero-top-image"> 
       <div class="top-img-ring"></div> 
       <div class="top-img-container"> 
-        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" loading="eager" fetchpriority="high"> 
+        <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
-      <div class="floating-badge">??</div> 
+      <div class="floating-badge">متاح للعمل</div>
     </div> 
 
     <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
+    <p class="hero-hook">Cross-platform MVPs, built with clean architecture and delivered fast.</p>
 
     <div class="typing-container"> 
       <span class="typing-text" id="typingText"></span> 
@@ -3732,13 +3756,17 @@ footer p{
   </div> 
   <div class="about-grid"> 
     <div class="about-content reveal"> 
-      <h3>Passionate Flutter Developer Creating Digital Excellence</h3> 
+      <p class="about-hook">Cross-platform MVPs, built with clean architecture and delivered fast.</p>
+      <h3>Who I Am</h3>
       <p> 
         I'm <strong>Abdelrahman Abdullah</strong>, a dedicated Flutter developer based in Cairo, Egypt. I specialize in transforming complex ideas into elegant, high-performance mobile applications that users love. 
       </p> 
-      <p> 
-        With intensive training from <strong>ITI</strong> and <strong>DEPI</strong>, I've mastered clean architecture principles, REST API integration, and modern UI/UX design patterns. My approach combines technical excellence with creative problem-solving. 
-      </p> 
+      <p class="about-usp">I help startups and small businesses turn ideas into reliable cross-platform MVPs—using clean architecture, ITI and DEPI training, and a fast, focused delivery process.</p>
+      <div class="about-detail-stack">
+        <div><h4 class="about-detail-label">Experience</h4><p class="about-detail-copy">Training through ITI and DEPI in full-stack development and Flutter.</p></div>
+        <div><h4 class="about-detail-label">Tech Stack</h4><p class="about-detail-copy">Flutter, Dart, Firebase, REST APIs, and clean architecture.</p></div>
+        <div><h4 class="about-detail-label">Education</h4><p class="about-detail-copy">B.Sc. Computer Science &amp; Artificial Intelligence at MTI, 2024 — 2028.</p></div>
+      </div>
 
       <div class="languages-section"> 
         <div class="languages-title"> 
@@ -3746,17 +3774,17 @@ footer p{
         </div> 
         <div class="languages-grid"> 
           <div class="language-card"> 
-            <div class="lang-icon">????</div> 
+            <div class="lang-icon">ع</div>
             <div class="lang-info"> 
-              <h4>???????</h4> 
+              <h4>العربية</h4>
               <p>Native Language</p> 
               <span class="lang-level">Native</span> 
             </div> 
           </div> 
           <div class="language-card"> 
-            <div class="lang-icon">????</div> 
+            <div class="lang-icon">EN</div>
             <div class="lang-info"> 
-              <h4>English</h4> 
+              <h4>الإنجليزية</h4>
               <p>Professional Proficiency</p> 
               <span class="lang-level">Professional</span> 
             </div> 
@@ -3766,12 +3794,40 @@ footer p{
     </div> 
     <div class="about-image reveal"> 
       <div class="about-img-container"> 
-        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" loading="lazy"> 
+        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" width="653" height="1280" loading="lazy">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
     </div> 
   </div> 
 </section> 
+
+<!-- Education Section (MTI) -->
+<section id="education">
+  <div class="section-header reveal">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic <span class="gradient-text">Background</span></h2>
+  </div>
+  <div class="exp-cards-stack">
+    <div class="car-card reveal">
+      <div class="car-header">
+        <div class="car-logo-info">
+          <div class="car-logo-box">
+            <img src="images/MTI.png" alt="MTI Logo" loading="lazy" width="200" height="200">
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#fff;">B.Sc. Computer Science &amp; Artificial Intelligence</h3>
+            <p style="font-size:13px;color:var(--neon);font-weight:600;">Modern University for Technology and Information (MTI)</p>
+          </div>
+        </div>
+        <span class="car-date-badge badge-depi">2024 — 2028</span>
+      </div>
+      <div class="car-body">
+        <p><strong>Focus: </strong>Pursuing a Bachelor of Computer Science with a concentration in Artificial Intelligence, building a strong foundation in algorithms, data structures, machine learning, and software engineering fundamentals.</p>
+        <p><strong>Status: </strong>Currently enrolled, balancing academic studies with hands-on Flutter development and professional training through ITI and DEPI.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
  
 
@@ -3787,12 +3843,14 @@ footer p{
       <button class="skill-tab active" data-skill-tab="mobile" role="tab" aria-selected="true">Mobile Development</button> 
       <button class="skill-tab" data-skill-tab="languages" role="tab" aria-selected="false">Programming Languages</button> 
       <button class="skill-tab" data-skill-tab="web" role="tab" aria-selected="false">Web Development</button> 
+      <button class="skill-tab" data-skill-tab="soft-skills" role="tab" aria-selected="false">Soft Skills</button>
+      <button class="skill-tab" data-skill-tab="spoken-languages" role="tab" aria-selected="false">Languages</button>
     </div>
 
     <!-- Cat 1 -->
     <div class="skill-category reveal" data-skill-panel="mobile"> 
       <div class="skills-desc"> 
-        <p>I don't just write apps � I bring ideas to life on every phone. With Flutter I build one <strong>buttery-smooth experience</strong> that runs natively on iOS &amp; Android from a single codebase, so your users get the same pixel-perfect feel whether they tap on an iPhone or a Galaxy.</p> 
+        <p>I don't just write apps — I bring ideas to life on every phone. With Flutter I build one <strong>buttery-smooth experience</strong> that runs natively on iOS &amp; Android from a single codebase, so your users get the same pixel-perfect feel whether they tap on an iPhone or a Galaxy.</p>
       </div> 
       <div class="skill-header"> 
         <i class="fas fa-mobile-alt"></i> 
@@ -3825,7 +3883,7 @@ footer p{
     <!-- Cat 2 -->
     <div class="skill-category reveal hidden" data-skill-panel="languages"> 
       <div class="skills-desc"> 
-        <p>Coding isn't about memorizing syntax � it's about <strong>how you think</strong>. These languages are my mental gym: they sharpen my logic, speed up my algorithms, and turn even the messiest problems into clean, elegant solutions.</p> 
+        <p>Coding isn't about memorizing syntax — it's about <strong>how you think</strong>. These languages are my mental gym: they sharpen my logic, speed up my algorithms, and turn even the messiest problems into clean, elegant solutions.</p>
       </div> 
       <div class="skill-header"> 
         <i class="fas fa-code"></i> 
@@ -3868,7 +3926,7 @@ footer p{
     <!-- Cat 3 -->
     <div class="skill-category reveal hidden" data-skill-panel="web"> 
       <div class="skills-desc"> 
-        <p>Behind every great app lives an equally great web experience. I blend <strong>modern, responsive frontends</strong> with a solid Laravel backend � so your site doesn't just look stunning, it loads fast and works flawlessly on every screen.</p> 
+        <p>Behind every great app lives an equally great web experience. I blend <strong>modern, responsive frontends</strong> with a solid Laravel backend — so your site doesn't just look stunning, it loads fast and works flawlessly on every screen.</p>
       </div> 
       <div class="skill-header"> 
         <i class="fas fa-globe"></i> 
@@ -3928,6 +3986,27 @@ footer p{
       </div> 
     </div> 
 
+    <div class="skill-category reveal hidden" data-skill-panel="soft-skills">
+      <div class="skills-desc"><p>Complementing technical rigor with collaborative agility, structured problem decomposition, and reliable execution.</p></div>
+      <div class="skill-header"><i class="fas fa-people-group"></i><h3>Soft Skills</h3></div>
+      <div class="soft-skill-grid">
+        <div class="skill-item soft-skill-card"><i class="fas fa-people-group"></i><h4>Teamwork</h4><span class="soft-skill-tag">Collaboration</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-lightbulb"></i><h4>Problem Solving</h4><span class="soft-skill-tag">Analytical</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-clock"></i><h4>Time Management</h4><span class="soft-skill-tag">Organization</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-list-check"></i><h4>Multitasking</h4><span class="soft-skill-tag">Execution</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-comments"></i><h4>Communication</h4><span class="soft-skill-tag">Interpersonal</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-book-open"></i><h4>Fast Learning</h4><span class="soft-skill-tag">Growth</span></div>
+      </div>
+    </div>
+
+    <div class="skill-category reveal hidden" data-skill-panel="spoken-languages">
+      <div class="skill-header"><i class="fas fa-globe"></i><h3>Languages</h3></div>
+      <div class="skills-row">
+        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>Arabic</h4><span class="soft-skill-tag">Native Proficiency</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>English</h4><span class="soft-skill-tag">Professional Proficiency</span></div>
+      </div>
+    </div>
+
   </div> 
 </section> 
 
@@ -3943,7 +4022,7 @@ footer p{
     <div class="pro-exp-card reveal">
       <div class="exp-header">
         <div class="exp-logo-box">
-          <img src="images/depi.png" alt="DEPI Logo" loading="lazy">
+          <img src="images/depi.png" alt="DEPI Logo" width="558" height="558" loading="lazy">
         </div>
         <div class="exp-title-info">
           <h3>Flutter Developer Trainee</h3>
@@ -3951,7 +4030,7 @@ footer p{
         </div>
       </div>
       <div class="exp-meta">
-        <div class="meta-item"><i class="far fa-calendar-alt"></i> Nov 2024 � Present</div>
+        <div class="meta-item"><i class="far fa-calendar-alt"></i> Nov 2024 — Present</div>
         <div class="meta-item"><i class="fas fa-map-marker-alt"></i> Hybrid (Online &amp; Cairo, El Nozha)</div>
       </div>
       <div class="exp-tech-tags">
@@ -3987,7 +4066,7 @@ footer p{
     <div class="pro-exp-card reveal">
       <div class="exp-header">
         <div class="exp-logo-box bg-white">
-          <img src="images/iti.png" alt="ITI Logo" loading="lazy">
+          <img src="images/iti.png" alt="ITI Logo" width="750" height="430" loading="lazy">
         </div>
         <div class="exp-title-info">
           <h3>Full-Stack Development Trainee</h3>
@@ -3995,7 +4074,7 @@ footer p{
         </div>
       </div>
       <div class="exp-meta">
-        <div class="meta-item"><i class="far fa-calendar-alt"></i> 2023 � 2024</div>
+        <div class="meta-item"><i class="far fa-calendar-alt"></i> 2023 — 2024</div>
         <div class="meta-item"><i class="fas fa-globe"></i> Online</div>
       </div>
       <div class="exp-tech-tags">
@@ -4030,34 +4109,6 @@ footer p{
   </div> 
 </section> 
 
-<!-- Education Section (MTI) -->
-<section id="education"> 
-  <div class="section-header reveal"> 
-    <div class="section-label">Education</div> 
-    <h2 class="section-title">Academic <span class="gradient-text">Background</span></h2> 
-  </div> 
-  <div class="exp-cards-stack"> 
-    <div class="car-card reveal">
-      <div class="car-header">
-        <div class="car-logo-info">
-          <div class="car-logo-box">
-            <img src="images/MTI.png" alt="MTI Logo" loading="lazy" width="64" height="64">
-          </div>
-          <div>
-            <h3 style="font-size:22px;font-weight:700;color:#fff;">B.Sc. Computer Science &amp; Artificial Intelligence</h3>
-            <p style="font-size:13px;color:var(--neon);font-weight:600;">Modern University for Technology and Information (MTI)</p>
-          </div>
-        </div>
-        <span class="car-date-badge badge-depi">2024 � 2028</span>
-      </div>
-      <div class="car-body">
-        <p><strong>Focus: </strong>Pursuing a Bachelor of Computer Science with a concentration in Artificial Intelligence, building a strong foundation in algorithms, data structures, machine learning, and software engineering fundamentals.</p>
-        <p><strong>Status: </strong>Currently enrolled, balancing academic studies with hands-on Flutter development and professional training through ITI and DEPI.</p>
-      </div>
-    </div>
-  </div> 
-</section> 
-
 <!-- Stats Section (Big Numbers) -->
 <section id="stats"> 
   <div class="section-header reveal"> 
@@ -4082,7 +4133,44 @@ footer p{
       <div class="stat-label">Commitment to Clean Code</div> 
     </div> 
   </div> 
-</section> 
+</section>
+
+<!-- Services Section (5 Cards) -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3 class="service-title">Mobile App Development</h3>
+      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+      <h3 class="service-title">UI/UX Design</h3>
+      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-plug"></i></div>
+      <h3 class="service-title">API Integration</h3>
+      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div>
+      <h3 class="service-title">App Optimization</h3>
+      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-globe"></i></div>
+      <h3 class="service-title">Portfolio & Landing Pages</h3>
+      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p>
+    </div>
+  </div>
+
+    </section>
 
 <!-- Projects Section (High Quality Showcase Display) --> 
 <section id="projects"> 
@@ -4096,12 +4184,12 @@ footer p{
     <!-- Project 1: MovieVerse -->
     <div class="project-card reveal" onclick="openProjectModal(0)"> 
       <div class="project-image">
-        <img src="images/movie2.jpg" alt="MovieVerse Showcase" loading="lazy">
+        <img src="images/movie2.jpg" alt="MovieVerse Showcase" width="1280" height="853" loading="lazy">
       </div> 
       <div class="project-content"> 
-        <h3>MovieVerse � Movie Explorer</h3> 
+        <h3>MovieVerse — Movie Explorer</h3>
         <div class="project-subtitle">Movies & Series Streaming Platform</div>
-        <p>A cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready � even at 30,000 feet.</p> 
+        <p>A cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.</p>
         <div class="tech-stack"> 
           <span class="tech-tag">Flutter</span> 
           <span class="tech-tag">REST API</span> 
@@ -4110,16 +4198,16 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(0)"><i class="fas fa-eye"></i> See More</button> 
-          <div class="demo-card" onclick="openProjectVideo('images/movieberse.mp4', 'MovieVerse')" style="flex: 1.5; margin: 0; padding: 8px;">
+          <a href="#demo-movieverse" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <img src="images/movie2.jpg" alt="MovieVerse Demo" onerror="this.style.display='none'">
+              <img src="images/movie2.jpg" alt="MovieVerse Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'">
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
               <h4 style="font-size: 13px;">Watch Web<br>Project</h4>
             </div>
             <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
-          </div>
+          </a>
         </div> 
       </div> 
     </div> 
@@ -4127,12 +4215,12 @@ footer p{
     <!-- Project 2: Masrofy -->
     <div class="project-card reveal" onclick="openProjectModal(1)"> 
       <div class="project-image">
-        <img src="images/masrofy2.png" alt="Masrofy Showcase" loading="lazy">
+        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy"></picture>
       </div> 
       <div class="project-content"> 
-        <h3>Masrofy � Smart Expense Tracker</h3> 
+        <h3>Masrofy — Smart Expense Tracker</h3>
         <div class="project-subtitle">Personal Finance Management</div>
-        <p>A smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies � all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.</p> 
+        <p>A smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.</p>
         <div class="tech-stack"> 
           <span class="tech-tag">Flutter</span> 
           <span class="tech-tag">Dart</span> 
@@ -4141,16 +4229,16 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
-          <div class="demo-card" onclick="openProjectVideo('images/masrofy.mp4', 'Masrofy')" style="flex: 1.5; margin: 0; padding: 8px;">
+          <a href="#demo-masrofy" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <img src="images/masrofy2.png" alt="Masrofy Demo" onerror="this.style.display='none'">
+              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
               <h4 style="font-size: 13px;">Watch Mobile<br>Project</h4>
             </div>
             <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
-          </div>
+          </a>
         </div> 
       </div> 
     </div> 
@@ -4158,79 +4246,21 @@ footer p{
   </div> 
 </section> 
 
-<!-- Future Projects Section -->
-<section id="future-projects">
+<!-- Achievements Section -->
+<section id="achievements">
   <div class="section-header reveal">
-    <div class="section-label">Coming Up</div>
-    <h2 class="section-title">Future <span class="gradient-text">Projects</span></h2>
+    <div class="section-label">Achievements</div>
+    <h2 class="section-title">Progress &amp; <span class="gradient-text">Training</span></h2>
   </div>
-  <div class="projects-grid">
-
-    <!-- Project: StudySync -->
-    <div class="project-card reveal" onclick="openProjectModal(2)"> 
-      <div class="project-image">
-        <img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" loading="lazy">
-      </div> 
-      <div class="project-content"> 
-        <h3>StudySync � Smart Study Planner</h3> 
-        <div class="project-subtitle">Study Organization &amp; Focus</div>
-        <p>A focused study companion that keeps your learning on track. StudySync brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.</p> 
-        <div class="tech-stack"> 
-          <span class="tech-tag">Flutter</span> 
-          <span class="tech-tag">Dart</span> 
-        </div> 
-        <div class="project-links" onclick="event.stopPropagation()"> 
-          <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button> 
-          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
-        </div> 
-      </div> 
-    </div> 
-
-    <!-- Project: MediMind -->
-    <div class="project-card reveal" onclick="openProjectModal(3)"> 
-      <div class="project-image">
-        <img src="images/MediMind.jpg" alt="MediMind Showcase" loading="lazy">
-      </div> 
-      <div class="project-content"> 
-        <h3>MediMind � Health Companion</h3> 
-        <div class="project-subtitle">Wellness &amp; Medication Reminders</div>
-        <p>A simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines � with gentle reminders and an easy-to-use interface designed around your wellbeing.</p> 
-        <div class="tech-stack"> 
-          <span class="tech-tag">Flutter</span> 
-          <span class="tech-tag">Dart</span> 
-        </div> 
-        <div class="project-links" onclick="event.stopPropagation()"> 
-          <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button> 
-          <a href="https://youtube.com/@abdelrahmanabuoelwafa" class="project-btn secondary" target="_blank"><i class="fas fa-play"></i> View Project</a> 
-        </div> 
-      </div> 
-    </div> 
-
-  </div> 
-</section>
-
-<!-- Future / Featured Section -->
-<section id="future">
-  <div class="section-header reveal">
-    <div class="section-label">What's Next</div>
-    <h2 class="section-title">Future &amp; <span class="gradient-text">Featured</span></h2>
+  <div class="stats-grid">
+    <div class="stat-card reveal"><div class="stat-value">+8</div><div class="stat-label">Projects Completed</div></div>
+    <div class="stat-card reveal"><div class="stat-value">+4</div><div class="stat-label">Years of Learning &amp; Building</div></div>
+    <div class="stat-card reveal"><div class="stat-value">2</div><div class="stat-label">Intensive Training Programs</div></div>
+    <div class="stat-card reveal"><div class="stat-value">100%</div><div class="stat-label">Commitment to Clean Code</div></div>
   </div>
-  <div class="future-grid">
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-brain"></i></div>
-      <h3 class="future-title">Deepening AI &amp; ML</h3>
-      <p class="future-desc">Expanding my Artificial Intelligence studies at MTI and applying ML concepts into Flutter-powered smart mobile experiences.</p>
-    </div>
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-store"></i></div>
-      <h3 class="future-title">Client-Launched Apps</h3>
-      <p class="future-desc">Shipping freelance Flutter apps to production on Google Play and the App Store � for clients across Khamsat and Nafzly.</p>
-    </div>
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-plug"></i></div>
-      <h3 class="future-title">Full-Stack Flutter</h3>
-      <p class="future-desc">Bridging mobile and backend with clean REST APIs, Firebase, and Laravel to deliver complete, end-to-end product experiences.</p>
-    </div>
+  <div class="achievement-grid" style="margin-top:24px">
+    <article class="car-card reveal achievement-cert"><img src="images/iti.png" alt="ITI logo" width="750" height="430" loading="lazy"><div><h3>ITI</h3><p>Full-Stack Development Training</p></div></article>
+    <article class="car-card reveal achievement-cert"><img src="images/depi.png" alt="DEPI logo" width="558" height="558" loading="lazy"><div><h3>DEPI</h3><p>Flutter Development Training</p></div></article>
   </div>
 </section>
 
@@ -4253,10 +4283,10 @@ footer p{
       <div class="author-info">
         <div class="avatar" style="background-color: #a855f7;">A</div>
         <div class="details">
-          <h4>A. Amira � Soft skills Mentor</h4>
+          <h4>A. Amira — Soft skills Mentor</h4>
           <div class="linkedin-link">
-            <span class="recommendation-text">Recommendation �</span>
-            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+            <span class="recommendation-text">Recommendation —</span>
+            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
               <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
           </div>
@@ -4276,10 +4306,10 @@ footer p{
       <div class="author-info">
         <div class="avatar" style="background-color: #22d3ee;">M</div>
         <div class="details">
-          <h4>Menna Omar � Freelancing &amp; Coaching Instructor</h4>
+          <h4>Menna Omar — Freelancing &amp; Coaching Instructor</h4>
           <div class="linkedin-link">
-            <span class="recommendation-text">Recommendation �</span>
-            <a href="https://www.linkedin.com/in/mennaomar/" target="_blank" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+            <span class="recommendation-text">Recommendation —</span>
+            <a href="https://www.linkedin.com/in/mennaomar/" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
               <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
           </div>
@@ -4289,42 +4319,73 @@ footer p{
   </div>
 </section>
 
-<!-- Services Section (5 Cards) --> 
-<section id="services"> 
-  <div class="section-header reveal"> 
-    <div class="section-label">What I Do</div> 
-    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2> 
+<!-- What's Next: planned projects and goals -->
+<section id="future-projects">
+  <div class="section-header reveal">
+    <div class="section-label">What's Next</div>
+    <h2 class="section-title">What's <span class="gradient-text">Next</span></h2>
   </div>
-  
-  <div class="services-grid"> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div> 
-      <h3 class="service-title">Mobile App Development</h3> 
-      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-paint-brush"></i></div> 
-      <h3 class="service-title">UI/UX Design</h3> 
-      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-plug"></i></div> 
-      <h3 class="service-title">API Integration</h3> 
-      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div> 
-      <h3 class="service-title">App Optimization</h3> 
-      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p> 
-    </div> 
-    <div class="service-card reveal"> 
-      <div class="service-icon"><i class="fas fa-globe"></i></div> 
-      <h3 class="service-title">Portfolio & Landing Pages</h3> 
-      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients � designed to make you stand out from the competition</p> 
-    </div> 
-  </div> 
+  <div class="projects-grid">
 
-    </section> 
+    <!-- Project: StudySync -->
+    <div class="project-card reveal" onclick="openProjectModal(2)">
+      <div class="project-image">
+        <img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" width="1280" height="853" loading="lazy">
+      </div>
+      <div class="project-content">
+        <h3>StudySync — Smart Study Planner</h3>
+        <div class="project-subtitle">Study Organization &amp; Focus</div>
+        <p>A focused study companion that keeps your learning on track. StudySync brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+        </div>
+        <div class="project-links" onclick="event.stopPropagation()">
+          <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button>
+          <a href="#demo-studysync" class="project-btn secondary" target="_self"><i class="fas fa-play"></i> View Project</a>
+        </div>
+      </div>
+    </div> 
+
+    <!-- Project: MediMind -->
+    <div class="project-card reveal" onclick="openProjectModal(3)">
+      <div class="project-image">
+        <img src="images/MediMind.jpg" alt="MediMind Showcase" width="1280" height="854" loading="lazy">
+      </div>
+      <div class="project-content">
+        <h3>MediMind — Health Companion</h3>
+        <div class="project-subtitle">Wellness &amp; Medication Reminders</div>
+        <p>A simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+        </div>
+        <div class="project-links" onclick="event.stopPropagation()">
+          <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button>
+          <a href="#demo-medimind" class="project-btn secondary" target="_self"><i class="fas fa-play"></i> View Project</a>
+        </div>
+      </div>
+    </div> 
+
+  </div>
+  <div class="future-grid">
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-brain"></i></div>
+      <h3 class="future-title">Deepening AI &amp; ML</h3>
+      <p class="future-desc">Expanding my Artificial Intelligence studies at MTI and applying ML concepts into Flutter-powered smart mobile experiences.</p>
+    </div>
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-store"></i></div>
+      <h3 class="future-title">Client-Launched Apps</h3>
+      <p class="future-desc">Shipping freelance Flutter apps to production on Google Play and the App Store — for clients across Khamsat and Nafzly.</p>
+    </div>
+    <div class="future-card reveal">
+      <div class="future-icon"><i class="fas fa-plug"></i></div>
+      <h3 class="future-title">Full-Stack Flutter</h3>
+      <p class="future-desc">Bridging mobile and backend with clean REST APIs, Firebase, and Laravel to deliver complete, end-to-end product experiences.</p>
+    </div>
+  </div>
+</section>
 
 <!-- Pricing Section (3 Tiers) -->
 <section id="pricing">
@@ -4343,7 +4404,7 @@ footer p{
           <div style="width:1px;height:30px;background:#334155;"></div>
           <div><span class="price-unit">MAX </span><span class="price-val">$30</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);font-style:italic;">Simple apps � short timeline</p>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">Simple apps — short timeline</p>
         <p style="font-size:12px;color:var(--muted);margin-top:8px;">Best for simple utility or personal apps. Clean UI; on-time delivery; source code included.</p>
       </div>
       <div class="price-features">
@@ -4368,7 +4429,7 @@ footer p{
           <div style="width:1px;height:30px;background:#334155;"></div>
           <div><span class="price-unit">MAX </span><span class="price-val">$70</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);font-style:italic;">E-commerce & dashboards � mid complexity</p>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">E-commerce & dashboards — mid complexity</p>
         <p style="font-size:12px;color:var(--muted);margin-top:8px;">Ideal for e-commerce, dashboards, or productivity apps with real-time data and clean architecture.</p>
       </div>
       <div class="price-features">
@@ -4393,8 +4454,8 @@ footer p{
           <div style="width:1px;height:30px;background:#334155;"></div>
           <div><span class="price-unit">MAX </span><span class="price-val">$100</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);font-style:italic;">Full production apps � startup & launches</p>
-        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Full production-ready app � multi-feature, optimized, deployed. Ideal for startups & launches.</p>
+        <p style="font-size:12px;color:var(--muted);font-style:italic;">Full production apps — startup & launches</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Full production-ready app — multi-feature, optimized, deployed. Ideal for startups & launches.</p>
       </div>
       <div class="price-features">
         <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Unlimited screens</div>
@@ -4499,27 +4560,30 @@ footer p{
       <h3>Have a project in mind?</h3> 
       <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Let's create something amazing together.</p> 
       <div class="contact-links"> 
-        <a href="mailto:abdulrahman.abuoshaifa@gmail.com" class="contact-link"> 
+        <div class="contact-link contact-link-card">
           <i class="fas fa-envelope"></i> 
-          <div> 
+          <div class="contact-link-copy">
             <strong>Email</strong> 
             <span>abdulrahman.abuoshaifa@gmail.com</span> 
           </div> 
-        </a> 
-        <a href="https://wa.me/201123031944" class="contact-link"> 
+          <div class="contact-link-actions"><button type="button" data-copy="abdulrahman.abuoshaifa@gmail.com">Copy</button><a href="mailto:abdulrahman.abuoshaifa@gmail.com">Open</a></div>
+        </div>
+        <div class="contact-link contact-link-card">
           <i class="fab fa-whatsapp" style="color:#25d366;"></i> 
-          <div> 
+          <div class="contact-link-copy">
             <strong>WhatsApp</strong> 
             <span>+20 112 303 1944</span> 
           </div> 
-        </a> 
-        <a href="tel:+201123031944" class="contact-link"> 
+          <div class="contact-link-actions"><button type="button" data-copy="+201123031944">Copy</button><a href="https://wa.me/201123031944" target="_blank" rel="noopener">Open</a></div>
+        </div>
+        <div class="contact-link contact-link-card">
           <i class="fas fa-phone-alt"></i> 
-          <div> 
+          <div class="contact-link-copy">
             <strong>Phone</strong> 
             <span>+20 112 303 1944</span> 
           </div> 
-        </a> 
+          <div class="contact-link-actions"><button type="button" data-copy="+201123031944">Copy</button><a href="tel:+201123031944">Open</a></div>
+        </div>
         <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" class="contact-link"> 
           <i class="fab fa-linkedin-in" style="color:#0077b5;"></i> 
           <div> 
@@ -4552,23 +4616,43 @@ footer p{
       </div>
 
       <form class="contact-form compact-form hidden-form" id="actualContactForm" onsubmit="handleFormSubmit(event)"> 
+        <input type="hidden" name="access_key" value="ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="Portfolio contact form">
         <div class="form-group"> 
           <label>Your Name</label> 
-          <input type="text" id="contactName" placeholder="John Doe" required> 
+          <input type="text" id="contactName" name="name" placeholder="John Doe" required>
         </div> 
         <div class="form-group"> 
           <label>Your Email</label> 
-          <input type="email" id="contactEmail" placeholder="john@example.com" required> 
+          <input type="email" id="contactEmail" name="email" placeholder="john@example.com" required>
         </div> 
         <div class="form-group"> 
           <label>Message</label> 
-          <textarea id="contactMsg" placeholder="Tell me about your project..." required></textarea> 
+          <textarea id="contactMsg" name="message" placeholder="Tell me about your project..." required></textarea>
         </div> 
         <button type="submit" id="contactBtn" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button> 
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form> 
     </div>
   </div> 
 </section> 
+
+<!-- Find Me On -->
+<section class="find-me" aria-labelledby="find-me-title">
+  <h2 id="find-me-title">Find Me <span class="gradient-text">On</span></h2>
+  <div class="find-me-grid">
+    <a class="find-me-tile" href="#" target="_self" data-platform="Upwork" rel="noopener" aria-label="Upwork profile URL placeholder" style="--platform-color:#14a800"><span>Up</span></a>
+    <a class="find-me-tile" href="#" data-platform="Fiverr" rel="noopener" aria-label="Fiverr profile URL placeholder" style="--platform-color:#1dbf73"><span>Fi</span></a>
+    <a class="find-me-tile" href="#" data-platform="Freelancer" rel="noopener" aria-label="Freelancer profile URL placeholder" style="--platform-color:#1686d9"><span>Fr</span></a>
+    <a class="find-me-tile" href="#" data-platform="Khamsat" rel="noopener" aria-label="Khamsat profile URL placeholder" style="--platform-color:#f6a623"><span>5</span></a>
+    <a class="find-me-tile" href="#" target="_self" data-platform="Mostaql" rel="noopener" aria-label="Mostaql profile URL placeholder" style="--platform-color:#25a9e0"><span>Mo</span></a>
+    <a class="find-me-tile" href="#" data-platform="Nafezly" rel="noopener" aria-label="Nafezly profile URL placeholder" style="--platform-color:#14b8a6"><span>Na</span></a>
+    <a class="find-me-tile" href="#" data-platform="Guru" rel="noopener" aria-label="Guru profile URL placeholder" style="--platform-color:#4d8b31"><span>Gu</span></a>
+    <a class="find-me-tile" href="#" data-platform="LinkedIn" rel="noopener" aria-label="LinkedIn profile URL placeholder" style="--platform-color:#0a66c2"><span>in</span></a>
+    <a class="find-me-tile" href="#" data-platform="GitHub" rel="noopener" aria-label="GitHub profile URL placeholder" style="--platform-color:#8b5cf6"><span>GH</span></a>
+    <a class="find-me-tile" href="#" data-platform="YouTube" rel="noopener" aria-label="YouTube channel URL placeholder" style="--platform-color:#ff0033"><span>YT</span></a>
+  </div>
+</section>
 
 <!-- Footer --> 
 <footer class="premium-footer"> 
@@ -4583,13 +4667,24 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <div class="footer-logo"><span class="code-bracket">&lt;/&gt;</span> A<span class="neon-dot">.</span>A</div>
-      <p class="footer-subtitle">Flutter Developer � Cairo, Egypt</p>
+      <img class="footer-logo-img" src="images/logo.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
+      <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
-        <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="????? (Khamsat)" aria-label="Khamsat profile"><img src="images/?????.png" alt="?????" loading="lazy"></a>
-        <a href="https://nafezly.com/u/ENGabdelrahamn" class="platform-icon" target="_blank" rel="noopener" title="????? (Nafzly)" aria-label="Nafzly profile"><img src="images/?????.jpg" alt="?????" loading="lazy"></a>
-        <a href="https://mostaql.com/onboarding/profile" class="platform-icon" target="_blank" rel="noopener" title="????? (Mostaql)" aria-label="Mostaql profile"><img src="images/?????.jpeg" alt="?????" loading="lazy"></a>
-        <a href="https://www.freelancer.com/u/abdelrahmana089" class="platform-icon" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer profile"><img src="images/????????.jpg" alt="Freelancer" loading="lazy"></a>
+        <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Khamsat"><title>Khamsat</title><rect width="64" height="64" rx="14" fill="#f6a623"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">5</text></svg>
+        </a>
+        <a href="https://nafezly.com/u/ENGabdelrahamn" class="platform-icon" target="_blank" rel="noopener" title="Nafezly" aria-label="Nafezly" style="--platform-color:#14b8a6">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Nafezly"><title>Nafezly</title><rect width="64" height="64" rx="14" fill="#14b8a6"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#fff">ن</text></svg>
+        </a>
+        <a href="MOSTAQL_URL_HERE" class="platform-icon" target="_blank" rel="noopener" title="Mostaql" aria-label="Mostaql" style="--platform-color:#25a9e0">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Mostaql"><title>Mostaql</title><rect width="64" height="64" rx="14" fill="#25a9e0"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#fff">م</text></svg>
+        </a>
+        <a href="https://www.freelancer.com/u/abdelrahmana089" class="platform-icon" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer" style="--platform-color:#1686d9">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Freelancer"><title>Freelancer</title><rect width="64" height="64" rx="14" fill="#1686d9"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">F</text></svg>
+        </a>
+        <a href="https://rebhy.com/freelancers/abdelrahman_aboelwafa" class="platform-icon" target="_blank" rel="noopener" title="Rebhy" aria-label="Rebhy" style="--platform-color:#8b5cf6">
+          <svg viewBox="0 0 64 64" role="img" aria-label="Rebhy"><title>Rebhy</title><rect width="64" height="64" rx="14" fill="#8b5cf6"/><text x="32" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">R</text></svg>
+        </a>
       </div>
     </div>
     <div class="footer-col right-col">
@@ -4609,7 +4704,6 @@ footer p{
 </div>
 
 <!-- Three.js & Libraries --> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/neon-border.js?v=22"></script> 
 <script src="js/tornado.js?v=22"></script> 
 <script src="js/firework-cursor.js?v=23"></script>
@@ -4652,7 +4746,7 @@ window.addEventListener('scroll', () => {
 }); 
 
 // Scroll-spy: highlight the active section link in the nav
-const spySections = ['hero','about','services','skills','experience','education','stats','projects','testimonials','pricing','contact'];
+const spySections = ['hero','about','education','skills','experience','services','projects','achievements','testimonials'];
 function updateActiveLink() { 
   const links = document.querySelectorAll('.nav-links a'); 
   if (!links.length) return; 
@@ -4696,7 +4790,7 @@ function type() {
 } 
 type(); 
 
-// Cinematic scroll reveals � progress follows scroll position (all browsers)
+// Cinematic scroll reveals — progress follows scroll position (all browsers)
 (function(){
   if (window.__skipOldReveal !== false) return; /* LIGHT MODE: disabled in favor of assets/js/scroll-reveal.js */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -4803,12 +4897,12 @@ type();
 // Project Data & Modal System
 const projectDetails = [
   {
-    title: "MovieVerse � Movie Explorer App",
+    title: "MovieVerse — Movie Explorer App",
     subtitle: "Movies & Series Streaming",
     image: "images/movie2.jpg",
     video: "images/movieberse.mp4",
     tech: ["Flutter", "REST API", "Firebase", "Hive"],
-    desc: "MovieVerse is a cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready � even at 30,000 feet.",
+    desc: "MovieVerse is a cinematic movie discovery app that turns browsing into an experience. It streams real-time trending titles from the TMDB API, surfaces rich reviews and trailers, and keeps a personalized watchlist synced across devices via Firebase. A Hive-powered offline cache means your queue is always ready — even at 30,000 feet.",
     challenge: "Developing cross-platform applications with high responsiveness, clean networking logic, offline usability, and synchronized cloud stores without causing frame drops during media-heavy list rendering.",
     solution: "Implemented Clean Architecture with strict layer separations (Core, Data, Domain, Presentation). Utilized BLoC for clean state containment, Hive for local database persistence enabling instant offline access, and responsive grid layouts ensuring visual continuity from compact mobile devices to tablets.",
     results: "Dynamic TMDB API integration for up-to-the-minute trailers, reviews, and film databases. Blazing fast local cache using Hive database engine. Firebase Cloud sync for customized bookmarks. Fully responsive adaptation with layout switches. Custom micro-interactions and dark theme aesthetics matching standard Material 3 specs.",
@@ -4821,12 +4915,12 @@ const projectDetails = [
     ]
   },
   {
-    title: "Masrofy � Expense Tracker App",
-    subtitle: "Track � Manage � Grow",
+    title: "Masrofy — Expense Tracker App",
+    subtitle: "Track — Manage — Grow",
     image: "images/masrofy2.png",
     video: "images/masrofy.mp4",
     tech: ["Flutter", "Dart", "Hive", "FL Chart"],
-    desc: "Masrofy is a smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies � all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.",
+    desc: "Masrofy is a smart expense tracker that makes financial clarity effortless. It auto-categorizes spending, plans budgets with live FL Chart analytics, and supports multiple currencies — all stored securely on-device with Hive. Custom alerts and interactive insights help you spend with intention, not guesswork.",
     challenge: "Building a comprehensive expense tracking app with intuitive UI, multi-currency support, and secure data management that works seamlessly offline.",
     solution: "Flutter with clean architecture, local database (Hive) for offline-first experience, customizable budget categories, and real-time expense analytics with visual charts.",
     results: "Full-featured expense tracker with multi-currency support (Saudi Riyal, US Dollar, UAE Dirhams, Euro), budget control with category limits, detailed statistics and charts, and a polished dark-themed UI.",
@@ -4840,12 +4934,12 @@ const projectDetails = [
     ]
   },
   {
-    title: "StudySync � Smart Study Planner",
-    subtitle: "Study Organization � Focus",
+    title: "StudySync — Smart Study Planner",
+    subtitle: "Study Organization — Focus",
     image: "images/STUDYSYNC.jpg",
     tech: ["Flutter", "Firebase", "AI Integration", "REST APIs"],
     desc: "StudySync is a focused study companion that keeps your learning on track. It brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.",
-    challenge: "Designing an intuitive planner that balances feature richness with a calm, minimal interface � without overwhelming students juggling multiple courses.",
+    challenge: "Designing an intuitive planner that balances feature richness with a calm, minimal interface — without overwhelming students juggling multiple courses.",
     solution: "Built with Flutter and Dart using a clean, modular architecture. Focused on smooth navigation, clear visual hierarchy, and effortless schedule management.",
     results: "A polished study planner that turns scattered to-dos into an organized, motivating daily rhythm.",
     features: [
@@ -4856,12 +4950,12 @@ const projectDetails = [
     ]
   },
   {
-    title: "MediMind � Health Companion",
-    subtitle: "Wellness � Medication Reminders",
+    title: "MediMind — Health Companion",
+    subtitle: "Wellness — Medication Reminders",
     image: "images/MediMind.jpg",
     tech: ["Flutter", "Dart"],
-    desc: "MediMind is a simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines � with gentle reminders and an easy-to-use interface designed around your wellbeing.",
-    challenge: "Building a health app that is genuinely easy to use for everyone � clear reminders, zero clutter, and reliable notifications.",
+    desc: "MediMind is a simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.",
+    challenge: "Building a health app that is genuinely easy to use for everyone — clear reminders, zero clutter, and reliable notifications.",
     solution: "Developed with Flutter and Dart, prioritizing a warm, accessible UI and dependable reminder flows that fit naturally into daily life.",
     results: "An approachable wellness app that helps users stay consistent with their medication and self-care routines.",
     features: [
@@ -4875,73 +4969,50 @@ const projectDetails = [
 
 const projectDetailsAr = [
   {
-    title: "MovieVerse � ????? ??????? ???????",
-    subtitle: "???? ????? ????????",
+    title: "MovieVerse — مستكشف الأفلام",
+    subtitle: "الأفلام والمسلسلات",
     image: "images/movie2.jpg",
     video: "images/movieberse.mp4",
     tech: ["Flutter", "REST API", "Firebase", "Hive"],
-    desc: "MovieVerse ?? ????? ??????? ??????? ????? ?????? ??? ????? ????????. ????? ?????? ????? ?????? ?? TMDB API? ?? ??????? ???????? ??????? ????? ?????? ?????? ????? ??????? ??? ??????? ?????? Firebase. ?????? ????? ????? ?????? Hive ???? ?????? ????? ?????? ??? ??? ?????? 30,000 ???.",
-    challenge: "????? ??????? ?????? ??????? ????? ??????? ?????? ????? ????? ????? ???? ??? ?????? ?????? ????? ?????? � ??? ?? ????? ?? ?????? ????? ??? ????? ????? ????????.",
-    solution: "????? Clean Architecture ???? ???? ??????? (Core, Data, Domain, Presentation)? ???????? BLoC ?????? ??????? ?Hive ?????? ?????? ????? ???? ?????? ?????? ??? ?????? ?????? ????? ??????? ???? ????????? ????? ?? ??????? ??????? ??? ??????? ???????.",
-    results: "????? ???????? ?? TMDB API ?????? ?????????? ?????? ?????? ??????? ???? ?????. ????? ????? ????? ????? ?????? ??? Hive. ?????? ?????? ??? Firebase ???????? ????????. ????? ???? ?? ??????? ???????? ???????? ?????? ???? ???? ????? ??????? Material 3.",
-    features: [
-      "????? ???????? ?? TMDB API ?????? ?????????? ?????? ?????? ???????.",
-      "????? ????? ????? ????? ?????? ??? ???? Hive.",
-      "?????? ?????? ??? Firebase ???????? ???????? ???????.",
-      "????? ???? ?? ??????? ???????.",
-      "??????? ????? ???? ???? ????? ??????? Material 3."
-    ]
+    desc: "تطبيق لاكتشاف الأفلام يعرض الأعمال الرائجة والمراجعات والإعلانات من TMDB، مع قائمة مشاهدة شخصية ومزامنة عبر Firebase وتخزين دون اتصال باستخدام Hive.",
+    challenge: "جمع اكتشاف المحتوى والمراجعات والإعلانات وقائمة المشاهدة في تجربة سلسة تعمل حتى دون اتصال.",
+    solution: "بناء التطبيق باستخدام Flutter وواجهات TMDB وFirebase، مع تخزين محلي عبر Hive وتنظيم واضح للمكونات.",
+    results: "تجربة سينمائية تعرض المحتوى الرائج وتتيح حفظ قائمة مشاهدة شخصية ومزامنتها.",
+    features: ["استكشاف الأفلام عبر TMDB", "مراجعات وإعلانات", "مزامنة Firebase", "قائمة مشاهدة وتخزين محلي عبر Hive"]
   },
   {
-    title: "Masrofy � ????? ???? ?????????",
-    subtitle: "???? � ????? � ???",
+    title: "Masrofy — متتبع المصروفات الذكي",
+    subtitle: "تتبّع — أدر — نمِّ",
     image: "images/masrofy2.png",
     video: "images/masrofy.mp4",
     tech: ["Flutter", "Dart", "Hive", "FL Chart"],
-    desc: "Masrofy ?? ????? ??? ????? ????????? ???? ?????? ?????? ?????. ???? ??????? ????????? ????? ?????????? ?? ??????? FL Chart ???? ????? ????? ?????? � ??? ??? ????? ????? ??? ?????? ??? Hive. ??????? ????? ???? ??????? ?????? ??? ??????? ????? ?? ????????.",
-    challenge: "???? ????? ???? ????? ????????? ?????? ?????? ???? ????? ?????? ?????? ???? ???????? ???? ?????? ??? ?????.",
-    solution: "Flutter ???????? ?????? ?????? ?????? ????? (Hive) ?????? ???? ??? ????? ?????? ????? ??????? ????? ???????? ???????? ????? ????????? ????? ?????? ?????.",
-    results: "????? ?????? ????? ????????? ???? ????? ?????? (???? ?????? ????? ??????? ???? ???????? ????)? ???? ??????? ????? ??? ???? ???????? ????? ?????? ???????? ?????? ????? ?????.",
-    features: [
-      "???? ??? ????????? ?? ????? ??????",
-      "??? ??????? ????? ????? ??????? ??? ???",
-      "?????? ??????? ????? ?????? ????????",
-      "??? ????? ?????? (SAR, USD, AED, EUR)",
-      "?????? ???? ????? (???? ?????? ????? ??? ?????)",
-      "??? ???? ?? ????? ????"
-    ]
+    desc: "تطبيق ذكي لإدارة المصروفات والميزانيات، مع تصنيف للإنفاق وتحليلات مرئية ودعم لعملات متعددة وتخزين آمن على الجهاز عبر Hive.",
+    challenge: "تسهيل متابعة المصروفات والميزانية مع دعم العمل دون اتصال وبواجهة واضحة.",
+    solution: "تطوير التطبيق باستخدام Flutter وHive للتخزين المحلي وFL Chart لعرض التحليلات.",
+    results: "متتبع مصروفات يدعم الميزانيات والعملات المتعددة وإحصاءات الإنفاق.",
+    features: ["تصنيف المصروفات", "حدود ميزانية قابلة للتخصيص", "تقارير ورسوم بيانية", "دعم عملات متعددة", "تخزين محلي آمن"]
   },
   {
-    title: "StudySync � ???? ??????? ?????",
-    subtitle: "????? ??????? � ?????",
+    title: "StudySync — مخطط الدراسة الذكي",
+    subtitle: "تنظيم الدراسة — التركيز",
     image: "images/STUDYSYNC.jpg",
     tech: ["Flutter", "Firebase", "AI Integration", "REST APIs"],
-    desc: "StudySync ?? ???? ????? ????? ???? ?????? ??? ?????? ??????. ???? ??????? ??????? ??????? ?? ????? ????? ????? ?? ???????? ??? ???? ????? ????? ????.",
-    challenge: "????? ???? ????? ????? ??? ??? ??????? ?????? ????? ????? � ??? ????? ?????? ????? ??????? ??? ??? ??????.",
-    solution: "???? ?? Flutter ? Dart ???????? ????? ???????? ?? ????? ??? ???? ??? ?????? ???? ???? ?????? ??? ???????.",
-    results: "???? ????? ???? ????? ?????? ????????? ??? ????? ???? ???? ?????.",
-    features: [
-      "????? ??????? ?????? ???? ???????",
-      "???? ?????? ??? ???????? ???????",
-      "????? ????? ????? ?? ????????",
-      "????? Flutter ????? ?????"
-    ]
+    desc: "رفيق دراسي يجمع الجداول والمهام والتقدم في واجهة هادئة تساعد على التخطيط والمذاكرة بتركيز.",
+    challenge: "تنظيم مقررات ومهام متعددة في مخطط بسيط لا يشتت الطالب.",
+    solution: "تطوير واجهة Flutter منظمة تسهّل إدارة الجداول ومتابعة التقدم.",
+    results: "مخطط يحوّل المهام المتفرقة إلى خطة دراسية يومية واضحة.",
+    features: ["جدولة جلسات الدراسة", "تنظيم المهام", "متابعة التقدم", "واجهة بسيطة"]
   },
   {
-    title: "MediMind � ???? ?????",
-    subtitle: "????? � ????? ????????",
+    title: "MediMind — رفيق الصحة",
+    subtitle: "العافية — تذكير الدواء",
     image: "images/MediMind.jpg",
     tech: ["Flutter", "Dart"],
-    desc: "MediMind ?? ???? ??? ???? ????? ?????? ??? ????? ?????? ??????? ??????? ??????? ?????? ??????? ?????? � ???????? ????? ?????? ???? ????????? ????? ??? ?????.",
-    challenge: "???? ????? ??? ??? ????????? ???? ?????? � ??????? ?????? ??? ????? ???????? ??????.",
-    solution: "????? ?? Flutter ? Dart? ?? ?????? ?????? ????? ????? ??????? ??????? ????? ?????? ?????? ??????? ?? ?????? ???????.",
-    results: "????? ????? ????? ????? ?????????? ??? ???????? ??? ??????? ?????? ??????? ???????.",
-    features: [
-      "??????? ??????? ???????",
-      "???? ????? ??????? ??????",
-      "????? ????? ????? ??????",
-      "??????? ????? ??????"
-    ]
+    desc: "رفيق صحي يساعد على تذكّر مواعيد الدواء والعادات اليومية للعافية من خلال تنبيهات لطيفة وواجهة سهلة.",
+    challenge: "توفير تذكيرات صحية واضحة وسهلة الاستخدام دون ازدحام أو تعقيد.",
+    solution: "تطوير تدفقات تذكير موثوقة وواجهة مريحة باستخدام Flutter وDart.",
+    results: "تطبيق يساعد المستخدمين على الالتزام بمواعيد الدواء وروتين العناية اليومية.",
+    features: ["تذكير بمواعيد الدواء", "متابعة العادات الصحية", "واجهة سهلة", "إشعارات محلية"]
   }
 ];
 
@@ -4952,7 +5023,7 @@ function openProjectModal(index) {
   const L = isAr
     ? { challenge: '??????', solution: '???? (???????)', result: '???????', features: '??????? ????????', source: '????? ???????', watch: '???? ?????', play: '???? ???' }
     : { challenge: 'THE CHALLENGE', solution: 'THE SOLUTION (ACTION)', result: 'THE RESULT', features: 'KEY FEATURES', source: 'Source Code', watch: 'Watch Demo', play: 'Play the' };
-  const badge = p.title.split(' � ')[0];
+  const badge = p.title.split(' — ')[0];
   const techPills = (p.tech || []).map(t => `<span class="tech-pill"><i class="fas fa-code"></i> ${t}</span>`).join('');
   const content = `
     <div class="premium-project-details">
@@ -4989,16 +5060,16 @@ function openProjectModal(index) {
       </div>
       ${p.video ? `
       <div class="demo-buttons-container">
-        <div class="demo-card" onclick="openProjectVideo('${p.video}', '${String(p.title.split(' � ')[0]).replace(/'/g, '')}')">
+        <div class="demo-card" onclick="openProjectVideo('${p.video}', '${String(p.title.split(' — ')[0]).replace(/'/g, '')}')">
           <div class="demo-thumbnail">
-            <img src="${p.image}" alt="Demo Thumbnail" onerror="this.src='https://via.placeholder.com/100x65/222/fff?text=Demo'">
+            <img src="${p.image}" alt="Demo Thumbnail" width="1280" height="${p.image === 'images/MediMind.jpg' ? 854 : 853}" loading="lazy" onerror="this.src='https://via.placeholder.com/100x65/222/fff?text=Demo'">
             <div class="play-icon-overlay">
               <i class="fas fa-play"></i>
             </div>
           </div>
           <div class="demo-info">
             <h4>${L.watch}</h4>
-            <p>${L.play} ${String(p.title.split(' � ')[0]).replace(/'/g, '')}</p>
+            <p>${L.play} ${String(p.title.split(' — ')[0]).replace(/'/g, '')}</p>
           </div>
           <div class="demo-arrow">
             <i class="fas fa-arrow-right"></i>
@@ -5017,25 +5088,80 @@ function closeProjectModal() {
 
 function handleFormSubmit(e) {
   e.preventDefault();
+  const submitButton = document.getElementById('contactBtn');
+  if (submitButton.disabled) return;
+  const form = e.currentTarget;
   const isAr = document.documentElement.lang === 'ar';
-  const sending = isAr ? '<i class="fas fa-spinner fa-spin"></i> ???? ???????...' : '<i class="fas fa-spinner fa-spin"></i> Sending message...';
-  const sent = isAr ? '<i class="fas fa-check"></i> ?? ????? ??????? ?????!' : '<i class="fas fa-check"></i> Message Sent Successfully!';
-  const sendLabel = isAr ? '????? ??????? <i class="fas fa-paper-plane"></i>' : 'Send Message <i class="fas fa-paper-plane"></i>';
-  const btn = document.getElementById('contactBtn');
-  btn.innerHTML = sending;
-  btn.style.background = '#9333EA';
-  setTimeout(() => {
-    btn.innerHTML = sent;
-    btn.style.background = '#10b981';
-    document.getElementById('contactName').value = '';
-    document.getElementById('contactEmail').value = '';
-    document.getElementById('contactMsg').value = '';
-    setTimeout(() => {
+  const btn = submitButton;
+  const status = document.getElementById('formStatus');
+  const key = form.elements.access_key.value.trim();
+  const name = form.elements.name.value.trim();
+  const email = form.elements.email.value.trim();
+  const message = form.elements.message.value.trim();
+  const subject = encodeURIComponent('Portfolio inquiry from ' + name);
+  const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
+  const mailto = 'mailto:abdulrahman.abuoshaifa@gmail.com?subject=' + subject + '&body=' + body;
+  const sendLabel = isAr ? 'إرسال الرسالة <i class="fas fa-paper-plane"></i>' : 'Send Message <i class="fas fa-paper-plane"></i>';
+  const showFailure = (text) => {
+    status.textContent = text + ' ';
+    const fallback = document.createElement('a');
+    fallback.href = mailto;
+    fallback.textContent = isAr ? 'أرسل عبر بريدك الإلكتروني' : 'Send it using your email app';
+    status.appendChild(fallback);
+  };
+  if (!key || key === 'ACCESS_KEY_HERE') {
+    showFailure(isAr ? 'نموذج الإرسال غير مفعّل بعد؛ أضف مفتاح Web3Forms.' : 'The form is not configured yet; add a Web3Forms access key.');
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = isAr ? '<i class="fas fa-spinner fa-spin"></i> جاري إرسال الرسالة...' : '<i class="fas fa-spinner fa-spin"></i> Sending message...';
+  status.textContent = '';
+  fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+    .then(async (response) => {
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || 'Request failed');
+      status.textContent = isAr ? 'تم إرسال رسالتك بنجاح!' : 'Your message was sent successfully!';
+      form.reset();
+    })
+    .catch(() => showFailure(isAr ? 'تعذر إرسال الرسالة. حاول مرة أخرى أو استخدم البريد الإلكتروني:' : 'Message could not be sent. Please try again or use email:'))
+    .finally(() => {
+      btn.disabled = false;
       btn.innerHTML = sendLabel;
-      btn.style.background = 'var(--primary)';
-    }, 3500);
-  }, 1200);
+    });
 }
+
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const value = button.dataset.copy;
+    try {
+      if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(value);
+      else {
+        const temporary = document.createElement('textarea');
+        temporary.value = value;
+        temporary.style.position = 'fixed';
+        temporary.style.opacity = '0';
+        document.body.appendChild(temporary);
+        temporary.select();
+        document.execCommand('copy');
+        temporary.remove();
+      }
+      const original = button.textContent;
+      button.textContent = document.documentElement.lang === 'ar' ? 'تم النسخ!' : 'Copied!';
+      setTimeout(() => { button.textContent = original; }, 1500);
+    } catch (error) {
+      button.textContent = document.documentElement.lang === 'ar' ? 'تعذر النسخ' : 'Copy failed';
+    }
+  });
+});
+
+document.querySelectorAll('[data-platform][href="#"]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const label = link.dataset.platform || 'Profile';
+    const isAr = document.documentElement.lang === 'ar';
+    window.alert(isAr ? 'أضف رابط حساب ' + label + ' لاحقًا.' : 'Add your ' + label + ' profile URL here later.');
+  });
+});
 
 // Initialize Neon Glowing Borders & WebGL Tornado Background
 document.addEventListener("DOMContentLoaded", () => {
@@ -5059,33 +5185,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3D Tornado WebGL Background Engine
+  // Load the optional WebGL scene only after the first paint and near the viewport.
   (function() {
     var canvas = document.getElementById("vortex-canvas");
     var container = document.getElementById("vortex-container");
-    if (!canvas || !container || !window.createVortex || typeof THREE === "undefined") return;
-    var config = {
-      floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
-      waistAt: 0.5, twist: 3, zoom: 75,
-      flowDir: 1, flowSpeed: 0.1,
-      lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
-      showDots: true, dotCount: 1200, dotSize: 0.02,
-      dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
-      showComets: true, cometCount: 4, cometSpeed: 0.08,
-      cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
-      cometDelay: 6, collideForce: 0.6,
-      hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
-    };
-    if (document.documentElement.getAttribute("data-theme") === "light") {
-      config.lineColor = "#F5B301";
-      config.dotColor = "#FFD23F";
-      config.cometColor = "#E8910D";
-      config.lineGlow = 1.1;
-      config.dotGlow = 1.6;
-      config.cometGlow = 1.1;
+    if (!canvas || !container || !window.createVortex) return;
+    var started = false;
+    function startScene() {
+      if (started) return;
+      started = true;
+      function initialize() {
+        try {
+          if (!window.THREE) return;
+          var config = {
+            floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
+            waistAt: 0.5, twist: 3, zoom: 75, flowDir: 1, flowSpeed: 0.1,
+            lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
+            showDots: true, dotCount: 1200, dotSize: 0.02, dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
+            showComets: true, cometCount: 4, cometSpeed: 0.08, cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
+            cometDelay: 6, collideForce: 0.6, hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
+          };
+          if (document.documentElement.getAttribute("data-theme") === "light") {
+            config.lineColor = "#F5B301"; config.dotColor = "#FFD23F"; config.cometColor = "#E8910D";
+            config.lineGlow = 1.1; config.dotGlow = 1.6; config.cometGlow = 1.1;
+          }
+          window.vortexConfig = config;
+          window.createVortex(canvas, container, { current: config });
+        } catch (error) { console.warn("Optional WebGL background unavailable:", error); }
+      }
+      if (window.THREE) { initialize(); return; }
+      var script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      script.async = true;
+      script.onload = initialize;
+      script.onerror = function() { console.warn("Three.js failed to load; continuing without WebGL background."); };
+      document.head.appendChild(script);
     }
-    window.vortexConfig = config;
-    window.createVortex(canvas, container, { current: config });
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        if (entries.some(function(entry) { return entry.isIntersecting; })) {
+          observer.disconnect();
+          (window.requestIdleCallback || function(callback) { setTimeout(callback, 150); })(startScene);
+        }
+      }, { rootMargin: "250px" });
+      observer.observe(container);
+    } else {
+      (window.requestIdleCallback || function(callback) { setTimeout(callback, 250); })(startScene);
+    }
   })();
 });
 </script> 
@@ -5247,7 +5393,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoTitle = document.getElementById('videoModalTitle');
 
   window.openProjectVideo = function(videoSrc, projectName) {
-    videoTitle.textContent = projectName + (document.documentElement.lang === 'ar' ? ' � ???' : ' Demo');
+    videoTitle.textContent = projectName + (document.documentElement.lang === 'ar' ? ' — عرض' : ' Demo');
     videoPlayer.src = videoSrc;
 
     videoModal.classList.add('active');
@@ -5302,6 +5448,60 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.dir = 'rtl';
     var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'EN';
 
+    setAllText('.nav-links a', ['الرئيسية','من أنا','التعليم','المهارات','الخبرة','الخدمات','المشاريع','الإنجازات','آراء الآخرين']);
+    setHtml('.hero-badge', '<span class="status-dot"></span> متاح لمشاريع جديدة');
+    setText('.hero-hook', 'أبني تطبيقات أولية متعددة المنصات للشركات الناشئة — بمعمارية نظيفة وتسليم سريع.');
+    setText('.hero-desc', 'مطوّر Flutter متخصص في تطبيقات الموبايل متعددة المنصات عالية الأداء، بمعمارية نظيفة وممارسات تطوير حديثة.');
+    setHtml('.hero-buttons .btn-primary', '<i class="fas fa-rocket"></i> شاهد المشاريع');
+    setHtml('.hero-buttons .btn-outline', '<i class="fas fa-envelope"></i> تواصل معي');
+    setText('.hero-scroll-text', 'مرّر للاستكشاف');
+    try { words.length = 0; words.push('مطوّر Flutter','مهندس تطبيقات موبايل','مهتم بتجربة المستخدم'); i = 0; j = 0; isDeleting = false; } catch (e) {}
+    setText('#about .section-label', 'من أنا');
+    setHtml('#about .section-title', 'تعرّف على <span class="gradient-text">قصتي أكثر</span>');
+    setText('.about-content h3', 'من أنا');
+    setText('.about-hook', 'أبني تطبيقات أولية متعددة المنصات بمعمارية نظيفة وتسليم سريع.');
+    setHtml('.about-content > p:not(.about-hook):not(.about-usp)', 'أنا <strong>عبدالرحمن عبدالله</strong>، مطوّر Flutter مقيم في القاهرة، مصر. أحوّل الأفكار إلى تطبيقات موبايل أنيقة وعالية الأداء.');
+    setText('.about-usp', 'أساعد الشركات الناشئة والصغيرة على تحويل أفكارها إلى تطبيقات MVP متعددة المنصات — بمعمارية نظيفة وتدريب ITI وDEPI وتسليم سريع ومنظّم.');
+    setAllText('.about-detail-label', ['الخبرة','التقنيات','التعليم']);
+    setAllText('.about-detail-copy', ['تدريب عبر ITI وDEPI في تطوير الويب المتكامل وFlutter.','Flutter وDart وFirebase وREST APIs والمعمارية النظيفة.','بكالوريوس علوم الحاسب والذكاء الاصطناعي في MTI، 2024 — 2028.']);
+    setText('.languages-title', 'اللغات');
+    setAllText('.language-card .lang-info h4', ['العربية','الإنجليزية']);
+    setAllText('.language-card .lang-info p', ['اللغة الأم','إتقان مهني']);
+    setAllText('.language-card .lang-level', ['أم','احترافي']);
+    setText('#education .section-label', 'التعليم');
+    setHtml('#education .section-title', 'الخلفية <span class="gradient-text">الأكاديمية</span>');
+    setText('#skills .section-label', 'المهارات');
+    setHtml('#skills .section-title', 'المهارات و<span class="gradient-text">التقنيات</span>');
+    setAllText('.skill-tab', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
+    setAllText('.skill-header h3', ['تطوير الموبايل','لغات البرمجة','تطوير الويب','المهارات الشخصية','اللغات']);
+    setText('[data-skill-panel="soft-skills"] .skills-desc p', 'تكمل الدقة التقنية بالعمل التعاوني، وتحليل المشكلات المنظّم، والتنفيذ الموثوق.');
+    setAllText('[data-skill-panel="soft-skills"] .soft-skill-card h4', ['العمل الجماعي','حل المشكلات','إدارة الوقت','تعدد المهام','التواصل','سرعة التعلم']);
+    setAllText('[data-skill-panel="soft-skills"] .soft-skill-tag', ['التعاون','تحليلي','التنظيم','التنفيذ','التواصل الشخصي','التطور']);
+    setAllText('[data-skill-panel="spoken-languages"] h4', ['العربية','الإنجليزية']);
+    setAllText('[data-skill-panel="spoken-languages"] .soft-skill-tag', ['إتقان اللغة الأم','إتقان مهني']);
+    setText('#experience .section-label', 'الخبرة');
+    setHtml('#experience .section-title', 'التدريب و<span class="gradient-text">الخبرة</span>');
+    setText('#services .section-label', 'الخدمات');
+    setHtml('#services .section-title', 'الخدمات التي <span class="gradient-text">أقدمها</span>');
+    setAllText('.service-title', ['تطوير تطبيقات الموبايل','تصميم واجهات المستخدم','تكامل واجهات API','تحسين التطبيقات','مواقع وصفحات تعريفية']);
+    setText('#projects .section-label', 'أعمالي');
+    setHtml('#projects .section-title', 'مشاريعي <span class="gradient-text">العملية</span>');
+    setAllText('.project-card h3', ['MovieVerse — مستكشف الأفلام','Masrofy — متتبع المصروفات الذكي','StudySync — مخطط الدراسة الذكي','MediMind — رفيق الصحة']);
+    setText('#achievements .section-label', 'الإنجازات');
+    setHtml('#achievements .section-title', 'التقدم و<span class="gradient-text">التدريب</span>');
+    setText('#testimonials .section-label', 'آراء الآخرين');
+    setHtml('#testimonials .section-title', 'كلمة من <span class="gradient-text">مُعلّمَيَّ</span>');
+    setText('#future-projects .section-label', 'ماذا بعد؟');
+    setHtml('#future-projects .section-title', 'ماذا <span class="gradient-text">بعد؟</span>');
+    setAllText('.future-title', ['تعميق الذكاء الاصطناعي وتعلم الآلة','تطبيقات تُطلق للعملاء','فلاتر متكامل المنصة']);
+    setText('#contact .section-label', 'تواصل معي');
+    setAllText('.contact-link-actions button', ['نسخ','نسخ','نسخ']);
+    setAllText('.contact-link-actions a', ['فتح','فتح','فتح']);
+    setText('#contact .section-label', 'تواصل معي');
+    setHtml('#contact .section-title', 'لنعمل <span class="gradient-text">معًا</span>');
+    if (typeof window.__plannerI18n === 'function') window.__plannerI18n();
+    return;
+
     // Nav
     setAllText('.nav-links a', ['????????','?? ???','????????','???????','???????','????????','???? ???????','???????']);
 
@@ -5342,9 +5542,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('.skill-tab', ['????? ????????','???? ???????','????? ?????']);
     setAllText('.skill-header h3', ['????? ????????','???? ???????','????? ?????']);
     setAllHtml('.skills-desc p', [
-      '?? ???? ????????? ???? � ?? <strong>????? ??????? ??? ?? ????</strong>. ?? Flutter ???? ????? <strong>???? ???? ????</strong> ???? ???? ???? ??? iOS ? Android ?? ??? ????? ????? ???????? ??? ??? ??????? ??????? ???? ????? ??? ????? ?? ???????.',
-      '??????? ???? ??? ??? � ?? <strong>????? ??????</strong>. ??? ?????? ?? ???? ????? ????: ???? ?????? ?????? ??????????? ?????? ???? ???????? ??????? ??? ???? ????? ??????.',
-      '???? ?? ????? ????? ????? ??? ????? ??????. ???? <strong>?????? ?????? ????? ????????</strong> ?? ????? Laravel ???? � ?????? ?? ???? ?????? ????? ?? ????? ????? ????? ??? ???? ??? ?? ????.'
+      '?? ???? ????????? ???? — ?? <strong>????? ??????? ??? ?? ????</strong>. ?? Flutter ???? ????? <strong>???? ???? ????</strong> ???? ???? ???? ??? iOS ? Android ?? ??? ????? ????? ???????? ??? ??? ??????? ??????? ???? ????? ??? ????? ?? ???????.',
+      '??????? ???? ??? ??? — ?? <strong>????? ??????</strong>. ??? ?????? ?? ???? ????? ????: ???? ?????? ?????? ??????????? ?????? ???? ???????? ??????? ??? ???? ????? ??????.',
+      '???? ?? ????? ????? ????? ??? ????? ??????. ???? <strong>?????? ?????? ????? ????????</strong> ?? ????? Laravel ???? — ?????? ?? ???? ?????? ????? ?? ????? ????? ????? ??? ???? ??? ?? ????.'
     ]);
 
     // Experience
@@ -5356,9 +5556,9 @@ document.addEventListener('DOMContentLoaded', () => {
       '???? ????????? ????????? (ITI) <span class="badge-type">?????</span>'
     ]);
     setAllHtml('.exp-cards-stack .pro-exp-card .meta-item', [
-      '<i class="far fa-calendar-alt"></i> ?????? 2024 � ??? ????',
+      '<i class="far fa-calendar-alt"></i> ?????? 2024 — ??? ????',
       '<i class="fas fa-map-marker-alt"></i> ???? (??????? ????????? ??????)',
-      '<i class="far fa-calendar-alt"></i> 2023 � 2024',
+      '<i class="far fa-calendar-alt"></i> 2023 — 2024',
       '<i class="fas fa-globe"></i> ???????'
     ]);
     setAllText('#experience .car-box h4', ['??????','???????','???????','??????','???????','???????']);
@@ -5399,11 +5599,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Projects
     setText('#projects .section-label', '??????');
     setHtml('#projects .section-title', '??????<span class="gradient-text">?</span>');
-    setAllText('#projects .project-card h3', ['MovieVerse � ????? ??????? ???????','Masrofy � ????? ????????? ?????']);
+    setAllText('#projects .project-card h3', ['MovieVerse — ????? ??????? ???????','Masrofy — ????? ????????? ?????']);
     setAllText('#projects .project-subtitle', ['???? ????? ????????','????? ????? ?????']);
     setAllText('#projects .project-card .project-content > p', [
       '????? ??????? ??????? ????? ?????? ??? ????? ????????. ????? ?????? ????? ?????? ?? TMDB API? ?????? ?????? ????? ??????? ??? ??????? ?????? Firebase? ?????? ????? ????? ?????? Hive ???? ?????? ????? ??????.',
-      '????? ??????? ??? ???? ?????? ?????? ?????. ???? ??????? ????????? ????? ?????????? ?? ??????? FL Chart ???? ????? ????? ?????? � ????? ????? ??? ?????? ??? Hive.'
+      '????? ??????? ??? ???? ?????? ?????? ?????. ???? ??????? ????????? ????? ?????????? ?? ??????? FL Chart ???? ????? ????? ?????? — ????? ????? ??? ?????? ??? Hive.'
     ]);
     setAllHtml('#projects .project-btn.primary', ['<i class="fas fa-eye"></i> ??????','<i class="fas fa-eye"></i> ??????']);
     setAllHtml('#projects .demo-info h4', ['???? ?????<br>?????','???? ?????<br>????????']);
@@ -5411,11 +5611,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Future Projects
     setText('#future-projects .section-label', '??????');
     setHtml('#future-projects .section-title', '?????? <span class="gradient-text">?????</span>');
-    setAllText('#future-projects .project-card h3', ['StudySync � ???? ??????? ?????','MediMind � ???? ?????']);
+    setAllText('#future-projects .project-card h3', ['StudySync — ???? ??????? ?????','MediMind — ???? ?????']);
     setAllText('#future-projects .project-subtitle', ['????? ??????? ????????','??????? ???????? ????????']);
     setAllText('#future-projects .project-card .project-content > p', [
       '???? ????? ????? ???? ?????? ??? ?????? ??????. ???? StudySync ??????? ??????? ??????? ?? ????? ????? ????? ?? ???????? ??? ???? ????? ????? ????.',
-      '???? ??? ???? ????? ?????? ??? ????? ?????? ??????? ??????? ??????? ?????? ??????? ?????? � ???????? ????? ?????? ???? ????????? ????? ??? ?????.'
+      '???? ??? ???? ????? ?????? ??? ????? ?????? ??????? ??????? ??????? ?????? ??????? ?????? — ???????? ????? ?????? ???? ????????? ????? ??? ?????.'
     ]);
     setAllHtml('#future-projects .project-btn.primary', ['<i class="fas fa-eye"></i> ??????','<i class="fas fa-eye"></i> ??????']);
     setAllHtml('#future-projects .project-btn.secondary', ['<i class="fas fa-play"></i> ??? ???????','<i class="fas fa-play"></i> ??? ???????']);
@@ -5426,7 +5626,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('.future-title', ['????? ?????? ????????? ????? ?????','??????? ????? ???????','????? ?????? ??????']);
     setAllText('.future-desc', [
       '????? ?????? ?????? ????????? ?? MTI ?????? ?????? ???? ????? ?? ????? ?????? ???? ????? ?? Flutter.',
-      '????? ??????? ????? ??????? ??? ??????? ??? Google Play ? App Store � ?????? ??? ????? ??????.',
+      '????? ??????? ????? ??????? ??? ??????? ??? Google Play ? App Store — ?????? ??? ????? ??????.',
       '??? ???????? ????????? ??????? REST API ????? ? Firebase ? Laravel ?????? ????? ?????? ??????? ?? ??????? ???????.'
     ]);
 
@@ -5437,8 +5637,8 @@ document.addEventListener('DOMContentLoaded', () => {
       '"????? ????????? ???? ????? ????? ?????? ???? ????? ????? ????? ??????? ?????? ????? ??????? ?????. ??? ?????? ???????? ?????? ????????? ?????? ?????? ?????? ?? ??????? ??????? ?? ?? ????? ?????? ????? ????? ??? ?? ????????. ???? ?? ???? ??? ???? ????? ??????."',
       '"??? ??? ???? ????? ?? ????? ?? ????????? ???? ???? ???? ????? ????? ????? ???? ????????? ??? ???? ????? ???? ??? ?? ????? ????? ????? ????????.<br><br>???? ??????? ???? ????? ?? ????? ???? ??? ???? ?? ??? ?????? ?????????. ????? ?? ????? ?? ????? ???? ???? ??? ?? ???? ????? ????? ???????????? ???? ???? ?? ??????.<br><br>?? ?????? ???? ?? ?? ??? ??? ??????. ????? ????????? ?? ????? ?? ??? ?????? ???????? ????? ??????? ??????? ?????? ??? ???? ??? ?? ????? ??? ????? ???. ?????? ??? ????? ????? ?????? ?????? ????????? ??? Outlier? ??? ?????? ??? ????? ??????? ???????? ??????.<br><br>??? ??????? ?? ???? ?????? ?? ?????. ??? ????? ????? ??? ????? ??? ????? ?? ????? ????? ?? ?????? ??????? ??????? ???????? ??????.<br><br>??? ????? ???? ???????? ???? ????? ?????????? ?????? ????? ????? ?? ?????? ?? ???? ????? ?? ?????. ??? ????? ?? ?? ?????? ????? ??????? ??????? ???????? ?????? ????."'
     ]);
-    setAllText('.details h4', ['?. ????? � ?????? ???????? ???????', '??? ??? � ????? ????? ???? ????????']);
-    setAllText('.recommendation-text', ['????? �', '????? �']);
+    setAllText('.details h4', ['?. ????? — ?????? ???????? ???????', '??? ??? — ????? ????? ???? ????????']);
+    setAllText('.recommendation-text', ['????? —', '????? —']);
     document.querySelectorAll('.quote-more-btn').forEach(function(btn){
       var q = btn.previousElementSibling;
       btn.textContent = (q && !q.classList.contains('clamped')) ? '??? ???' : '??????';
@@ -5453,7 +5653,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '?????? ????? ???????? ?????? ????? ????? ?????? ???? ????? ??????????',
       '????? ??? ????????? ??? REST APIs ? Firebase ?????? ????? ?????? ?????? ?????? ????',
       '??? ?????? ?????? ????? ????? ??????? ????? ???????? ????? ?????? ??????',
-      '????? ????????? ???????? ?????? ???????? ????? ?????? ??? ????? � ????? ????? ?? ????????'
+      '????? ????????? ???????? ?????? ???????? ????? ?????? ??? ????? — ????? ????? ?? ????????'
     ]);
 
     // Pricing
@@ -5461,12 +5661,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setHtml('#pricing .section-title', '????? <span class="gradient-text">???????</span>');
     setAllText('.price-unit', ['??','???','??','???','??','???']);
     setAllText('.price-header p', [
-      '??????? ????? � ??? ?????',
+      '??????? ????? — ??? ?????',
       '?????? ????????? ??????? ?? ???????. ????? ?????? ????? ?? ??????? ??? ?????? ????.',
-      '????? ????????? ?????? ???? � ????? ?????',
+      '????? ????????? ?????? ???? — ????? ?????',
       '????? ??????? ??????????? ?????? ?????? ?? ??????? ????????? ?? ?????? ????? ???????? ?????.',
-      '??????? ??????? ????? � ??????? ??????? ????????',
-      '????? ?????? ???? ??????? � ????? ???????? ?????? ??????. ????? ??????? ??????? ??????????.'
+      '??????? ??????? ????? — ??????? ??????? ????????',
+      '????? ?????? ???? ??????? — ????? ???????? ?????? ??????. ????? ??????? ??????? ??????????.'
     ]);
     setText('.popular-badge', '? ?????? ?????');
     setAllHtml('.btn-pricing', [
@@ -5523,8 +5723,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('.footer-title', ['???????','?? ????']);
     setText('.footer-col.left-col p', '??? ?????? ????? ??????? ?????? ????? ????? ???? ????? ???? ???????? ????? ????? ?????? ?????.');
     setHtml('.footer-col.right-col p', '??? <strong style="color:var(--text)">????????? ???????</strong>? ????? ????? ???? ????? ??????? ?????? ?????? ??????? ????? ?????? ???????? ????? ?????? ?????? ????.');
-    setText('.footer-subtitle', '????? ????? � ???????? ???');
-    setText('.footer-copy', '� 2026 ????????? ???????. ???? ?????? ??????.');
+    setText('.footer-subtitle', '????? ????? — ???????? ???');
+    setText('.footer-copy', '© 2026 ????????? ???????. ???? ?????? ??????.');
 
     // AI Planner follows the site language
     setText('#planner-subtitle', '???? ????? ??????? ??? ???? ????? ????? ?? ??? ?? ?????.');
@@ -5599,10 +5799,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </div>
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v37</div>
 <script>
-  var bn = document.getElementById('build-note');
-  if (bn) { bn.style.opacity = '1'; setTimeout(function(){ bn.style.opacity = '0'; setTimeout(function(){ bn.parentNode.removeChild(bn); }, 500); }, 6000); }
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
     if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
@@ -5612,7 +5809,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="assets/js/scroll-reveal.js?v=11" defer></script>
-<script src="assets/js/ai-planner.js?v=25" defer></script>
+<script src="assets/js/ai-planner.js?v=26" defer></script>
 </body> 
 </html>
 

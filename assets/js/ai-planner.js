@@ -1,6 +1,6 @@
 /* ============================================================
    AI Business Planner — premium guided brief (bilingual)
-   - Real AI via OVHcloud endpoint (FREE, no login, no API key)
+  - Gemini AI via a protected Cloudflare Worker proxy (API key is never shipped to visitors)
    - Guided form -> structured 9-section project plan
    - Follows the site language (ar/en) with RTL/LTR support
    - Safe rendering: textContent only (no innerHTML -> no XSS)
@@ -8,8 +8,8 @@
 (function () {
   'use strict';
 
-  var AI_ENDPOINT = 'https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions';
-  var AI_MODEL = 'Qwen3.6-27B';
+  // Replace this with your deployed Worker URL, or define window.PORTFOLIO_AI_ENDPOINT before this script.
+  var AI_ENDPOINT = 'https://abdelrahman-portfolio-gemini.abdelrahman-dev1.workers.dev';
   var TIMEOUT_MS = 30000;
   var MAX_IDEA = 2500;
   var PREFILL = {
@@ -67,6 +67,7 @@
       loading: 'Analyzing your brief and building the plan...',
       errIdea: 'Please describe your project idea first.',
       errNetwork: 'Could not reach the AI service. Check your connection and try again.',
+      errConfig: 'The Gemini service is not connected yet. Configure the Worker URL to enable planning.',
       errTimeout: 'The AI took too long to respond. Please try again.',
       errGeneric: 'Something went wrong while generating the plan. Please try again.',
       errCancelled: 'Request cancelled because the language was switched.',
@@ -106,6 +107,7 @@
       loading: 'جارٍ تحليل طلبك وبناء الخطة...',
       errIdea: 'من فضلك اكتب فكرة مشروعك أولًا.',
       errNetwork: 'تعذر الوصول لخدمة الذكاء الاصطناعي. تحقق من اتصالك وحاول مجددًا.',
+      errConfig: 'خدمة Gemini غير متصلة بعد. أضف رابط Worker لتفعيل التخطيط.',
       errTimeout: 'استغرق الذكاء الاصطناعي وقتًا طويلاً. حاول مرة أخرى.',
       errGeneric: 'حدث خطأ أثناء إنشاء الخطة. حاول مرة أخرى.',
       errCancelled: 'تم إلغاء الطلب بسبب تبديل اللغة.',
@@ -200,29 +202,6 @@
   }
 
   /* ---- AI ---- */
-  function buildSystem(withPrefill) {
-    if (lang() === 'ar') {
-      return 'أنت مستشار تقنية ومشاريع محترف. مهمتك تحويل فكرة عميل إلى خطة مشروع واضحة.' +
-        '\nاكتب الرد بالعربية الفصحى الواضحة فقط.' +
-        '\nقسّم ردك بالضبط إلى 9 أقسام، كل قسم في سطر يبدأ بالشكل: 1) عنوان القسم' +
-        '\nالأقسام: 1) ملخص المشروع 2) المشكلة والحل 3) المستخدمون المستهدفون 4) مميزات النسخة الأولية MVP' +
-        ' 5) مميزات مستقبلية 6) التقنيات المقترحة مع سبب الاختيار 7) مراحل التنفيذ والجدول الزمني' +
-        ' 8) المخاطر والافتراضات والأسئلة المفتوحة 9) الخطوات التالية' +
-        '\nقواعد مهمة: لا تستخدم Markdown؛ لا تخترع ميزانية مؤكدة أو مواعيد تسليم محددة؛ علّم كل تقدير بأنه مبدئي' +
-        '؛ إذا كانت معلومة ناقصة فاذكرها في قسم المخاطر؛ كن مختصرًا وعمليًا (3-6 أسطر لكل قسم).' +
-        (withPrefill ? PREFILL_NOTE.ar : '');
-    }
-    return 'You are a professional technology and product consultant. Your job is to turn a client idea into a clear project plan.' +
-      '\nReply in clear English only.' +
-      '\nStructure your reply into exactly 9 sections, each starting on its own line in the form: 1) Section title' +
-      '\nThe sections: 1) Project summary 2) Problem & solution 3) Target users 4) Core MVP features' +
-      ' 5) Potential future features 6) Suggested technology stack with reasons 7) Development phases & rough timeline' +
-      ' 8) Risks, assumptions & open questions 9) Recommended next steps' +
-      '\nRules: plain text only, no Markdown; never invent a confirmed budget or guaranteed delivery dates; label every estimate as preliminary' +
-      '; list missing information under risks; be concise and practical (3-6 lines per section).' +
-        (withPrefill ? PREFILL_NOTE.en : '');
-  }
-
   function buildUserMessage() {
     var isAr = lang() === 'ar';
     var L = [];
@@ -251,14 +230,9 @@
     }
 
     function run(withPrefill, effort, maxTok, retry429Count) {
-      var msgs = [
-        { role: 'system', content: buildSystem(withPrefill) },
-        { role: 'user', content: userText }
-      ];
-      if (withPrefill) msgs.push({ role: 'assistant', content: PREFILL[lang()] });
-      var bodyObj = { model: AI_MODEL, messages: msgs, stream: true };
-      if (effort) bodyObj.reasoning_effort = effort;
-      if (maxTok) bodyObj.max_tokens = maxTok;
+      var prompt = userText;
+      if (withPrefill) prompt += '\n\n' + PREFILL[lang()] + PREFILL_NOTE[lang()];
+      var bodyObj = { messages: [{ role: 'user', content: prompt }] };
 
       return fetch(AI_ENDPOINT, {
         method: 'POST',
@@ -273,38 +247,18 @@
           if (withPrefill && res.status >= 400 && res.status < 500) return null;
           throw new Error('HTTP ' + res.status);
         }
-        if (!res.body) return res.json().then(function (j) {
-          return j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || '';
-        });
-
-        var reader = res.body.getReader();
-        var decoder = new TextDecoder();
-        var buf = '';
-        var content = '';
-        function pump() {
-          return reader.read().then(function (step) {
-            if (step.done) return content;
-            buf += decoder.decode(step.value, { stream: true });
-            var lines = buf.split('\n');
-            buf = lines.pop();
-            for (var i2 = 0; i2 < lines.length; i2++) {
-              var ln = lines[i2].trim();
-              if (ln.indexOf('data:') !== 0) continue;
-              var payload = ln.slice(5).trim();
-              if (payload === '[DONE]') continue;
-              try {
-                var j2 = JSON.parse(payload);
-                var d = j2.choices && j2.choices[0] && j2.choices[0].delta;
-                if (d && d.content) {
-                  content += d.content;
-                  if (onDelta) { try { onDelta(content); } catch (e) {} }
-                }
-              } catch (e) {}
-            }
-            return pump();
+        var ct = res.headers.get('content-type') || '';
+        if (ct.indexOf('application/json') !== -1) {
+          return res.json().then(function (j) {
+            return j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || '';
           });
         }
-        return pump();
+        return res.json().then(function (j) {
+          var content = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+          if (typeof content !== 'string' || !content.trim()) throw new Error('bad-format');
+          if (onDelta) { try { onDelta(content); } catch (e) {} }
+          return content;
+        });
       }).then(function (txt) {
         if (txt === null) return attemptNext();
         txt = (txt || '').trim();
@@ -321,8 +275,8 @@
       throw new Error('bad-format');
     }
 
-    /* speed ladder: prefill+minimal thinking -> plain+minimal -> plain no-cap */
-    return run(true, 'minimal', 6000, 0).then(function (txt) {
+    /* Gemini proxy uses a server-owned system prompt; retry once without optional section prefill. */
+    return run(true, null, null, 0).then(function (txt) {
       clear();
       return txt;
     }, function (err) {
@@ -391,6 +345,11 @@
       return;
     }
     if (idea.length > MAX_IDEA) idea = idea.slice(0, MAX_IDEA);
+
+    if (AI_ENDPOINT.indexOf('YOUR-WORKER-NAME') !== -1) {
+      showError(t('errConfig'));
+      return;
+    }
 
     if (errorEl) errorEl.hidden = true;
     showState('loading');
