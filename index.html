@@ -900,7 +900,7 @@ body::after{
 } 
 
 /* Sections */ 
-section{padding:clamp(40px,6vw,72px) clamp(16px,5vw,60px);position:relative;z-index:1} 
+section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-index:1} 
 .section-header{text-align:center;margin-bottom:36px} 
 .section-label{ 
   display:inline-flex; 
@@ -1619,7 +1619,9 @@ section{padding:clamp(40px,6vw,72px) clamp(16px,5vw,60px);position:relative;z-in
   grid-template-columns:repeat(3,1fr);
   gap:28px;
   max-width:1100px;
-  margin:0 auto;
+  margin:48px auto 0;
+  padding-top:48px;
+  border-top:1px solid rgba(168,85,247,.15);
 }
 .future-card{
   background:var(--card-bg);
@@ -1630,6 +1632,19 @@ section{padding:clamp(40px,6vw,72px) clamp(16px,5vw,60px);position:relative;z-in
   transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
   position:relative;
   overflow:hidden;
+}
+/* Divider between stacked cards on mobile */
+@media (max-width:768px){
+  #future-projects .project-card:not(:last-child){
+    margin-bottom:24px;
+    padding-bottom:24px;
+    border-bottom:1px solid rgba(168,85,247,.2);
+  }
+  .future-card:not(:last-child){
+    margin-bottom:20px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(168,85,247,.15);
+  }
 }
 .future-card::before{
   content:'';
@@ -3634,7 +3649,7 @@ footer p{
 }
 </style> 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=10">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=11">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -5757,7 +5772,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="assets/js/scroll-reveal.js?v=14" defer></script>
-<script src="assets/js/ai-planner.js?v=29" defer></script>
+<script src="assets/js/ai-planner.js?v=30" defer></script>
 </body> 
 </html>
 
