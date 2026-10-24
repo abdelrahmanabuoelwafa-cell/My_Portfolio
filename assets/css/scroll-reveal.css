@@ -5,14 +5,12 @@
    Enhanced with neon glow and progressive reveal for visual impact
    ============================================================ */
 
-/* --- Initial hidden state (only when JS is ON) --- */
-html.js-enabled .reveal {
+/* --- Initial state for reveal elements --- */
+html.js.js-enabled .reveal {
   opacity: 0;
-  transform: translateY(-80px) scale(0.96);
-  will-change: opacity, transform;
 }
 
-html.js-enabled .reveal.is-visible {
+html.js.js-enabled .reveal.is-visible {
   opacity: 1;
   transform: none;
   filter: none;
@@ -24,13 +22,13 @@ html.js-enabled .reveal.is-visible {
 
 /* GSAP owns hero entrance + scrubbed scroll-out; disable CSS
    keyframes to avoid double animation and scrub handoff glitches */
-html.js-enabled .hero-top-image,
-html.js-enabled .hero-name,
-html.js-enabled .typing-container,
-html.js-enabled .hero-badge,
-html.js-enabled .hero-desc,
-html.js-enabled .hero-buttons,
-html.js-enabled .hero-scroll-cue {
+html.js.js-enabled .hero-top-image,
+html.js.js-enabled .hero-name,
+html.js.js-enabled .typing-container,
+html.js.js-enabled .hero-badge,
+html.js.js-enabled .hero-desc,
+html.js.js-enabled .hero-buttons,
+html.js.js-enabled .hero-scroll-cue {
   animation: none;
 }
 
@@ -43,20 +41,20 @@ html:not(.js-enabled) .reveal {
 
 /* --- Reduced motion preference --- */
 @media (prefers-reduced-motion: reduce) {
-  html.js-enabled .reveal,
-  html.js-enabled .reveal.is-visible {
+  html.js.js-enabled .reveal,
+  html.js.js-enabled .reveal.is-visible {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     will-change: auto;
   }
-  html.js-enabled .hero-top-image,
-  html.js-enabled .hero-name,
-  html.js-enabled .typing-container,
-  html.js-enabled .hero-badge,
-  html.js-enabled .hero-desc,
-  html.js-enabled .hero-buttons,
-  html.js-enabled .hero-scroll-cue {
+  html.js.js-enabled .hero-top-image,
+  html.js.js-enabled .hero-name,
+  html.js.js-enabled .typing-container,
+  html.js.js-enabled .hero-badge,
+  html.js.js-enabled .hero-desc,
+  html.js.js-enabled .hero-buttons,
+  html.js.js-enabled .hero-scroll-cue {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

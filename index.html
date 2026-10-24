@@ -340,9 +340,7 @@ body::after{
   50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
 }
 
-.project-card:hover {
-  animation: glowPulse 2s ease-in-out infinite;
-}
+
 
 /* Testimonials Section Styling */
 .testimonials-grid {
@@ -648,14 +646,9 @@ body::after{
   width:clamp(155px,22vw,245px);
   height:clamp(155px,22vw,245px);
   margin-bottom:24px; 
-  animation:fadeInDown 1s ease; 
   border-radius:50%;
   overflow:visible;
-  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-} 
-@keyframes fadeInDown{ 
-  from{opacity:0;transform:translateY(-30px)} 
-  to{opacity:1;transform:translateY(0)} 
+  transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
 } 
 .top-img-container{ 
   width:100%; 
@@ -690,23 +683,51 @@ body::after{
 @keyframes spin{to{transform:rotate(360deg)}} 
 .floating-badge{ 
   position:absolute; 
-  bottom:0; 
-  right:0; 
-  width:46px;
-  height:46px;
+  bottom:2px; 
+  right:2px; 
+  width:48px;
+  height:48px;
   padding:0;
-  background:var(--card-bg); 
-  border:2px solid var(--neon); 
+  background:rgba(18, 18, 32, 0.88); 
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:2px solid rgba(168, 85, 247, 0.6); 
   border-radius:50%;
   display:flex; 
   align-items:center; 
   justify-content:center; 
-  font-size:20px;
-  box-shadow:0 0 20px rgba(168,85,247,.5); 
+  box-shadow:0 4px 20px rgba(168,85,247,.45), inset 0 1px 1px rgba(255,255,255,0.25); 
   z-index:10; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 } 
-.lab-icon{color:var(--accent);animation:labIconPulse 2.2s ease-in-out infinite}
-@keyframes labIconPulse{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-3px) rotate(-8deg) scale(1.12)}}
+.floating-badge:hover{
+  transform:scale(1.15) rotate(8deg);
+  border-color:#38bdf8;
+  box-shadow:0 6px 25px rgba(56,189,248,.5), inset 0 1px 1px rgba(255,255,255,0.4);
+}
+.chic-tech-svg{
+  width:24px;
+  height:24px;
+  display:block;
+  filter:drop-shadow(0 2px 8px rgba(56,189,248,.65));
+  transition:transform 0.3s ease;
+}
+.floating-badge:hover .chic-tech-svg{
+  transform:scale(1.1);
+}
+@keyframes chicIconFloat{
+  0%, 100%{transform:translateY(0);}
+  50%{transform:translateY(-2px);}
+}
+[data-theme="light"] .floating-badge{
+  background:rgba(255, 255, 255, 0.92);
+  border-color:rgba(147, 51, 234, 0.5);
+  box-shadow:0 4px 15px rgba(147, 51, 234, 0.25);
+}
+[data-theme="light"] .chic-tech-icon{
+  color:#0284c7;
+  filter:drop-shadow(0 2px 4px rgba(2, 132, 199, 0.4));
+}
 @keyframes bounce{ 
   0%,100%{transform:translateY(0)} 
   50%{transform:translateY(-10px)} 
@@ -1801,9 +1822,10 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   opacity:1;
 }
 .project-card:hover{ 
+  opacity:1 !important;
   border-color:var(--neon); 
-  transform:translateY(-10px) scale(1.02); 
-  box-shadow:0 25px 50px rgba(168, 85, 247, 0.7); 
+  transform:translateY(-8px); 
+  box-shadow:0 20px 45px rgba(168, 85, 247, 0.45); 
 } 
 /* Expanded 420px Showcase Image Box for Full High-Quality Mockup View */
 .project-image{ 
@@ -3735,7 +3757,14 @@ footer p{
         <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
-      <div class="floating-badge" role="img" aria-label="Development workspace"><i class="fas fa-laptop-code lab-icon" aria-hidden="true"></i></div>
+      <div class="floating-badge" role="img" aria-label="Flutter Developer">
+        <svg class="chic-tech-svg" width="24" height="24" viewBox="0 0 166 202" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M102.7 0L0 102.7L31.8 134.5L166.3 0H102.7Z" fill="#38BDF8"/>
+          <path d="M102.7 101.4L32.4 171.7L64.2 203.5L134.5 133.2L166.3 101.4H102.7Z" fill="#0284C7"/>
+          <path d="M63.7 139.8L31.8 171.7L64.2 203.5L95.5 172.2L63.7 139.8Z" fill="#0369A1"/>
+          <path d="M102.7 101.4L63.7 139.8L95.5 172.2L166.3 101.4H102.7Z" fill="#38BDF8"/>
+        </svg>
+      </div>
     </div> 
 
     <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
@@ -4219,7 +4248,7 @@ footer p{
     <!-- Project 2: Masrofy -->
     <div class="project-card reveal" onclick="openProjectModal(1)"> 
       <div class="project-image">
-        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy"></picture>
+        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy" onerror="this.onerror=null; this.src='images/masrofy2.png';"></picture>
       </div> 
       <div class="project-content"> 
         <h3>Masrofy — Smart Expense Tracker</h3>
@@ -4235,7 +4264,7 @@ footer p{
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
           <a href="#demo-masrofy" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'"></picture>
+              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.onerror=null; this.src='images/masrofy2.png';"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
@@ -5166,8 +5195,8 @@ document.addEventListener("DOMContentLoaded", () => {
           var config = {
             floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
             waistAt: 0.5, twist: 3, zoom: 75, flowDir: 1, flowSpeed: 0.1,
-            lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
-            showDots: true, dotCount: 1200, dotSize: 0.02, dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
+            lineCount: 45, lineColor: "#A855F7", lineGlow: 0.8,
+            showDots: true, dotCount: 450, dotSize: 0.02, dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
             showComets: true, cometCount: 4, cometSpeed: 0.08, cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
             cometDelay: 6, collideForce: 0.6, hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
           };
@@ -6259,35 +6288,72 @@ document.addEventListener('DOMContentLoaded', () => {
     showTyping();
 
     try {
-      const response = await fetch(`${BACKEND_URL}/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(-10) }),
-      });
+      let reply = null;
+
+      // 1. Try local backend first
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const response = await fetch(`${BACKEND_URL}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: history.slice(-8) }),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.reply) reply = data.reply;
+        }
+      } catch (e) {
+        // Local backend unreachable or timeout -> will use direct Google Gemini
+      }
+
+      // 2. Client-side fallback if custom key configured in browser
+      if (!reply) {
+        const clientKey = window.PORTFOLIO_GEMINI_KEY || localStorage.getItem('gemini_api_key');
+        if (clientKey) {
+          try {
+            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${clientKey}`;
+            const sysPrompt = `أنت المساعد الذكي لموقع بورتفوليو عبد الرحمن عبد الله (Abdelrahman Abdullah).
+عبد الرحمن مطور تطبيقات محترف متخصص في Flutter & Dart بالقاهرة، مصر.
+مشاريع مميزة: MovieVerse و Masrofy.
+التواصل: هاتف/واتساب +201123031944 أو +201060754494، البريد: abdelrahman.a.aboelwafa@gmail.com.
+أجب باختصار وبأسلوب لبق واحترافي بنفس لغة السائل.`;
+
+            const contents = [
+              { role: 'user', parts: [{ text: `${sysPrompt}\n\nسؤال الزائر: ${text}` }] }
+            ];
+
+            const gemResp = await fetch(geminiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ contents: contents })
+            });
+
+            if (gemResp.ok) {
+              const gemData = await gemResp.json();
+              const candidateText = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (candidateText) {
+                reply = candidateText.trim();
+              }
+            }
+          } catch (e) {}
+        }
+      }
 
       hideTyping();
 
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: 'Server error' }));
-        if (response.status === 500 && err.detail && err.detail.includes('GROK_API_KEY')) {
-          showError('⚠️ API key not configured. Please add your Grok API key to chatbot-backend/.env');
-        } else {
-          showError(`❌ Error: ${err.detail || 'Something went wrong'}`);
-        }
-        history.pop(); // Remove failed message from history
-      } else {
-        const data = await response.json();
-        const reply = data.reply;
+      if (reply) {
         appendMessage('bot', reply);
         history.push({ role: 'assistant', content: reply });
+      } else {
+        showError('⚠️ المساعد الذكي يتطلب تشغيل السيرفر المحلي. يمكنك تشغيله بالضغط على start.bat داخل مجلد chatbot-backend، أو مراسلتي مباشرة عبر واتساب.');
+        history.pop();
       }
     } catch (err) {
       hideTyping();
-      if (err.message.includes('fetch') || err.message.includes('Failed')) {
-        showError('⚠️ Backend not running. Start it with: cd chatbot-backend && python -m uvicorn main:app --reload');
-      } else {
-        showError(`❌ Network error: ${err.message}`);
-      }
+      showError('عذرًا، حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة لاحقًا.');
       history.pop();
     } finally {
       isLoading = false;
@@ -6300,7 +6366,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v22</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v25</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
@@ -6310,7 +6376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=14" defer></script>
+<script src="assets/js/scroll-reveal.js?v=25" defer></script>
 <script src="assets/js/ai-planner.js?v=31" defer></script>
 </body> 
 </html>

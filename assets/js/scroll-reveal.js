@@ -1,13 +1,9 @@
 /* ============================================================
-   Cinematic Scroll-Linked Motion — GSAP + ScrollTrigger (scrub)
-   - Content DESCENDS from above into place (cinematic sky-fall),
-   - Motion progress is CONNECTED to scroll progress (scrub),
-     not timed one-shot reveals.
-   - Long scroll ranges + SMOOTHING for a cinematic feel.
-   - Layered parallax: hero content, image ring, badges,
-     project media, about image move at different speeds.
-   - Enhanced slow-motion reveals with blur and scale
-   - prefers-reduced-motion / no GSAP / no JS: content visible.
+   Cinematic & High-Performance Scroll Motion — GSAP + ScrollTrigger
+   - Smooth entrance reveals with once: true (no flickering/disappearing)
+   - Elements stay 100% visible once revealed
+   - Cleans inline transforms so CSS hovers work flawlessly
+   - Lightweight & 60fps buttery smooth performance
    ============================================================ */
 (function () {
   'use strict';
@@ -15,7 +11,7 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mobile = window.innerWidth < 768;
 
-  /* ---- No GSAP or reduced motion: show everything ---- */
+  /* ---- Reduced motion or no GSAP fallback ---- */
   if (reduceMotion || typeof gsap === 'undefined') {
     document.documentElement.classList.remove('js-enabled');
     document.querySelectorAll('.reveal').forEach(function (el) {
@@ -29,110 +25,70 @@
   }
 
   document.documentElement.classList.add('js-enabled');
-  gsap.registerPlugin(ScrollTrigger);
-
-  var SCRUB = mobile ? 0.3 : 0.3;          /* LIGHT MODE: minimal smoothing */
-  var HDR_Y = mobile ? 18 : 30;            /* LIGHT MODE: short travel */
-  var CARD_Y = mobile ? 14 : 24;           /* LIGHT MODE: short travel */
-  var HDR_BLUR = 0;                        /* LIGHT MODE: no blur */
-  var CARD_BLUR = 0;                       /* LIGHT MODE: no blur */
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
   /* ============================================================
-     HERO ENTRANCE — on page load (above the fold)
-     Enhanced with glow and blur
+     HERO ENTRANCE — Smooth, elegant, no glitches
      ============================================================ */
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
-    .from('.hero-top-image', { duration: mobile ? 0.4 : 0.6, opacity: 0, scale: 0.94, y: -12 })
-    .from('.hero-name', { duration: mobile ? 0.35 : 0.5, opacity: 0, y: -14 }, '-=0.25')
-    .from('.typing-container', { duration: mobile ? 0.3 : 0.45, opacity: 0, y: -10 }, '-=0.15')
-    .from('.hero-badge', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
-    .from('.hero-desc', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
-    .from('.hero-buttons', { duration: mobile ? 0.3 : 0.4, opacity: 0, y: -10 }, '-=0.15')
+    .from('.hero-top-image', { duration: mobile ? 0.5 : 0.7, opacity: 0, scale: 0.92, y: -16, clearProps: 'transform' })
+    .from('.hero-name', { duration: mobile ? 0.4 : 0.6, opacity: 0, y: -12 }, '-=0.35')
+    .from('.hero-hook', { duration: 0.4, opacity: 0, y: -8 }, '-=0.25')
+    .from('.typing-container', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
+    .from('.hero-badge', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
+    .from('.hero-desc', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
+    .from('.hero-buttons', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
     .from('.hero-scroll-cue', { duration: 0.3, opacity: 0, y: -6 }, '-=0.15');
 
-  /* ============================================================
-     HERO SCROLL-OUT — layered scrubbed parallax
-     Enhanced with longer ranges and smoother motion
-     ============================================================ */
-  var heroTrigger = {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom 8%',
-    scrub: SCRUB
-  };
-
-  gsap.to('.hero-content', {
-    yPercent: mobile ? -22 : -45,
-    opacity: 0,
-    scale: 0.9,
-    ease: 'none',
-    scrollTrigger: heroTrigger
-  });
-
-  if (!mobile) {
-    gsap.to('.hero-top-image', {
-      yPercent: -38,
-      scale: 1.15,
-      ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
+  /* Subtle hero fade out on scroll down */
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.to('.hero-content', {
+      opacity: 0,
+      y: -30,
+      ease: 'power1.in',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'center top',
+        end: 'bottom top',
+        scrub: 0.5
+      }
     });
-    var ring = document.querySelector('.top-img-ring');
-    if (ring) {
-      gsap.to(ring, {
-        rotate: 120,
-        scale: 1.45,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
-      });
-    }
-    var badge = document.querySelector('.floating-badge');
-    if (badge) {
-      gsap.to(badge, {
-        yPercent: 130,
-        rotate: 40,
-        scale: 1.15,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 8%', scrub: SCRUB }
-      });
-    }
+
+    gsap.to(['.hero-scroll-cue', '.scroll-indicator'], {
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: '15% top', scrub: true }
+    });
   }
 
-  /* scroll cue fades out slowly */
-  gsap.to(['.hero-scroll-cue', '.scroll-indicator'], {
-    opacity: 0,
-    scale: 0.8,
-    ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: '25% top', scrub: true }
-  });
-
   /* ============================================================
-     SECTION HEADERS — lightweight scrubbed rise-in
-     Reduced blur and range for better performance
+     SECTION HEADERS — Smooth reveal once
      ============================================================ */
   document.querySelectorAll('.section-header.reveal').forEach(function (el) {
     gsap.fromTo(el,
-      { opacity: 0, y: -HDR_Y * 0.5, scale: 0.96, filter: 'blur(' + HDR_BLUR * 0.5 + 'px)' },
+      { opacity: 0, y: 22 },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        filter: 'blur(0px)',
-        ease: 'none',
+        duration: 0.6,
+        ease: 'power2.out',
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: el,
-          start: 'top 110%',
-          end: 'top 70%',
-          scrub: SCRUB
+          start: 'top 90%',
+          once: true
         }
       }
     );
   });
 
   /* ============================================================
-     GENERIC CARDS / BLOCKS — staggered scrubbed ranges
+     CARDS & CONTENT BLOCKS — Staggered reveal once
      ============================================================ */
-  function scrubGroup(selector, scaleFrom) {
+  function revealGroup(selector, staggerTime) {
     var els = Array.prototype.slice.call(document.querySelectorAll(selector));
     if (!els.length) return;
 
@@ -144,110 +100,88 @@
     });
 
     Object.keys(groups).forEach(function (k) {
-      groups[k].items.forEach(function (el, i) {
-        var startPct = Math.max(80, 98 - i * 6);
-        var endPct = Math.max(45, startPct - 25);
-        gsap.fromTo(el,
-          { opacity: 0, y: -CARD_Y * 0.6, scale: Math.max(scaleFrom, 0.97), filter: 'blur(' + CARD_BLUR * 0.5 + 'px)' },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top ' + startPct + '%',
-              end: 'top ' + endPct + '%',
-              scrub: SCRUB
-            }
+      var items = groups[k].items;
+      gsap.fromTo(items,
+        { opacity: 0, y: 28, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.55,
+          stagger: staggerTime || 0.12,
+          ease: 'power2.out',
+          clearProps: 'transform',
+          scrollTrigger: {
+            trigger: items[0],
+            start: 'top 88%',
+            once: true
           }
-        );
-      });
+        }
+      );
     });
   }
 
-  scrubGroup('.about-content.reveal', 0.90);
-  scrubGroup('.skills-tabs.reveal', 0.92);
-  scrubGroup('.skill-category.reveal', 0.92);
-  scrubGroup('.car-card.reveal', 0.86);
-  scrubGroup('.stat-card.reveal', 0.85);
-  scrubGroup('.premium-testimonial-card.reveal', 0.88);
-  scrubGroup('.service-card.reveal', 0.86);
-  scrubGroup('.price-card.reveal', 0.86);
-  scrubGroup('.future-card.reveal', 0.86);
-  scrubGroup('.pro-exp-card.reveal', 0.86);
-  scrubGroup('.contact-info.reveal', 0.90);
-  scrubGroup('.planner-box.reveal', 0.88);
+  revealGroup('.about-content.reveal', 0.1);
+  revealGroup('.skills-tabs.reveal', 0.1);
+  revealGroup('.skill-category.reveal', 0.12);
+  revealGroup('.car-card.reveal', 0.12);
+  revealGroup('.stat-card.reveal', 0.08);
+  revealGroup('.premium-testimonial-card.reveal', 0.12);
+  revealGroup('.testimonial-card.reveal', 0.12);
+  revealGroup('.service-card.reveal', 0.1);
+  revealGroup('.price-card.reveal', 0.12);
+  revealGroup('.future-card.reveal', 0.12);
+  revealGroup('.pro-exp-card.reveal', 0.12);
+  revealGroup('.contact-info.reveal', 0.1);
+  revealGroup('.planner-box.reveal', 0.1);
 
   /* ============================================================
-     FEATURED PROJECT CARDS — longest range
-     Enhanced with image scale and blur
+     FEATURED PROJECT CARDS — Never disappear, clean hover handoff
      ============================================================ */
-  document.querySelectorAll('.project-card.reveal').forEach(function (el, idx) {
-    var startPct = Math.max(55, 98 - idx * 4);
-
-    gsap.fromTo(el,
-      { opacity: 0, y: -(CARD_Y + 10), scale: 0.96 },
+  var projectCards = document.querySelectorAll('.project-card.reveal');
+  if (projectCards.length) {
+    gsap.fromTo(projectCards,
+      { opacity: 0, y: 35, scale: 0.98 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        ease: 'none',
+        duration: 0.65,
+        stagger: 0.16,
+        ease: 'power2.out',
+        clearProps: 'transform',
         scrollTrigger: {
-          trigger: el,
-          start: 'top ' + startPct + '%',
-          end: 'top 65%',
-          scrub: SCRUB
+          trigger: projectCards[0],
+          start: 'top 88%',
+          once: true
         }
       }
     );
+  }
 
-    var img = el.querySelector('.project-image img');
-    if (img) {
-      gsap.fromTo(img,
-        { scale: 0.96 },
-        {
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 110%',
-            end: 'top 55%',
-            scrub: SCRUB
-          }
-        }
-      );
-    }
-  });
-
-  /* ============================================================
-     ABOUT IMAGE — scroll-through parallax + scale
-     Enhanced with longer range and blur
-     ============================================================ */
+  /* About Image Reveal */
   var aboutImg = document.querySelector('.about-image.reveal');
   if (aboutImg) {
-    var aboutWrap = aboutImg.closest('.about-grid') || aboutImg;
     gsap.fromTo(aboutImg,
-      { opacity: 0, yPercent: mobile ? 0 : -8, scale: 0.96 },
+      { opacity: 0, y: 30, scale: 0.96 },
       {
         opacity: 1,
-        yPercent: mobile ? 0 : 6,
+        y: 0,
         scale: 1,
-        ease: 'none',
+        duration: 0.7,
+        ease: 'power2.out',
+        clearProps: 'transform',
         scrollTrigger: {
-          trigger: aboutWrap,
-          start: 'top 105%',
-          end: 'bottom 25%',
-          scrub: SCRUB
+          trigger: aboutImg,
+          start: 'top 85%',
+          once: true
         }
       }
     );
   }
 
   /* ============================================================
-     SKILL PROGRESS BARS — width fills gradually with scroll
-     Enhanced with longer range
+     SKILL PROGRESS BARS — Fill once when scrolled into view
      ============================================================ */
   document.querySelectorAll('.skill-progress[data-width]').forEach(function (bar) {
     var target = bar.getAttribute('data-width') || '0';
@@ -256,38 +190,26 @@
       { width: '0%' },
       {
         width: target + '%',
-        ease: 'none',
+        duration: 0.9,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: host,
-          start: 'top 100%',
-          end: 'top 40%',
-          scrub: SCRUB
+          start: 'top 92%',
+          once: true
         }
       }
     );
   });
 
-  /* ============================================================
-     SKILL TABS — refresh triggers when a panel is shown/hidden
-     ============================================================ */
-  document.querySelectorAll('.skill-tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      setTimeout(function () { ScrollTrigger.refresh(); }, 80);
-    });
+  /* Recalculate positions once everything (images/fonts) is loaded */
+  window.addEventListener('load', function () {
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
   });
 
-  /* Recalculate positions once everything (images/fonts) is loaded */
-  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
-
   /* ============================================================
-     IDLE BREATHING — disabled (LIGHT MODE, temporary)
-     ============================================================ */
-
-
-  /* ============================================================
-     SERVICES CINEMA — slide-wipe sequence (GSAP demo style)
-     Scroll-linked via sticky stage + scrub timeline.
-     Desktop only; mobile / reduced-motion keep stacked fallback.
+     SERVICES CINEMA — slide-wipe sequence (desktop only)
      ============================================================ */
   (function initServicesCinema() {
     var cinema = document.getElementById('svcCinema');
@@ -337,8 +259,6 @@
         .fromTo(imgs[i], { xPercent: 125, scaleX: 1.5, scaleY: 1.3 }, { xPercent: 0, scaleX: 1, scaleY: 1 }, seg)
         .fromTo(imgs[i - 1], { xPercent: 0, scaleX: 1, scaleY: 1 }, { xPercent: -125, scaleX: 1.5, scaleY: 1.3 }, seg);
     }
-
-    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   })();
 
   /* ============================================================

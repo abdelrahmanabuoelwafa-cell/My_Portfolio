@@ -1,6 +1,6 @@
-﻿"""
-Grok AI Chatbot Backend for Portfolio
-FastAPI server that proxies requests to Grok API (api.x.ai)
+"""
+AI Chatbot Backend for Portfolio
+FastAPI server that supports Google Gemini API (gemini-3.8-flash) & Grok API
 """
 
 from fastapi import FastAPI, HTTPException
@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title="Portfolio Grok Chatbot API")
+app = FastAPI(title="Portfolio AI Chatbot API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,28 +22,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GROK_API_KEY = os.getenv("GROK_API_KEY", "")
-GROK_API_URL = "https://api.x.ai/v1/chat/completions"
-GROK_MODEL = "grok-3-mini"
 
-SYSTEM_PROMPT = """You are an AI assistant on Abdelrahman Abdullah's portfolio website.
-Abdelrahman is a talented Flutter and Full-Stack developer from Cairo, Egypt.
+SYSTEM_PROMPT = """You are Abdelrahman Abdullah's AI portfolio assistant.
+Abdelrahman is an expert Flutter & Mobile Application Developer based in Cairo, Egypt.
 
-About Abdelrahman:
-- Specializes in Flutter cross-platform mobile app development
-- Experience with Dart, Firebase, REST APIs, and modern mobile UI/UX
-- Built projects like MediMind (AI health assistant), MovieVerse (movie explorer), StudySync
-- Completed DEPI (Digital Egypt Pioneers Initiative) and ITI programs
-- Available for freelance work and full-time opportunities
-- Contact: WhatsApp +201123031944
+Key Details about Abdelrahman:
+- Specialization: Cross-platform mobile apps with Flutter & Dart, Clean Architecture, BLoC / Provider / Hive.
+- Featured Apps:
+  1. MovieVerse — Cinema streaming & discovery app powered by TMDB API, Firebase & Hive offline caching.
+  2. Masrofy — Smart personal finance tracker with live FL Chart analytics and on-device Hive storage.
+  3. MediMind & StudySync — AI health companion and smart study planner.
+- Background: DEPI (Digital Egypt Pioneers Initiative) and ITI graduate.
+- Contact: WhatsApp/Phone: +201123031944 / +201060754494, Email: abdelrahman.a.aboelwafa@gmail.com
+- Work status: Available for freelance projects and full-time mobile development roles.
 
-Your role:
-- Answer questions about Abdelrahman's skills, projects, and experience
-- Help visitors understand his work
-- Encourage hiring or collaboration
-- Be friendly, professional, and concise
-- Always respond in the same language the user writes in (Arabic or English)"""
-
+Guidelines:
+- Respond in the same language the visitor uses (Arabic or English).
+- Be polite, professional, concise, and enthusiastic.
+- Help visitors explore projects, get in touch, or discuss app development inquiries."""
 
 class Message(BaseModel):
     role: str
@@ -59,38 +57,85 @@ class ChatResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"status": "Grok Chatbot API is running", "model": GROK_MODEL}
+    return {
+        "status": "Portfolio AI Chatbot is running",
+        "gemini_ready": bool(GEMINI_API_KEY),
+        "grok_ready": bool(GROK_API_KEY)
+    }
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "api_key_configured": bool(GROK_API_KEY), "model": GROK_MODEL}
+    return {
+        "status": "healthy",
+        "gemini_ready": bool(GEMINI_API_KEY),
+        "grok_ready": bool(GROK_API_KEY)
+    }
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    if not GROK_API_KEY:
-        raise HTTPException(status_code=500, detail="GROK_API_KEY not configured in .env file")
-    if not request.message.strip():
+    user_msg = request.message.strip()
+    if not user_msg:
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    for msg in request.history[-10:]:
-        if isinstance(msg, dict) and msg.get("role") in ("user", "assistant"):
-            messages.append({"role": msg["role"], "content": msg["content"]})
-    messages.append({"role": "user", "content": request.message})
+    # Priority 1: Google Gemini API
+    if GEMINI_API_KEY:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_API_KEY}"
+            
+            # Format chat history
+            contents = [
+                {"role": "user", "parts": [{"text": f"{SYSTEM_PROMPT}\n\nPlease acknowledge and assist the user."}]},
+                {"role": "model", "parts": [{"text": "Understood. I am ready to represent Abdelrahman and assist the visitor."}]}
+            ]
+            
+            for msg in request.history[-8:]:
+                if isinstance(msg, dict) and msg.get("role") and msg.get("content"):
+                    role = "user" if msg["role"] == "user" else "model"
+                    contents.append({"role": role, "parts": [{"text": msg["content"]}]})
+            
+            contents.append({"role": "user", "parts": [{"text": user_msg}]})
 
-    try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(
-                GROK_API_URL,
-                headers={"Authorization": f"Bearer {GROK_API_KEY}", "Content-Type": "application/json"},
-                json={"model": GROK_MODEL, "messages": messages, "max_tokens": 500, "temperature": 0.7},
-            )
-            if response.status_code != 200:
-                raise HTTPException(status_code=response.status_code, detail=f"Grok API error: {response.text}")
-            data = response.json()
-            reply = data["choices"][0]["message"]["content"]
-            return ChatResponse(reply=reply)
-    except httpx.TimeoutException:
-        raise HTTPException(status_code=504, detail="Request timed out")
-    except httpx.RequestError as e:
-        raise HTTPException(status_code=503, detail=f"Network error: {str(e)}")
+            payload = {
+                "contents": contents,
+                "generationConfig": {
+                    "temperature": 0.7,
+                    "maxOutputTokens": 600
+                }
+            }
+
+            async with httpx.AsyncClient(timeout=25.0) as client:
+                resp = await client.post(url, json=payload, headers={"Content-Type": "application/json"})
+                if resp.status_code == 200:
+                    data = resp.json()
+                    candidates = data.get("candidates", [])
+                    if candidates and candidates[0].get("content", {}).get("parts"):
+                        reply_text = candidates[0]["content"]["parts"][0].get("text", "")
+                        return ChatResponse(reply=reply_text.strip())
+                else:
+                    print(f"Gemini API error: {resp.status_code} {resp.text}")
+        except Exception as e:
+            print(f"Gemini error: {e}")
+
+    # Priority 2: Grok API
+    if GROK_API_KEY:
+        try:
+            messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+            for msg in request.history[-8:]:
+                if isinstance(msg, dict) and msg.get("role") in ("user", "assistant"):
+                    messages.append({"role": msg["role"], "content": msg["content"]})
+            messages.append({"role": "user", "content": user_msg})
+
+            async with httpx.AsyncClient(timeout=25.0) as client:
+                resp = await client.post(
+                    "https://api.x.ai/v1/chat/completions",
+                    headers={"Authorization": f"Bearer {GROK_API_KEY}", "Content-Type": "application/json"},
+                    json={"model": "grok-3-mini", "messages": messages, "max_tokens": 500, "temperature": 0.7},
+                )
+                if resp.status_code == 200:
+                    data = resp.json()
+                    reply = data["choices"][0]["message"]["content"]
+                    return ChatResponse(reply=reply.strip())
+        except Exception as e:
+            print(f"Grok error: {e}")
+
+    raise HTTPException(status_code=500, detail="AI Service is currently unavailable. Please verify API keys.")
