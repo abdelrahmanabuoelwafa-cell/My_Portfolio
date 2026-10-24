@@ -1,6 +1,6 @@
 /* ============================================================
    AI Business Planner — premium guided brief (bilingual)
-  - Gemini AI via a protected Cloudflare Worker proxy (API key is never shipped to visitors)
+  - Groq AI (llama-3.3-70b) via local backend server (API key protected)
    - Guided form -> structured 9-section project plan
    - Follows the site language (ar/en) with RTL/LTR support
    - Safe rendering: textContent only (no innerHTML -> no XSS)
@@ -8,8 +8,8 @@
 (function () {
   'use strict';
 
-  // Replace this with your deployed Worker URL, or define window.PORTFOLIO_AI_ENDPOINT before this script.
-  var AI_ENDPOINT = 'https://abdelrahman-portfolio-gemini.abdelrahman-dev1.workers.dev';
+  // Groq API backend (local development: localhost:3001, production: deploy to your server)
+  var AI_ENDPOINT = window.PORTFOLIO_AI_ENDPOINT || 'http://localhost:3001/api/chat';
   var TIMEOUT_MS = 30000;
   var MAX_IDEA = 2500;
   var PREFILL = {
@@ -67,7 +67,7 @@
       loading: 'Analyzing your brief and building the plan...',
       errIdea: 'Please describe your project idea first.',
       errNetwork: 'Could not reach the AI service. Check your connection and try again.',
-      errConfig: 'The Gemini service is not connected yet. Configure the Worker URL to enable planning.',
+      errConfig: 'The AI service is not connected. Make sure the backend server is running on localhost:3001.',
       errTimeout: 'The AI took too long to respond. Please try again.',
       errGeneric: 'Something went wrong while generating the plan. Please try again.',
       errCancelled: 'Request cancelled because the language was switched.',
@@ -107,7 +107,7 @@
       loading: 'جارٍ تحليل طلبك وبناء الخطة...',
       errIdea: 'من فضلك اكتب فكرة مشروعك أولًا.',
       errNetwork: 'تعذر الوصول لخدمة الذكاء الاصطناعي. تحقق من اتصالك وحاول مجددًا.',
-      errConfig: 'خدمة Gemini غير متصلة بعد. أضف رابط Worker لتفعيل التخطيط.',
+      errConfig: 'خدمة الذكاء الاصطناعي غير متصلة. تأكد من تشغيل الخادم على localhost:3001.',
       errTimeout: 'استغرق الذكاء الاصطناعي وقتًا طويلاً. حاول مرة أخرى.',
       errGeneric: 'حدث خطأ أثناء إنشاء الخطة. حاول مرة أخرى.',
       errCancelled: 'تم إلغاء الطلب بسبب تبديل اللغة.',
@@ -232,7 +232,14 @@
     function run(withPrefill, effort, maxTok, retry429Count) {
       var prompt = userText;
       if (withPrefill) prompt += '\n\n' + PREFILL[lang()] + PREFILL_NOTE[lang()];
-      var bodyObj = { messages: [{ role: 'user', content: prompt }] };
+      var systemPrompt = lang() === 'ar' 
+        ? 'أنت مساعد ذكاء اصطناعي متخصص في تخطيط مشاريع تطوير التطبيقات. ساعد المستخدم بإنشاء خطة مشروع مفصلة ومنظمة بتسعة أقسام. كن محترفًا ودقيقًا ومختصرًا. اكتب بالعربية الفصحى.'
+        : 'You are an AI assistant specialized in app development project planning. Help users create a detailed, structured 9-section project plan. Be professional, precise, and concise.';
+      var bodyObj = { 
+        message: prompt,
+        systemPrompt: systemPrompt,
+        conversationHistory: []
+      };
 
       return fetch(AI_ENDPOINT, {
         method: 'POST',
@@ -247,14 +254,10 @@
           if (withPrefill && res.status >= 400 && res.status < 500) return null;
           throw new Error('HTTP ' + res.status);
         }
-        var ct = res.headers.get('content-type') || '';
-        if (ct.indexOf('application/json') !== -1) {
-          return res.json().then(function (j) {
-            return j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || '';
-          });
-        }
         return res.json().then(function (j) {
-          var content = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+          // Backend returns { message: "...", conversationHistory: [...] } or { error: "..." }
+          if (j.error) throw new Error(j.error);
+          var content = j.message || '';
           if (typeof content !== 'string' || !content.trim()) throw new Error('bad-format');
           if (onDelta) { try { onDelta(content); } catch (e) {} }
           return content;
