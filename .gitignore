@@ -18,3 +18,18 @@ safeset.sh
 .token*
 temp/
 tmp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Chatbot backend secrets (keep main.py, ignore only .env)
+chatbot-backend/.env
