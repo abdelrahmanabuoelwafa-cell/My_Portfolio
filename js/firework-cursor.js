@@ -14,6 +14,7 @@
   var ring = { x: -100, y: -100 };
   var dot = { x: -100, y: -100 };
   var colors = ['#A855F7', '#C084FC', '#E9D5FF', '#9333EA'];
+  var rafId = null;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -37,6 +38,8 @@
         color: colors[Math.floor(Math.random() * colors.length)]
       });
     }
+
+    if (rafId === null) rafId = requestAnimationFrame(render);
   });
 
   function render() {
@@ -93,8 +96,17 @@
       ctx.restore();
     }
 
-    requestAnimationFrame(render);
+    rafId = requestAnimationFrame(render);
   }
 
   render();
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (!document.hidden && rafId === null) {
+      rafId = requestAnimationFrame(render);
+    }
+  });
 })();

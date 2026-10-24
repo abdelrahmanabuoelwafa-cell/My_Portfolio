@@ -852,7 +852,7 @@
     }
 
     function step(now) {
-      frame = requestAnimationFrame(step);
+      if (!document.hidden) frame = requestAnimationFrame(step);
       const cfg = cfgRef.current;
       const dt = Math.min((now - lastTime) / 1000, 0.04);
       lastTime = now;
@@ -961,6 +961,13 @@
     observer.observe(container);
     lastTime = performance.now();
     frame = requestAnimationFrame(step);
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && !frame) {
+        lastTime = performance.now();
+        frame = requestAnimationFrame(step);
+      }
+    });
 
     return {
       rebuild() {
