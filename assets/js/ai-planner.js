@@ -8,8 +8,8 @@
 (function () {
   'use strict';
 
-  // Groq API backend (local development: localhost:3001, production: deploy to your server)
-  var AI_ENDPOINT = window.PORTFOLIO_AI_ENDPOINT || 'http://localhost:3001/api/chat';
+  // Cloudflare AI Worker backend (production & development)
+  var AI_ENDPOINT = window.PORTFOLIO_AI_ENDPOINT || null;
   var TIMEOUT_MS = 30000;
   var MAX_IDEA = 2500;
   var PREFILL = {
@@ -67,11 +67,21 @@
       loading: 'Analyzing your brief and building the plan...',
       errIdea: 'Please describe your project idea first.',
       errNetwork: 'Could not reach the AI service. Check your connection and try again.',
-      errConfig: 'The AI service is not connected. Make sure the backend server is running on localhost:3001.',
+      errConfig: 'AI service endpoint is not configured. Please check site-config.js.',
       errTimeout: 'The AI took too long to respond. Please try again.',
       errGeneric: 'Something went wrong while generating the plan. Please try again.',
       errCancelled: 'Request cancelled because the language was switched.',
       sectionFallback: 'Plan',
+      approveBtn: '✅ Approved — Send plan to Abdelrahman',
+      askBtn: '❓ Ask about the plan',
+      regenBtn: '🔄 Generate another plan',
+      namePh: 'Your name (optional)',
+      contactPh: 'WhatsApp or Email for follow-up',
+      askPh: 'Ask any question about this plan...',
+      sendQuestion: 'Send question',
+      asking: 'Thinking...',
+      successMsg: 'Plan sent successfully to Abdelrahman! He will reach out to you soon 🚀',
+      web3Disabled: 'Direct email submission is not active. Connect with Abdelrahman on WhatsApp:',
       cineH1: 'MOBILE',
       cineH2: 'DESIGN',
       cineH3: 'BUILD',
@@ -107,11 +117,21 @@
       loading: 'جارٍ تحليل طلبك وبناء الخطة...',
       errIdea: 'من فضلك اكتب فكرة مشروعك أولًا.',
       errNetwork: 'تعذر الوصول لخدمة الذكاء الاصطناعي. تحقق من اتصالك وحاول مجددًا.',
-      errConfig: 'خدمة الذكاء الاصطناعي غير متصلة. تأكد من تشغيل الخادم على localhost:3001.',
+      errConfig: 'خدمة الذكاء الاصطناعي غير متصلة. يرجى مراجعة إعدادات الموقع في site-config.js.',
       errTimeout: 'استغرق الذكاء الاصطناعي وقتًا طويلاً. حاول مرة أخرى.',
       errGeneric: 'حدث خطأ أثناء إنشاء الخطة. حاول مرة أخرى.',
       errCancelled: 'تم إلغاء الطلب بسبب تبديل اللغة.',
       sectionFallback: 'الخطة',
+      approveBtn: '✅ وافقت — ابعت الخطة لعبد الرحمن',
+      askBtn: '❓ اسأل عن الخطة',
+      regenBtn: '🔄 ولّد خطة تانية',
+      namePh: 'اسمك (اختياري)',
+      contactPh: 'واتساب أو إيميلك للتواصل',
+      askPh: 'اسأل أي سؤال عن الخطة (مثلاً: ممكن نبسط النقطة 4؟)...',
+      sendQuestion: 'إرسال السؤال',
+      asking: 'جارٍ الرد...',
+      successMsg: 'وصلت الخطة لعبد الرحمن — هو هيتواصل معاك قريب 🚀',
+      web3Disabled: 'إرسال الإيميل مش مفعّل حاليًا — كلّمني على واتساب مباشرة 👇',
       cineH1: 'موبايل',
       cineH2: 'تصميم',
       cineH3: 'تنفيذ',
@@ -220,6 +240,12 @@
   }
 
   function callAI(userText, onDelta) {
+    if (!AI_ENDPOINT) {
+      showError(lang() === 'ar' ? 'نقطة نهاية الذكاء الاصطناعي غير متصلة. يرجى مراجعة إعدادات الموقع.' : 'AI endpoint is not configured. Please check site configuration.');
+      setBusy(false);
+      return Promise.reject(new Error('AI endpoint not configured'));
+    }
+
     var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : null;
     currentAbort = ctrl;
@@ -232,9 +258,10 @@
     function run(withPrefill, effort, maxTok, retry429Count) {
       var prompt = userText;
       if (withPrefill) prompt += '\n\n' + PREFILL[lang()] + PREFILL_NOTE[lang()];
+      var pricingContext = window.PRICING ? ('\n\nOfficial Pricing Context:\n' + JSON.stringify(window.PRICING)) : '';
       var systemPrompt = lang() === 'ar' 
-        ? 'أنت مساعد ذكاء اصطناعي متخصص في تخطيط مشاريع تطوير التطبيقات. ساعد المستخدم بإنشاء خطة مشروع مفصلة ومنظمة بتسعة أقسام. كن محترفًا ودقيقًا ومختصرًا. اكتب بالعربية الفصحى.'
-        : 'You are an AI assistant specialized in app development project planning. Help users create a detailed, structured 9-section project plan. Be professional, precise, and concise.';
+        ? 'أنت مساعد ذكاء اصطناعي متخصص في تخطيط مشاريع تطوير التطبيقات لموقع عبد الرحمن عبد الله. اكتب الخطة بنفس لغة العميل ولهجته: لو فكرة المشروع مكتوبة بالمصري، اكتب الخطة كاملة بالمصري؛ لو بالإنجليزي اكتبها بالإنجليزي؛ لو مش واضح، اكتب بالعربية الفصحى. نظّم الخطة بدقة في تسعة أقسام. لو فكرة العميل تطبيق موبايل Flutter، اختم الخطة بقسم التكلفة التقديرية يرشّح الباقة الأنسب من بيانات الأسعار الرسمية (بالاسم والمدى السعري فقط) + سطر إن السعر النهائي بعد استشارة مجانية.' + pricingContext
+        : 'You are an AI assistant specialized in app development project planning for Abdelrahman Abdullah. Write the plan in the SAME language and dialect the client wrote their idea in; Egyptian Arabic stays Egyptian Arabic. Keep it detailed, structured in 9 sections, and concise. If the idea is a Flutter mobile app, conclude with an estimated budget section recommending the most suitable tier from the official pricing plans (name and price range only) + note that final pricing is set after a free consultation.' + pricingContext;
       var bodyObj = { 
         message: prompt,
         systemPrompt: systemPrompt,
@@ -307,8 +334,11 @@
     return secs;
   }
 
+  var lastGeneratedPlan = '';
+
   function renderPlan(text) {
     if (!bodyEl) return;
+    lastGeneratedPlan = text;
     bodyEl.textContent = '';
     var secs = parseSections(text);
     if (secs.length >= 3) {
@@ -333,7 +363,138 @@
       p.textContent = text.trim();
       bodyEl.appendChild(p);
     }
+
+    // Phase 7: Approval & Review Action Box
+    var actionBox = document.createElement('div');
+    actionBox.className = 'pr-review-box';
+    actionBox.innerHTML = [
+      '<div class="pr-contact-fields">',
+      '  <div class="pr-field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">',
+      '    <input type="text" id="pr-client-name" class="pf-input" style="padding:10px 14px;font-size:13px;" placeholder="' + t('namePh') + '">',
+      '    <input type="text" id="pr-client-contact" class="pf-input" style="padding:10px 14px;font-size:13px;" placeholder="' + t('contactPh') + '">',
+      '  </div>',
+      '</div>',
+      '<div class="pr-action-buttons" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">',
+      '  <button type="button" id="pr-approve-btn" class="btn-primary" style="background:linear-gradient(135deg,#10b981,#059669);border:none;cursor:pointer;padding:12px 22px;font-weight:700;">' + t('approveBtn') + '</button>',
+      '  <button type="button" id="pr-ask-btn" class="btn-primary" style="background:rgba(168,85,247,0.18);border:1px solid rgba(168,85,247,0.4);color:#c084fc;cursor:pointer;padding:12px 20px;">' + t('askBtn') + '</button>',
+      '  <button type="button" id="pr-regen-btn" class="btn-primary" style="background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:12px 18px;">' + t('regenBtn') + '</button>',
+      '</div>',
+      '<div id="pr-ask-panel" style="display:none;margin-top:16px;">',
+      '  <div style="display:flex;gap:8px;">',
+      '    <input type="text" id="pr-ask-input" class="pf-input" placeholder="' + t('askPh') + '" style="flex:1;">',
+      '    <button type="button" id="pr-ask-submit-btn" class="btn-primary" style="white-space:nowrap;padding:10px 18px;">' + t('sendQuestion') + '</button>',
+      '  </div>',
+      '</div>',
+      '<div id="pr-qa-stream" style="margin-top:14px;display:flex;flex-direction:column;gap:10px;"></div>',
+      '<div id="pr-status-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;"></div>'
+    ].join('\n');
+    bodyEl.appendChild(actionBox);
+
+    // Wire up Phase 7 buttons
+    var approveBtn = document.getElementById('pr-approve-btn');
+    var askBtn = document.getElementById('pr-ask-btn');
+    var regenBtn = document.getElementById('pr-regen-btn');
+    var askPanel = document.getElementById('pr-ask-panel');
+    var askInput = document.getElementById('pr-ask-input');
+    var askSubmitBtn = document.getElementById('pr-ask-submit-btn');
+    var qaStream = document.getElementById('pr-qa-stream');
+    var statusMsg = document.getElementById('pr-status-msg');
+
+    if (regenBtn) {
+      regenBtn.addEventListener('click', function () {
+        showState('empty');
+        if (form && form.scrollIntoView) form.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    if (askBtn && askPanel) {
+      askBtn.addEventListener('click', function () {
+        var isHidden = askPanel.style.display === 'none';
+        askPanel.style.display = isHidden ? 'block' : 'none';
+        if (isHidden && askInput) askInput.focus();
+      });
+    }
+
+    if (askSubmitBtn && askInput) {
+      askSubmitBtn.addEventListener('click', function () {
+        var qText = askInput.value.trim();
+        if (!qText) return;
+        askSubmitBtn.disabled = true;
+        askSubmitBtn.textContent = t('asking');
+
+        var qItem = document.createElement('div');
+        qItem.style.cssText = 'padding:12px 16px;background:rgba(0,0,0,0.25);border-left:3px solid #22d3ee;border-radius:8px;font-size:13px;line-height:1.6;';
+        qItem.innerHTML = '<div style="font-weight:700;color:#22d3ee;margin-bottom:4px;">Q: ' + escapeHtml(qText) + '</div><div class="pr-qa-ans" style="opacity:0.8;">' + t('asking') + '</div>';
+        qaStream.appendChild(qItem);
+        askInput.value = '';
+
+        var askPrompt = (lang() === 'ar'
+          ? 'اشرح للعميل بنفس لغته ولهجته، مختصر وواضح.\n\n[الخطة]:\n' + text + '\n\n[سؤال العميل]: ' + qText
+          : 'Answer the client in the same language and tone, concise and clear.\n\n[Plan]:\n' + text + '\n\n[Client Question]: ' + qText);
+
+        callAI(askPrompt, null).then(function (ans) {
+          var ansEl = qItem.querySelector('.pr-qa-ans');
+          if (ansEl) ansEl.textContent = ans;
+        }).catch(function (err) {
+          var ansEl = qItem.querySelector('.pr-qa-ans');
+          if (ansEl) ansEl.textContent = lang() === 'ar' ? 'تعذر الرد حاليًا. يرجى مراجعة عبد الرحمن مباشرة عبر واتساب.' : 'Could not retrieve answer. Please reach out to Abdelrahman directly on WhatsApp.';
+        }).finally(function () {
+          askSubmitBtn.disabled = false;
+          askSubmitBtn.textContent = t('sendQuestion');
+        });
+      });
+    }
+
+    if (approveBtn) {
+      approveBtn.addEventListener('click', function () {
+        var nameInput = document.getElementById('pr-client-name');
+        var contactInput = document.getElementById('pr-client-contact');
+        var clientName = (nameInput && nameInput.value.trim()) || (lang() === 'ar' ? 'زائر من الموقع' : 'Website Visitor');
+        var clientContact = (contactInput && contactInput.value.trim()) || 'Not provided';
+        var userIdea = (ideaEl && ideaEl.value.trim()) || '';
+        var planSummary = text.slice(0, 1500);
+
+        // 1. WhatsApp approval trigger
+        var waMsg = lang() === 'ar'
+          ? 'وافقت على الخطة! 👋 اسمي: ' + clientName + ' — فكرة المشروع: ' + userIdea + '\n\nملخص الخطة:\n' + planSummary
+          : 'I approved the project plan! 👋 Name: ' + clientName + ' — Idea: ' + userIdea + '\n\nPlan Summary:\n' + planSummary;
+        var waUrl = 'https://wa.me/201123031944?text=' + encodeURIComponent(waMsg);
+        window.open(waUrl, '_blank', 'noopener');
+
+        // 2. Web3Forms submission if key configured
+        var web3Key = window.PORTFOLIO_WEB3FORMS_KEY;
+        if (web3Key && web3Key !== 'ACCESS_KEY_HERE') {
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              access_key: web3Key,
+              subject: '🤝 عميل وافق على خطة من الـ AI Planner',
+              name: clientName,
+              contact: clientContact,
+              message: 'Idea: ' + userIdea + '\n\nFull Plan:\n' + text
+            })
+          }).catch(function (e) { console.warn('[Web3Forms Planner Error]', e); });
+        }
+
+        // 3. Success confirmation
+        if (statusMsg) {
+          statusMsg.style.display = 'block';
+          statusMsg.style.background = 'rgba(16, 185, 129, 0.15)';
+          statusMsg.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          statusMsg.style.color = '#34d399';
+          statusMsg.innerHTML = '<i class="fas fa-check-circle"></i> ' + t('successMsg');
+        }
+      });
+    }
+
     showState('body');
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
   /* ---- submit ---- */

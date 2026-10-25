@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Business Planner — Abdelrahman Abdullah</title>
+<meta name="description" content="Turn your mobile or web app idea into a structured project plan with architecture recommendations, MVP roadmap, and cost estimation.">
+<link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Central Config & Pricing (Single Source of Truth) -->
+<script src="js/site-config.js"></script>
+<script src="js/pricing-data.js"></script>
+
+<style>
+:root {
+  --primary: #A855F7;
+  --secondary: #9333EA;
+  --neon: #A855F7;
+  --bg: #111111;
+  --card-bg: #1E293B;
+  --border: #334155;
+  --text: #F8FAFC;
+  --muted: #94A3B8;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --card-bg: #FFFBE8;
+  --border: #F3E6C9;
+  --text: #0F172A;
+  --muted: #1E293B;
+  --primary: #9333EA;
+  --secondary: #7C3AED;
+  --neon: #7C3AED;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+html[lang="ar"] { direction: rtl; }
+html[lang="ar"] body { font-family: 'Cairo', var(--font); }
+
+/* Header / Navbar */
+.planner-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  background: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+[data-theme="light"] .planner-nav {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom-color: rgba(147, 51, 234, 0.15);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+}
+.nav-brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--neon);
+}
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-btn {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.nav-btn:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: var(--neon);
+  transform: translateY(-1px);
+}
+.nav-btn-primary {
+  background: linear-gradient(135deg, #9333EA, #A855F7);
+  border: none;
+  color: #ffffff;
+}
+
+/* Container */
+.planner-container {
+  max-width: 920px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[data-theme="light"] .section-title {
+  background: linear-gradient(135deg, #0f172a, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Planner Box */
+.planner-box {
+  background: var(--card-bg);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15), 0 0 60px rgba(168, 85, 247, 0.08);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.planner-box::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(34, 211, 238, 0.2), rgba(168, 85, 247, 0.4));
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0.7;
+  animation: plannerGlow 5s ease-in-out infinite;
+}
+@keyframes plannerGlow {
+  0%, 100% { opacity: 0.5; filter: blur(10px); }
+  50% { opacity: 0.85; filter: blur(15px); }
+}
+
+.planner-badge {
+  padding: 14px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.06));
+  border-bottom: 1px solid rgba(34, 211, 238, 0.25);
+  color: #22d3ee;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.planner-badge-dot {
+  width: 8px;
+  height: 8px;
+  background: #22d3ee;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #22d3ee;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.planner-form {
+  padding: 32px 36px;
+}
+@media (max-width: 600px) {
+  .planner-form { padding: 24px 20px; }
+}
+
+.pf-field { margin-bottom: 22px; }
+.pf-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--neon);
+  margin-bottom: 8px;
+  letter-spacing: 0.4px;
+}
+.pf-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.pf-input:focus {
+  outline: none;
+  border-color: #a855f7;
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15), 0 0 20px rgba(168, 85, 247, 0.2);
+}
+[data-theme="light"] .pf-input {
+  background: #ffffff;
+  border-color: rgba(147, 51, 234, 0.25);
+  color: #0f172a;
+}
+textarea.pf-input { resize: vertical; min-height: 85px; }
+
+.pf-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 700px) {
+  .pf-grid2 { grid-template-columns: 1fr; }
+}
+
+.pf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pf-chip {
+  padding: 9px 18px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  border-radius: 20px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pf-chip:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--neon);
+  transform: translateY(-1px);
+}
+.pf-chip.on, .pf-chip[aria-pressed="true"] {
+  background: linear-gradient(135deg, #9333ea, #a855f7);
+  border-color: #a855f7;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+}
+
+.pf-actions {
+  margin-top: 28px;
+  text-align: center;
+}
+.btn-primary {
+  padding: 15px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #9333ea, #a855f7);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.pf-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Result Area */
+.planner-result {
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  padding: 32px 36px;
+}
+@media (max-width: 600px) {
+  .planner-result { padding: 24px 20px; }
+}
+.pr-state {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 16px;
+}
+.pr-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--neon);
+}
+.pr-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--neon);
+  border-radius: 50%;
+  animation: bounceDot 1.2s infinite ease-in-out;
+}
+.pr-dot:nth-child(2) { animation-delay: 0.15s; }
+.pr-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounceDot {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+.pr-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.pr-preview {
+  background: rgba(168, 85, 247, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Plan Structured Output */
+.pr-section {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease;
+}
+[data-theme="light"] .pr-section {
+  background: #ffffff;
+  border-color: rgba(147, 51, 234, 0.18);
+}
+.pr-section:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+}
+.pr-sec-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--neon);
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+}
+.pr-sec-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+/* Phase 7 Review Box */
+.pr-review-box {
+  margin-top: 28px;
+  padding: 24px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 18px;
+}
+[data-theme="light"] .pr-review-box {
+  background: #fdf4ff;
+  border-color: rgba(147, 51, 234, 0.25);
+}
+</style>
+</head>
+<body>
+
+<!-- Top Navbar -->
+<header class="planner-nav">
+  <a href="index.html" class="nav-brand">
+    <img src="images/brand-icon-96.png" alt="Abdelrahman Abdullah" width="36" height="36">
+    <span>Abdelrahman's AI</span>
+  </a>
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" id="backToHomeBtn">
+      <i class="fas fa-arrow-left"></i>
+      <span data-pf="backHome">Portfolio</span>
+    </a>
+    <button type="button" class="nav-btn" id="themeToggle" aria-label="Toggle Theme">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <button type="button" class="nav-btn nav-btn-primary" id="langToggle">
+      <span id="langLabel">AR</span>
+    </button>
+  </div>
+</header>
+
+<!-- Main Container -->
+<main class="planner-container">
+  <div class="section-header">
+    <h1 class="section-title">AI Business Planner</h1>
+    <p class="section-subtitle" id="planner-subtitle">
+      Turn a rough idea into a structured project brief with cost estimation and architecture choices in under a minute.
+    </p>
+  </div>
+
+  <div class="planner-box" id="planner-box">
+    <div class="planner-badge ai-connected" id="planner-mode">
+      <span class="planner-badge-dot"></span>
+      <span data-pf="badge">AI-assisted planning — free, no sign-up</span>
+    </div>
+
+    <form class="planner-form" id="planner-form" novalidate>
+      <div class="pf-field">
+        <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
+        <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
+          placeholder="Describe your app or business idea in a few sentences..."></textarea>
+      </div>
+
+      <div class="pf-grid2">
+        <div class="pf-field">
+          <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
+          <input id="planner-audience" class="pf-input" type="text" maxlength="200"
+            placeholder="e.g. medical clinics, university students, local shops...">
+        </div>
+        <div class="pf-field">
+          <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
+          <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
+            <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
+            <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
+            <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
+            <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-field">
+        <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
+        <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
+          placeholder="e.g. login, appointments, payments, notifications..."></textarea>
+      </div>
+
+      <div class="pf-grid2">
+        <div class="pf-field">
+          <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
+          <select id="planner-budget" class="pf-input">
+            <option value="" data-pf="optUnknown">Prefer not to say</option>
+            <option value="small" data-pf="optSmall">Small</option>
+            <option value="medium" data-pf="optMedium">Medium</option>
+            <option value="large" data-pf="optLarge">Large</option>
+          </select>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
+          <select id="planner-deadline" class="pf-input">
+            <option value="" data-pf="optUnknown">Prefer not to say</option>
+            <option value="flexible" data-pf="dlFlexible">Flexible</option>
+            <option value="1-2m" data-pf="dlSoon">1–2 months</option>
+            <option value="3-4m" data-pf="dlSoon2">3–4 months</option>
+            <option value="asap" data-pf="dlUrgent">ASAP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="pf-actions">
+        <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
+        <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
+      </div>
+    </form>
+
+    <div class="planner-result" id="planner-result">
+      <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">
+        Fill in your idea (other fields optional) and generate a structured plan here.
+      </div>
+      <div class="pr-state pr-loading" id="planner-loading" hidden>
+        <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
+        <span data-pf="loading">Analyzing your brief and building the plan...</span>
+      </div>
+      <pre class="pr-preview" id="planner-preview" dir="auto" hidden></pre>
+      <div class="pr-state pr-error" id="planner-error" hidden></div>
+      <div class="pr-body" id="planner-body" dir="auto" hidden></div>
+    </div>
+  </div>
+</main>
+
+<!-- Theme & Language Synchronizer -->
+<script>
+(function() {
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const langToggle = document.getElementById('langToggle');
+  const langLabel = document.getElementById('langLabel');
+  const backBtn = document.getElementById('backToHomeBtn');
+  const subtitle = document.getElementById('planner-subtitle');
+
+  // 1. Theme sync
+  let savedTheme = 'dark';
+  try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch(e){}
+  applyTheme(savedTheme);
+
+  function applyTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    if (themeIcon) {
+      themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const cur = html.getAttribute('data-theme') || 'dark';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', next); } catch(e){}
+      applyTheme(next);
+    });
+  }
+
+  // 2. Language sync
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('lang') || 'en'; } catch(e){}
+  applyLang(savedLang);
+
+  function applyLang(l) {
+    html.setAttribute('lang', l);
+    if (langLabel) langLabel.textContent = l === 'ar' ? 'EN' : 'AR';
+    if (backBtn) {
+      backBtn.querySelector('span').textContent = l === 'ar' ? 'الرئيسية' : 'Portfolio';
+      const icon = backBtn.querySelector('i');
+      if (icon) icon.className = l === 'ar' ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
+    }
+    if (subtitle) {
+      subtitle.textContent = l === 'ar'
+        ? 'حوّل فكرتك إلى خطة عمل تقنية متكاملة مع التكلفة التقديرية والجدول الزمني خلال دقيقة.'
+        : 'Turn a rough idea into a structured project brief with cost estimation and architecture choices in under a minute.';
+    }
+    if (typeof window.__plannerI18n === 'function') {
+      window.__plannerI18n();
+    }
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener('click', () => {
+      const cur = html.getAttribute('lang') || 'en';
+      const next = cur === 'en' ? 'ar' : 'en';
+      try { localStorage.setItem('lang', next); } catch(e){}
+      applyLang(next);
+    });
+  }
+})();
+</script>
+
+<!-- AI Business Planner Script -->
+<script src="assets/js/ai-planner.js?v=32" defer></script>
+
+</body>
+</html>
