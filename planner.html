@@ -839,6 +839,75 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
   font-size: 13px;
   transition: all 0.2s;
 }
+
+@media (max-width: 640px) {
+  .planner-nav {
+    padding: 12px 14px;
+  }
+  .nav-brand {
+    font-size: 15px;
+    gap: 8px;
+  }
+  .nav-controls {
+    gap: 6px;
+  }
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 4px;
+  }
+  .planner-container {
+    margin-top: 18px;
+    padding: 0 12px;
+  }
+  .section-badge-top {
+    font-size: 11px;
+    padding: 5px 12px;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(22px, 6.5vw, 30px);
+    line-height: 1.25;
+  }
+  .section-desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .planner-card-header {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .planner-form {
+    padding: 20px 14px;
+  }
+  .planner-result {
+    padding: 20px 14px;
+  }
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+  .budget-estimates-holder {
+    grid-template-columns: 1fr;
+  }
+  .currency-selector-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pr-action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .pr-action-buttons button,
+  .pr-action-buttons a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
 </style>
 </head>
 <body>

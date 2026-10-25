@@ -1,5 +1,8 @@
-﻿// Neon Cursor Follower with glowing trail and smooth ring lerp
 (function() {
+  // Only enable custom cursor follower on devices with a mouse (fine pointer)
+  if (!window.matchMedia || !window.matchMedia('(pointer: fine)').matches) {
+    return;
+  }
   var canvas = document.createElement('canvas');
   canvas.id = 'neon-cursor-canvas';
   canvas.style.position = 'fixed';
