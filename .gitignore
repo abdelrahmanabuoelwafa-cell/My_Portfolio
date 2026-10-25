@@ -33,3 +33,6 @@ build/
 
 # Chatbot backend secrets (keep main.py, ignore only .env)
 chatbot-backend/.env
+
+# Backups
+backups/

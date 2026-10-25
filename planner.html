@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Business Planner — Abdelrahman Abdullah</title>
-<meta name="description" content="Turn your mobile or web app idea into a structured project plan with architecture recommendations, MVP roadmap, and cost estimation.">
+<title>AI Project Blueprint & Cost Planner — Abdelrahman Abdullah</title>
+<meta name="description" content="Turn your mobile or web app idea into a client-ready project plan with real delivery milestones, transparent budget estimation, and tailored architecture.">
 <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
 
 <!-- Fonts -->
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Central Config & Pricing (Single Source of Truth) -->
+<!-- Central Config & Pricing -->
 <script src="js/site-config.js"></script>
 <script src="js/pricing-data.js"></script>
 
@@ -21,25 +21,41 @@
 :root {
   --primary: #A855F7;
   --secondary: #9333EA;
+  --accent-cyan: #06B6D4;
+  --accent-pink: #EC4899;
   --neon: #A855F7;
-  --bg: #111111;
-  --card-bg: #1E293B;
-  --border: #334155;
+  --bg: #0B0F17;
+  --card-bg: #131B2E;
+  --card-inner: #1A243B;
+  --border: rgba(168, 85, 247, 0.25);
+  --border-light: rgba(255, 255, 255, 0.08);
   --text: #F8FAFC;
+  --text-dim: #CBD5E1;
   --muted: #94A3B8;
   --font: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
+  --shadow-glow: 0 0 35px rgba(168, 85, 247, 0.15);
 }
 
 [data-theme="light"] {
   --bg: #FFFFFF;
   --card-bg: #FFFBE8;
+  --card-inner: #FFFFFF;
   --border: #F3E6C9;
+  --border-light: rgba(147, 51, 234, 0.12);
   --text: #0F172A;
-  --muted: #1E293B;
+  --text-dim: #1E293B;
+  --muted: #64748B;
   --primary: #9333EA;
   --secondary: #7C3AED;
   --neon: #7C3AED;
+  --accent-cyan: #0891B2;
+  --accent-pink: #DB2777;
+  --shadow-glow: 0 4px 20px rgba(147, 51, 234, 0.08);
+}
+
+[data-theme="light"] .ambient-mesh {
+  display: none !important;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,28 +66,81 @@ body {
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
   padding-bottom: 80px;
 }
 
 html[lang="ar"] { direction: rtl; }
 html[lang="ar"] body { font-family: 'Cairo', var(--font); }
 
+/* Ambient Animated Glowing Mesh Background */
+.ambient-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.28;
+  will-change: transform;
+}
+[data-theme="light"] .ambient-orb {
+  opacity: 0.16;
+  filter: blur(80px);
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #9333EA, #A855F7);
+  top: -100px; left: -100px;
+  animation: floatOrb1 18s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 550px; height: 550px;
+  background: radial-gradient(circle, #06B6D4, #3B82F6);
+  top: 30%; right: -150px;
+  animation: floatOrb2 22s ease-in-out infinite alternate;
+}
+.orb-3 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, #EC4899, #8B5CF6);
+  bottom: 5%; left: 15%;
+  animation: floatOrb3 20s ease-in-out infinite alternate;
+}
+@keyframes floatOrb1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(120px, 100px) scale(1.15); }
+}
+@keyframes floatOrb2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-100px, 120px) scale(0.9); }
+}
+@keyframes floatOrb3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, -90px) scale(1.1); }
+}
+
 /* Header / Navbar */
 .planner-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-  background: rgba(17, 17, 17, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(168, 85, 247, 0.18);
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(11, 15, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
 }
 [data-theme="light"] .planner-nav {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.88);
   border-bottom-color: rgba(147, 51, 234, 0.15);
 }
 .nav-brand {
@@ -85,15 +154,15 @@ html[lang="ar"] body { font-family: 'Cairo', var(--font); }
   font-weight: 700;
 }
 .nav-brand img {
-  width: 36px;
-  height: 36px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   border: 2px solid var(--neon);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
 }
 .nav-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 .nav-btn {
   background: rgba(168, 85, 247, 0.12);
@@ -107,7 +176,7 @@ html[lang="ar"] body { font-family: 'Cairo', var(--font); }
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   transition: all 0.2s ease;
 }
 .nav-btn:hover {
@@ -115,118 +184,148 @@ html[lang="ar"] body { font-family: 'Cairo', var(--font); }
   border-color: var(--neon);
   transform: translateY(-1px);
 }
+[data-theme="light"] .nav-btn {
+  background: rgba(147, 51, 234, 0.08);
+  border-color: rgba(147, 51, 234, 0.25);
+  color: #1e293b;
+}
 .nav-btn-primary {
   background: linear-gradient(135deg, #9333EA, #A855F7);
   border: none;
   color: #ffffff;
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.35);
 }
 
 /* Container */
 .planner-container {
-  max-width: 920px;
-  margin: 40px auto 0;
+  position: relative;
+  z-index: 1;
+  max-width: 940px;
+  margin: 36px auto 0;
   padding: 0 20px;
 }
 .section-header {
   text-align: center;
   margin-bottom: 32px;
 }
+.section-badge-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #C084FC;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+[data-theme="light"] .section-badge-top {
+  background: rgba(147, 51, 234, 0.1);
+  border-color: rgba(147, 51, 234, 0.25);
+  color: #7C3AED;
+}
 .section-title {
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(28px, 4.5vw, 42px);
   font-family: var(--font-heading);
   font-weight: 800;
+  line-height: 1.2;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, #ffffff, #c084fc);
+  background: linear-gradient(135deg, #F8FAFC 20%, #C084FC 70%, #06B6D4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 [data-theme="light"] .section-title {
-  background: linear-gradient(135deg, #0f172a, #7c3aed);
+  background: linear-gradient(135deg, #0F172A 20%, #7C3AED 70%, #0891B2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .section-subtitle {
   color: var(--muted);
-  font-size: 15px;
-  max-width: 600px;
+  font-size: clamp(14px, 1.8vw, 16px);
+  max-width: 680px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* Planner Box */
+/* Planner Main Box */
 .planner-box {
   background: var(--card-bg);
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border: 1px solid var(--border);
   border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15), 0 0 60px rgba(168, 85, 247, 0.08);
-  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), var(--shadow-glow);
   overflow: hidden;
-  isolation: isolate;
+  position: relative;
+  backdrop-filter: blur(12px);
 }
-.planner-box::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(34, 211, 238, 0.2), rgba(168, 85, 247, 0.4));
-  z-index: -1;
-  filter: blur(12px);
-  opacity: 0.7;
-  animation: plannerGlow 5s ease-in-out infinite;
-}
-@keyframes plannerGlow {
-  0%, 100% { opacity: 0.5; filter: blur(10px); }
-  50% { opacity: 0.85; filter: blur(15px); }
+[data-theme="light"] .planner-box {
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08), 0 0 40px rgba(147, 51, 234, 0.06);
 }
 
-.planner-badge {
-  padding: 14px 24px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  text-align: center;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.06));
-  border-bottom: 1px solid rgba(34, 211, 238, 0.25);
-  color: #22d3ee;
-  text-transform: uppercase;
+/* Badge bar inside box */
+.planner-status-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(168, 85, 247, 0.07);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: #C084FC;
+}
+[data-theme="light"] .planner-status-bar {
+  background: rgba(147, 51, 234, 0.05);
+  color: #7C3AED;
+}
+.status-indicator {
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
-.planner-badge-dot {
-  width: 8px;
-  height: 8px;
-  background: #22d3ee;
+.status-dot {
+  width: 9px; height: 9px;
   border-radius: 50%;
-  box-shadow: 0 0 12px #22d3ee;
-  animation: pulse-dot 2s infinite;
+  background: #22C55E;
+  box-shadow: 0 0 10px #22C55E;
+  animation: pulseGreen 2s infinite;
 }
-@keyframes pulse-dot {
+@keyframes pulseGreen {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.3); }
+  50% { opacity: 0.5; transform: scale(1.2); }
 }
 
+/* Form Styles */
 .planner-form {
   padding: 32px 36px;
 }
 @media (max-width: 600px) {
-  .planner-form { padding: 24px 20px; }
+  .planner-form { padding: 22px 18px; }
 }
 
 .pf-field { margin-bottom: 22px; }
 .pf-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--neon);
+  color: #C084FC;
   margin-bottom: 8px;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
+}
+[data-theme="light"] .pf-label {
+  color: #7C3AED;
 }
 .pf-input {
   width: 100%;
   padding: 14px 18px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: var(--card-inner);
+  border: 1px solid var(--border);
   border-radius: 12px;
   color: var(--text);
   font-family: inherit;
@@ -235,16 +334,21 @@ html[lang="ar"] body { font-family: 'Cairo', var(--font); }
 }
 .pf-input:focus {
   outline: none;
-  border-color: #a855f7;
-  background: rgba(15, 23, 42, 0.85);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15), 0 0 20px rgba(168, 85, 247, 0.2);
+  border-color: #A855F7;
+  background: rgba(26, 36, 59, 0.95);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2), 0 0 20px rgba(168, 85, 247, 0.15);
 }
 [data-theme="light"] .pf-input {
-  background: #ffffff;
+  background: #FFFFFF;
   border-color: rgba(147, 51, 234, 0.25);
-  color: #0f172a;
+  color: #0F172A;
 }
-textarea.pf-input { resize: vertical; min-height: 85px; }
+[data-theme="light"] .pf-input:focus {
+  background: #FFFFFF;
+  border-color: #9333EA;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
+}
+textarea.pf-input { resize: vertical; min-height: 90px; }
 
 .pf-grid2 {
   display: grid;
@@ -261,15 +365,18 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
   gap: 8px;
 }
 .pf-chip {
-  padding: 9px 18px;
+  padding: 9px 16px;
   background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.22);
+  border: 1px solid rgba(168, 85, 247, 0.25);
   border-radius: 20px;
   color: var(--text);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .pf-chip:hover {
   background: rgba(168, 85, 247, 0.2);
@@ -277,31 +384,39 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
   transform: translateY(-1px);
 }
 .pf-chip.on, .pf-chip[aria-pressed="true"] {
-  background: linear-gradient(135deg, #9333ea, #a855f7);
-  border-color: #a855f7;
+  background: linear-gradient(135deg, #9333EA, #A855F7);
+  border-color: #A855F7;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);
+}
+[data-theme="light"] .pf-chip {
+  background: rgba(147, 51, 234, 0.06);
+  border-color: rgba(147, 51, 234, 0.2);
+  color: #1E293B;
 }
 
 .pf-actions {
-  margin-top: 28px;
+  margin-top: 30px;
   text-align: center;
 }
 .btn-primary {
-  padding: 15px 36px;
+  padding: 15px 38px;
   font-size: 16px;
   font-weight: 700;
   color: #ffffff;
-  background: linear-gradient(135deg, #9333ea, #a855f7);
+  background: linear-gradient(135deg, #9333EA, #A855F7);
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.65);
 }
 .btn-primary:disabled {
   opacity: 0.6;
@@ -314,108 +429,426 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
   color: var(--muted);
 }
 
-/* Result Area */
+/* Result Container */
 .planner-result {
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(0, 0, 0, 0.22);
+  border-top: 1px solid var(--border);
   padding: 32px 36px;
 }
-@media (max-width: 600px) {
-  .planner-result { padding: 24px 20px; }
+[data-theme="light"] .planner-result {
+  background: #F8FAFC;
+  border-top-color: rgba(147, 51, 234, 0.15);
 }
+@media (max-width: 600px) {
+  .planner-result { padding: 22px 18px; }
+}
+
 .pr-state {
   text-align: center;
   color: var(--muted);
   font-size: 14px;
-  padding: 16px;
+  padding: 24px 16px;
+}
+.pr-empty-icon {
+  font-size: 44px;
+  color: #C084FC;
+  opacity: 0.6;
+  margin-bottom: 12px;
 }
 .pr-loading {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
   font-size: 15px;
   font-weight: 600;
   color: var(--neon);
 }
-.pr-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--neon);
+.pr-loading-spinner {
+  width: 44px; height: 44px;
+  border: 3px solid rgba(168, 85, 247, 0.2);
+  border-top-color: #A855F7;
+  border-right-color: #06B6D4;
   border-radius: 50%;
-  animation: bounceDot 1.2s infinite ease-in-out;
+  animation: spin 0.8s linear infinite;
 }
-.pr-dot:nth-child(2) { animation-delay: 0.15s; }
-.pr-dot:nth-child(3) { animation-delay: 0.3s; }
-@keyframes bounceDot {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 .pr-error {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #f87171;
-  padding: 14px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #F87171;
+  padding: 16px;
   border-radius: 12px;
   font-weight: 600;
 }
-.pr-preview {
-  background: rgba(168, 85, 247, 0.05);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  border-radius: 12px;
-  padding: 20px;
-  font-size: 14px;
-  white-space: pre-wrap;
-  max-height: 400px;
-  overflow-y: auto;
+
+/* =========================================================
+   Redesigned High-Impact Client Cards (5 Clear Sections)
+   ========================================================= */
+.pr-cards-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Plan Structured Output */
-.pr-section {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  border-radius: 14px;
-  padding: 18px 22px;
-  margin-bottom: 16px;
-  transition: border-color 0.2s ease;
+/* Card Base */
+.client-plan-card {
+  background: var(--card-inner);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
-[data-theme="light"] .pr-section {
-  background: #ffffff;
+[data-theme="light"] .client-plan-card {
+  background: #FFFFFF;
   border-color: rgba(147, 51, 234, 0.18);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
 }
-.pr-section:hover {
+.client-plan-card:hover {
   border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.12);
 }
-.pr-sec-title {
-  font-size: 15px;
+.cpc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.cpc-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
   font-weight: 800;
-  color: var(--neon);
-  margin-bottom: 10px;
   font-family: var(--font-heading);
+  color: #F8FAFC;
+  letter-spacing: 0.3px;
+}
+[data-theme="light"] .cpc-title {
+  color: #0F172A;
+}
+.cpc-title i {
+  color: var(--primary);
+  font-size: 17px;
+}
+.cpc-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.pr-sec-text {
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--text);
-  white-space: pre-line;
+.cpc-badge.badge-highlight {
+  background: rgba(168, 85, 247, 0.18);
+  color: #C084FC;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+.cpc-badge.badge-timeline {
+  background: rgba(6, 182, 212, 0.16);
+  color: #22D3EE;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+.cpc-badge.badge-budget {
+  background: rgba(34, 197, 94, 0.16);
+  color: #4ADE80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
-/* Phase 7 Review Box */
+.cpc-content {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  white-space: pre-line;
+}
+[data-theme="light"] .cpc-content {
+  color: #334155;
+}
+
+/* Timeline Flow Visualizer */
+.timeline-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 18px 0 12px;
+}
+@media (max-width: 768px) {
+  .timeline-flow { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .timeline-flow { grid-template-columns: 1fr; }
+}
+.timeline-step-box {
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 14px;
+  padding: 14px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+[data-theme="light"] .timeline-step-box {
+  background: #F8FAFC;
+  border-color: rgba(147, 51, 234, 0.15);
+}
+.timeline-step-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.tsb-week {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tsb-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+[data-theme="light"] .tsb-title { color: #0F172A; }
+.tsb-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tsb-handover {
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #22C55E;
+}
+
+/* Interactive Currency Switcher inside Budget Card */
+.currency-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 16px 0;
+}
+[data-theme="light"] .currency-selector-bar {
+  background: #F1F5F9;
+  border-color: rgba(147, 51, 234, 0.15);
+}
+.csb-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #C084FC;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+[data-theme="light"] .csb-label { color: #7C3AED; }
+.csb-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.curr-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--text);
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.curr-pill:hover {
+  border-color: var(--neon);
+  background: rgba(168, 85, 247, 0.18);
+}
+.curr-pill.active {
+  background: linear-gradient(135deg, #9333EA, #A855F7);
+  border-color: #A855F7;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+}
+
+.budget-estimate-highlight {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0 10px;
+}
+@media (max-width: 650px) {
+  .budget-estimate-highlight { grid-template-columns: 1fr; }
+}
+.beh-tier-card {
+  background: rgba(11, 15, 23, 0.5);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  transition: all 0.2s;
+}
+[data-theme="light"] .beh-tier-card {
+  background: #FFFFFF;
+  border-color: rgba(147, 51, 234, 0.15);
+}
+.beh-tier-card.recommended {
+  border-color: #A855F7;
+  background: rgba(168, 85, 247, 0.1);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.15);
+}
+.beh-tier-name {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #C084FC;
+  margin-bottom: 4px;
+}
+.beh-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #F8FAFC;
+  font-family: var(--font-heading);
+  margin-bottom: 4px;
+}
+[data-theme="light"] .beh-price { color: #0F172A; }
+.beh-desc {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Future Enhancements Add-on Chips */
+.enhancements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.enhancement-item {
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+[data-theme="light"] .enhancement-item {
+  background: #F8FAFC;
+  border-color: rgba(147, 51, 234, 0.15);
+}
+.enhancement-icon {
+  font-size: 18px;
+  color: var(--primary);
+  margin-top: 2px;
+}
+.enhancement-text h5 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+[data-theme="light"] .enhancement-text h5 { color: #0F172A; }
+.enhancement-text p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Phase 7 Action Box */
 .pr-review-box {
   margin-top: 28px;
-  padding: 24px;
-  background: rgba(168, 85, 247, 0.06);
-  border: 1px solid rgba(168, 85, 247, 0.28);
-  border-radius: 18px;
+  padding: 26px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(6, 182, 212, 0.04));
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 [data-theme="light"] .pr-review-box {
-  background: #fdf4ff;
+  background: #FDF4FF;
   border-color: rgba(147, 51, 234, 0.25);
+  box-shadow: 0 10px 30px rgba(147, 51, 234, 0.06);
+}
+.pr-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+#pr-approve-btn {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  padding: 13px 24px;
+  border-radius: 24px;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s ease;
+}
+#pr-approve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6);
+}
+#pr-ask-btn {
+  background: rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #C084FC;
+  cursor: pointer;
+  padding: 13px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+[data-theme="light"] #pr-ask-btn {
+  background: rgba(147, 51, 234, 0.1);
+  color: #7C3AED;
+}
+#pr-regen-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 13px 18px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
 }
 </style>
 </head>
 <body>
+
+<!-- Ambient Animated Mesh Background -->
+<div class="ambient-mesh" aria-hidden="true">
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+</div>
 
 <!-- Top Navbar -->
 <header class="planner-nav">
@@ -440,83 +873,125 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
 <!-- Main Container -->
 <main class="planner-container">
   <div class="section-header">
-    <h1 class="section-title">AI Business Planner</h1>
-    <p class="section-subtitle" id="planner-subtitle">
-      Turn a rough idea into a structured project brief with cost estimation and architecture choices in under a minute.
+    <div class="section-badge-top">
+      <i class="fas fa-sparkles"></i>
+      <span data-pf="topBadge">Instant Client Roadmap & Budget Estimator — Free</span>
+    </div>
+    <h1 class="section-title" data-pf="mainTitle">AI Project Blueprint & Cost Planner</h1>
+    <p class="section-subtitle" id="planner-subtitle" data-pf="mainSubtitle">
+      Transform your app idea into a high-converting, production-ready roadmap with realistic delivery milestones, transparent budget estimation in your local currency, and tailored feature architecture.
     </p>
   </div>
 
   <div class="planner-box" id="planner-box">
-    <div class="planner-badge ai-connected" id="planner-mode">
-      <span class="planner-badge-dot"></span>
-      <span data-pf="badge">AI-assisted planning — free, no sign-up</span>
+    <div class="planner-status-bar" id="planner-mode">
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span data-pf="badge">AI Engine Online — Architecture & Sprint Planning Ready</span>
+      </div>
+      <span style="font-size:12px;opacity:0.8;">Flutter & Dart Expert</span>
     </div>
 
     <form class="planner-form" id="planner-form" novalidate>
       <div class="pf-field">
-        <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
+        <label class="pf-label" for="planner-idea">
+          <i class="fas fa-lightbulb"></i>
+          <span data-pf="ideaLabel">Project Idea & Business Vision *</span>
+        </label>
         <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
-          placeholder="Describe your app or business idea in a few sentences..."></textarea>
+          placeholder="Describe your app concept, the core problem it solves, and your main business goal..."></textarea>
       </div>
 
       <div class="pf-grid2">
         <div class="pf-field">
-          <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
+          <label class="pf-label" for="planner-audience">
+            <i class="fas fa-users"></i>
+            <span data-pf="audLabel">Target Audience & Market (Optional)</span>
+          </label>
           <input id="planner-audience" class="pf-input" type="text" maxlength="200"
-            placeholder="e.g. medical clinics, university students, local shops...">
+            placeholder="e.g. Healthcare clinics, e-commerce shoppers, college students...">
         </div>
         <div class="pf-field">
-          <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
+          <span class="pf-label">
+            <i class="fas fa-layer-group"></i>
+            <span data-pf="platLabel">Target Platform</span>
+          </span>
           <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
-            <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
-            <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
-            <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
-            <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
+            <button type="button" class="pf-chip on" data-v="Mobile app (iOS & Android via Flutter)" data-pf="platMobile" aria-pressed="true">
+              <i class="fas fa-mobile-alt"></i> Mobile (iOS + Android)
+            </button>
+            <button type="button" class="pf-chip" data-v="Web application" data-pf="platWeb" aria-pressed="false">
+              <i class="fas fa-globe"></i> Web
+            </button>
+            <button type="button" class="pf-chip" data-v="Desktop application" data-pf="platDesktop" aria-pressed="false">
+              <i class="fas fa-desktop"></i> Desktop
+            </button>
+            <button type="button" class="pf-chip" data-v="Cross-Platform (Mobile, Web, Desktop)" data-pf="platUniversal" aria-pressed="false">
+              <i class="fas fa-infinity"></i> Cross-Platform
+            </button>
           </div>
         </div>
       </div>
 
       <div class="pf-field">
-        <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
+        <label class="pf-label" for="planner-features">
+          <i class="fas fa-cubes"></i>
+          <span data-pf="featLabel">Key Features & Modules (Optional)</span>
+        </label>
         <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
-          placeholder="e.g. login, appointments, payments, notifications..."></textarea>
+          placeholder="e.g. User login, payment gateway, real-time chat, push notifications, Google Maps..."></textarea>
       </div>
 
       <div class="pf-grid2">
         <div class="pf-field">
-          <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
-          <select id="planner-budget" class="pf-input">
-            <option value="" data-pf="optUnknown">Prefer not to say</option>
-            <option value="small" data-pf="optSmall">Small</option>
-            <option value="medium" data-pf="optMedium">Medium</option>
-            <option value="large" data-pf="optLarge">Large</option>
+          <label class="pf-label" for="planner-currency">
+            <i class="fas fa-coins"></i>
+            <span data-pf="currencyLabel">Preferred Currency & Country</span>
+          </label>
+          <select id="planner-currency" class="pf-input">
+            <option value="USD" selected>🇺🇸 USD ($) — US Dollar</option>
+            <option value="EGP">🇪🇬 EGP (ج.م) — Egyptian Pound</option>
+            <option value="SAR">🇸🇦 SAR (ر.س) — Saudi Riyal</option>
+            <option value="AED">🇦🇪 AED (د.إ) — UAE Dirham</option>
           </select>
         </div>
         <div class="pf-field">
-          <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
+          <label class="pf-label" for="planner-deadline">
+            <i class="fas fa-stopwatch"></i>
+            <span data-pf="deadlineLabel">Estimated Delivery Expectation</span>
+          </label>
           <select id="planner-deadline" class="pf-input">
-            <option value="" data-pf="optUnknown">Prefer not to say</option>
-            <option value="flexible" data-pf="dlFlexible">Flexible</option>
-            <option value="1-2m" data-pf="dlSoon">1–2 months</option>
-            <option value="3-4m" data-pf="dlSoon2">3–4 months</option>
-            <option value="asap" data-pf="dlUrgent">ASAP</option>
+            <option value="mvp" selected data-pf="dlMvp">Fast MVP (2–3 Weeks)</option>
+            <option value="standard" data-pf="dlStandard">Standard Production (3–5 Weeks)</option>
+            <option value="enterprise" data-pf="dlEnterprise">Full Scale Launch (6–8 Weeks)</option>
+            <option value="flexible" data-pf="dlFlexible">Flexible / Milestone Based</option>
           </select>
         </div>
       </div>
 
       <div class="pf-actions">
-        <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
-        <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
+        <button type="submit" id="planner-btn" class="btn-primary">
+          <i class="fas fa-rocket"></i>
+          <span data-pf="generate">Generate Client Roadmap & Estimate</span>
+        </button>
+        <p class="pf-note" data-pf="note">
+          Clear, structured guidance. Final timeline, deliverables, and exact quote are finalized during your free consultation.
+        </p>
       </div>
     </form>
 
     <div class="planner-result" id="planner-result">
       <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">
-        Fill in your idea (other fields optional) and generate a structured plan here.
+        <div class="pr-empty-icon"><i class="fas fa-clipboard-list"></i></div>
+        <h3>Ready to build your client-grade project plan?</h3>
+        <p style="margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;">
+          Fill in your project idea above and get a complete 5-section executive blueprint with realistic sprint milestones, real delivery dates, and budget breakdown in your currency.
+        </p>
       </div>
       <div class="pr-state pr-loading" id="planner-loading" hidden>
-        <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
-        <span data-pf="loading">Analyzing your brief and building the plan...</span>
+        <div class="pr-loading-spinner"></div>
+        <div style="font-weight:700;font-size:16px;" data-pf="loadingTitle">Architecting Your Project Roadmap...</div>
+        <span data-pf="loading" style="font-size:13px;color:var(--muted);">Analyzing features, structuring sprints, and computing budget...</span>
       </div>
       <pre class="pr-preview" id="planner-preview" dir="auto" hidden></pre>
       <div class="pr-state pr-error" id="planner-error" hidden></div>
@@ -534,7 +1009,6 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
   const langToggle = document.getElementById('langToggle');
   const langLabel = document.getElementById('langLabel');
   const backBtn = document.getElementById('backToHomeBtn');
-  const subtitle = document.getElementById('planner-subtitle');
 
   // 1. Theme sync
   let savedTheme = 'dark';
@@ -557,7 +1031,7 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
     });
   }
 
-  // 2. Language sync
+  // 2. Language sync (English default)
   let savedLang = 'en';
   try { savedLang = localStorage.getItem('lang') || 'en'; } catch(e){}
   applyLang(savedLang);
@@ -569,11 +1043,6 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
       backBtn.querySelector('span').textContent = l === 'ar' ? 'الرئيسية' : 'Portfolio';
       const icon = backBtn.querySelector('i');
       if (icon) icon.className = l === 'ar' ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
-    }
-    if (subtitle) {
-      subtitle.textContent = l === 'ar'
-        ? 'حوّل فكرتك إلى خطة عمل تقنية متكاملة مع التكلفة التقديرية والجدول الزمني خلال دقيقة.'
-        : 'Turn a rough idea into a structured project brief with cost estimation and architecture choices in under a minute.';
     }
     if (typeof window.__plannerI18n === 'function') {
       window.__plannerI18n();
@@ -592,7 +1061,7 @@ textarea.pf-input { resize: vertical; min-height: 85px; }
 </script>
 
 <!-- AI Business Planner Script -->
-<script src="assets/js/ai-planner.js?v=32" defer></script>
+<script src="assets/js/ai-planner.js?v=34" defer></script>
 
 </body>
 </html>

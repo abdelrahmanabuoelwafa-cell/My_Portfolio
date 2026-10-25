@@ -837,3 +837,148 @@ html.js-enabled .cinema-ready .slide:nth-of-type(4) .slide__content { background
 }
 .pr-preview[hidden] { display: none; }
 [dir='rtl'] .pr-preview { direction: rtl; text-align: right; }
+
+/* ===== High-End White (Light Mode) Card & Planner Enhancements ===== */
+/* Light body background restored to original */
+
+[data-theme='light'] .client-plan-card {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.18) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme='light'] .client-plan-card:hover {
+  border-color: rgba(147, 51, 234, 0.45) !important;
+  box-shadow: 0 8px 25px rgba(147, 51, 234, 0.12) !important;
+}
+
+[data-theme='light'] .cpc-title {
+  color: #0F172A !important;
+}
+
+[data-theme='light'] .cpc-content {
+  color: #334155 !important;
+}
+
+[data-theme='light'] .timeline-step-box {
+  background: #F8FAFC !important;
+  border-color: rgba(147, 51, 234, 0.15) !important;
+}
+
+[data-theme='light'] .timeline-step-box:hover {
+  border-color: #9333EA !important;
+  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.1) !important;
+}
+
+[data-theme='light'] .tsb-title {
+  color: #0F172A !important;
+}
+
+[data-theme='light'] .currency-selector-bar {
+  background: #F1F5F9 !important;
+  border-color: rgba(147, 51, 234, 0.2) !important;
+}
+
+[data-theme='light'] .csb-label {
+  color: #7C3AED !important;
+}
+
+[data-theme='light'] .curr-pill {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.25) !important;
+  color: #1E293B !important;
+}
+
+[data-theme='light'] .curr-pill:hover {
+  background: rgba(147, 51, 234, 0.1) !important;
+  border-color: #9333EA !important;
+}
+
+[data-theme='light'] .curr-pill.active {
+  background: linear-gradient(135deg, #9333EA, #A855F7) !important;
+  border-color: #9333EA !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme='light'] .beh-tier-card {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.16) !important;
+}
+
+[data-theme='light'] .beh-tier-card.recommended {
+  border-color: #9333EA !important;
+  background: rgba(147, 51, 234, 0.05) !important;
+}
+
+[data-theme='light'] .beh-price {
+  color: #0F172A !important;
+}
+
+[data-theme='light'] .enhancement-item {
+  background: #F8FAFC !important;
+  border-color: rgba(147, 51, 234, 0.15) !important;
+}
+
+[data-theme='light'] .enhancement-text h5 {
+  color: #0F172A !important;
+}
+
+[data-theme='light'] .pr-review-box {
+  background: #FDF4FF !important;
+  border-color: rgba(147, 51, 234, 0.25) !important;
+}
+
+[data-theme='light'] #pr-ask-btn {
+  background: rgba(147, 51, 234, 0.1) !important;
+  color: #7C3AED !important;
+}
+
+[data-theme='light'] #pr-regen-btn {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.25) !important;
+  color: #64748B !important;
+}
+
+[data-theme='light'] #pr-regen-btn:hover {
+  color: #0F172A !important;
+  border-color: #9333EA !important;
+}
+
+/* ===== Photo & Circle Subtle Bouncing Animation ===== */
+@keyframes circleBounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  50% {
+    transform: translateY(-13px);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+}
+
+@keyframes ringPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.35), inset 0 0 12px rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 48px rgba(168, 85, 247, 0.75), inset 0 0 20px rgba(168, 85, 247, 0.35);
+    border-color: rgba(168, 85, 247, 0.85);
+  }
+}
+
+html.js.js-enabled .hero-top-image,
+.hero-top-image {
+  animation: circleBounce 3.4s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+.top-img-ring {
+  position: absolute;
+  inset: -10px;
+  border: 2px dashed rgba(168, 85, 247, 0.55);
+  border-radius: 50%;
+  animation: spin 16s linear infinite, ringPulseGlow 3.4s ease-in-out infinite !important;
+  z-index: 3;
+  pointer-events: none;
+}

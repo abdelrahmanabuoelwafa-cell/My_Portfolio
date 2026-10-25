@@ -13,7 +13,7 @@
  * (the GEMINI_API_KEY secret survives redeploy)
  */
 
-const ALLOWED_MODEL = "gemini-3.8-flash";
+const ALLOWED_MODEL = "gemini-3.5-flash-lite";
 const GEMINI_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/" +
   ALLOWED_MODEL +
@@ -23,12 +23,24 @@ const ALLOWED_ORIGINS = [
   "https://abdelrahmanabuoelwafa-cell.github.io",
   "http://localhost:8000",
   "http://127.0.0.1:8000",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
 ];
 
-const MAX_BODY_BYTES = 32 * 1024; // 32 KB
+function isOriginAllowed(origin) {
+  if (!origin) return true;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return true;
+  if (/^https:\/\/[a-z0-9-]+\.github\.io$/.test(origin)) return true;
+  return false;
+}
+
+const MAX_BODY_BYTES = 64 * 1024; // 64 KB
 const MAX_MESSAGES = 12;
 const MAX_CHARS_PER_MESSAGE = 4000;
-const RATE_LIMIT = 15;            // requests per window per IP
+const RATE_LIMIT = 20;            // requests per window per IP
 const RATE_WINDOW_MS = 60 * 1000; // 1 minute
 
 const SYSTEM_PROMPT = `أنت "مستشار المشاريع" — مساعد ذكي داخل بورتفوليو عبدالرحمن أبو الوفا (مهندس Flutter، القاهرة).
@@ -56,14 +68,15 @@ const SYSTEM_PROMPT = `أنت "مستشار المشاريع" — مساعد ذ�
 const rateMap = new Map(); // "ip:window" -> count
 
 function corsHeaders(origin) {
+  const allowed = isOriginAllowed(origin) ? (origin || "*") : "";
   const h = {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
     "Content-Type": "application/json; charset=utf-8",
   };
-  if (origin && ALLOWED_ORIGINS.includes(origin)) {
-    h["Access-Control-Allow-Origin"] = origin;
+  if (allowed) {
+    h["Access-Control-Allow-Origin"] = allowed;
   }
   return h;
 }
@@ -81,7 +94,7 @@ export default {
 
     // ---- CORS preflight ----
     if (request.method === "OPTIONS") {
-      if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+      if (origin && !isOriginAllowed(origin)) {
         return new Response(null, { status: 403 });
       }
       const h = corsHeaders(origin);
@@ -93,8 +106,8 @@ export default {
       return json({ error: "Use POST with a JSON body." }, 405, origin);
     }
 
-    // ---- Origin policy: browsers always send Origin; scripts may omit it ----
-    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    // ---- Origin policy ----
+    if (origin && !isOriginAllowed(origin)) {
       return json({ error: "Origin not allowed." }, 403, origin);
     }
 
@@ -158,8 +171,12 @@ export default {
     }
 
     // ---- Gemini payload ----
+    const activeSystemPrompt = (typeof data.systemPrompt === "string" && data.systemPrompt.trim())
+      ? data.systemPrompt.trim()
+      : SYSTEM_PROMPT;
+
     const payload = {
-      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      systemInstruction: { parts: [{ text: activeSystemPrompt }] },
       contents,
       generationConfig: {
         temperature: 0.4,
