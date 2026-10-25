@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logo Concepts — Abdelrahman Abdullah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090912;
+      --card-bg: #121222;
+      --border: #232338;
+      --purple: #A855F7;
+      --cyan: #22D3EE;
+      --text: #F1F5F9;
+      --muted: #94A3B8;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+      --font-ar: 'Cairo', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ar);
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFF 30%, var(--purple) 70%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .concept-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--purple);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+    }
+
+    .badge-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-family: var(--font-en);
+    }
+
+    .concept-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      color: #FFF;
+    }
+
+    .concept-subtitle {
+      font-size: 13px;
+      color: var(--cyan);
+      font-family: var(--font-en);
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Hero Display Box */
+    .hero-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .box {
+      border-radius: 16px;
+      padding: 24px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      position: relative;
+    }
+
+    .box.dark {
+      background: #0B0B14;
+      border: 1px solid #1E1E32;
+    }
+
+    .box.light {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+
+    .box-label {
+      position: absolute;
+      bottom: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: var(--font-en);
+    }
+    .box.dark .box-label { color: #64748B; }
+    .box.light .box-label { color: #94A3B8; }
+
+    .logo-hero {
+      width: 80px;
+      height: 60px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.4));
+    }
+    .box.light .logo-hero {
+      filter: drop-shadow(0 4px 12px rgba(168, 85, 247, 0.2));
+    }
+    .box:hover .logo-hero {
+      transform: scale(1.08);
+    }
+
+    /* Nav Simulation */
+    .nav-preview-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-mockup {
+      background: #17172B;
+      border: 1px solid #282846;
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      direction: ltr;
+    }
+
+    .brand-svg {
+      width: 44px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-en);
+    }
+
+    .brand-first {
+      font-size: 13px;
+      font-weight: 800;
+      color: #FFF;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-last {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+    .brand-cursor {
+      color: var(--cyan);
+    }
+
+    .nav-links-mock {
+      display: flex;
+      gap: 12px;
+    }
+    .nav-pill {
+      width: 32px;
+      height: 6px;
+      border-radius: 100px;
+      background: #2D2D4D;
+    }
+    .nav-pill.active {
+      background: var(--purple);
+    }
+
+    /* Size Ladder */
+    .size-ladder {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #0B0B14;
+      border: 1px solid #1E1E32;
+      border-radius: 12px;
+      padding: 14px 10px;
+      margin-bottom: 24px;
+    }
+
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .size-item span {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: var(--font-en);
+    }
+
+    /* Rationale Description */
+    .rationale {
+      font-size: 13.5px;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .features-list li {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .features-list li::before {
+      content: "✦";
+      color: var(--cyan);
+      font-size: 10px;
+    }
+
+    /* Choose Button */
+    .btn-choose {
+      background: linear-gradient(135deg, var(--purple), #7C3AED);
+      color: #FFF;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      font-family: var(--font-ar);
+    }
+    .btn-choose:hover {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>مفاهيم اللوجو المقترحة</h1>
+      <p>3 نماذج احترافية تم تصميمها خصيصاً لهوية عبد الرحمن عبد الله كمطور فلاتر، متوافقة بدقة مع مقاسات الهيدر والثيم الداكن والفاتح.</p>
+    </header>
+
+    <div class="grid">
+
+      <!-- ==================== CONCEPT 1 ==================== -->
+      <div class="concept-card">
+        <span class="badge-tag">CONCEPT 01</span>
+        <h2 class="concept-title">Facet Duality (ازدواجية هندسية)</h2>
+        <div class="concept-subtitle">Bold Monogram • Low-Poly Flutter Cuts</div>
+
+        <div class="hero-boxes">
+          <div class="box dark">
+            <svg class="logo-hero" viewBox="0 0 72 48" fill="none">
+              <defs>
+                <linearGradient id="c1-ring" x1="5" y1="42" x2="64" y2="6" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A855F7"/>
+                  <stop offset="1" stop-color="#22D3EE"/>
+                </linearGradient>
+                <linearGradient id="c1-fa" x1="23" y1="11" x2="23" y2="41.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A855F7"/>
+                  <stop offset="1" stop-color="#7C3AED"/>
+                </linearGradient>
+                <linearGradient id="c1-fb" x1="49" y1="11" x2="49" y2="41.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#22D3EE"/>
+                  <stop offset="1" stop-color="#0891B2"/>
+                </linearGradient>
+                <clipPath id="c1-weave">
+                  <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+                </clipPath>
+                <mask id="c1-notch" maskUnits="userSpaceOnUse" x="0" y="0" width="72" height="48">
+                  <rect x="0" y="0" width="72" height="48" fill="#fff"/>
+                  <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </mask>
+              </defs>
+              <path d="M 15 3 H 57" fill="none" stroke="url(#c1-ring)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#c1-ring)" stroke-width="2.5" stroke-linecap="round"/>
+              <g mask="url(#c1-notch)">
+                <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+                <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#c1-fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+                <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#c1-weave)"/>
+              </g>
+              <path d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+            </svg>
+            <span class="box-label">Dark</span>
+          </div>
+          <div class="box light">
+            <svg class="logo-hero" viewBox="0 0 72 48" fill="none">
+              <path d="M 15 3 H 57" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+              <g>
+                <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="#6D28D9" stroke-width="6.8" stroke-linejoin="bevel"/>
+                <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="#0284C7" stroke-width="6.8" stroke-linejoin="bevel"/>
+              </g>
+              <path d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#0284C7"/>
+            </svg>
+            <span class="box-label">Light</span>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">معاينة داخل الهيدر (Dark):</div>
+        <div class="nav-mockup">
+          <div class="brand-lockup">
+            <svg class="brand-svg" viewBox="0 0 72 48" fill="none">
+              <path d="M 15 3 H 57" fill="none" stroke="url(#c1-ring)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#c1-ring)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+              <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#c1-fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+              <path d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+            </svg>
+            <div class="brand-text">
+              <span class="brand-first">Abdelrahman</span>
+              <span class="brand-last">Abdullah<span class="brand-cursor">_</span></span>
+            </div>
+          </div>
+          <div class="nav-links-mock">
+            <div class="nav-pill active"></div>
+            <div class="nav-pill"></div>
+            <div class="nav-pill"></div>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">سلم المقاسات الصغير (وضوح تام):</div>
+        <div class="size-ladder">
+          <div class="size-item">
+            <svg style="width:48px;height:32px" viewBox="0 0 72 48" fill="none">
+              <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="7" stroke-linejoin="bevel"/>
+              <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#c1-fb)" stroke-width="7" stroke-linejoin="bevel"/>
+            </svg>
+            <span>48px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:36px;height:24px" viewBox="0 0 72 48" fill="none">
+              <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="7" stroke-linejoin="bevel"/>
+              <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#c1-fb)" stroke-width="7" stroke-linejoin="bevel"/>
+            </svg>
+            <span>34px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:24px;height:16px" viewBox="0 0 72 48" fill="none">
+              <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#c1-fa)" stroke-width="8" stroke-linejoin="bevel"/>
+              <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#c1-fb)" stroke-width="8" stroke-linejoin="bevel"/>
+            </svg>
+            <span>24px</span>
+          </div>
+        </div>
+
+        <p class="rationale">
+          مونوغرام صلب وقوي مكون من حرفي (AA) متداخلين ومقطوعين بزوايا حادة 45° مستوحاة من فلسفة تصميم فلاتر الهندسية. الإطار المستدير يحتوي على فتحة ذكية تسكن فيها شعلة نيون تعبر عن الدقة.
+        </p>
+
+        <ul class="features-list">
+          <li>إطار مربع بحواف ناعمة ولمسة هندسية</li>
+          <li>تداخل قوي للأحرف يرمز للبرمجة والبناء</li>
+          <li>وضوح استثنائي عند التصغير في شاشات الجوال</li>
+        </ul>
+
+        <button class="btn-choose" onclick="alert('اخترت المفهوم الأول (Facet Duality)! اكتب لي في الشات لاعتماده فوراً.')">
+          اختر هذا التصميم
+        </button>
+      </div>
+
+      <!-- ==================== CONCEPT 2 ==================== -->
+      <div class="concept-card">
+        <span class="badge-tag">CONCEPT 02</span>
+        <h2 class="concept-title">Cursor Spark (النبض التفاعلي)</h2>
+        <div class="concept-subtitle">Kinetic Flow • Code Cursor & Apex Spark</div>
+
+        <div class="hero-boxes">
+          <div class="box dark">
+            <svg class="logo-hero" viewBox="0 0 48 48" fill="none">
+              <defs>
+                <linearGradient id="c2-ring" x1="6" y1="42" x2="40" y2="8" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#9333EA"/>
+                  <stop offset=".55" stop-color="#A855F7"/>
+                  <stop offset="1" stop-color="#22D3EE"/>
+                </linearGradient>
+                <linearGradient id="c2-body" x1="10.6" y1="30.6" x2="27" y2="6" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A855F7"/>
+                  <stop offset=".6" stop-color="#BE8CFF"/>
+                  <stop offset="1" stop-color="#E9D5FF"/>
+                </linearGradient>
+              </defs>
+              <path d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#c2-ring)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#c2-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+              <path d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="#22D3EE"/>
+            </svg>
+            <span class="box-label">Dark</span>
+          </div>
+          <div class="box light">
+            <svg class="logo-hero" viewBox="0 0 48 48" fill="none">
+              <path d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="#7C3AED" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="#6D28D9" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+              <path d="M 22.6 35.4 L 30.4 35.4" stroke="#0284C7" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="#0284C7"/>
+            </svg>
+            <span class="box-label">Light</span>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">معاينة داخل الهيدر (Dark):</div>
+        <div class="nav-mockup">
+          <div class="brand-lockup">
+            <svg class="brand-svg" viewBox="0 0 48 48" fill="none">
+              <path d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#c2-ring)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#c2-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+              <path d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="#22D3EE"/>
+            </svg>
+            <div class="brand-text">
+              <span class="brand-first">Abdelrahman</span>
+              <span class="brand-last">Abdullah<span class="brand-cursor">_</span></span>
+            </div>
+          </div>
+          <div class="nav-links-mock">
+            <div class="nav-pill active"></div>
+            <div class="nav-pill"></div>
+            <div class="nav-pill"></div>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">سلم المقاسات الصغير (وضوح تام):</div>
+        <div class="size-ladder">
+          <div class="size-item">
+            <svg style="width:36px;height:36px" viewBox="0 0 48 48" fill="none">
+              <path d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#c2-ring)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#c2-body)" stroke-width="3.6" stroke-linecap="round"/>
+              <path d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.4" stroke-linecap="round"/>
+            </svg>
+            <span>48px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:26px;height:26px" viewBox="0 0 48 48" fill="none">
+              <path d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#c2-ring)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#c2-body)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span>34px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:18px;height:18px" viewBox="0 0 48 48" fill="none">
+              <path d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#c2-body)" stroke-width="4.5" stroke-linecap="round"/>
+            </svg>
+            <span>24px</span>
+          </div>
+        </div>
+
+        <p class="rationale">
+          تصميم ديناميكي رشيق يرسم حرفي الـ AA بخط متصل واحد يشبه نبض الكود (ECG Pulse)، تحيط به حلقة مفتوحة تسكن على قمتها نجمة الإلهام، مع شَرطة الكود السفلية (_) التي تحاكي مؤشر المحرر.
+        </p>
+
+        <ul class="features-list">
+          <li>حركة انسيابية بخط متصل تعبر عن السرعة والإنجاز</li>
+          <li>مؤشر كود سفلي يتماشى مع "Abdullah_"</li>
+          <li>إطار دائري جذاب جداً كأيقونة تطبيق أو فافيكون</li>
+        </ul>
+
+        <button class="btn-choose" onclick="alert('اخترت المفهوم الثاني (Cursor Spark)! اكتب لي في الشات لاعتماده فوراً.')">
+          اختر هذا التصميم
+        </button>
+      </div>
+
+      <!-- ==================== CONCEPT 3 ==================== -->
+      <div class="concept-card">
+        <span class="badge-tag">CONCEPT 03</span>
+        <h2 class="concept-title">Ain Fusion (أصالة عين الكود)</h2>
+        <div class="concept-subtitle">Arabic-Latin Ligature • Tech Hexagon</div>
+
+        <div class="hero-boxes">
+          <div class="box dark">
+            <svg class="logo-hero" viewBox="0 0 48 48" fill="none">
+              <defs>
+                <linearGradient id="c3-body" x1="26" y1="10" x2="26" y2="46" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#C084FC"/>
+                  <stop offset=".5" stop-color="#A855F7"/>
+                  <stop offset="1" stop-color="#7C3AED"/>
+                </linearGradient>
+                <linearGradient id="c3-frame" x1="5" y1="7.5" x2="42" y2="41" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A855F7" stop-opacity=".85"/>
+                  <stop offset="1" stop-color="#6D28D9" stop-opacity=".55"/>
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#c3-frame)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M28.2 40.45 L14.5 40.45 L5 24 L14.5 7.55 L33.5 7.55 L40.5 19.67"/>
+                <path d="M40.5 28.33 L37.4 33.75"/>
+              </g>
+              <g>
+                <path fill="#22D3EE" d="M43.6 20.4 C44.05 22.3 45.3 23.55 47.2 24 C45.3 24.45 44.05 25.7 43.6 27.6 C43.15 25.7 41.9 24.45 40 24 C41.9 23.55 43.15 22.3 43.6 20.4 Z"/>
+                <path fill="none" stroke="#22D3EE" stroke-width="2.2" stroke-linecap="round" d="M41.5 36.7 L45.6 34.3"/>
+              </g>
+              <g fill="none" stroke="url(#c3-body)" stroke-linejoin="round">
+                <path stroke-width="5" stroke-linecap="round" stroke-linejoin="miter" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+                <path stroke-width="3.2" stroke-linecap="butt" stroke-linejoin="round" d="M16.2 29.4 C17.6 34.6 19.2 38.6 21.8 41.6 C23.4 43.4 25.4 44.7 27.4 44.7 L39.3 38.2"/>
+              </g>
+            </svg>
+            <span class="box-label">Dark</span>
+          </div>
+          <div class="box light">
+            <svg class="logo-hero" viewBox="0 0 48 48" fill="none">
+              <g fill="none" stroke="#7C3AED" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M28.2 40.45 L14.5 40.45 L5 24 L14.5 7.55 L33.5 7.55 L40.5 19.67"/>
+                <path d="M40.5 28.33 L37.4 33.75"/>
+              </g>
+              <g>
+                <path fill="#0284C7" d="M43.6 20.4 C44.05 22.3 45.3 23.55 47.2 24 C45.3 24.45 44.05 25.7 43.6 27.6 C43.15 25.7 41.9 24.45 40 24 C41.9 23.55 43.15 22.3 43.6 20.4 Z"/>
+                <path fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" d="M41.5 36.7 L45.6 34.3"/>
+              </g>
+              <g fill="none" stroke="#6D28D9" stroke-linejoin="round">
+                <path stroke-width="5" stroke-linecap="round" stroke-linejoin="miter" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+                <path stroke-width="3.2" stroke-linecap="butt" stroke-linejoin="round" d="M16.2 29.4 C17.6 34.6 19.2 38.6 21.8 41.6 C23.4 43.4 25.4 44.7 27.4 44.7 L39.3 38.2"/>
+              </g>
+            </svg>
+            <span class="box-label">Light</span>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">معاينة داخل الهيدر (Dark):</div>
+        <div class="nav-mockup">
+          <div class="brand-lockup">
+            <svg class="brand-svg" viewBox="0 0 48 48" fill="none">
+              <g fill="none" stroke="url(#c3-frame)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M28.2 40.45 L14.5 40.45 L5 24 L14.5 7.55 L33.5 7.55 L40.5 19.67"/>
+                <path d="M40.5 28.33 L37.4 33.75"/>
+              </g>
+              <g>
+                <path fill="#22D3EE" d="M43.6 20.4 C44.05 22.3 45.3 23.55 47.2 24 C45.3 24.45 44.05 25.7 43.6 27.6 C43.15 25.7 41.9 24.45 40 24 C41.9 23.55 43.15 22.3 43.6 20.4 Z"/>
+              </g>
+              <g fill="none" stroke="url(#c3-body)" stroke-linejoin="round">
+                <path stroke-width="5" stroke-linecap="round" stroke-linejoin="miter" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+                <path stroke-width="3.2" stroke-linecap="butt" stroke-linejoin="round" d="M16.2 29.4 C17.6 34.6 19.2 38.6 21.8 41.6 C23.4 43.4 25.4 44.7 27.4 44.7 L39.3 38.2"/>
+              </g>
+            </svg>
+            <div class="brand-text">
+              <span class="brand-first">Abdelrahman</span>
+              <span class="brand-last">Abdullah<span class="brand-cursor">_</span></span>
+            </div>
+          </div>
+          <div class="nav-links-mock">
+            <div class="nav-pill active"></div>
+            <div class="nav-pill"></div>
+            <div class="nav-pill"></div>
+          </div>
+        </div>
+
+        <div class="nav-preview-title">سلم المقاسات الصغير (وضوح تام):</div>
+        <div class="size-ladder">
+          <div class="size-item">
+            <svg style="width:36px;height:36px" viewBox="0 0 48 48" fill="none">
+              <g fill="none" stroke="url(#c3-body)" stroke-linejoin="round">
+                <path stroke-width="5" stroke-linecap="round" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+              </g>
+            </svg>
+            <span>48px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:26px;height:26px" viewBox="0 0 48 48" fill="none">
+              <g fill="none" stroke="url(#c3-body)" stroke-linejoin="round">
+                <path stroke-width="5" stroke-linecap="round" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+              </g>
+            </svg>
+            <span>34px</span>
+          </div>
+          <div class="size-item">
+            <svg style="width:18px;height:18px" viewBox="0 0 48 48" fill="none">
+              <g fill="none" stroke="url(#c3-body)" stroke-linejoin="round">
+                <path stroke-width="6" stroke-linecap="round" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+              </g>
+            </svg>
+            <span>24px</span>
+          </div>
+        </div>
+
+        <p class="rationale">
+          دمج ثنائي اللغة بارع: حرف العين (ع) من اسم عبد الرحمن يندمج مع قمتين تشكلان حرفي (AA)، محاط بإطار سداسي تقني مفتوح تنطلق منه شَرطة برمجية تكسر النمطية، مع نجمة نيون في الرأس.
+        </p>
+
+        <ul class="features-list">
+          <li>هوية عربية إنجليزية فريدة مستوحاة من الخط الكوفي التقني</li>
+          <li>إطار سداسي (Hexagon) يرمز للتكنولوجيا والقوة</li>
+          <li>يعكس شخصية عربية تقنية أصيلة وغير مكررة</li>
+        </ul>
+
+        <button class="btn-choose" onclick="alert('اخترت المفهوم الثالث (Ain Fusion)! اكتب لي في الشات لاعتماده فوراً.')">
+          اختر هذا التصميم
+        </button>
+      </div>
+
+    </div>
+
+    <footer>
+      اختر المفهوم الذي يعجبك وسأقوم بتطبيقه فوراً في الهيدر الرئيسي مع فحص التوافق الكامل.
+    </footer>
+  </div>
+
+</body>
+</html>

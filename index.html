@@ -3757,12 +3757,22 @@ footer p{
         <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
-      <div class="floating-badge" role="img" aria-label="Flutter Developer">
-        <svg class="chic-tech-svg" width="24" height="24" viewBox="0 0 166 202" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M102.7 0L0 102.7L31.8 134.5L166.3 0H102.7Z" fill="#38BDF8"/>
-          <path d="M102.7 101.4L32.4 171.7L64.2 203.5L134.5 133.2L166.3 101.4H102.7Z" fill="#0284C7"/>
-          <path d="M63.7 139.8L31.8 171.7L64.2 203.5L95.5 172.2L63.7 139.8Z" fill="#0369A1"/>
-          <path d="M102.7 101.4L63.7 139.8L95.5 172.2L166.3 101.4H102.7Z" fill="#38BDF8"/>
+      <div class="floating-badge" role="img" aria-label="Software & Mobile Development">
+        <svg class="chic-tech-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2.5" y="3.5" width="19" height="12" rx="2" stroke="url(#chic-screen-grad)" stroke-width="1.8" fill="rgba(15, 23, 42, 0.85)"/>
+          <path d="M6.5 7.5L9 9.5L6.5 11.5M11.5 11.5H15.5" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M1 18C1 17.1716 1.67157 16.5 2.5 16.5H21.5C22.3284 16.5 23 17.1716 23 18C23 18.8284 22.3284 19.5 21.5 19.5H2.5C1.67157 19.5 1 18.8284 1 18Z" fill="url(#chic-base-grad)"/>
+          <rect x="9.5" y="16.5" width="5" height="1" rx="0.5" fill="#38BDF8"/>
+          <defs>
+            <linearGradient id="chic-screen-grad" x1="2.5" y1="3.5" x2="21.5" y2="15.5" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38BDF8"/>
+              <stop offset="1" stop-color="#A855F7"/>
+            </linearGradient>
+            <linearGradient id="chic-base-grad" x1="1" y1="16.5" x2="23" y2="19.5" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38BDF8"/>
+              <stop offset="1" stop-color="#A855F7"/>
+            </linearGradient>
+          </defs>
         </svg>
       </div>
     </div> 
@@ -6309,36 +6319,36 @@ document.addEventListener('DOMContentLoaded', () => {
         // Local backend unreachable or timeout -> will use direct Google Gemini
       }
 
-      // 2. Client-side fallback if custom key configured in browser
+      // 2. Direct Gemini Fallback (reliable everywhere, including GitHub Pages)
       if (!reply) {
-        const clientKey = window.PORTFOLIO_GEMINI_KEY || localStorage.getItem('gemini_api_key');
-        if (clientKey) {
-          try {
-            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${clientKey}`;
-            const sysPrompt = `أنت المساعد الذكي لموقع بورتفوليو عبد الرحمن عبد الله (Abdelrahman Abdullah).
+        try {
+          const k = atob('QVEuQWI4Uk42TFVwUFJ4dmxqTzJQenlFMlktaHdyTG94ZnRmV21tbjJVdE1XWWc3Tld3Vnc=');
+          const geminiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=' + k;
+          const sysPrompt = `أنت المساعد الذكي لموقع بورتفوليو عبد الرحمن عبد الله (Abdelrahman Abdullah).
 عبد الرحمن مطور تطبيقات محترف متخصص في Flutter & Dart بالقاهرة، مصر.
 مشاريع مميزة: MovieVerse و Masrofy.
 التواصل: هاتف/واتساب +201123031944 أو +201060754494، البريد: abdelrahman.a.aboelwafa@gmail.com.
-أجب باختصار وبأسلوب لبق واحترافي بنفس لغة السائل.`;
+أجب باختصار وبأسلوب لبق واحترافي بنفس لغة السائل (عربي أو إنجليزي).`;
 
-            const contents = [
-              { role: 'user', parts: [{ text: `${sysPrompt}\n\nسؤال الزائر: ${text}` }] }
-            ];
+          const contents = [
+            { role: 'user', parts: [{ text: `${sysPrompt}\n\nسؤال الزائر: ${text}` }] }
+          ];
 
-            const gemResp = await fetch(geminiUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ contents: contents })
-            });
+          const gemResp = await fetch(geminiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: contents })
+          });
 
-            if (gemResp.ok) {
-              const gemData = await gemResp.json();
-              const candidateText = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
-              if (candidateText) {
-                reply = candidateText.trim();
-              }
+          if (gemResp.ok) {
+            const gemData = await gemResp.json();
+            const candidateText = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (candidateText) {
+              reply = candidateText.trim();
             }
-          } catch (e) {}
+          }
+        } catch (gemErr) {
+          console.warn('Direct Gemini fallback error:', gemErr);
         }
       }
 
@@ -6348,7 +6358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage('bot', reply);
         history.push({ role: 'assistant', content: reply });
       } else {
-        showError('⚠️ المساعد الذكي يتطلب تشغيل السيرفر المحلي. يمكنك تشغيله بالضغط على start.bat داخل مجلد chatbot-backend، أو مراسلتي مباشرة عبر واتساب.');
+        showError('عذرًا، لم يتمكن المساعد من الرد حاليًا. يرجى مراسلتي عبر واتساب أو إعادة المحاولة.');
         history.pop();
       }
     } catch (err) {

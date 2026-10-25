@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdelrahman Abdullah — Logo Concept 2 · Cursor Spark</title>
+<style>
+:root{
+  --purple:#A855F7; --cyan:#22D3EE; --bg:#0B0B14; --panel:#17172B;
+  --ink:#E6EAF6; --mut:#8E96BC; --line:rgba(168,85,247,.18); --light:#F8FAFC; --dark:#0f172a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:
+    radial-gradient(900px 420px at 85% -8%, rgba(168,85,247,.13), transparent 60%),
+    radial-gradient(700px 380px at 0% 30%, rgba(34,211,238,.06), transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding:56px 20px 90px;
+}
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:26px}
+.head{display:flex;gap:18px;align-items:flex-start;padding:6px 4px}
+.head .m{flex:none;margin-top:6px}
+.kicker{font:600 11px/1 ui-monospace,"Cascadia Code",Consolas,monospace;letter-spacing:.22em;color:var(--purple);text-transform:uppercase}
+h1{font-size:34px;font-weight:700;letter-spacing:-.01em;margin:8px 0 6px}
+h1 em{font-style:normal;background:linear-gradient(92deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);font-size:14px;max-width:56ch;line-height:1.55}
+.card{background:linear-gradient(180deg, rgba(23,23,43,.72), rgba(17,17,31,.72));border:1px solid var(--line);border-radius:20px;padding:26px 26px 28px}
+.slab{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.slab .no{font:700 11px/1 ui-monospace,Consolas,monospace;color:var(--cyan);letter-spacing:.18em}
+.slab h2{font-size:16px;font-weight:650;letter-spacing:.01em}
+.slab .hint{margin-left:auto;color:var(--mut);font-size:12px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chip{position:relative;display:flex;align-items:center;justify-content:center;min-height:250px;border-radius:16px}
+.chip-dark{background:#0B0B14;border:1px solid rgba(168,85,247,.28);box-shadow:inset 0 0 60px rgba(168,85,247,.05)}
+.chip-light{background:var(--light);border:1px solid rgba(15,23,42,.08)}
+.cap{position:absolute;bottom:14px;left:0;right:0;text-align:center;font:600 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.16em;text-transform:uppercase}
+.chip-dark .cap{color:#6f77a0}
+.chip-light .cap{color:#94a3b8}
+.chip-dark .eng-cursor{animation:lgx-blink 1.7s infinite}
+@keyframes lgx-blink{0%,48%{opacity:1}49%,100%{opacity:.22}}
+.nav{display:flex;align-items:center;gap:12px;border-radius:14px;padding:9px 16px;min-height:58px}
+.nav-dark{background:var(--panel);border:1px solid rgba(168,85,247,.22)}
+.nav-dark .eng-cursor{animation:lgx-blink 1.7s infinite}
+.nav-light{background:var(--light);border:1px solid rgba(15,23,42,.08)}
+.stack .name{font-size:15px;font-weight:650;color:#E8ECF7;letter-spacing:.01em}
+.stack .handle{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:10.5px;letter-spacing:.24em;color:#9CA7CC;margin-top:2px}
+.stack .handle .u{color:var(--cyan)}
+.nav-light .name{color:var(--dark)}
+.nav-light .handle{color:#64748b}
+.nav-light .handle .u{color:#0E7490}
+.nav .sp{flex:1}
+.links{display:flex;gap:22px;font-size:13px;color:#8B93B8;font-weight:550}
+.nav-light .links a{color:#475569;text-decoration:none}
+.links a{text-decoration:none}
+.links a.on{color:#CBB6FF}
+.nav-light .links a.on{color:#7E22CE}
+.tgl{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(168,85,247,.35);color:#C9A8FF}
+.nav-light .tgl{border-color:rgba(15,23,42,.12);color:#0EA5E9}
+.btn{font-size:12.5px;font-weight:650;color:#fff;padding:8px 15px;border-radius:999px;background:linear-gradient(135deg,#A855F7,#7C3AED);box-shadow:0 4px 14px rgba(168,85,247,.35)}
+.ladder{display:flex;align-items:flex-end;gap:38px;flex-wrap:wrap;justify-content:center;padding:12px 0 4px}
+.cell{display:flex;flex-direction:column;align-items:center;gap:14px}
+.cell .lab{font:600 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.14em;color:#7d86ad;text-transform:uppercase}
+.foot{color:#767f9e;font-size:11.5px;text-align:center;margin-top:16px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.06em}
+.rat{display:grid;gap:16px}
+.rat .en{font-size:14px;line-height:1.75;color:#C7CDE8;max-width:88ch}
+.rat .ar{direction:rtl;text-align:right;font-size:15px;line-height:1.9;color:#C7CDE8}
+.rat .ar b,.rat .en b{color:#E9DDFF;font-weight:650}
+.tagline{display:inline-block;margin-top:14px;font:600 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.2em;color:var(--cyan);border:1px solid rgba(34,211,238,.3);padding:8px 12px;border-radius:999px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.links{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="head">
+    <svg class="brand-mark" viewBox="0 0 48 48" width="42" height="42" fill="none" role="img" aria-label="AA Cursor Spark mark">
+      <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+      <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+      <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+    </svg>
+    <div>
+      <div class="kicker">Concept 2 / 3 · Navbar brand mark</div>
+      <h1>Cursor <em>Spark</em></h1>
+      <p class="sub">A kinetic thin-line monogram for Abdelrahman Abdullah: one continuous stroke draws both A peaks in a single surge inside a circular ring that opens exactly where the stroke enters. A glowing cursor underscore waits at the baseline — the soul of <b>ABDULLAH_</b>.</p>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="slab"><span class="no">01</span><h2>Hero</h2><span class="hint">120px · dark &amp; near-white</span></div>
+    <div class="hero">
+      <figure class="chip chip-dark">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="120" height="120" fill="none" role="img" aria-label="AA Cursor Spark mark on dark">
+          <defs>
+            <linearGradient id="lgx-ring" x1="6" y1="42" x2="40" y2="8" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#9333EA"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#22D3EE"/>
+            </linearGradient>
+            <linearGradient id="lgx-body" x1="10.6" y1="30.6" x2="27" y2="6" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#A855F7"/><stop offset=".6" stop-color="#BE8CFF"/><stop offset="1" stop-color="#E9D5FF"/>
+            </linearGradient>
+            <linearGradient id="lgx-spark" x1="29.35" y1="0.65" x2="29.35" y2="6.05" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#D8FBFF"/><stop offset="1" stop-color="#22D3EE"/>
+            </linearGradient>
+            <radialGradient id="lgx-halo">
+              <stop offset="0" stop-color="#22D3EE" stop-opacity=".38"/>
+              <stop offset=".7" stop-color="#22D3EE" stop-opacity=".12"/>
+              <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="26.5" cy="35.4" rx="9" ry="4.8" fill="url(#lgx-halo)"/>
+          <circle cx="29.35" cy="3.6" r="5.2" fill="url(#lgx-halo)"/>
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+        </svg>
+        <figcaption class="cap">on dark · #0B0B14</figcaption>
+      </figure>
+      <figure class="chip chip-light">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="120" height="120" fill="none" role="img" aria-label="AA Cursor Spark mark on light">
+          <defs>
+            <linearGradient id="lgx-ringL" x1="6" y1="42" x2="40" y2="8" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#6D28D9"/><stop offset=".55" stop-color="#9333EA"/><stop offset="1" stop-color="#0E7490"/>
+            </linearGradient>
+            <linearGradient id="lgx-bodyL" x1="10.6" y1="30.6" x2="27" y2="6" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#9333EA"/><stop offset=".6" stop-color="#7E22CE"/><stop offset="1" stop-color="#5B21B6"/>
+            </linearGradient>
+            <linearGradient id="lgx-sparkL" x1="29.35" y1="0.65" x2="29.35" y2="6.05" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#0891B2"/>
+            </linearGradient>
+          </defs>
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ringL)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-bodyL)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#0E7490" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-sparkL)"/>
+        </svg>
+        <figcaption class="cap">on near-white · #F8FAFC</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="slab"><span class="no">02</span><h2>Navbar in context</h2><span class="hint">static mock · mark ≈ 38px next to 15px text</span></div>
+    <nav class="nav nav-dark">
+      <svg class="brand-mark" viewBox="0 0 48 48" width="38" height="38" fill="none" role="img" aria-label="AA Cursor Spark navbar mark">
+        <ellipse cx="26.5" cy="35.4" rx="9" ry="4.8" fill="url(#lgx-halo)"/>
+        <circle cx="29.35" cy="3.6" r="5.2" fill="url(#lgx-halo)"/>
+        <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+        <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+        <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+        <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+      </svg>
+      <div class="stack">
+        <div class="name">Abdelrahman</div>
+        <div class="handle">ABDULLAH<span class="u">_</span></div>
+      </div>
+      <span class="sp"></span>
+      <div class="links">
+        <a href="#" class="on">Work</a><a href="#">Apps</a><a href="#">Stack</a><a href="#">Contact</a>
+      </div>
+      <span class="tgl" title="theme toggle">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.4" stroke="currentColor" stroke-width="1.4"/><path d="M 7 1.6 A 5.4 5.4 0 0 1 7 12.4 Z" fill="currentColor"/></svg>
+      </span>
+      <span class="btn">Hire me</span>
+    </nav>
+  </section>
+
+  <section class="card">
+    <div class="slab"><span class="no">03</span><h2>Size ladder</h2><span class="hint">bare geometry · no glow, no filters</span></div>
+    <div class="ladder">
+      <div class="cell">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="96" height="96" fill="none" role="img" aria-label="mark at 96px">
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+        </svg>
+        <span class="lab">96px · hero</span>
+      </div>
+      <div class="cell">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="48" height="48" fill="none" role="img" aria-label="mark at 48px">
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+        </svg>
+        <span class="lab">48px · menu</span>
+      </div>
+      <div class="cell">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="34" height="34" fill="none" role="img" aria-label="mark at 34px">
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+        </svg>
+        <span class="lab">34px · navbar</span>
+      </div>
+      <div class="cell">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="24" height="24" fill="none" role="img" aria-label="mark at 24px">
+          <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ring)" stroke-width="2.6" stroke-linecap="round"/>
+          <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-body)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+          <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round"/>
+          <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-spark)"/>
+        </svg>
+        <span class="lab">24px · floor</span>
+      </div>
+    </div>
+    <p class="foot">same <b>d</b> path geometry everywhere — drawn once, reused · lgx-* gradients · eng-accent / eng-cursor hooks intact</p>
+  </section>
+
+  <section class="card">
+    <div class="slab"><span class="no">04</span><h2>Light mode strip</h2><span class="hint">same navbar · near-white bg · #0f172a-family mark</span></div>
+    <nav class="nav nav-light">
+      <svg class="brand-mark" viewBox="0 0 48 48" width="38" height="38" fill="none" role="img" aria-label="AA Cursor Spark navbar mark, light mode">
+        <path class="brand-ring" d="M 18.28 6.41 A 18.5 18.5 0 1 0 31.52 7.1" stroke="url(#lgx-ringL)" stroke-width="2.6" stroke-linecap="round"/>
+        <path class="brand-stroke" d="M 10.6 30.6 L 15.6 15.5 L 21.6 28 L 26.8 6 L 37.6 30.6" transform="rotate(6 24 24)" stroke="url(#lgx-bodyL)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"/>
+        <path class="eng-cursor" d="M 22.6 35.4 L 30.4 35.4" stroke="#0E7490" stroke-width="3.2" stroke-linecap="round"/>
+        <path class="eng-accent" d="M 29.35 0.65 Q 29.95 2.75 32.05 3.35 Q 29.95 3.95 29.35 6.05 Q 28.75 3.95 26.65 3.35 Q 28.75 2.75 29.35 0.65 Z" fill="url(#lgx-sparkL)"/>
+      </svg>
+      <div class="stack">
+        <div class="name">Abdelrahman</div>
+        <div class="handle">ABDULLAH<span class="u">_</span></div>
+      </div>
+      <span class="sp"></span>
+      <div class="links">
+        <a href="#" class="on">Work</a><a href="#">Apps</a><a href="#">Stack</a><a href="#">Contact</a>
+      </div>
+      <span class="tgl" title="theme toggle">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.4" stroke="currentColor" stroke-width="1.4"/><path d="M 7 1.6 A 5.4 5.4 0 0 0 7 12.4 L 7 1.6 Z" fill="currentColor"/></svg>
+      </span>
+      <span class="btn">Hire me</span>
+    </nav>
+  </section>
+
+  <section class="card">
+    <div class="slab"><span class="no">05</span><h2>Rationale</h2></div>
+    <div class="rat">
+      <p class="en"><b>Why it works:</b> the eye traces a single motion — one continuous round-cap stroke climbs, dips at a sharp miter valley and surges into the tall spike that passes straight through the ring's only opening. The ring itself stays mathematically circular (calm container) while the zigzag is tilted 6° (kinetic content). Down at the baseline, a glowing cyan underscore — literally the <b>_</b> of ABDULLAH_ — waits like a blinking cursor, and a four-point spark crowns the apex at the gap, as if the mark just compiled successfully. Both A's share the same foot and the underscore acts as their common crossbar, so the mark reads <b>AA_</b> without a single drawn letterform.</p>
+      <p class="ar"><b>لماذا نجح هذا الاتجاه:</b> خط واحد متصل يرسم قمّتيّ الحرفين بحركة انتعاش واحدة داخل حلقة دائرية مثالية تفتح من الدقيقة التي يعبرها الخط فقط. الشريرة السماوية أسفل القاعدة تلمع مثل مؤشر كتابة ينتظر — وهي روح الاسم <b>ABDULLAH_</b> — وشرارة رباعية تتوّج القمة حيث يخترق الخط الحلقة. إحساس بالحركة والتركيز: مطوّر يُشحن ويُسلّم.</p>
+      <span class="tagline">ONE STROKE · ONE MOTION · ALWAYS SHIPPING</span>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="72" height="48" class="brand-mark" role="img" aria-label="Abdelrahman Abdullah — interlocked double-A monogram">
+  <title>Abdelrahman Abdullah — AA Facet Duality monogram</title>
+  <defs>
+    <linearGradient id="lgx-ring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-fa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-fb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-weave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-notch" maskUnits="userSpaceOnUse" x="0" y="0" width="72" height="48">
+      <rect x="0" y="0" width="72" height="48" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+
+  <!-- font: no text elements; letterforms are pure geometry -->
+
+  <!-- 1. broken rounded-square ring: gap sits in the top-right corner arc -->
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-ring)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- 2. interlocked double-A body -->
+  <g class="eng-cursor" mask="url(#lgx-notch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <!-- counter-facet: purple bleeds back through the cyan at the crossing, cut on 45° -->
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-weave)"/>
+  </g>
+
+  <!-- 3. spark nested in the broken corner -->
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>

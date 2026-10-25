@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Abdelrahman Abdullah — ain double-A monogram inside an open hexagon frame">
+  <title>Abdelrahman Abdullah — brand mark</title>
+  <desc>Arabic ain (ع) head drawn as a double-A ligature with a slash-kick tail escaping an open flat-top hexagon; four-point spark replaces the right vertex.</desc>
+  <defs>
+    <linearGradient id="lgx-body" gradientUnits="userSpaceOnUse" x1="26" y1="10" x2="26" y2="46">
+      <stop offset="0" stop-color="#C084FC"/>
+      <stop offset=".5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-frame" gradientUnits="userSpaceOnUse" x1="5" y1="7.5" x2="42" y2="41">
+      <stop offset="0" stop-color="#A855F7" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#6D28D9" stop-opacity=".55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- hexagon frame, flat-top: open at the bottom-right corner where the tail escapes -->
+  <g fill="none" stroke="url(#lgx-frame)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M28.2 40.45 L14.5 40.45 L5 24 L14.5 7.55 L33.5 7.55 L40.5 19.67"/>
+    <path d="M40.5 28.33 L37.4 33.75"/>
+  </g>
+
+  <!-- spark replaces the hexagon's right vertex -->
+  <g class="eng-accent">
+    <path fill="#22D3EE" d="M43.6 20.4 C44.05 22.3 45.3 23.55 47.2 24 C45.3 24.45 44.05 25.7 43.6 27.6 C43.15 25.7 41.9 24.45 40 24 C41.9 23.55 43.15 22.3 43.6 20.4 Z"/>
+    <!-- exit dash trailing out of the open corner -->
+    <path fill="none" stroke="#22D3EE" stroke-width="2.2" stroke-linecap="round" d="M41.5 36.7 L45.6 34.3"/>
+  </g>
+
+  <!-- ain monogram: thick calligraphic bowl, thin slash-kick tail -->
+  <g class="eng-cursor" fill="none" stroke="url(#lgx-body)" stroke-linejoin="round">
+    <path stroke-width="5" stroke-linecap="round" stroke-linejoin="miter" d="M36.8 27.3 L34.2 14.2 L31.6 14.2 C29.4 15.8 27.7 18.3 26.7 20.6 C24.5 17.2 22.7 16.2 20.9 15.6 L18.4 15.6 L15.4 27.3 C17.9 29.5 21.9 30.2 26.2 29.7 C29.9 29.2 33.4 28.6 36.8 27.3 Z"/>
+    <path stroke-width="3.2" stroke-linecap="butt" stroke-linejoin="round" d="M16.2 29.4 C17.6 34.6 19.2 38.6 21.8 41.6 C23.4 43.4 25.4 44.4 27.4 44.7 L39.3 38.2"/>
+  </g>
+</svg>

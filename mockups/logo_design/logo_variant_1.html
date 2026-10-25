@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo — Variant 1 · Facet Duality (Abdelrahman Abdullah)</title>
+<style>
+  :root{
+    --bg:#0B0B14; --tile:#17172B; --ink:#E9E7F2; --muted:#9C9AB5; --line:rgba(255,255,255,.08);
+    --purple:#A855F7; --cyan:#22D3EE; --light:#F8FAFC; --light-ink:#0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Tahoma,"Noto Kufi Arabic",sans-serif;
+    min-height:100vh; padding:48px 24px 80px;
+  }
+  .wrap{max-width:940px;margin:0 auto}
+  .kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+  h1{font-size:26px;font-weight:700;margin:10px 0 6px}
+  .sub{color:var(--muted);font-size:14px;max-width:640px;line-height:1.7}
+  .axes{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .axes span{font-size:11.5px;color:#C4B5FD;background:rgba(168,85,247,.09);border:1px solid rgba(168,85,247,.25);padding:5px 10px;border-radius:999px}
+  section{margin-top:46px}
+  h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:20px}
+  .label{font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center}
+
+  /* hero */
+  .hero{display:flex;gap:20px;flex-wrap:wrap}
+  .chip{flex:1 1 300px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 20px 24px}
+  .chip.dark{background:radial-gradient(120% 90% at 50% 0%,#1E1633 0%,var(--tile) 55%);border:1px solid var(--line)}
+  .chip.light{background:var(--light);border:1px solid #E2E8F0}
+  .glow-dark svg{filter:drop-shadow(0 12px 30px rgba(168,85,247,.30))}
+  .glow-air svg{filter:drop-shadow(0 10px 22px rgba(14,116,144,.18))}
+
+  /* hover demo of the site's continuity hooks */
+  .brand-mark{cursor:default}
+  .brand-mark:hover .eng-accent{filter:drop-shadow(0 0 5px #22D3EE)}
+  .brand-mark:hover .eng-cursor{opacity:.82}
+
+  /* navbar mock */
+  .nav{
+    display:flex;align-items:center;gap:14px;
+    background:var(--tile);border:1px solid var(--line);border-radius:12px;
+    padding:10px 18px;
+  }
+  .nav svg{flex:0 0 auto}
+  .brand-text{display:flex;flex-direction:column;line-height:1.15}
+  .brand-text .name{font-size:15px;font-weight:650;color:#F3F2FA}
+  .brand-text .fam{font-size:10.5px;letter-spacing:.28em;color:var(--purple);margin-top:2px}
+  .brand-text .fam i{font-style:normal;color:var(--cyan)}
+  .nav .links{margin-left:auto;display:flex;gap:22px;font-size:13px;color:#A8A6C2}
+  .nav .links b{font-weight:500;color:#E4E2F2}
+  .toggle{width:38px;height:20px;border-radius:999px;border:1px solid var(--line);background:#0E0E1C;position:relative;flex:0 0 auto}
+  .toggle::after{content:"";position:absolute;top:2.5px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--purple)}
+  .nav.glownav svg{filter:drop-shadow(0 4px 14px rgba(168,85,247,.35))}
+
+  /* light navbar variant */
+  .nav.light-nav{background:var(--light);border-color:#E2E8F0}
+  .nav.light-nav .name{color:var(--light-ink)}
+  .nav.light-nav .fam{color:#7E22CE}
+  .nav.light-nav .fam i{color:#0891B2}
+  .nav.light-nav .links{color:#64748B}
+  .nav.light-nav .links b{color:var(--light-ink)}
+  .nav.light-nav .toggle{border-color:#E2E8F0;background:#EEF2F7}
+  .nav.light-nav .toggle::after{left:auto;right:3px;background:#0891B2}
+
+  /* size ladder — no filters, bare proof */
+  .ladder{display:flex;align-items:flex-end;gap:44px;flex-wrap:wrap;padding:26px 6px 16px;border-radius:14px;background:var(--tile);border:1px solid var(--line)}
+  .step{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .step b{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.1em}
+  .ladder-note{font-size:12px;color:var(--muted);margin-top:12px}
+
+  /* rationale */
+  .rationale{background:var(--tile);border:1px solid var(--line);border-radius:14px;padding:24px 26px;line-height:1.9;font-size:14px;color:#C9C7DD}
+  .rationale h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+  .rationale p+ p{margin-top:14px}
+  .rationale .ar{direction:rtl;text-align:right;font-size:14.5px}
+  footer{margin-top:52px;font-size:11px;color:#5D5B78;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Logo concept · variant 1 of 3</div>
+    <h1>Facet Duality — interlocked double-A</h1>
+    <p class="sub">Bold, engineered monogram for the navbar brand mark. Two chiseled "A" strokes cross through a shared facet, set inside a broken rounded-square ring. Dark theme is the primary habitat.</p>
+    <div class="axes">
+      <span>◉ container: rounded-square badge</span>
+      <span>◉ stroke weight: 6.8u chunky bevel cuts</span>
+      <span>◉ spark: 4-point, nested in corner break</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section>
+    <h2>Hero · 120&nbsp;px — Dark (داكن) vs Light (فاتح)</h2>
+    <div class="hero">
+      <div class="chip dark">
+        <div class="glow-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="120" height="80" class="brand-mark" role="img" aria-label="Abdelrahman Abdullah — interlocked double-A monogram">
+  <defs>
+    <linearGradient id="lgx-hring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-hfa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-hfb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-hweave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-hnotch" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="80">
+      <rect x="0" y="0" width="120" height="80" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-hring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-hring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-hnotch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-hfa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-hfb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-hfa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-hweave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+</div>
+        <div class="label">Dark · #0B0B14–#17172B</div>
+      </div>
+      <div class="chip light">
+        <div class="glow-air"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="120" height="80" class="brand-mark" role="img" aria-label="Abdelrahman Abdullah — interlocked double-A monogram">
+  <defs>
+    <linearGradient id="lgx-hlring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#9333EA"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <linearGradient id="lgx-hlfa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#9333EA"/>
+      <stop offset="1" stop-color="#6B21A8"/>
+    </linearGradient>
+    <linearGradient id="lgx-hlfb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <clipPath id="lgx-hlweave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-hlnotch" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="80">
+      <rect x="0" y="0" width="120" height="80" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-hlring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-hlring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-hlnotch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-hlfa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-hlfb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-hlfa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-hlweave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#0891B2"/>
+</svg>
+</div>
+        <div class="label" style="color:#64748B">Light · #F8FAFC</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVBAR IN CONTEXT (dark) -->
+  <section>
+    <h2>Navbar in context · dark (شريط التنقل)</h2>
+    <div class="nav glownav">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="60" height="40" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-nring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-nfa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-nfb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-nweave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-nnotch" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="40">
+      <rect x="0" y="0" width="60" height="40" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-nring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-nring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-nnotch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-nfa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-nfb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-nfa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-nweave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+
+      <div class="brand-text">
+        <span class="name">Abdelrahman</span>
+        <span class="fam">ABDULLAH<i>_</i></span>
+      </div>
+      <div class="links"><b>Home</b><span>Projects</span><span>Skills</span><span>Contact</span></div>
+      <div class="toggle" title="light mode toggle"></div>
+    </div>
+  </section>
+
+  <!-- SIZE LADDER -->
+  <section>
+    <h2>Size ladder · 96 / 48 / 34 / 24 px — bare, no glow</h2>
+    <div class="ladder">
+      <div class="step"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="144" height="96" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-s1ring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-s1fa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-s1fb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-s1weave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-s1notch" maskUnits="userSpaceOnUse" x="0" y="0" width="144" height="96">
+      <rect x="0" y="0" width="144" height="96" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-s1ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-s1ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-s1notch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s1fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-s1fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s1fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-s1weave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+<b>96</b></div>
+      <div class="step"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="72" height="48" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-s2ring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-s2fa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-s2fb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-s2weave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-s2notch" maskUnits="userSpaceOnUse" x="0" y="0" width="72" height="48">
+      <rect x="0" y="0" width="72" height="48" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-s2ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-s2ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-s2notch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s2fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-s2fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s2fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-s2weave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+<b>48</b></div>
+      <div class="step"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="51" height="34" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-s3ring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-s3fa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-s3fb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-s3weave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-s3notch" maskUnits="userSpaceOnUse" x="0" y="0" width="51" height="34">
+      <rect x="0" y="0" width="51" height="34" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-s3ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-s3ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-s3notch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s3fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-s3fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s3fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-s3weave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+<b>34</b></div>
+      <div class="step"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="36" height="24" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-s4ring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="lgx-s4fa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="lgx-s4fb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#0891B2"/>
+    </linearGradient>
+    <clipPath id="lgx-s4weave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-s4notch" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="24">
+      <rect x="0" y="0" width="36" height="24" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-s4ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-s4ring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-s4notch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s4fa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-s4fb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-s4fa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-s4weave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#22D3EE"/>
+</svg>
+<b>24</b></div>
+    </div>
+    <p class="ladder-note">At 24&nbsp;px the mark still holds its three signature reads: the square contour, the two beveled peaks, and the spark sitting in the broken corner. Negative ">" notch between the inner diagonals survives as the interlock's chiseled cut.</p>
+  </section>
+
+  <!-- LIGHT MODE STRIP -->
+  <section>
+    <h2>Light-mode strip · نفس الشريط على خلفية فاتحة</h2>
+    <div class="nav light-nav">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" width="60" height="40" class="brand-mark" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgx-nlring" gradientUnits="userSpaceOnUse" x1="5" y1="42" x2="64" y2="6">
+      <stop offset="0" stop-color="#9333EA"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <linearGradient id="lgx-nlfa" gradientUnits="userSpaceOnUse" x1="23" y1="11" x2="23" y2="41.5">
+      <stop offset="0" stop-color="#9333EA"/>
+      <stop offset="1" stop-color="#6B21A8"/>
+    </linearGradient>
+    <linearGradient id="lgx-nlfb" gradientUnits="userSpaceOnUse" x1="49" y1="11" x2="49" y2="41.5">
+      <stop offset="0" stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <clipPath id="lgx-nlweave">
+      <path d="M 34.7 30.2 L 40.7 36.6 L 34.7 43 L 28.7 36.6 Z"/>
+    </clipPath>
+    <mask id="lgx-nlnotch" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="40">
+      <rect x="0" y="0" width="60" height="40" fill="#fff"/>
+      <path d="M 33.9 22.4 L 36.9 25.3 L 33.9 28.2" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M 15 3 H 57" fill="none" stroke="url(#lgx-nlring)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 65.5 6.5 A 12 12 0 0 1 69 15 V 33 A 12 12 0 0 1 57 45 H 15 A 12 12 0 0 1 3 33 V 15 A 12 12 0 0 1 15 3" fill="none" stroke="url(#lgx-nlring)" stroke-width="2.5" stroke-linecap="round"/>
+  <g class="eng-cursor" mask="url(#lgx-nlnotch)">
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-nlfa)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 32 41.5 L 49 11 L 63 41.5" fill="none" stroke="url(#lgx-nlfb)" stroke-width="6.8" stroke-linejoin="bevel"/>
+    <path d="M 9 41.5 L 23 11 L 37 41.5" fill="none" stroke="url(#lgx-nlfa)" stroke-width="6.8" stroke-linejoin="bevel" clip-path="url(#lgx-nlweave)"/>
+  </g>
+  <path class="eng-accent" d="M 61.8 2.8 L 62.4 4 L 63.6 4.6 L 62.4 5.2 L 61.8 6.4 L 61.2 5.2 L 60 4.6 L 61.2 4 Z" transform="rotate(45 61.8 4.6)" fill="#0891B2"/>
+</svg>
+
+      <div class="brand-text">
+        <span class="name">Abdelrahman</span>
+        <span class="fam">ABDULLAH<i>_</i></span>
+      </div>
+      <div class="links"><b>Home</b><span>Projects</span><span>Skills</span><span>Contact</span></div>
+      <div class="toggle" title="dark mode toggle"></div>
+    </div>
+  </section>
+
+  <!-- RATIONALE -->
+  <section>
+    <h2>Design rationale · لماذا هذا الشكل؟</h2>
+    <div class="rationale">
+      <p class="ar">فكرة العلامة: حرفان "A" متشابكان (مخطوطان كبضلعين سميكين بزوايا مشطوفة 45°) يتقاطعان في وسط الحاوية، ويتشاركان وحدة أرضية واحدة — فيتشكل نقطة العبور «ماسة» بنصف مهب أرجواني فوق سماوي: انقسام قُطري بعيد عن المنتصف حتى لا يبدو تدرجاً عاماً. المسافة السالبة بين الضلعين الداخليين تعطي شقّاً رفيعاً على شكل سهم ">" نحو الأعلى-يمين (نمو)، وهي تفصيلة تكاد تختفي عند 24px لكنها تمنح القصد. الإطار مربع مستدير الزوايا بقوس علوي-أيمن «مكسور» يعشش فيه شرارة رباعية صغيرة (فئة <code>eng-accent</code>) — العنصر الناعم الوحيد على حرف صلب.</p>
+      <p><b style="color:#E4E2F2">Concept:</b> two chunky "A" strokes with bevel-cut apexes (a nod to low-poly / Flutter's oblique-triangle heritage) interlock through a shared crossing; a 45°-cut diamond lets the purple facet bleed back through the cyan counter-facet. A round-cornered square badge carries the mark, its top-right arc deliberately broken by a small 4-point spark — the single soft element on an otherwise hard letterform — while the negative space between the inner diagonals hides a thin up-right ">" arrow (growth). Colors ride the fixed brand palette (purple <code>#A855F7</code> / cyan <code>#22D3EE</code>) and swap to darker equivalents via CSS in light mode; <code>.eng-cursor</code> dims the body and <code>.eng-accent</code> glows cyan on hover, matching the site's existing hooks.</p>
+    </div>
+  </section>
+
+  <footer>Variant 1 · "Facet Duality" · geometry identical to logo_variant_1.svg · gradients &amp; ids prefixed lgx-</footer>
+</div>
+</body>
+</html>

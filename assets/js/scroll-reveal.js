@@ -1,7 +1,8 @@
 /* ============================================================
    Cinematic & High-Performance Scroll Motion — GSAP + ScrollTrigger
-   - Smooth entrance reveals with once: true (no flickering/disappearing)
-   - Elements stay 100% visible once revealed
+   - Smooth entrance reveals with once: true
+   - Individual triggers so cards animate as they appear
+   - Locks is-visible class permanently upon completion
    - Cleans inline transforms so CSS hovers work flawlessly
    - Lightweight & 60fps buttery smooth performance
    ============================================================ */
@@ -17,6 +18,7 @@
     document.querySelectorAll('.reveal').forEach(function (el) {
       el.style.opacity = '1';
       el.style.transform = 'none';
+      el.classList.add('is-visible');
     });
     document.querySelectorAll('.skill-progress[data-width]').forEach(function (bar) {
       bar.style.width = bar.getAttribute('data-width') + '%';
@@ -34,7 +36,7 @@
      ============================================================ */
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
-    .from('.hero-top-image', { duration: mobile ? 0.5 : 0.7, opacity: 0, scale: 0.92, y: -16, clearProps: 'transform' })
+    .from('.hero-top-image', { duration: mobile ? 0.5 : 0.7, opacity: 0, scale: 0.94, y: -16, clearProps: 'transform' })
     .from('.hero-name', { duration: mobile ? 0.4 : 0.6, opacity: 0, y: -12 }, '-=0.35')
     .from('.hero-hook', { duration: 0.4, opacity: 0, y: -8 }, '-=0.25')
     .from('.typing-container', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
@@ -43,141 +45,82 @@
     .from('.hero-buttons', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
     .from('.hero-scroll-cue', { duration: 0.3, opacity: 0, y: -6 }, '-=0.15');
 
-  /* Subtle hero fade out on scroll down */
+  /* Gentle hero cue fade out */
   if (typeof ScrollTrigger !== 'undefined') {
-    gsap.to('.hero-content', {
-      opacity: 0,
-      y: -30,
-      ease: 'power1.in',
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 0.5
-      }
-    });
-
     gsap.to(['.hero-scroll-cue', '.scroll-indicator'], {
       opacity: 0,
       ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: '15% top', scrub: true }
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: '20% top', scrub: true }
     });
   }
 
-  /* ============================================================
-     SECTION HEADERS — Smooth reveal once
-     ============================================================ */
-  document.querySelectorAll('.section-header.reveal').forEach(function (el) {
+  /* Helper function to animate elements smoothly into view */
+  function revealElement(el, yOffset, startThreshold) {
+    if (!el) return;
     gsap.fromTo(el,
-      { opacity: 0, y: 22 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-        clearProps: 'transform',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          once: true
-        }
-      }
-    );
-  });
-
-  /* ============================================================
-     CARDS & CONTENT BLOCKS — Staggered reveal once
-     ============================================================ */
-  function revealGroup(selector, staggerTime) {
-    var els = Array.prototype.slice.call(document.querySelectorAll(selector));
-    if (!els.length) return;
-
-    var groups = {};
-    els.forEach(function (el) {
-      var key = el.parentElement;
-      if (!groups[key]) groups[key] = { parent: key, items: [] };
-      groups[key].items.push(el);
-    });
-
-    Object.keys(groups).forEach(function (k) {
-      var items = groups[k].items;
-      gsap.fromTo(items,
-        { opacity: 0, y: 28, scale: 0.98 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.55,
-          stagger: staggerTime || 0.12,
-          ease: 'power2.out',
-          clearProps: 'transform',
-          scrollTrigger: {
-            trigger: items[0],
-            start: 'top 88%',
-            once: true
-          }
-        }
-      );
-    });
-  }
-
-  revealGroup('.about-content.reveal', 0.1);
-  revealGroup('.skills-tabs.reveal', 0.1);
-  revealGroup('.skill-category.reveal', 0.12);
-  revealGroup('.car-card.reveal', 0.12);
-  revealGroup('.stat-card.reveal', 0.08);
-  revealGroup('.premium-testimonial-card.reveal', 0.12);
-  revealGroup('.testimonial-card.reveal', 0.12);
-  revealGroup('.service-card.reveal', 0.1);
-  revealGroup('.price-card.reveal', 0.12);
-  revealGroup('.future-card.reveal', 0.12);
-  revealGroup('.pro-exp-card.reveal', 0.12);
-  revealGroup('.contact-info.reveal', 0.1);
-  revealGroup('.planner-box.reveal', 0.1);
-
-  /* ============================================================
-     FEATURED PROJECT CARDS — Never disappear, clean hover handoff
-     ============================================================ */
-  var projectCards = document.querySelectorAll('.project-card.reveal');
-  if (projectCards.length) {
-    gsap.fromTo(projectCards,
-      { opacity: 0, y: 35, scale: 0.98 },
+      { opacity: 0, y: yOffset || 22, scale: 0.99 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.65,
-        stagger: 0.16,
+        duration: 0.55,
         ease: 'power2.out',
         clearProps: 'transform',
+        onComplete: function () {
+          el.classList.add('is-visible');
+        },
         scrollTrigger: {
-          trigger: projectCards[0],
-          start: 'top 88%',
+          trigger: el,
+          start: startThreshold || 'top 92%',
           once: true
         }
       }
     );
   }
+
+  /* ============================================================
+     SECTION HEADERS — Smooth rise-in
+     ============================================================ */
+  document.querySelectorAll('.section-header.reveal').forEach(function (el) {
+    revealElement(el, 18, 'top 92%');
+  });
+
+  /* ============================================================
+     CONTENT BLOCKS & CARDS — Each item triggers as it reaches view
+     ============================================================ */
+  var cardSelectors = [
+    '.about-content.reveal',
+    '.skills-tabs.reveal',
+    '.skill-category.reveal',
+    '.car-card.reveal',
+    '.stat-card.reveal',
+    '.premium-testimonial-card.reveal',
+    '.testimonial-card.reveal',
+    '.service-card.reveal',
+    '.price-card.reveal',
+    '.future-card.reveal',
+    '.pro-exp-card.reveal',
+    '.contact-info.reveal',
+    '.planner-box.reveal'
+  ];
+
+  cardSelectors.forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el) {
+      revealElement(el, 24, 'top 90%');
+    });
+  });
+
+  /* ============================================================
+     PROJECT CARDS — Stable, smooth, 100% visible on hover
+     ============================================================ */
+  document.querySelectorAll('.project-card.reveal').forEach(function (card) {
+    revealElement(card, 28, 'top 90%');
+  });
 
   /* About Image Reveal */
   var aboutImg = document.querySelector('.about-image.reveal');
   if (aboutImg) {
-    gsap.fromTo(aboutImg,
-      { opacity: 0, y: 30, scale: 0.96 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        ease: 'power2.out',
-        clearProps: 'transform',
-        scrollTrigger: {
-          trigger: aboutImg,
-          start: 'top 85%',
-          once: true
-        }
-      }
-    );
+    revealElement(aboutImg, 26, 'top 88%');
   }
 
   /* ============================================================
@@ -190,7 +133,7 @@
       { width: '0%' },
       {
         width: target + '%',
-        duration: 0.9,
+        duration: 0.85,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: host,
@@ -201,7 +144,7 @@
     );
   });
 
-  /* Recalculate positions once everything (images/fonts) is loaded */
+  /* Recalculate positions once everything is loaded */
   window.addEventListener('load', function () {
     if (typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.refresh();
