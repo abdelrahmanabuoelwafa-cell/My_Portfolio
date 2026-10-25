@@ -47,6 +47,13 @@
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
+<!-- Google Fonts (Non-blocking link) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap">
+
+<!-- Central Config & Pricing Data (Single Source of Truth) -->
+<script src="js/site-config.js"></script>
+<script src="js/pricing-data.js"></script>
+
 <!-- Basic Analytics -->
 <script>
   // Simple analytics tracking
@@ -148,8 +155,6 @@
 }
 </script> 
 <style> 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap');
-
 :root { 
   --primary: #A855F7; 
   --secondary: #9333EA; 
@@ -641,6 +646,14 @@ body::after{
   flex-direction:column; 
   align-items:center; 
 } 
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes ringGlow {
+  0%, 100% { box-shadow: 0 0 28px rgba(168,85,247,.30); }
+  50%      { box-shadow: 0 0 52px rgba(168,85,247,.60); }
+}
 .hero-top-image{ 
   position:relative; 
   width:clamp(155px,22vw,245px);
@@ -648,6 +661,8 @@ body::after{
   margin-bottom:24px; 
   border-radius:50%;
   overflow:visible;
+  animation: heroFloat 4.5s ease-in-out infinite;
+  will-change: transform;
   transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
 } 
 .top-img-container{ 
@@ -676,10 +691,16 @@ body::after{
   inset:-8px; 
   border:2px dashed rgba(168,85,247,.3); 
   border-radius:50%; 
-  animation:spin 15s linear infinite; 
+  animation:spin 15s linear infinite, ringGlow 4.5s ease-in-out infinite; 
   z-index: 3;
   pointer-events: none;
 } 
+[data-theme="light"] .top-img-ring {
+  box-shadow: 0 0 20px rgba(147,51,234,.20);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-top-image, .top-img-ring { animation: none !important; }
+}
 @keyframes spin{to{transform:rotate(360deg)}} 
 .floating-badge{ 
   position:absolute; 
@@ -3656,6 +3677,119 @@ footer p{
   color: #dc2626;
 }
 
+/* ===== Neon CTA Box (Link to planner.html) ===== */
+.neon-cta-box {
+  position: relative;
+  border-radius: 24px;
+  isolation: isolate;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 auto;
+}
+.neon-cta-box:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+.neon-cta-box::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: 27px;
+  background: linear-gradient(120deg, #a855f7, #22d3ee, #34d399, #a855f7);
+  background-size: 300% 300%;
+  animation: neonFlow 8s ease infinite;
+  filter: blur(12px);
+  opacity: .5;
+  transition: opacity 0.3s ease;
+}
+.neon-cta-box:hover::before {
+  opacity: .75;
+  filter: blur(16px);
+}
+@keyframes neonFlow {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.neon-cta-inner {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 24px;
+  padding: 48px 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+[data-theme="light"] .neon-cta-inner {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(147, 51, 234, 0.3);
+}
+.neon-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #c084fc;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+[data-theme="light"] .neon-cta-badge {
+  background: rgba(147, 51, 234, 0.1);
+  color: #7c3aed;
+  border-color: rgba(147, 51, 234, 0.25);
+}
+.neon-cta-dot {
+  width: 8px;
+  height: 8px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #34d399;
+  animation: pulse-green 2s infinite;
+}
+.neon-cta-title {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  max-width: 650px;
+}
+.neon-cta-desc {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: var(--muted);
+  max-width: 620px;
+  line-height: 1.6;
+}
+.neon-cta-btn-wrap {
+  margin-top: 8px;
+}
+.neon-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s ease;
+}
+.neon-cta-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
+  color: #ffffff;
+}
+
 @media (max-width: 768px) {
   .pf-grid2 {
     grid-template-columns: 1fr;
@@ -3704,7 +3838,7 @@ footer p{
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <img class="brand-mark" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024">
+    <img class="brand-mark" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96">
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
       <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
@@ -4460,7 +4594,7 @@ footer p{
 
     <!-- STANDARD (Featured) -->
     <div class="price-card featured reveal">
-      <div class="popular-badge">? Most Popular</div>
+      <div class="popular-badge">👑 Most Popular</div>
       <div class="price-header">
         <div class="price-tier-name" style="color:#34d399;">STANDARD</div>
         <div class="price-range">
@@ -4481,7 +4615,7 @@ footer p{
         <div class="price-feature-item included"><i class="fas fa-check" style="color:#10b981;"></i> Android + iOS build</div>
         <div class="price-feature-item excluded"><i class="fas fa-times"></i> Store deployment</div>
       </div>
-      <a href="https://wa.me/201123031944?text=Hi%20Abdelrahman!%20I'm%20interested%20in%20the%20Standard%20plan." class="btn-pricing featured-btn">Hire Me ?</a>
+      <a href="https://wa.me/201123031944?text=Hi%20Abdelrahman!%20I'm%20interested%20in%20the%20Standard%20plan." class="btn-pricing featured-btn">Hire Me 🚀</a>
     </div>
 
     <!-- PRO -->
@@ -4511,81 +4645,27 @@ footer p{
   </div>
 </section>
 
-<section id="ai-planner-section">
-<!-- AI Business Planner (below Pricing, follows site language) -->
-    <div class="services-planner">
-<!-- AI Business Planner -->
-<div class="section-header reveal">
-      <h2 class="section-title">AI Business Planner</h2>
-      <p class="section-subtitle" id="planner-subtitle">Turn a rough idea into a structured project brief in under a minute.</p>
-    </div>
-    <div class="planner-box reveal" id="planner-box">
-      <div class="planner-badge ai-connected" id="planner-mode" data-pf="badge">AI-assisted planning &mdash; free, no sign-up</div>
-      <form class="planner-form" id="planner-form" novalidate>
-        <div class="pf-field">
-          <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
-          <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
-            placeholder="Describe your app or business idea in a few sentences..."></textarea>
-        </div>
-        <div class="pf-grid2">
-          <div class="pf-field">
-            <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
-            <input id="planner-audience" class="pf-input" type="text" maxlength="200"
-              placeholder="e.g. medical clinics, university students, local shops...">
-          </div>
-          <div class="pf-field">
-            <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
-            <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
-              <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
-              <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
-              <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
-              <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
-            </div>
-          </div>
-        </div>
-        <div class="pf-field">
-          <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
-          <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
-            placeholder="e.g. login, appointments, payments, notifications..."></textarea>
-        </div>
-        <div class="pf-grid2">
-          <div class="pf-field">
-            <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
-            <select id="planner-budget" class="pf-input">
-              <option value="" data-pf="optUnknown">Prefer not to say</option>
-              <option value="small" data-pf="optSmall">Small</option>
-              <option value="medium" data-pf="optMedium">Medium</option>
-              <option value="large" data-pf="optLarge">Large</option>
-            </select>
-          </div>
-          <div class="pf-field">
-            <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
-            <select id="planner-deadline" class="pf-input">
-              <option value="" data-pf="optUnknown">Prefer not to say</option>
-              <option value="flexible" data-pf="dlFlexible">Flexible</option>
-              <option value="1-2m" data-pf="dlSoon">1&ndash;2 months</option>
-              <option value="3-4m" data-pf="dlSoon2">3&ndash;4 months</option>
-              <option value="asap" data-pf="dlUrgent">ASAP</option>
-            </select>
-          </div>
-        </div>
-        <div class="pf-actions">
-          <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
-          <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
-        </div>
-      </form>
-      <div class="planner-result" id="planner-result">
-        <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">Fill in your idea (other fields optional) and generate a structured plan here.</div>
-        <div class="pr-state pr-loading" id="planner-loading" hidden>
-          <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
-          <span data-pf="loading">Analyzing your brief and building the plan...</span>
-        </div>
-        <pre class="pr-preview" id="planner-preview" dir="auto" hidden></pre>
-        <div class="pr-state pr-error" id="planner-error" hidden></div>
-        <div class="pr-body" id="planner-body" dir="auto" hidden></div>
+<!-- AI Project Planner CTA Box -->
+<section id="ai-planner-cta" style="padding:40px 20px 80px;max-width:960px;margin:0 auto;">
+  <div class="neon-cta-box reveal" onclick="window.location.href='planner.html'" role="region" aria-label="AI Project Planner CTA">
+    <div class="neon-cta-inner">
+      <div class="neon-cta-badge">
+        <span class="neon-cta-dot"></span>
+        <span>AI-powered · Free · No sign-up</span>
+      </div>
+      <h2 class="neon-cta-title">
+        Got a project idea? Let's turn it into a real plan.
+      </h2>
+      <p class="neon-cta-desc">
+        Answer a few quick questions and get a complete 9-section development roadmap, architecture choices, and timeline estimates in under a minute.
+      </p>
+      <div class="neon-cta-btn-wrap">
+        <a href="planner.html" class="neon-cta-btn" onclick="event.stopPropagation()">
+          ✨ Build your plan — free
+        </a>
       </div>
     </div>
-    </div>
+  </div>
 </section>
 
 <!-- Contact Section (5 Cards + Form) --> 
@@ -4672,7 +4752,7 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <img class="footer-logo-img" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
+      <img class="footer-logo-img" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96" loading="lazy">
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
@@ -4708,10 +4788,17 @@ footer p{
   </div>
 </div>
 
-<!-- Three.js & Libraries --> 
-<script src="js/neon-border.js?v=25"></script> 
-<script src="js/tornado.js?v=25"></script> 
-<script src="js/firework-cursor.js?v=26"></script>
+<!-- Mouse Effects (Desktop Only with fine pointer) --> 
+<script>
+  if (window.matchMedia && window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1024) {
+    ['js/neon-border.js?v=25', 'js/tornado.js?v=25', 'js/firework-cursor.js?v=26'].forEach(function(src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.defer = true;
+      document.body.appendChild(s);
+    });
+  }
+</script>
 
 <script> 
 // Mobile Menu Toggle 
@@ -5099,7 +5186,11 @@ function handleFormSubmit(e) {
   const isAr = document.documentElement.lang === 'ar';
   const btn = submitButton;
   const status = document.getElementById('formStatus');
-  const key = form.elements.access_key.value.trim();
+  const configuredKey = window.PORTFOLIO_WEB3FORMS_KEY || (form.elements.access_key ? form.elements.access_key.value.trim() : '');
+  if (form.elements.access_key && configuredKey) {
+    form.elements.access_key.value = configuredKey;
+  }
+  const key = configuredKey.trim();
   const name = form.elements.name.value.trim();
   const email = form.elements.email.value.trim();
   const message = form.elements.message.value.trim();
@@ -5115,7 +5206,7 @@ function handleFormSubmit(e) {
     status.appendChild(fallback);
   };
   if (!key || key === 'ACCESS_KEY_HERE') {
-    showFailure(isAr ? 'نموذج الإرسال غير مفعّل بعد؛ أضف مفتاح Web3Forms.' : 'The form is not configured yet; add a Web3Forms access key.');
+    showFailure(isAr ? 'نموذج الإرسال غير مفعّل بعد؛ أضف مفتاح Web3Forms في site-config.js.' : 'The form is not configured yet; add a Web3Forms access key in site-config.js.');
     return;
   }
   btn.disabled = true;
@@ -5686,8 +5777,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setAttr('.btn-cv', 'aria-label', 'تنزيل السيرة الذاتية PDF');
     setAttr('.btn-contact-nav', 'aria-label', 'تواصل معي');
     setAttr('.hamburger', 'aria-label', 'فتح أو إغلاق القائمة');
-    setAttr('#navbar', 'aria-label', 'القائمة الرئيسية');
     setAttr('.skills-tabs', 'aria-label', 'فئات المهارات');
+
+    // AI Planner CTA Box
+    setText('#ai-planner-cta .neon-cta-badge span:last-child', 'مدعوم بالذكاء الاصطناعي · مجاني · بدون تسجيل');
+    setText('#ai-planner-cta .neon-cta-title', 'عندك فكرة مشروع؟ خلينا نحوّلها لخطة شغل حقيقية');
+    setText('#ai-planner-cta .neon-cta-desc', 'جاوب على أسئلة سريعة واحصل على خطة مشروع متكاملة من 9 أقسام مع التكلفة التقديرية والجدول الزمني خلال دقيقة.');
+    setText('#ai-planner-cta .neon-cta-btn', '✨ ابنِ خطتك مجانًا');
     setAllAttr('.footer-social-icons a', 'aria-label', ['حساب GitHub','حساب LinkedIn','واتساب']);
     setAllAttr('.platform-icon', 'aria-label', ['حساب خمسات','حساب نفذلي','حساب Freelancer','حساب ربحي']);
     setText('.contact-info h3', 'لديك مشروع في ذهنك؟');
@@ -6082,8 +6178,43 @@ document.addEventListener('DOMContentLoaded', () => {
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 .grok-quick-btn:hover { background: rgba(147,51,234,0.25); border-color: #A855F7; }
+
+.grok-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.grok-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(168,85,247,0.15);
+  border: 1px solid rgba(168,85,247,0.35);
+  border-radius: 12px;
+  color: #c084fc;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.grok-action-btn:hover {
+  background: rgba(168,85,247,0.3);
+  border-color: #a855f7;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+[data-theme="light"] .grok-action-btn {
+  background: rgba(147,51,234,0.1);
+  border-color: rgba(147,51,234,0.3);
+  color: #7c3aed;
+}
 
 @media (max-width: 400px) {
   #grok-chat-panel { width: calc(100vw - 32px); right: 0; }
@@ -6105,7 +6236,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="grok-chat-avatar">🤖</div>
       <div class="grok-chat-info">
         <h4>Abdelrahman's AI</h4>
-        <span>Powered by Grok · Online</span>
+        <span>Live Assistant · Online</span>
       </div>
       <button class="grok-chat-clear" id="grok-clear-btn" title="Clear chat">Clear</button>
     </div>
@@ -6114,20 +6245,22 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="grok-msg bot">
         <div class="grok-msg-avatar">🤖</div>
         <div class="grok-msg-bubble">
-          Hey! 👋 I'm Abdelrahman's AI assistant. Ask me anything about his skills, projects, or how to work with him!
+          أهلاً بيك! 👋 أنا المساعد الذكي لموقع عبد الرحمن عبد الله. اسألني عن مشاريعه، مهاراته، أو باقات الأسعار — حتى بالمصري 😉
         </div>
       </div>
     </div>
     <!-- Quick questions -->
     <div class="grok-quick-btns" id="grok-quick-btns">
+      <button class="grok-quick-btn" data-q="إيه باقات الأسعار عندك؟">💰 الأسعار</button>
+      <a class="grok-quick-btn" href="https://wa.me/201123031944?text=%D8%B9%D8%A7%D9%8A%D8%B2%2F%D8%B9%D8%A7%D9%8A%D8%B2%D8%A9%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9%20(15%20%D8%AF%D9%82%D9%8A%D9%82%D8%A9)" target="_blank" rel="noopener">📅 احجز استشارة</a>
+      <a class="grok-quick-btn" href="planner.html">🚀 خطط لمشروعك</a>
+      <button class="grok-quick-btn" data-q="إزاي أتواصل مع عبد الرحمن؟">📞 طرق التواصل</button>
       <button class="grok-quick-btn" data-q="What are his main skills?">🛠️ Skills</button>
       <button class="grok-quick-btn" data-q="Tell me about his projects">📱 Projects</button>
-      <button class="grok-quick-btn" data-q="Is he available for hire?">💼 Hire him</button>
-      <button class="grok-quick-btn" data-q="How can I contact Abdelrahman?">📞 Contact</button>
     </div>
     <!-- Input -->
     <div class="grok-chat-input-wrap">
-      <textarea id="grok-input" placeholder="Ask me anything..." rows="1" maxlength="500"></textarea>
+      <textarea id="grok-input" placeholder="اسأل أي سؤال..." rows="1" maxlength="500"></textarea>
       <button id="grok-send-btn" aria-label="Send message">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -6153,7 +6286,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 // ===== GROK AI CHAT WIDGET =====
 (function() {
-  const BACKEND_URL = 'http://localhost:8000';
   const btn = document.getElementById('grok-chat-btn');
   const panel = document.getElementById('grok-chat-panel');
   const messagesEl = document.getElementById('grok-messages');
@@ -6167,27 +6299,51 @@ document.addEventListener('DOMContentLoaded', () => {
   let isOpen = false;
   let isLoading = false;
 
+  const CHAT_SYSTEM_PROMPT_TEMPLATE = `You are "Abdelrahman's AI" — the official assistant on the portfolio website of Abdelrahman Abdullah, a Flutter & Dart developer from Cairo, Egypt.
+His standout projects: MovieVerse, Masrofy, StudySync, MediMind.
+
+OFFICIAL CONTACT (only these):
+WhatsApp: +20 112 303 1944 — Email: abdulrahman.abuoshaifa@gmail.com
+
+OFFICIAL PRICING (single source of truth — never invent prices):
+__PRICING_JSON__
+
+STRICT RULES:
+1. Mirror the user's language AND dialect. If they write Egyptian Arabic, reply in Egyptian Arabic (مصري). English -> English. MSA -> MSA.
+2. Prices come ONLY from the PRICING JSON above. If a requested service is not listed, say the exact quote depends on project details and Abdelrahman will send it.
+3. If the visitor's idea is bigger than the plan they asked about, recommend the higher tier and explain why briefly.
+4. The moment the visitor shows buying intent (wants to start, book, or talk): suggest WhatsApp with a ready message, or building a project plan at planner.html.
+5. You are a general portfolio assistant. If the question is NOT a project-plan request, do NOT output a 9-section plan — just answer naturally, warm and concise.
+6. Keep replies 3–6 short lines. Plain text friendly (no heavy markdown).`;
+
+  function buildSystemPrompt() {
+    return CHAT_SYSTEM_PROMPT_TEMPLATE.replace('__PRICING_JSON__', JSON.stringify(window.PRICING || {}));
+  }
+
   // Show unread badge after 3 seconds
   setTimeout(() => {
-    if (!isOpen) {
+    if (!isOpen && unreadBadge) {
       unreadBadge.classList.add('show');
     }
   }, 3000);
 
   // Toggle chat panel
-  btn.addEventListener('click', () => {
-    isOpen = !isOpen;
-    panel.classList.toggle('open', isOpen);
-    btn.classList.toggle('open', isOpen);
-    if (isOpen) {
-      unreadBadge.classList.remove('show');
-      setTimeout(() => input.focus(), 300);
-    }
-  });
+  if (btn) {
+    btn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      panel.classList.toggle('open', isOpen);
+      btn.classList.toggle('open', isOpen);
+      if (isOpen) {
+        if (unreadBadge) unreadBadge.classList.remove('show');
+        setTimeout(() => input && input.focus(), 300);
+      }
+    });
+  }
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    if (isOpen && !document.getElementById('grok-chat-widget').contains(e.target)) {
+    const widget = document.getElementById('grok-chat-widget');
+    if (isOpen && widget && !widget.contains(e.target)) {
       isOpen = false;
       panel.classList.remove('open');
       btn.classList.remove('open');
@@ -6195,50 +6351,55 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Quick questions
-  quickBtnsEl.addEventListener('click', (e) => {
-    const qBtn = e.target.closest('.grok-quick-btn');
-    if (qBtn) {
-      const q = qBtn.dataset.q;
-      input.value = q;
-      quickBtnsEl.style.display = 'none';
-      sendMessage();
-    }
-  });
+  if (quickBtnsEl) {
+    quickBtnsEl.addEventListener('click', (e) => {
+      const qBtn = e.target.closest('.grok-quick-btn');
+      if (qBtn && qBtn.dataset && qBtn.dataset.q) {
+        input.value = qBtn.dataset.q;
+        quickBtnsEl.style.display = 'none';
+        sendMessage();
+      }
+    });
+  }
 
   // Send on Enter (Shift+Enter = newline)
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+  if (input) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
 
-  // Auto resize textarea
-  input.addEventListener('input', () => {
-    input.style.height = 'auto';
-    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
-  });
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    });
+  }
 
-  sendBtn.addEventListener('click', sendMessage);
-  clearBtn.addEventListener('click', clearChat);
+  if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+  if (clearBtn) clearBtn.addEventListener('click', clearChat);
 
   function clearChat() {
     history = [];
     messagesEl.innerHTML = `
       <div class="grok-msg bot">
         <div class="grok-msg-avatar">🤖</div>
-        <div class="grok-msg-bubble">Chat cleared! How can I help you? 😊</div>
+        <div class="grok-msg-bubble">تم مسح المحادثة! إزاي أقدر أساعدك؟ 😊</div>
       </div>`;
     quickBtnsEl.style.display = 'flex';
   }
 
-  function appendMessage(role, text) {
+  function appendMessage(role, text, actionsHtml) {
     const div = document.createElement('div');
     div.className = `grok-msg ${role}`;
     const avatarEmoji = role === 'bot' ? '🤖' : '👤';
-    div.innerHTML = `
-      <div class="grok-msg-avatar">${avatarEmoji}</div>
-      <div class="grok-msg-bubble">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+    let contentHtml = `<div class="grok-msg-avatar">${avatarEmoji}</div>
+      <div class="grok-msg-bubble">
+        ${escapeHtml(text).replace(/\n/g, '<br>')}
+        ${actionsHtml || ''}
+      </div>`;
+    div.innerHTML = contentHtml;
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return div;
@@ -6264,10 +6425,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typing) typing.remove();
   }
 
-  function showError(msg) {
+  function showErrorWithFallback(msg) {
+    const isAr = /[\u0600-\u06FF]/.test(msg) || (document.documentElement.lang === 'ar');
     const div = document.createElement('div');
     div.className = 'grok-error-msg';
-    div.textContent = msg;
+    div.innerHTML = `
+      <div>${escapeHtml(msg)}</div>
+      <div style="margin-top:6px;">
+        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="grok-action-btn" style="display:inline-flex;margin:2px auto;">
+          💬 ${isAr ? 'تواصل مع عبد الرحمن على واتساب' : 'Contact on WhatsApp'}
+        </a>
+      </div>`;
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
@@ -6278,92 +6446,98 @@ document.addEventListener('DOMContentLoaded', () => {
     return d.innerHTML;
   }
 
+  async function fetchWorker(endpoint, payload, retryCount) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (res.status === 429 && retryCount < 1) {
+        await new Promise(r => setTimeout(r, 6000));
+        return fetchWorker(endpoint, payload, retryCount + 1);
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      return data.message || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+    } catch (err) {
+      clearTimeout(timeoutId);
+      throw err;
+    }
+  }
+
   async function sendMessage() {
     const text = input.value.trim();
     if (!text || isLoading) return;
 
-    // Hide quick buttons
-    quickBtnsEl.style.display = 'none';
+    if (quickBtnsEl) quickBtnsEl.style.display = 'none';
 
-    // Add user message
     appendMessage('user', text);
     history.push({ role: 'user', content: text });
     input.value = '';
     input.style.height = 'auto';
 
-    // Show loading state
     isLoading = true;
     sendBtn.disabled = true;
     input.disabled = true;
     showTyping();
 
+    const isArabicQuestion = /[\u0600-\u06FF]/.test(text) || (document.documentElement.lang === 'ar');
+    const endpoint = window.PORTFOLIO_AI_ENDPOINT;
+
+    if (!endpoint) {
+      hideTyping();
+      showErrorWithFallback(isArabicQuestion ? 'نقطة نهاية الذكاء الاصطناعي غير متصلة. تواصل مع عبد الرحمن مباشرة على واتساب:' : 'AI endpoint is not configured. Contact Abdelrahman directly on WhatsApp:');
+      history.pop();
+      isLoading = false;
+      sendBtn.disabled = false;
+      input.disabled = false;
+      return;
+    }
+
     try {
-      let reply = null;
+      const sysPrompt = buildSystemPrompt();
+      const combinedMessage = `[System Instructions & Pricing]:\n${sysPrompt}\n\n[Visitor Question]:\n${text}`;
+      const payload = {
+        message: combinedMessage,
+        systemPrompt: sysPrompt,
+        conversationHistory: history.slice(-8)
+      };
 
-      // 1. Try local backend first
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3500);
-        const response = await fetch(`${BACKEND_URL}/chat`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history: history.slice(-8) }),
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.reply) reply = data.reply;
-        }
-      } catch (e) {
-        // Local backend unreachable or timeout -> will use direct Google Gemini
-      }
-
-      // 2. Direct Gemini Fallback (reliable everywhere, including GitHub Pages)
-      if (!reply) {
-        try {
-          const k = atob('QVEuQWI4Uk42TFVwUFJ4dmxqTzJQenlFMlktaHdyTG94ZnRmV21tbjJVdE1XWWc3Tld3Vnc=');
-          const geminiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=' + k;
-          const sysPrompt = `أنت المساعد الذكي لموقع بورتفوليو عبد الرحمن عبد الله (Abdelrahman Abdullah).
-عبد الرحمن مطور تطبيقات محترف متخصص في Flutter & Dart بالقاهرة، مصر.
-مشاريع مميزة: MovieVerse و Masrofy.
-التواصل: هاتف/واتساب +201123031944 أو +201060754494، البريد: abdelrahman.a.aboelwafa@gmail.com.
-أجب باختصار وبأسلوب لبق واحترافي بنفس لغة السائل (عربي أو إنجليزي).`;
-
-          const contents = [
-            { role: 'user', parts: [{ text: `${sysPrompt}\n\nسؤال الزائر: ${text}` }] }
-          ];
-
-          const gemResp = await fetch(geminiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: contents })
-          });
-
-          if (gemResp.ok) {
-            const gemData = await gemResp.json();
-            const candidateText = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (candidateText) {
-              reply = candidateText.trim();
-            }
-          }
-        } catch (gemErr) {
-          console.warn('Direct Gemini fallback error:', gemErr);
-        }
-      }
+      const reply = await fetchWorker(endpoint, payload, 0);
 
       hideTyping();
 
-      if (reply) {
-        appendMessage('bot', reply);
-        history.push({ role: 'assistant', content: reply });
+      if (reply && reply.trim()) {
+        const trimmed = reply.trim();
+        // Check if reply mentions pricing, booking, or contact to add interactive action buttons
+        const hasPricing = /\$|\bUSD\b|سعر|باقة|تكلفة|دولار/i.test(trimmed);
+        const hasContact = /واتساب|تواصل|whatsapp|contact|استشارة/i.test(trimmed);
+        let actionsHtml = '';
+        if (hasPricing || hasContact) {
+          actionsHtml = `
+            <div class="grok-actions-row">
+              <a href="https://wa.me/201123031944?text=${encodeURIComponent(isArabicQuestion ? 'أهلاً عبد الرحمن، كنت بتكلم مع الـ AI بتاعك وعايز استفسر عن مشروع.' : 'Hi Abdelrahman, I was chatting with your AI assistant about a project.')}" target="_blank" rel="noopener" class="grok-action-btn">💬 احجز على واتساب</a>
+              <a href="planner.html" class="grok-action-btn">📋 اكتب خطة مشروعي</a>
+            </div>`;
+        }
+
+        appendMessage('bot', trimmed, actionsHtml);
+        history.push({ role: 'assistant', content: trimmed });
       } else {
-        showError('عذرًا، لم يتمكن المساعد من الرد حاليًا. يرجى مراسلتي عبر واتساب أو إعادة المحاولة.');
-        history.pop();
+        throw new Error('empty-response');
       }
     } catch (err) {
       hideTyping();
-      showError('عذرًا، حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة لاحقًا.');
+      console.warn('[Chatbot Error]', err);
+      showErrorWithFallback(isArabicQuestion
+        ? 'عذرًا، المساعد يواجه ضغطًا مؤقتًا. تقدر تراسل عبد الرحمن مباشرة على واتساب:'
+        : 'Sorry, the assistant is temporarily busy. You can message Abdelrahman directly on WhatsApp:');
       history.pop();
     } finally {
       isLoading = false;
@@ -6375,19 +6549,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v25</div>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
-    if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
-  }
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="assets/js/scroll-reveal.js?v=25" defer></script>
-<script src="assets/js/ai-planner.js?v=31" defer></script>
+<script src="assets/js/ai-planner.js?v=32" defer></script>
 </body> 
 </html>
 
