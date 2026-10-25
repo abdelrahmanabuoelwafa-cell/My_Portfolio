@@ -4784,17 +4784,10 @@ footer p{
   </div>
 </div>
 
-<!-- Mouse Effects (Desktop Only with fine pointer) --> 
-<script>
-  if (window.matchMedia && window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1024) {
-    ['js/neon-border.js?v=25', 'js/tornado.js?v=25', 'js/firework-cursor.js?v=26'].forEach(function(src) {
-      var s = document.createElement('script');
-      s.src = src;
-      s.defer = true;
-      document.body.appendChild(s);
-    });
-  }
-</script>
+<!-- Three.js & Background Visual Effects --> 
+<script src="js/neon-border.js?v=25"></script> 
+<script src="js/tornado.js?v=25"></script> 
+<script src="js/firework-cursor.js?v=26"></script>
 
 <script> 
 // Mobile Menu Toggle 

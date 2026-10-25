@@ -944,15 +944,15 @@ html.js-enabled .cinema-ready .slide:nth-of-type(4) .slide__content { background
   border-color: #9333EA !important;
 }
 
-/* ===== Photo & Circle Subtle Bouncing Animation ===== */
+/* ===== Photo & Circle Subtle Bouncing Animation (طفيف وبطيء فوق ولتحت) ===== */
 @keyframes circleBounce {
   0%, 100% {
     transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
   }
   50% {
-    transform: translateY(-13px);
-    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    transform: translateY(-9px);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
   }
 }
 
@@ -962,14 +962,14 @@ html.js-enabled .cinema-ready .slide:nth-of-type(4) .slide__content { background
     border-color: rgba(168, 85, 247, 0.45);
   }
   50% {
-    box-shadow: 0 0 48px rgba(168, 85, 247, 0.75), inset 0 0 20px rgba(168, 85, 247, 0.35);
+    box-shadow: 0 0 44px rgba(168, 85, 247, 0.70), inset 0 0 18px rgba(168, 85, 247, 0.35);
     border-color: rgba(168, 85, 247, 0.85);
   }
 }
 
 html.js.js-enabled .hero-top-image,
 .hero-top-image {
-  animation: circleBounce 3.4s ease-in-out infinite !important;
+  animation: circleBounce 4.4s ease-in-out infinite !important;
   will-change: transform;
 }
 
@@ -978,7 +978,7 @@ html.js.js-enabled .hero-top-image,
   inset: -10px;
   border: 2px dashed rgba(168, 85, 247, 0.55);
   border-radius: 50%;
-  animation: spin 16s linear infinite, ringPulseGlow 3.4s ease-in-out infinite !important;
+  animation: spin 16s linear infinite, ringPulseGlow 4.4s ease-in-out infinite !important;
   z-index: 3;
   pointer-events: none;
 }

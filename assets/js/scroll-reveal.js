@@ -36,7 +36,7 @@
      ============================================================ */
   var heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTL
-    .from('.hero-top-image', { duration: mobile ? 0.5 : 0.7, opacity: 0, scale: 0.94, y: -16, clearProps: 'transform' })
+    .from('.hero-top-image', { duration: mobile ? 0.5 : 0.7, opacity: 0, scale: 0.94, clearProps: 'all' })
     .from('.hero-name', { duration: mobile ? 0.4 : 0.6, opacity: 0, y: -12 }, '-=0.35')
     .from('.hero-hook', { duration: 0.4, opacity: 0, y: -8 }, '-=0.25')
     .from('.typing-container', { duration: 0.4, opacity: 0, y: -8 }, '-=0.2')
