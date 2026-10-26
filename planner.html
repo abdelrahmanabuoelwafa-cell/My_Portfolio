@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -736,6 +736,44 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
   line-height: 1.4;
 }
 
+/* Selectable Tier Cards */
+.selectable-tier {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.selectable-tier:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+}
+.selectable-tier.tier-selected {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4), 0 4px 20px rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.08);
+}
+[data-theme="light"] .selectable-tier.tier-selected {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: #059669;
+}
+.beh-select-indicator {
+  display: none;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+}
+.selectable-tier.tier-selected .beh-select-indicator {
+  display: block;
+}
+.tier-select-hint {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin: 8px 0 12px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
 /* Future Enhancements Add-on Chips */
 .enhancements-grid {
   display: grid;
@@ -986,17 +1024,17 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
             <span data-pf="platLabel">Target Platform</span>
           </span>
           <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
-            <button type="button" class="pf-chip on" data-v="Mobile app (iOS & Android via Flutter)" data-pf="platMobile" aria-pressed="true">
-              <i class="fas fa-mobile-alt"></i> Mobile (iOS + Android)
+            <button type="button" class="pf-chip on" data-v="Mobile app (iOS & Android via Flutter)" aria-pressed="true">
+              <i class="fas fa-mobile-alt"></i> <span data-pf="platMobile">Mobile (iOS + Android)</span>
             </button>
-            <button type="button" class="pf-chip" data-v="Web application" data-pf="platWeb" aria-pressed="false">
-              <i class="fas fa-globe"></i> Web
+            <button type="button" class="pf-chip" data-v="Web application" aria-pressed="false">
+              <i class="fas fa-globe"></i> <span data-pf="platWeb">Web</span>
             </button>
-            <button type="button" class="pf-chip" data-v="Desktop application" data-pf="platDesktop" aria-pressed="false">
-              <i class="fas fa-desktop"></i> Desktop
+            <button type="button" class="pf-chip" data-v="Desktop application" aria-pressed="false">
+              <i class="fas fa-desktop"></i> <span data-pf="platDesktop">Desktop</span>
             </button>
-            <button type="button" class="pf-chip" data-v="Cross-Platform (Mobile, Web, Desktop)" data-pf="platUniversal" aria-pressed="false">
-              <i class="fas fa-infinity"></i> Cross-Platform
+            <button type="button" class="pf-chip" data-v="Cross-Platform (Mobile, Web, Desktop)" aria-pressed="false">
+              <i class="fas fa-infinity"></i> <span data-pf="platUniversal">Cross-Platform</span>
             </button>
           </div>
         </div>
@@ -1017,12 +1055,13 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
             <i class="fas fa-coins"></i>
             <span data-pf="currencyLabel">Preferred Currency & Country</span>
           </label>
-          <select id="planner-currency" class="pf-input">
-            <option value="USD" selected>🇺🇸 USD ($) — US Dollar</option>
-            <option value="EGP">🇪🇬 EGP (ج.م) — Egyptian Pound</option>
-            <option value="SAR">🇸🇦 SAR (ر.س) — Saudi Riyal</option>
-            <option value="AED">🇦🇪 AED (د.إ) — UAE Dirham</option>
-          </select>
+          <div class="pf-chips currency-chips" id="planner-currency-chips" role="group" aria-label="Currency">
+            <button type="button" class="pf-chip on" data-curr="USD" aria-pressed="true">🇺🇸 USD ($)</button>
+            <button type="button" class="pf-chip" data-curr="EGP" aria-pressed="false">🇪🇬 EGP (ج.م)</button>
+            <button type="button" class="pf-chip" data-curr="SAR" aria-pressed="false">🇸🇦 SAR (ر.س)</button>
+            <button type="button" class="pf-chip" data-curr="AED" aria-pressed="false">🇦🇪 AED (د.إ)</button>
+          </div>
+          <input type="hidden" id="planner-currency" value="USD">
         </div>
         <div class="pf-field">
           <label class="pf-label" for="planner-deadline">

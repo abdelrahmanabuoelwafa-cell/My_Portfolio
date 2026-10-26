@@ -1120,3 +1120,293 @@ html, body {
   overflow-x: clip;
 }
 
+/* ============================================================
+   Enhanced Direct Click-to-Action & Copy Contact Cards
+   ============================================================ */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.contact-link.contact-link-card.direct-contact-action {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 16px 20px !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  border-radius: 16px !important;
+  text-decoration: none !important;
+  color: var(--text) !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="light"] .contact-link.contact-link-card.direct-contact-action {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+}
+
+.contact-link.contact-link-card.direct-contact-action:hover {
+  transform: translateY(-3px) scale(1.01) !important;
+  border-color: #A855F7 !important;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.25) !important;
+}
+
+.contact-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.contact-icon-box.email-box {
+  background: rgba(168, 85, 247, 0.15);
+  color: #C084FC;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.contact-icon-box.phone-box {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ADE80;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.contact-badge-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.click-hint {
+  font-size: 10px;
+  font-weight: 600;
+  color: #A855F7;
+  opacity: 0.9;
+}
+
+.contact-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #F8FAFC;
+  letter-spacing: 0.2px;
+}
+
+[data-theme="light"] .contact-val {
+  color: #0F172A;
+}
+
+.contact-arrow-indicator {
+  margin-left: auto;
+  font-size: 16px;
+  color: var(--muted);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.contact-link-card.direct-contact-action:hover .contact-arrow-indicator {
+  opacity: 1;
+  color: #A855F7;
+  transform: scale(1.15) translate(2px, -2px);
+}
+
+/* Enlarged Social Icons */
+.contact-social-row {
+  display: flex !important;
+  gap: 14px !important;
+  margin-top: 24px !important;
+  flex-wrap: wrap !important;
+}
+
+.social-pill.large-social {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 12px 20px !important;
+  border-radius: 14px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  transition: all 0.25s ease !important;
+  text-decoration: none !important;
+}
+
+[data-theme="light"] .social-pill.large-social {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.25) !important;
+}
+
+.social-pill.large-social i {
+  font-size: 20px !important;
+}
+
+.social-pill.large-social.social-whatsapp i { color: #22C55E !important; }
+.social-pill.large-social.social-linkedin i { color: #0EA5E9 !important; }
+.social-pill.large-social.social-github i { color: #A855F7 !important; }
+
+.social-pill.large-social:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  border-color: #A855F7 !important;
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.3) !important;
+}
+
+/* ============================================================
+   Enhanced Soft Skills Cards
+   ============================================================ */
+.soft-skill-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 28px !important;
+}
+
+.skill-item.soft-skill-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding: 24px !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(168, 85, 247, 0.22) !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme="light"] .skill-item.soft-skill-card {
+  background: #FFFFFF !important;
+  border-color: rgba(147, 51, 234, 0.18) !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04) !important;
+}
+
+.skill-item.soft-skill-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(168, 85, 247, 0.5) !important;
+  box-shadow: 0 12px 32px rgba(168, 85, 247, 0.2) !important;
+}
+
+.ssc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.ssc-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.ssc-icon-wrap.cyan { background: rgba(6, 182, 212, 0.14); color: #22D3EE; border: 1px solid rgba(6, 182, 212, 0.35); }
+.ssc-icon-wrap.purple { background: rgba(168, 85, 247, 0.14); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.35); }
+.ssc-icon-wrap.emerald { background: rgba(16, 185, 129, 0.14); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.35); }
+.ssc-icon-wrap.amber { background: rgba(245, 158, 11, 0.14); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.35); }
+.ssc-icon-wrap.pink { background: rgba(236, 72, 153, 0.14); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.35); }
+.ssc-icon-wrap.indigo { background: rgba(99, 102, 241, 0.14); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.35); }
+
+.soft-skill-tag {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 5px 12px !important;
+  border-radius: 999px !important;
+  letter-spacing: 0.4px !important;
+}
+
+.tag-cyan { background: rgba(6, 182, 212, 0.12); color: #22D3EE; border: 1px solid rgba(6, 182, 212, 0.28); }
+.tag-purple { background: rgba(168, 85, 247, 0.12); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.28); }
+.tag-emerald { background: rgba(16, 185, 129, 0.12); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.28); }
+.tag-amber { background: rgba(245, 158, 11, 0.12); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.28); }
+.tag-pink { background: rgba(236, 72, 153, 0.12); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.28); }
+.tag-indigo { background: rgba(99, 102, 241, 0.12); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.28); }
+
+.skill-item.soft-skill-card h4 {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #F8FAFC !important;
+  margin: 0 0 8px 0 !important;
+}
+
+[data-theme="light"] .skill-item.soft-skill-card h4 {
+  color: #0F172A !important;
+}
+
+.ssc-desc {
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  color: var(--muted) !important;
+  margin: 0 0 16px 0 !important;
+  flex: 1 !important;
+}
+
+.ssc-highlight-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ssc-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+[data-theme="light"] .ssc-pill {
+  background: rgba(147, 51, 234, 0.06);
+  border-color: rgba(147, 51, 234, 0.15);
+  color: #1E293B;
+}
+
+/* Interactive Floating Copy Toast */
+.copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
