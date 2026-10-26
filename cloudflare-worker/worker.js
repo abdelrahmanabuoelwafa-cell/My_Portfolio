@@ -1,4 +1,4 @@
-/* my-ai-proxy — Secure AI proxy for Gemini (Cloudflare Worker)
+/* my-ai-proxy — Secure AI proxy for Groq (Cloudflare Worker)
    ----------------------------------------------------------
    - CORS: allowlist only (no wildcards); Vary: Origin on EVERY response;
      Access-Control-Allow-Origin echoed only for allowlisted origins
@@ -16,17 +16,24 @@
 
 /* ====== CORS allowlist (update with your deployed origin(s)) ====== */
 const ALLOWED_ORIGINS = new Set([
-  "https://abdelrahmanabuoelwafa-cell.github.io"            // GitHub Pages origin (update as needed)
+  "https://my-portfolio.mohammed-galalxc1.workers.dev",     // Workers deployment
+  "https://abdelrahmanabuoelwafa-cell.github.io",           // GitHub Pages origin
+  "http://localhost",                                        // Local dev (http)
+  "http://localhost:3000",
+  "http://localhost:8080",
+  "http://127.0.0.1",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:8080"
 ]);
 
-const ALLOWED_MODEL = "gemini-2.5-flash"; // Server-side constant; clients cannot select models
+const ALLOWED_MODEL = "openai/gpt-oss-120b"; // Free-tier model; server-side constant to avoid client misuse
 const MAX_BODY_BYTES = 32 * 1024;            // 32KB — reasonable for chat request payloads
 const MAX_MESSAGES = 40;                     // Max number of messages (excluding system to keep token count low)
 const MAX_CONTENT_CHARS = 6000;              // Max chars per message content
 const MAX_TOTAL_CHARS = 50000;               // Total chars across all messages
-const MAX_OUTPUT_TOKENS = 3072;              // Budget for the requested nine-section plan
+const MAX_OUTPUT_TOKENS = 1024;              // Max tokens for AI response (capped at Groq's limits)
 const MAX_RESPONSE_BYTES = 64 * 1024;        // Max bytes for response body (capped for safety)
-const UPSTREAM_TIMEOUT_MS = 30000;           // 30s timeout for Gemini upstream
+const UPSTREAM_TIMEOUT_MS = 30000;           // 30s timeout for Groq upstream
 
 /* Soft throttle config (best-effort) — runs on Cache API for approximate rate limiting.
    NOTE: This is NOT a guaranteed counter. For production-grade rate limiting, add
@@ -37,14 +44,47 @@ const SOFT_LIMIT_PER_MIN = 15;
 
 /* ====== System prompt for the AI assistant (server-side only) ====== */
 const SYSTEM_PROMPT =
-  "You are a professional product and technology consultant helping visitors of Abdelrahman Abdullah's Flutter developer portfolio create a practical project plan." +
-  "\nRespond in the same language as the user's request (Arabic or English)." +
-  "\nReturn exactly 9 numbered sections, each on its own line, using plain text and this structure:" +
-  "\n1) Project summary 2) Problem and solution 3) Target users 4) Core MVP features 5) Future features" +
-  "\n6) Suggested technology stack with reasons 7) Development phases and rough timeline" +
-  "\n8) Risks, assumptions, and open questions 9) Recommended next steps." +
-  "\nBe concise and practical (about 3-6 lines per section). Do not invent facts, clients, metrics, fixed budgets, or guaranteed deadlines." +
-  "\nLabel estimates as preliminary and mention missing information under risks. This is planning guidance, not a quote or commitment.";
+  "You are a highly professional, multilingual AI assistant representing Abdelrahman Abdullah, a Flutter developer and software engineer." +
+  "\n\nYour Role:" +
+  "\n- You are the primary point of contact for clients visiting the portfolio website." +
+  "\n- You speak any language fluently (Arabic, English, or others based on user preference)." +
+  "\n- You have exceptional persuasion and communication skills." +
+  "\n- You combine general conversation assistance with advanced sales capabilities." +
+  "\n\nCommunication Style:" +
+  "\n- Formal, professional, yet warm and approachable." +
+  "\n- Clear, concise, and direct responses." +
+  "\n- Use persuasive language that builds trust and credibility." +
+  "\n- Adapt your tone to match the user's language and formality level." +
+  "\n\nCapabilities:" +
+  "\n1) General Conversation: Answer questions about Abdelrahman's services, skills, experience, technology stack, and work philosophy." +
+  "\n2) Sales & Business Development: Engage clients, understand their needs, explain value propositions, and guide them toward collaboration." +
+  "\n3) Professional Planning: Create detailed, professional implementation plans based on client requirements when requested." +
+  "\n\nPlanning Process (when a client needs a project plan):" +
+  "\n- Ask smart, clarifying questions to understand: project idea, target users, key features, platform(s), budget range, timeline." +
+  "\n- Show a summary of requirements and ask for confirmation before creating a detailed plan." +
+  "\n- After confirmation, provide: project overview, MVP scope, implementation phases, recommended tech stack, timeline with assumptions, and open decisions." +
+  "\n\nStrict Safety Rules (NEVER violate these):" +
+  "\n- DO NOT fabricate past clients, testimonials, case studies, or specific results." +
+  "\n- DO NOT provide formal price quotes in Abdelrahman's name. Pricing is decided after full scope discussion. You may give rough ranges based on complexity." +
+  "\n- DO NOT promise specific deadlines, budgets, or outcomes. Use phrases like \"typically,\" \"approximately,\" \"depending on scope.\"" +
+  "\n- DO NOT imply that execution, contact, or agreement has started. Direct formal commitments to Abdelrahman." +
+  "\n- DO NOT invent statistics, metrics, or performance data." +
+  "\n\nInformation You Know (about Abdelrahman):" +
+  "\n- Flutter developer and software engineer" +
+  "\n- Specializes in mobile app development (Android, iOS)" +
+  "\n- Experience with: Flutter, Dart, Firebase, REST APIs, Git, UI/UX design" +
+  "\n- Education: B.Sc. Computer Science & AI at MTI (2024-2028)" +
+  "\n- Training: ITI, DEPI programs" +
+  "\n- Approach: Focus on clean code, performance, and user experience" +
+  "\n\nResponse Guidelines:" +
+  "\n- Always respond in the user's preferred language (match their language)." +
+  "\n- Be helpful, informative, and persuasive without being pushy." +
+  "\n- If you don't know specific details, admit it honestly and offer to connect the user with Abdelrahman." +
+  "\n- Use Markdown for lists and structure when it improves readability." +
+  "\n- Keep responses concise but comprehensive." +
+  "\n\nError Handling:" +
+  "\n- If a user asks for something outside your scope (e.g., \"sign a contract now\"), politely redirect: \"I can help you prepare, but formal agreements are handled directly by Abdelrahman. Would you like me to facilitate an introduction?\"" +
+  "\n- If asked about sensitive topics (internal processes, personal information beyond portfolio), maintain professional boundaries.";
 /* ======================================================== */
 
 function corsHeaders(origin) {
@@ -164,7 +204,7 @@ export default {
       return new Response(JSON.stringify({ error: "Too many requests" }), { status: 429, headers: h });
     }
 
-    if (!env.GEMINI_API_KEY) {
+    if (!env.GROQ_API_KEY) {
       return jsonRes(echoOrigin, 500, { error: "Server configuration error" });
     }
 
@@ -191,18 +231,33 @@ export default {
       return jsonRes(echoOrigin, 400, { error: "Invalid body" });
     }
 
-    /* --- Strict field validation: only 'messages' allowed, no model, no extra fields --- */
+    /* --- Field validation: accept { messages } array OR { message, history } legacy format --- */
     const bodyKeys = Object.keys(body);
+    const validKeys = new Set(["messages", "message", "history", "systemPrompt", "conversationHistory"]);
     for (let i = 0; i < bodyKeys.length; i++) {
-      if (bodyKeys[i] !== "messages") {
+      if (!validKeys.has(bodyKeys[i])) {
         return jsonRes(echoOrigin, 400, { error: "Unknown field: " + bodyKeys[i] });
       }
     }
 
-    const rawMessages = body.messages;
+    /* Normalize to rawMessages array */
+    let rawMessages;
+    if (Array.isArray(body.messages)) {
+      rawMessages = body.messages;
+    } else if (typeof body.message === "string") {
+      /* Legacy format: { message, history? } - convert to messages array */
+      rawMessages = [];
+      const hist = Array.isArray(body.history) ? body.history : (Array.isArray(body.conversationHistory) ? body.conversationHistory : []);
+      hist.forEach(m => { if (m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string") rawMessages.push({ role: m.role, content: m.content }); });
+      rawMessages.push({ role: "user", content: body.message });
+    } else {
+      return jsonRes(echoOrigin, 400, { error: "Body must contain 'messages' array or 'message' string" });
+    }
+
     if (!Array.isArray(rawMessages) || rawMessages.length === 0 || rawMessages.length > MAX_MESSAGES) {
       return jsonRes(echoOrigin, 400, { error: "messages must be an array of 1-" + MAX_MESSAGES });
     }
+
 
     /* --- Strict message validation: only role + content, alternating, no system from client --- */
     let total = 0;
@@ -253,21 +308,20 @@ export default {
     /* system prompt added server-side (not exposed to client) */
     const finalMessages = [{ role: "system", content: SYSTEM_PROMPT }].concat(clean);
 
-    /* --- Upstream call to Gemini: key stays in Worker secrets --- */
+    /* --- Upstream call to Groq: fetch with timeout, auth, and error handling --- */
     let resp;
     try {
-      resp = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + ALLOWED_MODEL + ":generateContent", {
+      resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-goog-api-key": env.GEMINI_API_KEY
+          "Authorization": "Bearer " + env.GROQ_API_KEY
         },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents: clean.map(function (message) {
-            return { role: message.role === "assistant" ? "model" : "user", parts: [{ text: message.content }] };
-          }),
-          generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS, temperature: 0.4 }
+          model: ALLOWED_MODEL,
+          messages: finalMessages,
+          stream: false,
+          max_tokens: MAX_OUTPUT_TOKENS
         }),
         signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS)
       });
@@ -304,10 +358,8 @@ export default {
       console.error("upstream_bad_json");
       return jsonRes(echoOrigin, 502, { error: "AI service unavailable" });
     }
-    const candidate = data && data.candidates && data.candidates[0];
-    const content = candidate && candidate.content && Array.isArray(candidate.content.parts)
-      ? candidate.content.parts.map(function (part) { return typeof part.text === "string" ? part.text : ""; }).join("")
-      : "";
+    const choice = data && data.choices && data.choices[0];
+    const content = choice && choice.message && choice.message.content;
     if (typeof content !== "string" || content.length === 0) {
       console.error("upstream_unexpected_shape");
       return jsonRes(echoOrigin, 502, { error: "AI service unavailable" });
@@ -322,9 +374,9 @@ export default {
       choices: [{
         index: 0,
         message: { role: "assistant", content: content },
-        finish_reason: candidate && candidate.finishReason ? String(candidate.finishReason).toLowerCase() : "stop"
+        finish_reason: typeof choice.finish_reason === "string" ? choice.finish_reason : "stop"
       }],
-      model: ALLOWED_MODEL
+      model: typeof data.model === "string" ? data.model : ALLOWED_MODEL
     };
     const outBytes = new TextEncoder().encode(JSON.stringify(out)).byteLength;
     if (outBytes > MAX_RESPONSE_BYTES) {

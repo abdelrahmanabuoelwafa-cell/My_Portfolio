@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    Cinematic Scroll Animations — CSS Foundation with Glow Effects
    Works with GSAP ScrollTrigger (scroll-reveal.js)
    No-JS fallback: content visible by default
@@ -1734,47 +1734,29 @@ html.js-enabled .hero-top-image {
 
 
 /* ============================================================
-   TRUE PHYSICS-BASED BALL BOUNCING ANIMATION
-   (Bounces fluidly like a real rubber ball with squash & stretch)
+   GENTLE BUBBLE FLOATING ANIMATION
+   (Smooth, subtle floating in place like a weightless bubble)
    ============================================================ */
-@keyframes ballBouncePhysics {
-  0% {
-    transform: translateY(0) scale(1, 1);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  25% {
-    transform: translateY(-28px) scale(0.94, 1.06);
-    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
+@keyframes gentleBubbleFloat {
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(0) scale(1.10, 0.90);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  75% {
-    transform: translateY(-13px) scale(0.97, 1.03);
-    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
-  }
-  90% {
-    transform: translateY(0) scale(1.04, 0.96);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  100% {
-    transform: translateY(0) scale(1, 1);
+    transform: translateY(-11px);
   }
 }
 
 .hero-top-image,
 html.js .hero-top-image,
 html.js-enabled .hero-top-image {
-  animation: ballBouncePhysics 2.6s ease-in-out infinite !important;
-  transform-origin: bottom center !important;
+  animation: gentleBubbleFloat 4.2s ease-in-out infinite !important;
   will-change: transform;
 }
 
-.about-image .about-img-container,
-.about-img-container {
-  animation: ballBouncePhysics 2.8s ease-in-out infinite !important;
-  transform-origin: bottom center !important;
+.about-image,
+html.js .about-image,
+html.js-enabled .about-image {
+  animation: gentleBubbleFloat 4.8s ease-in-out infinite !important;
   will-change: transform;
 }
 
@@ -1804,251 +1786,3 @@ html.js-enabled .hero-top-image {
   .whoiam-banner .whoiam-line3 {
     font-size: 15px !important;
     line-height: 1.6 !important;
-  }
-}
-
-/* ============================================================
-   ULTRA-PREMIUM FOOTER REDESIGN (Matches Image 4 with Luxury Glow)
-   ============================================================ */
-.premium-footer {
-  position: relative !important;
-  background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.12), transparent 70%), #070A14 !important;
-  border-top: 1px solid rgba(168, 85, 247, 0.28) !important;
-  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.5) !important;
-  padding: 60px 24px 30px !important;
-  margin-top: 60px !important;
-}
-
-[data-theme="light"] .premium-footer {
-  background: radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.08), transparent 70%), #F8FAFC !important;
-  border-top-color: rgba(147, 51, 234, 0.2) !important;
-  box-shadow: 0 -12px 35px rgba(147, 51, 234, 0.05) !important;
-}
-
-.premium-footer::before {
-  content: "" !important;
-  position: absolute !important;
-  top: -1px !important;
-  left: 10% !important;
-  right: 10% !important;
-  height: 2px !important;
-  background: linear-gradient(90deg, transparent, #A855F7, #22D3EE, transparent) !important;
-  pointer-events: none !important;
-}
-
-.footer-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)) !important;
-  gap: 24px !important;
-  max-width: 1200px !important;
-  margin: 0 auto 40px !important;
-  align-items: stretch !important;
-}
-
-.footer-col {
-  background: rgba(15, 23, 42, 0.55) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(168, 85, 247, 0.22) !important;
-  border-radius: 22px !important;
-  padding: 30px 26px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-[data-theme="light"] .footer-col {
-  background: #FFFFFF !important;
-  border-color: rgba(147, 51, 234, 0.18) !important;
-  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.04) !important;
-}
-
-.footer-col:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(168, 85, 247, 0.5) !important;
-  box-shadow: 0 14px 34px rgba(168, 85, 247, 0.2) !important;
-}
-
-.footer-title {
-  font-size: 13px !important;
-  font-weight: 800 !important;
-  letter-spacing: 1.8px !important;
-  color: #C084FC !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  margin-bottom: 14px !important;
-  text-transform: uppercase !important;
-}
-
-[data-theme="light"] .footer-title {
-  color: #7C3AED !important;
-}
-
-.footer-col p {
-  font-size: 14px !important;
-  line-height: 1.7 !important;
-  color: var(--muted) !important;
-  margin-bottom: 20px !important;
-}
-
-/* Center Logo & Subtitle */
-.footer-col.center-col {
-  align-items: center !important;
-  text-align: center !important;
-}
-
-.footer-logo-img {
-  width: 68px !important;
-  height: 68px !important;
-  border-radius: 50% !important;
-  padding: 4px !important;
-  background: rgba(168, 85, 247, 0.15) !important;
-  border: 2px solid rgba(168, 85, 247, 0.4) !important;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3) !important;
-  margin-bottom: 12px !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.footer-col.center-col:hover .footer-logo-img {
-  transform: scale(1.08) rotate(5deg) !important;
-  box-shadow: 0 0 28px rgba(168, 85, 247, 0.6) !important;
-}
-
-.footer-subtitle {
-  display: inline-block !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.6px !important;
-  color: #E2E8F0 !important;
-  background: rgba(168, 85, 247, 0.14) !important;
-  border: 1px solid rgba(168, 85, 247, 0.32) !important;
-  padding: 5px 16px !important;
-  border-radius: 999px !important;
-  margin-bottom: 20px !important;
-}
-
-[data-theme="light"] .footer-subtitle {
-  color: #0F172A !important;
-  background: rgba(147, 51, 234, 0.08) !important;
-  border-color: rgba(147, 51, 234, 0.22) !important;
-}
-
-/* Freelance Platforms Row */
-.freelance-platforms {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  flex-wrap: wrap !important;
-  margin-top: auto !important;
-  width: 100% !important;
-}
-
-.platform-icon {
-  width: 50px !important;
-  height: 50px !important;
-  border-radius: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(15, 23, 42, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
-  overflow: hidden !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  padding: 8px !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-}
-
-[data-theme="light"] .platform-icon {
-  background: #F8FAFC !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
-}
-
-.platform-icon img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  border-radius: 8px !important;
-  transition: transform 0.25s ease !important;
-}
-
-.platform-icon:hover {
-  transform: translateY(-4px) scale(1.08) !important;
-  border-color: var(--platform-color, #A855F7) !important;
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--platform-color, #A855F7) 50%, transparent) !important;
-}
-
-.platform-icon:hover img {
-  transform: scale(1.1) !important;
-}
-
-/* Left Column Social Icons */
-.footer-social-icons {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  margin-top: auto !important;
-}
-
-.footer-social-icons a {
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 12px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 19px !important;
-  color: var(--text) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  transition: all 0.25s ease !important;
-  text-decoration: none !important;
-}
-
-[data-theme="light"] .footer-social-icons a {
-  background: #F1F5F9 !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-.footer-social-icons a:hover {
-  transform: translateY(-3px) !important;
-  color: #FFFFFF !important;
-}
-
-.footer-social-icons a[aria-label*="GitHub"]:hover {
-  background: #A855F7 !important;
-  border-color: #A855F7 !important;
-  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4) !important;
-}
-
-.footer-social-icons a[aria-label*="LinkedIn"]:hover {
-  background: #0EA5E9 !important;
-  border-color: #0EA5E9 !important;
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4) !important;
-}
-
-.footer-social-icons a[aria-label*="WhatsApp"]:hover {
-  background: #22C55E !important;
-  border-color: #22C55E !important;
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4) !important;
-}
-
-/* Footer Copyright */
-.footer-copy {
-  text-align: center !important;
-  font-size: 13px !important;
-  color: var(--muted) !important;
-  padding-top: 24px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-  letter-spacing: 0.5px !important;
-  margin: 0 !important;
-}
-
-[data-theme="light"] .footer-copy {
-  border-top-color: rgba(0, 0, 0, 0.06) !important;
-}

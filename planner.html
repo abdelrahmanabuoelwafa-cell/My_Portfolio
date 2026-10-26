@@ -723,13 +723,163 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
   margin-bottom: 4px;
 }
 .beh-price {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   color: #F8FAFC;
   font-family: var(--font-heading);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+.beh-price .price-range {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px;
+}
+.beh-price .price-curr {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #C084FC !important;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
 }
 [data-theme="light"] .beh-price { color: #0F172A; }
+[data-theme="light"] .beh-price .price-curr { color: #7C3AED !important; }
+
+/* Dynamic Milestone Payment Breakdown */
+.milestones-payment-box {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 18px 0;
+  backdrop-filter: blur(10px);
+}
+[data-theme="light"] .milestones-payment-box {
+  background: #F8FAFC;
+  border-color: rgba(147, 51, 234, 0.2);
+}
+.mpb-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #C084FC;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[data-theme="light"] .mpb-title { color: #7C3AED; }
+.mpb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+.mpb-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.2s;
+}
+[data-theme="light"] .mpb-item {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+.mpb-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.mpb-phase-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+[data-theme="light"] .mpb-phase-name { color: #0F172A; }
+.mpb-phase-amount {
+  font-size: 13px;
+  font-weight: 800;
+  color: #38BDF8;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+.mpb-phase-desc {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Plan Content Formatting (Tables, Lists, Cards) */
+.cpc-content {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(226, 232, 240, 0.88);
+}
+[data-theme="light"] .cpc-content {
+  color: #334155;
+}
+.cpc-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.cpc-bullet-icon {
+  color: #A855F7;
+  font-size: 13px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.cpc-table-wrap {
+  overflow-x: auto;
+  margin: 14px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+.cpc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+html[lang="ar"] .cpc-table {
+  text-align: right;
+}
+.cpc-table th {
+  background: rgba(168, 85, 247, 0.18);
+  color: #F8FAFC;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+}
+[data-theme="light"] .cpc-table th {
+  background: rgba(147, 51, 234, 0.12);
+  color: #0F172A;
+}
+.cpc-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+[data-theme="light"] .cpc-table td {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+.cpc-table tr:last-child td {
+  border-bottom: none;
+}
+.cpc-table tr:hover td {
+  background: rgba(168, 85, 247, 0.05);
+}
 .beh-desc {
   font-size: 11px;
   color: var(--muted);
@@ -960,12 +1110,12 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
 <!-- Top Navbar -->
 <header class="planner-nav">
   <a href="index.html" class="nav-brand">
-    <img src="images/brand-icon-96.png" alt="Abdelrahman Abdullah" width="36" height="36">
+    <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" width="36" height="36" style="border-radius:50%;object-fit:cover;object-position:center top;">
     <span>Abdelrahman's AI</span>
   </a>
   <div class="nav-controls">
     <a href="index.html" class="nav-btn" id="backToHomeBtn">
-      <i class="fas fa-arrow-left"></i>
+      <img src="images/profile-closeup.jpg" alt="" style="width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid var(--neon);margin-inline-end:4px;">
       <span data-pf="backHome">Portfolio</span>
     </a>
     <button type="button" class="nav-btn" id="themeToggle" aria-label="Toggle Theme">
@@ -1169,7 +1319,7 @@ textarea.pf-input { resize: vertical; min-height: 90px; }
 </script>
 
 <!-- AI Business Planner Script -->
-<script src="assets/js/ai-planner.js?v=34" defer></script>
+<script src="assets/js/ai-planner.js?v=40" defer></script>
 
 </body>
 </html>

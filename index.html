@@ -46,12 +46,11 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-
-<!-- Google Fonts (Non-blocking link) -->
+<!-- Google Fonts (moved from CSS @import for performance) -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap">
-
-<!-- Central Config & Pricing Data (Single Source of Truth) -->
+<!-- Central config — MUST be first script -->
 <script src="js/site-config.js"></script>
+<!-- Pricing data — single source of truth -->
 <script src="js/pricing-data.js"></script>
 
 <!-- Basic Analytics -->
@@ -155,6 +154,8 @@
 }
 </script> 
 <style> 
+/* Google Fonts loaded via <link> in <head> for performance */
+
 :root { 
   --primary: #A855F7; 
   --secondary: #9333EA; 
@@ -345,7 +346,9 @@ body::after{
   50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
 }
 
-
+.project-card:hover {
+  animation: glowPulse 2s ease-in-out infinite;
+}
 
 /* Testimonials Section Styling */
 .testimonials-grid {
@@ -646,50 +649,19 @@ body::after{
   flex-direction:column; 
   align-items:center; 
 } 
-@keyframes ballBouncePhysics {
-  0% {
-    transform: translateY(0) scale(1, 1);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  25% {
-    transform: translateY(-28px) scale(0.94, 1.06);
-    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
-  }
-  50% {
-    transform: translateY(0) scale(1.10, 0.90);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  75% {
-    transform: translateY(-13px) scale(0.97, 1.03);
-    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
-  }
-  90% {
-    transform: translateY(0) scale(1.04, 0.96);
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-  100% {
-    transform: translateY(0) scale(1, 1);
-  }
-}
-
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-12px); }
-}
-@keyframes ringGlow {
-  0%, 100% { box-shadow: 0 0 28px rgba(168,85,247,.30); }
-  50%      { box-shadow: 0 0 52px rgba(168,85,247,.60); }
-}
 .hero-top-image{ 
   position:relative; 
   width:clamp(155px,22vw,245px);
   height:clamp(155px,22vw,245px);
   margin-bottom:24px; 
+  animation:fadeInDown 1s ease; 
   border-radius:50%;
   overflow:visible;
-  animation: ballBouncePhysics 2.6s ease-in-out infinite;
-  will-change: transform;
-  transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+} 
+@keyframes fadeInDown{ 
+  from{opacity:0;transform:translateY(-30px)} 
+  to{opacity:1;transform:translateY(0)} 
 } 
 .top-img-container{ 
   width:100%; 
@@ -721,60 +693,26 @@ body::after{
   z-index: 3;
   pointer-events: none;
 } 
-[data-theme="light"] .top-img-ring {
-  box-shadow: 0 0 20px rgba(147,51,234,.20);
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-top-image, .top-img-ring { animation: none !important; }
-}
 @keyframes spin{to{transform:rotate(360deg)}} 
 .floating-badge{ 
   position:absolute; 
-  bottom:2px; 
-  right:2px; 
-  width:48px;
-  height:48px;
+  bottom:0; 
+  right:0; 
+  width:46px;
+  height:46px;
   padding:0;
-  background:rgba(18, 18, 32, 0.88); 
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border:2px solid rgba(168, 85, 247, 0.6); 
+  background:var(--card-bg); 
+  border:2px solid var(--neon); 
   border-radius:50%;
   display:flex; 
   align-items:center; 
   justify-content:center; 
-  box-shadow:0 4px 20px rgba(168,85,247,.45), inset 0 1px 1px rgba(255,255,255,0.25); 
+  font-size:20px;
+  box-shadow:0 0 20px rgba(168,85,247,.5); 
   z-index:10; 
-  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 } 
-.floating-badge:hover{
-  transform:scale(1.15) rotate(8deg);
-  border-color:#38bdf8;
-  box-shadow:0 6px 25px rgba(56,189,248,.5), inset 0 1px 1px rgba(255,255,255,0.4);
-}
-.chic-tech-svg{
-  width:24px;
-  height:24px;
-  display:block;
-  filter:drop-shadow(0 2px 8px rgba(56,189,248,.65));
-  transition:transform 0.3s ease;
-}
-.floating-badge:hover .chic-tech-svg{
-  transform:scale(1.1);
-}
-@keyframes chicIconFloat{
-  0%, 100%{transform:translateY(0);}
-  50%{transform:translateY(-2px);}
-}
-[data-theme="light"] .floating-badge{
-  background:rgba(255, 255, 255, 0.92);
-  border-color:rgba(147, 51, 234, 0.5);
-  box-shadow:0 4px 15px rgba(147, 51, 234, 0.25);
-}
-[data-theme="light"] .chic-tech-icon{
-  color:#0284c7;
-  filter:drop-shadow(0 2px 4px rgba(2, 132, 199, 0.4));
-}
+.lab-icon{color:var(--accent);animation:labIconPulse 2.2s ease-in-out infinite}
+@keyframes labIconPulse{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-3px) rotate(-8deg) scale(1.12)}}
 @keyframes bounce{ 
   0%,100%{transform:translateY(0)} 
   50%{transform:translateY(-10px)} 
@@ -1869,10 +1807,9 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   opacity:1;
 }
 .project-card:hover{ 
-  opacity:1 !important;
   border-color:var(--neon); 
-  transform:translateY(-8px); 
-  box-shadow:0 20px 45px rgba(168, 85, 247, 0.45); 
+  transform:translateY(-10px) scale(1.02); 
+  box-shadow:0 25px 50px rgba(168, 85, 247, 0.7); 
 } 
 /* Expanded 420px Showcase Image Box for Full High-Quality Mockup View */
 .project-image{ 
@@ -3703,119 +3640,6 @@ footer p{
   color: #dc2626;
 }
 
-/* ===== Neon CTA Box (Link to planner.html) ===== */
-.neon-cta-box {
-  position: relative;
-  border-radius: 24px;
-  isolation: isolate;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0 auto;
-}
-.neon-cta-box:hover {
-  transform: translateY(-4px) scale(1.01);
-}
-.neon-cta-box::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  z-index: -1;
-  border-radius: 27px;
-  background: linear-gradient(120deg, #a855f7, #22d3ee, #34d399, #a855f7);
-  background-size: 300% 300%;
-  animation: neonFlow 8s ease infinite;
-  filter: blur(12px);
-  opacity: .5;
-  transition: opacity 0.3s ease;
-}
-.neon-cta-box:hover::before {
-  opacity: .75;
-  filter: blur(16px);
-}
-@keyframes neonFlow {
-  0%,100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-.neon-cta-inner {
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  border-radius: 24px;
-  padding: 48px 36px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-[data-theme="light"] .neon-cta-inner {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(147, 51, 234, 0.3);
-}
-.neon-cta-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  color: #c084fc;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-[data-theme="light"] .neon-cta-badge {
-  background: rgba(147, 51, 234, 0.1);
-  color: #7c3aed;
-  border-color: rgba(147, 51, 234, 0.25);
-}
-.neon-cta-dot {
-  width: 8px;
-  height: 8px;
-  background: #34d399;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #34d399;
-  animation: pulse-green 2s infinite;
-}
-.neon-cta-title {
-  font-size: clamp(22px, 3.5vw, 32px);
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.3;
-  max-width: 650px;
-}
-.neon-cta-desc {
-  font-size: clamp(14px, 1.8vw, 16px);
-  color: var(--muted);
-  max-width: 620px;
-  line-height: 1.6;
-}
-.neon-cta-btn-wrap {
-  margin-top: 8px;
-}
-.neon-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #a855f7, #6366f1);
-  border-radius: 30px;
-  text-decoration: none;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
-  transition: all 0.3s ease;
-}
-.neon-cta-btn:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
-  color: #ffffff;
-}
-
 @media (max-width: 768px) {
   .pf-grid2 {
     grid-template-columns: 1fr;
@@ -3864,7 +3688,7 @@ footer p{
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <img class="brand-mark" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96">
+    <img class="brand-mark" src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" width="960" height="960" style="object-fit:cover;object-position:center top;">
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
       <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
@@ -3878,7 +3702,7 @@ footer p{
       <li><a href="#skills" target="_self">Skills</a></li> 
       <li><a href="#experience" target="_self">Experience</a></li> 
       <li><a href="#services" target="_self">Services</a></li>
-      <li><a href="#projects" target="_self">Projects</a></li>
+      <li><a href="#projects" target="_self">Projects</a></li> 
       <li><a href="#achievements" target="_self">Achievements</a></li>
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
     </ul> 
@@ -3917,24 +3741,7 @@ footer p{
         <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
-      <div class="floating-badge" role="img" aria-label="Software & Mobile Development">
-        <svg class="chic-tech-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="2.5" y="3.5" width="19" height="12" rx="2" stroke="url(#chic-screen-grad)" stroke-width="1.8" fill="rgba(15, 23, 42, 0.85)"/>
-          <path d="M6.5 7.5L9 9.5L6.5 11.5M11.5 11.5H15.5" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M1 18C1 17.1716 1.67157 16.5 2.5 16.5H21.5C22.3284 16.5 23 17.1716 23 18C23 18.8284 22.3284 19.5 21.5 19.5H2.5C1.67157 19.5 1 18.8284 1 18Z" fill="url(#chic-base-grad)"/>
-          <rect x="9.5" y="16.5" width="5" height="1" rx="0.5" fill="#38BDF8"/>
-          <defs>
-            <linearGradient id="chic-screen-grad" x1="2.5" y1="3.5" x2="21.5" y2="15.5" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#38BDF8"/>
-              <stop offset="1" stop-color="#A855F7"/>
-            </linearGradient>
-            <linearGradient id="chic-base-grad" x1="1" y1="16.5" x2="23" y2="19.5" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#38BDF8"/>
-              <stop offset="1" stop-color="#A855F7"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+      <div class="floating-badge" role="img" aria-label="Development workspace"><i class="fas fa-laptop-code lab-icon" aria-hidden="true"></i></div>
     </div> 
 
     <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
@@ -3967,6 +3774,11 @@ footer p{
       <span class="hero-scroll-text">Scroll to explore</span> 
     </div> 
   </div> 
+
+  <div class="scroll-indicator"> 
+    <span>SCROLL</span> 
+    <i class="fas fa-chevron-down"></i> 
+  </div> 
 </section> 
 
 <!-- About Section --> 
@@ -3977,7 +3789,7 @@ footer p{
   </div> 
   <div class="about-grid"> 
     <div class="about-content reveal"> 
-      <div class="whoiam-banner">
+      <div class="whoiam-banner reveal">
         <div class="whoiam-label">WHO I AM</div>
         <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
         <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
@@ -4188,115 +4000,20 @@ footer p{
       <div class="skills-desc"><p>Complementing technical rigor with collaborative agility, structured problem decomposition, and reliable execution.</p></div>
       <div class="skill-header"><i class="fas fa-people-group"></i><h3>Soft Skills</h3></div>
       <div class="soft-skill-grid">
-        <div class="skill-item soft-skill-card" data-accent="cyan">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap cyan"><i class="fas fa-users"></i></div>
-            <span class="soft-skill-tag tag-cyan">Agile Collaboration</span>
-          </div>
-          <h4>Teamwork</h4>
-          <p class="ssc-desc">Active contributor in <strong class="hl-cyan">cross-functional squads</strong>, sprint reviews, and mutual code reviews.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">Agile Sprints</span><span class="ssc-pill">Git Flow</span></div>
-        </div>
-
-        <div class="skill-item soft-skill-card" data-accent="purple">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap purple"><i class="fas fa-lightbulb"></i></div>
-            <span class="soft-skill-tag tag-purple">Root-Cause Analysis</span>
-          </div>
-          <h4>Problem Solving</h4>
-          <p class="ssc-desc">Decomposing complex architecture bugs into <strong class="hl-purple">modular, testable</strong>, and clean Flutter solutions.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">Clean Architecture</span><span class="ssc-pill">Debugging</span></div>
-        </div>
-
-        <div class="skill-item soft-skill-card" data-accent="emerald">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap emerald"><i class="fas fa-clock"></i></div>
-            <span class="soft-skill-tag tag-emerald">Milestone Precision</span>
-          </div>
-          <h4>Time Management</h4>
-          <p class="ssc-desc">Delivering scoped features on time, prioritizing <strong class="hl-green">MVP releases</strong>, and meeting sprint goals.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">Fast MVP</span><span class="ssc-pill">Deadlines</span></div>
-        </div>
-
-        <div class="skill-item soft-skill-card" data-accent="amber">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap amber"><i class="fas fa-layer-group"></i></div>
-            <span class="soft-skill-tag tag-amber">High-Throughput</span>
-          </div>
-          <h4>Multitasking</h4>
-          <p class="ssc-desc">Simultaneously managing <strong class="hl-orange">pixel-perfect UI</strong>, responsive state handling, and backend APIs.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">UI/UX Polish</span><span class="ssc-pill">API Sync</span></div>
-        </div>
-
-        <div class="skill-item soft-skill-card" data-accent="pink">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap pink"><i class="fas fa-comments"></i></div>
-            <span class="soft-skill-tag tag-pink">Client &amp; Tech Fluency</span>
-          </div>
-          <h4>Communication</h4>
-          <p class="ssc-desc">Translating non-technical client visions into <strong style="color:#EC4899;">crystal-clear engineering</strong> milestones.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">Client Demos</span><span class="ssc-pill">Reporting</span></div>
-        </div>
-
-        <div class="skill-item soft-skill-card" data-accent="indigo">
-          <div class="ssc-top">
-            <div class="ssc-icon-wrap indigo"><i class="fas fa-bolt"></i></div>
-            <span class="soft-skill-tag tag-indigo">Rapid Adaptability</span>
-          </div>
-          <h4>Fast Learning</h4>
-          <p class="ssc-desc">Continuous adoption of cutting-edge tech — from <strong class="hl-cyan">Dart 3 patterns</strong> to generative AI toolchains.</p>
-          <div class="ssc-highlight-bar"><span class="ssc-pill">Dart 3</span><span class="ssc-pill">AI Tools</span></div>
-        </div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-people-group"></i><h4>Teamwork</h4><span class="soft-skill-tag">Collaboration</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-lightbulb"></i><h4>Problem Solving</h4><span class="soft-skill-tag">Analytical</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-clock"></i><h4>Time Management</h4><span class="soft-skill-tag">Organization</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-list-check"></i><h4>Multitasking</h4><span class="soft-skill-tag">Execution</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-comments"></i><h4>Communication</h4><span class="soft-skill-tag">Interpersonal</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-book-open"></i><h4>Fast Learning</h4><span class="soft-skill-tag">Growth</span></div>
       </div>
     </div>
 
     <div class="skill-category reveal hidden" data-skill-panel="spoken-languages">
-      <div class="skills-desc">
-        <p>Clear communication is the bridge between software architecture and business outcomes. Fluent in both <strong>Arabic</strong> and <strong>English</strong> for seamless collaboration across global engineering teams and regional stakeholders.</p>
-      </div>
-      <div class="skill-header"><i class="fas fa-language"></i><h3>Languages</h3></div>
-      <div class="languages-showcase-grid">
-        <div class="lang-showcase-card" data-accent="emerald">
-          <div class="lsc-top">
-            <div class="lsc-icon-wrap emerald"><i class="fas fa-globe-africa"></i></div>
-            <span class="lsc-badge badge-emerald">Native Language</span>
-          </div>
-          <div class="lsc-header-row">
-            <h4>Arabic</h4>
-            <span class="lsc-native-title">العربية</span>
-          </div>
-          <p class="lsc-desc">Mother tongue. Natural fluency in technical terminology, client management, and team leadership across the MENA region.</p>
-          <div class="lsc-level-bar">
-            <div class="lsc-level-track"><div class="lsc-level-fill fill-emerald" style="width: 100%;"></div></div>
-            <span class="lsc-level-label">Native / Mother Tongue • 100%</span>
-          </div>
-          <div class="lsc-tags">
-            <span class="lsc-tag">Mother Tongue</span>
-            <span class="lsc-tag">Tech Docs</span>
-            <span class="lsc-tag">Client Meetings</span>
-          </div>
-        </div>
-
-        <div class="lang-showcase-card" data-accent="cyan">
-          <div class="lsc-top">
-            <div class="lsc-icon-wrap cyan"><i class="fas fa-globe-americas"></i></div>
-            <span class="lsc-badge badge-cyan">Full Professional</span>
-          </div>
-          <div class="lsc-header-row">
-            <h4>English</h4>
-            <span class="lsc-native-title">English</span>
-          </div>
-          <p class="lsc-desc">Full professional proficiency. Experienced in international sprint demos, English technical specifications, and cross-border delivery.</p>
-          <div class="lsc-level-bar">
-            <div class="lsc-level-track"><div class="lsc-level-fill fill-cyan" style="width: 95%;"></div></div>
-            <span class="lsc-level-label">Full Professional Proficiency • Fluent</span>
-          </div>
-          <div class="lsc-tags">
-            <span class="lsc-tag">Global Teams</span>
-            <span class="lsc-tag">Sprint Demos</span>
-            <span class="lsc-tag">Clean Specs</span>
-          </div>
-        </div>
+      <div class="skill-header"><i class="fas fa-globe"></i><h3>Languages</h3></div>
+      <div class="skills-row">
+        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>Arabic</h4><span class="soft-skill-tag">Native Proficiency</span></div>
+        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>English</h4><span class="soft-skill-tag">Professional Proficiency</span></div>
       </div>
     </div>
 
@@ -4508,7 +4225,7 @@ footer p{
     <!-- Project 2: Masrofy -->
     <div class="project-card reveal" onclick="openProjectModal(1)"> 
       <div class="project-image">
-        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy" onerror="this.onerror=null; this.src='images/masrofy2.png';"></picture>
+        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy"></picture>
       </div> 
       <div class="project-content"> 
         <h3>Masrofy — Smart Expense Tracker</h3>
@@ -4524,7 +4241,7 @@ footer p{
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
           <a href="#demo-masrofy" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.onerror=null; this.src='images/masrofy2.png';"></picture>
+              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
@@ -4761,27 +4478,81 @@ footer p{
   </div>
 </section>
 
-<!-- AI Project Planner CTA Box -->
-<section id="ai-planner-cta" style="padding:40px 20px 80px;max-width:960px;margin:0 auto;">
-  <div class="neon-cta-box reveal" onclick="window.location.href='planner.html'" role="region" aria-label="AI Project Planner CTA">
-    <div class="neon-cta-inner">
-      <div class="neon-cta-badge">
-        <span class="neon-cta-dot"></span>
-        <span>AI-powered · Free · No sign-up</span>
-      </div>
-      <h2 class="neon-cta-title">
-        Got a project idea? Let's turn it into a real plan.
-      </h2>
-      <p class="neon-cta-desc">
-        Answer a few quick questions and get a complete 9-section development roadmap, architecture choices, and timeline estimates in under a minute.
-      </p>
-      <div class="neon-cta-btn-wrap">
-        <a href="planner.html" class="neon-cta-btn" onclick="event.stopPropagation()">
-          ✨ Build your plan — free
-        </a>
+<section id="ai-planner-section">
+<!-- AI Business Planner (below Pricing, follows site language) -->
+    <div class="services-planner">
+<!-- AI Business Planner -->
+<div class="section-header reveal">
+      <h2 class="section-title">AI Business Planner</h2>
+      <p class="section-subtitle" id="planner-subtitle">Turn a rough idea into a structured project brief in under a minute.</p>
+    </div>
+    <div class="planner-box reveal" id="planner-box">
+      <div class="planner-badge ai-connected" id="planner-mode" data-pf="badge">AI-assisted planning &mdash; free, no sign-up</div>
+      <form class="planner-form" id="planner-form" novalidate>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-idea" data-pf="ideaLabel">Project idea</label>
+          <textarea id="planner-idea" class="pf-input" rows="3" maxlength="2500" required
+            placeholder="Describe your app or business idea in a few sentences..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-audience" data-pf="audLabel">Target audience (optional)</label>
+            <input id="planner-audience" class="pf-input" type="text" maxlength="200"
+              placeholder="e.g. medical clinics, university students, local shops...">
+          </div>
+          <div class="pf-field">
+            <span class="pf-label" data-pf="platLabel">Platform (optional)</span>
+            <div class="pf-chips" id="planner-platform" role="group" aria-label="Platform">
+              <button type="button" class="pf-chip" data-v="Mobile app" data-pf="platMobile" aria-pressed="false">Mobile</button>
+              <button type="button" class="pf-chip" data-v="Web app" data-pf="platWeb" aria-pressed="false">Web</button>
+              <button type="button" class="pf-chip" data-v="Desktop app" data-pf="platDesktop" aria-pressed="false">Desktop</button>
+              <button type="button" class="pf-chip" data-v="Not decided yet" data-pf="platUnsure" aria-pressed="false">Not sure</button>
+            </div>
+          </div>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="planner-features" data-pf="featLabel">Key features (optional)</label>
+          <textarea id="planner-features" class="pf-input" rows="2" maxlength="1200"
+            placeholder="e.g. login, appointments, payments, notifications..."></textarea>
+        </div>
+        <div class="pf-grid2">
+          <div class="pf-field">
+            <label class="pf-label" for="planner-budget" data-pf="budgetLabel">Budget range (optional)</label>
+            <select id="planner-budget" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="small" data-pf="optSmall">Small</option>
+              <option value="medium" data-pf="optMedium">Medium</option>
+              <option value="large" data-pf="optLarge">Large</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label" for="planner-deadline" data-pf="deadlineLabel">Timeline (optional)</label>
+            <select id="planner-deadline" class="pf-input">
+              <option value="" data-pf="optUnknown">Prefer not to say</option>
+              <option value="flexible" data-pf="dlFlexible">Flexible</option>
+              <option value="1-2m" data-pf="dlSoon">1&ndash;2 months</option>
+              <option value="3-4m" data-pf="dlSoon2">3&ndash;4 months</option>
+              <option value="asap" data-pf="dlUrgent">ASAP</option>
+            </select>
+          </div>
+        </div>
+        <div class="pf-actions">
+          <button type="submit" id="planner-btn" class="btn-primary">Generate plan</button>
+          <p class="pf-note" data-pf="note">Estimates are preliminary planning guidance, not guarantees.</p>
+        </div>
+      </form>
+      <div class="planner-result" id="planner-result">
+        <div class="pr-state pr-empty" id="planner-empty" data-pf="empty">Fill in your idea (other fields optional) and generate a structured plan here.</div>
+        <div class="pr-state pr-loading" id="planner-loading" hidden>
+          <span class="pr-dot"></span><span class="pr-dot"></span><span class="pr-dot"></span>
+          <span data-pf="loading">Analyzing your brief and building the plan...</span>
+        </div>
+        <pre class="pr-preview" id="planner-preview" dir="auto" hidden></pre>
+        <div class="pr-state pr-error" id="planner-error" hidden></div>
+        <div class="pr-body" id="planner-body" dir="auto" hidden></div>
       </div>
     </div>
-  </div>
+    </div>
 </section>
 
 <!-- Contact Section (5 Cards + Form) --> 
@@ -4834,7 +4605,7 @@ footer p{
       </div>
 
       <form class="contact-form compact-form hidden-form" id="actualContactForm" onsubmit="handleFormSubmit(event)"> 
-        <input type="hidden" name="access_key" value="4f14818f-bd1f-4236-8dd2-0c141262fae5">
+        <input type="hidden" name="access_key" id="contactFormKey" value="ACCESS_KEY_HERE">
         <input type="hidden" name="subject" value="Portfolio contact form">
         <div class="form-group"> 
           <label>Your Name</label> 
@@ -4868,7 +4639,7 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <img class="footer-logo-img" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96" loading="lazy">
+      <img class="footer-logo-img" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
@@ -4904,7 +4675,7 @@ footer p{
   </div>
 </div>
 
-<!-- Three.js & Background Visual Effects --> 
+<!-- Three.js & Libraries --> 
 <script src="js/neon-border.js?v=25"></script> 
 <script src="js/tornado.js?v=25"></script> 
 <script src="js/firework-cursor.js?v=26"></script>
@@ -5295,11 +5066,12 @@ function handleFormSubmit(e) {
   const isAr = document.documentElement.lang === 'ar';
   const btn = submitButton;
   const status = document.getElementById('formStatus');
-  const configuredKey = window.PORTFOLIO_WEB3FORMS_KEY || (form.elements.access_key ? form.elements.access_key.value.trim() : '');
-  if (form.elements.access_key && configuredKey) {
-    form.elements.access_key.value = configuredKey;
-  }
-  const key = configuredKey.trim();
+  // Read key from central config (fallback to hidden input)
+  const cfgKey = (window.PORTFOLIO_WEB3FORMS_KEY && window.PORTFOLIO_WEB3FORMS_KEY !== 'ACCESS_KEY_HERE') ? window.PORTFOLIO_WEB3FORMS_KEY : null;
+  const key = cfgKey || form.elements.access_key.value.trim();
+  // Sync hidden input so FormData carries the right key
+  const keyInput = document.getElementById('contactFormKey');
+  if (keyInput && cfgKey) keyInput.value = cfgKey;
   const name = form.elements.name.value.trim();
   const email = form.elements.email.value.trim();
   const message = form.elements.message.value.trim();
@@ -5315,7 +5087,7 @@ function handleFormSubmit(e) {
     status.appendChild(fallback);
   };
   if (!key || key === 'ACCESS_KEY_HERE') {
-    showFailure(isAr ? 'نموذج الإرسال غير مفعّل بعد؛ أضف مفتاح Web3Forms في site-config.js.' : 'The form is not configured yet; add a Web3Forms access key in site-config.js.');
+    showFailure(isAr ? 'نموذج الإرسال غير مفعّل بعد؛ أضف مفتاح Web3Forms.' : 'The form is not configured yet; add a Web3Forms access key.');
     return;
   }
   btn.disabled = true;
@@ -5335,30 +5107,12 @@ function handleFormSubmit(e) {
     });
 }
 
-function showCopyToast(msg) {
-  let toast = document.querySelector('.copy-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'copy-toast';
-    document.body.appendChild(toast);
-  }
-  toast.innerHTML = '<i class="fas fa-check-circle"></i> <span>' + msg + '</span>';
-  toast.classList.add('show');
-  clearTimeout(window.__copyToastTimeout);
-  window.__copyToastTimeout = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2400);
-}
-
 document.querySelectorAll('[data-copy]').forEach((button) => {
-  button.addEventListener('click', async (e) => {
-    e.stopPropagation();
-    const value = button.getAttribute('data-copy');
-    if (!value) return;
+  button.addEventListener('click', async () => {
+    const value = button.dataset.copy;
     try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(value);
-      } else {
+      if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(value);
+      else {
         const temporary = document.createElement('textarea');
         temporary.value = value;
         temporary.style.position = 'fixed';
@@ -5368,13 +5122,11 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
         document.execCommand('copy');
         temporary.remove();
       }
-      const isAr = document.documentElement.lang === 'ar';
-      showCopyToast(isAr ? 'تم النسخ إلى الحافظة بنجاح!' : 'Copied to clipboard!');
       const original = button.textContent;
-      button.textContent = isAr ? 'تم النسخ!' : 'Copied!';
-      setTimeout(() => { button.textContent = original; }, 1800);
+      button.textContent = document.documentElement.lang === 'ar' ? 'تم النسخ!' : 'Copied!';
+      setTimeout(() => { button.textContent = original; }, 1500);
     } catch (error) {
-      button.textContent = isAr ? 'تعذر النسخ' : 'Failed';
+      button.textContent = document.documentElement.lang === 'ar' ? 'تعذر النسخ' : 'Copy failed';
     }
   });
 });
@@ -5425,10 +5177,10 @@ document.addEventListener("DOMContentLoaded", () => {
           var config = {
             floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
             waistAt: 0.5, twist: 3, zoom: 75, flowDir: 1, flowSpeed: 0.1,
-            lineCount: 48, lineColor: "#A855F7", lineGlow: 1.1,
-            showDots: true, dotCount: 480, dotSize: 0.022, dotColor: "#06B6D4", dotGlow: 1.6, dotFlicker: 0.7,
-            showComets: true, cometCount: 5, cometSpeed: 0.085, cometColor: "#EC4899", cometGlow: 1.4, cometTail: 18,
-            cometDelay: 5, collideForce: 0.6, hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
+            lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
+            showDots: true, dotCount: 1200, dotSize: 0.02, dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
+            showComets: true, cometCount: 4, cometSpeed: 0.08, cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
+            cometDelay: 6, collideForce: 0.6, hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
           };
           if (document.documentElement.getAttribute("data-theme") === "light") {
             config.lineColor = "#F5B301"; config.dotColor = "#FFD23F"; config.cometColor = "#E8910D";
@@ -5493,11 +5245,8 @@ function applyVortexTheme(theme) {
     if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.1;
   } else {
     cfg.lineColor = '#A855F7';
-    cfg.dotColor = '#06B6D4';
-    cfg.cometColor = '#EC4899';
-    if (cfg.lineGlow !== undefined) cfg.lineGlow = 1.1;
-    if (cfg.dotGlow !== undefined) cfg.dotGlow = 1.6;
-    if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.4;
+    cfg.dotColor = '#C084FC';
+    cfg.cometColor = '#A855F7';
   }
 }
 
@@ -5727,12 +5476,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('[data-skill-panel="soft-skills"] .soft-skill-card h4', ['العمل الجماعي','حل المشكلات','إدارة الوقت','تعدد المهام','التواصل','سرعة التعلم']);
     setAllText('[data-skill-panel="soft-skills"] .soft-skill-tag', ['التعاون','التحليل','التنظيم','التنفيذ','التواصل الشخصي','التطور']);
     setAllText('[data-skill-panel="spoken-languages"] h4', ['العربية','الإنجليزية']);
-    setAllText('[data-skill-panel="spoken-languages"] .lsc-badge', ['اللغة الأم','إتقان مهني كامل']);
-    setAllText('[data-skill-panel="spoken-languages"] .lsc-level-label', ['اللغة الأم • ١٠٠٪','إتقان مهني واحترافي • طليق']);
-    setAllText('[data-skill-panel="spoken-languages"] .lsc-desc', [
-      'اللغة الأم. طلاقة تامة في المصطلحات التقنية وإدارة المشاريع والتواصل اليومي في الشرق الأوسط وشمال إفريقيا.',
-      'إتقان مهني كامل. خبرة عملية في العروض الفنية، مواصفات البرمجيات المعمارية، والتعاون مع فرق دولية.'
-    ]);
+    setAllText('[data-skill-panel="spoken-languages"] .soft-skill-tag', ['اللغة الأم','إتقان مهني']);
 
     // Experience
     setAllText('.exp-tech-tags span', ['Flutter','Dart','المعمارية النظيفة','واجهات REST API','Laravel','PHP','MySQL','HTML/CSS/JS']);
@@ -5914,13 +5658,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setAttr('.btn-cv', 'aria-label', 'تنزيل السيرة الذاتية PDF');
     setAttr('.btn-contact-nav', 'aria-label', 'تواصل معي');
     setAttr('.hamburger', 'aria-label', 'فتح أو إغلاق القائمة');
+    setAttr('#navbar', 'aria-label', 'القائمة الرئيسية');
     setAttr('.skills-tabs', 'aria-label', 'فئات المهارات');
-
-    // AI Planner CTA Box
-    setText('#ai-planner-cta .neon-cta-badge span:last-child', 'مدعوم بالذكاء الاصطناعي · مجاني · بدون تسجيل');
-    setText('#ai-planner-cta .neon-cta-title', 'عندك فكرة مشروع؟ خلينا نحوّلها لخطة شغل حقيقية');
-    setText('#ai-planner-cta .neon-cta-desc', 'جاوب على أسئلة سريعة واحصل على خطة مشروع متكاملة من 9 أقسام مع التكلفة التقديرية والجدول الزمني خلال دقيقة.');
-    setText('#ai-planner-cta .neon-cta-btn', '✨ ابنِ خطتك مجانًا');
     setAllAttr('.footer-social-icons a', 'aria-label', ['حساب GitHub','حساب LinkedIn','واتساب']);
     setAllAttr('.platform-icon', 'aria-label', ['حساب خمسات','حساب نفذلي','حساب Freelancer','حساب ربحي']);
     setText('.contact-info h3', 'لديك مشروع في ذهنك؟');
@@ -6157,29 +5896,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-.grok-chat-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.grok-chat-lang-btn {
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  border-radius: 8px;
-  color: #C084FC;
-  cursor: pointer;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-}
-.grok-chat-lang-btn:hover {
-  background: rgba(168, 85, 247, 0.35);
-  border-color: #A855F7;
-  color: #ffffff;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
-}
 .grok-chat-clear {
   background: none;
   border: 1px solid rgba(147,51,234,0.3);
@@ -6191,15 +5907,6 @@ document.addEventListener('DOMContentLoaded', () => {
   transition: all 0.2s;
 }
 .grok-chat-clear:hover { border-color: #A855F7; color: #A855F7; }
-[data-theme="light"] .grok-chat-lang-btn {
-  background: rgba(147, 51, 234, 0.1);
-  border-color: rgba(147, 51, 234, 0.3);
-  color: #7C3AED;
-}
-[data-theme="light"] .grok-chat-lang-btn:hover {
-  background: rgba(147, 51, 234, 0.2);
-  color: #581c87;
-}
 
 #grok-messages {
   flex: 1;
@@ -6347,43 +6054,8 @@ document.addEventListener('DOMContentLoaded', () => {
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
 }
 .grok-quick-btn:hover { background: rgba(147,51,234,0.25); border-color: #A855F7; }
-
-.grok-actions-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-.grok-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(168,85,247,0.15);
-  border: 1px solid rgba(168,85,247,0.35);
-  border-radius: 12px;
-  color: #c084fc;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.grok-action-btn:hover {
-  background: rgba(168,85,247,0.3);
-  border-color: #a855f7;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-[data-theme="light"] .grok-action-btn {
-  background: rgba(147,51,234,0.1);
-  border-color: rgba(147,51,234,0.3);
-  color: #7c3aed;
-}
 
 @media (max-width: 400px) {
   #grok-chat-panel { width: calc(100vw - 32px); right: 0; }
@@ -6405,34 +6077,31 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="grok-chat-avatar">🤖</div>
       <div class="grok-chat-info">
         <h4>Abdelrahman's AI</h4>
-        <span id="grok-chat-status">Live Assistant · Online</span>
+        <span>Powered by AI · Online</span>
       </div>
-      <div class="grok-chat-header-actions">
-        <button class="grok-chat-lang-btn" id="grok-lang-btn" title="Switch language (AR / EN)">AR</button>
-        <button class="grok-chat-clear" id="grok-clear-btn" title="Clear chat">Clear</button>
-      </div>
+      <button class="grok-chat-clear" id="grok-clear-btn" title="Clear chat">Clear</button>
     </div>
     <!-- Messages -->
     <div id="grok-messages" aria-live="polite">
       <div class="grok-msg bot">
         <div class="grok-msg-avatar">🤖</div>
-        <div class="grok-msg-bubble" id="grok-welcome-msg">
-          Hello! 👋 I'm Abdelrahman's AI assistant. Ask me anything about his Flutter projects, technical skills, delivery timeline, or pricing packages!
+        <div class="grok-msg-bubble">
+          Hey! 👋 I'm Abdelrahman's AI assistant. Ask me anything about his skills, projects, pricing, or how to work with him! (اسألني عن الأسعار حتى بالمصري 😉)
         </div>
       </div>
     </div>
     <!-- Quick questions -->
     <div class="grok-quick-btns" id="grok-quick-btns">
-      <button class="grok-quick-btn" data-q="What are your pricing packages?" data-en="💰 Pricing" data-ar="💰 الأسعار">💰 Pricing</button>
-      <a class="grok-quick-btn" id="grok-consult-btn" href="https://wa.me/201123031944?text=Hi%20Abdelrahman%2C%20I'd%20like%20to%20book%20a%20free%2015-minute%20consultation" target="_blank" rel="noopener" data-en="📅 Free Consult" data-ar="📅 احجز استشارة">📅 Free Consult</a>
-      <a class="grok-quick-btn" id="grok-planner-link" href="planner.html" data-en="🚀 Project Planner" data-ar="🚀 خطط لمشروعك">🚀 Project Planner</a>
-      <button class="grok-quick-btn" data-q="How can I contact Abdelrahman?" data-en="📞 Contact Info" data-ar="📞 طرق التواصل">📞 Contact Info</button>
-      <button class="grok-quick-btn" data-q="What are your main Flutter & Dart skills?" data-en="🛠️ Skills" data-ar="🛠️ المهارات">🛠️ Skills</button>
-      <button class="grok-quick-btn" data-q="Tell me about your featured Flutter projects" data-en="📱 Projects" data-ar="📱 المشاريع">📱 Projects</button>
+      <button class="grok-quick-btn" data-q="What are his main skills?">🛠️ Skills</button>
+      <button class="grok-quick-btn" data-q="Tell me about his projects">📱 Projects</button>
+      <button class="grok-quick-btn" data-q="إيه باقات الأسعار عندك؟">💰 الأسعار</button>
+      <button class="grok-quick-btn" data-q-wa="true" data-wa-text="عايز%2Fعايزة%20أحجز%20استشارة%20مجانية%20(15%20دقيقة)">📅 احجز استشارة</button>
+      <button class="grok-quick-btn" data-q-planner="true">🚀 خطط لمشروعك</button>
+      <button class="grok-quick-btn" data-q="إزاي أتواصل مع عبد الرحمن؟">📞 طرق التواصل</button>
     </div>
     <!-- Input -->
     <div class="grok-chat-input-wrap">
-      <textarea id="grok-input" placeholder="Ask any question..." rows="1" maxlength="500"></textarea>
+      <textarea id="grok-input" placeholder="Ask me anything..." rows="1" maxlength="500"></textarea>
       <button id="grok-send-btn" aria-label="Send message">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -6464,108 +6133,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('grok-input');
   const sendBtn = document.getElementById('grok-send-btn');
   const clearBtn = document.getElementById('grok-clear-btn');
-  const langBtn = document.getElementById('grok-lang-btn');
   const unreadBadge = document.getElementById('grok-unread');
   const quickBtnsEl = document.getElementById('grok-quick-btns');
 
   let history = [];
   let isOpen = false;
   let isLoading = false;
-  let chatLang = 'en'; // Default English as requested
-
-  const CHAT_SYSTEM_PROMPT_TEMPLATE = `You are "Abdelrahman's AI" — the official portfolio assistant for Abdelrahman Abdullah, a top-tier Flutter & Dart mobile engineer from Cairo, Egypt.
-His standout projects: MovieVerse, Masrofy, StudySync, MediMind.
-
-OFFICIAL CONTACT:
-WhatsApp: +20 112 303 1944 — Email: abdulrahman.abuoshaifa@gmail.com
-
-OFFICIAL PRICING:
-__PRICING_JSON__
-
-ACTIVE LANGUAGE MODE: __LANG_DIRECTIVE__
-
-STRICT RULES:
-1. Adhere strictly to the ACTIVE LANGUAGE MODE. If English is selected, converse in clear, professional, friendly English. If Arabic is selected, converse in fluent, warm, high-standard Arabic (Egyptian dialect friendly).
-2. Prices come ONLY from the official PRICING JSON above.
-3. When the visitor shows buying intent or interest in an app, suggest booking a free 15-minute consultation on WhatsApp (+20 112 303 1944) or generating a comprehensive roadmap on planner.html.
-4. Keep replies crisp, warm, and between 3–6 short sentences. Avoid dry lectures.`;
-
-  function buildSystemPrompt() {
-    let directive = chatLang === 'ar'
-      ? 'ARABIC (العربية): Respond naturally in Arabic. Be warm, professional, and friendly with Egyptian nuance.'
-      : 'ENGLISH: Respond clearly and professionally in English.';
-    return CHAT_SYSTEM_PROMPT_TEMPLATE
-      .replace('__PRICING_JSON__', JSON.stringify(window.PRICING || {}))
-      .replace('__LANG_DIRECTIVE__', directive);
-  }
-
-  function applyChatLang(lang) {
-    chatLang = lang;
-    if (langBtn) langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
-    if (input) input.placeholder = lang === 'ar' ? 'اسأل أي سؤال...' : 'Ask any question...';
-    
-    // Update quick chips
-    if (quickBtnsEl) {
-      quickBtnsEl.querySelectorAll('.grok-quick-btn').forEach(b => {
-        if (lang === 'ar') {
-          if (b.dataset.ar) b.textContent = b.dataset.ar;
-          if (b.dataset.q === 'What are your pricing packages?') b.dataset.q = 'إيه باقات الأسعار عندك؟';
-          if (b.dataset.q === 'How can I contact Abdelrahman?') b.dataset.q = 'إزاي أتواصل مع عبد الرحمن؟';
-          if (b.dataset.q === 'What are your main Flutter & Dart skills?') b.dataset.q = 'ما هي مهاراتك وتقنياتك في فلاتر؟';
-          if (b.dataset.q === 'Tell me about your featured Flutter projects') b.dataset.q = 'كلمني عن أهم مشاريعك السابقة في فلاتر';
-        } else {
-          if (b.dataset.en) b.textContent = b.dataset.en;
-          if (b.dataset.q === 'إيه باقات الأسعار عندك؟') b.dataset.q = 'What are your pricing packages?';
-          if (b.dataset.q === 'إزاي أتواصل مع عبد الرحمن؟') b.dataset.q = 'How can I contact Abdelrahman?';
-          if (b.dataset.q === 'ما هي مهاراتك وتقنياتك في فلاتر؟') b.dataset.q = 'What are your main Flutter & Dart skills?';
-          if (b.dataset.q === 'كلمني عن أهم مشاريعك السابقة في فلاتر') b.dataset.q = 'Tell me about your featured Flutter projects';
-        }
-      });
-    }
-
-    const consultLink = document.getElementById('grok-consult-btn');
-    if (consultLink) {
-      consultLink.href = lang === 'ar'
-        ? 'https://wa.me/201123031944?text=' + encodeURIComponent('أهلاً عبد الرحمن، أرغب في حجز استشارة مجانية (15 دقيقة) لمناقشة فكرة تطبيق.')
-        : 'https://wa.me/201123031944?text=' + encodeURIComponent("Hi Abdelrahman, I'd like to book a free 15-minute consultation to discuss an app idea.");
-    }
-  }
-
-  if (langBtn) {
-    langBtn.addEventListener('click', () => {
-      const nextLang = chatLang === 'en' ? 'ar' : 'en';
-      applyChatLang(nextLang);
-      const switchNotice = nextLang === 'ar'
-        ? 'أهلاً بيك! 👋 تم تفعيل المحادثة باللغة العربية. اسألني عن أي تفاصيل تخص التطبيقات أو باقات الأسعار.'
-        : 'Switched to English! 👋 Feel free to ask about Flutter projects, architecture, timeline, or pricing.';
-      appendMessage('bot', switchNotice);
-    });
-  }
 
   // Show unread badge after 3 seconds
   setTimeout(() => {
-    if (!isOpen && unreadBadge) {
+    if (!isOpen) {
       unreadBadge.classList.add('show');
     }
   }, 3000);
 
   // Toggle chat panel
-  if (btn) {
-    btn.addEventListener('click', () => {
-      isOpen = !isOpen;
-      panel.classList.toggle('open', isOpen);
-      btn.classList.toggle('open', isOpen);
-      if (isOpen) {
-        if (unreadBadge) unreadBadge.classList.remove('show');
-        setTimeout(() => input && input.focus(), 300);
-      }
-    });
-  }
+  btn.addEventListener('click', () => {
+    isOpen = !isOpen;
+    panel.classList.toggle('open', isOpen);
+    btn.classList.toggle('open', isOpen);
+    if (isOpen) {
+      unreadBadge.classList.remove('show');
+      setTimeout(() => input.focus(), 300);
+    }
+  });
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    const widget = document.getElementById('grok-chat-widget');
-    if (isOpen && widget && !widget.contains(e.target)) {
+    if (isOpen && !document.getElementById('grok-chat-widget').contains(e.target)) {
       isOpen = false;
       panel.classList.remove('open');
       btn.classList.remove('open');
@@ -6573,58 +6168,61 @@ STRICT RULES:
   });
 
   // Quick questions
-  if (quickBtnsEl) {
-    quickBtnsEl.addEventListener('click', (e) => {
-      const qBtn = e.target.closest('.grok-quick-btn');
-      if (qBtn && qBtn.dataset && qBtn.dataset.q) {
-        input.value = qBtn.dataset.q;
-        quickBtnsEl.style.display = 'none';
-        sendMessage();
+  quickBtnsEl.addEventListener('click', (e) => {
+    const qBtn = e.target.closest('.grok-quick-btn');
+    if (qBtn) {
+      // WhatsApp quick button
+      if (qBtn.dataset.qWa === 'true') {
+        window.open('https://wa.me/201123031944?text=' + (qBtn.dataset.waText || ''), '_blank', 'noopener');
+        return;
       }
-    });
-  }
+      // Planner quick button
+      if (qBtn.dataset.qPlanner === 'true') {
+        window.location.href = 'planner.html';
+        return;
+      }
+      const q = qBtn.dataset.q;
+      if (!q) return;
+      input.value = q;
+      quickBtnsEl.style.display = 'none';
+      sendMessage();
+    }
+  });
 
   // Send on Enter (Shift+Enter = newline)
-  if (input) {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 
-    input.addEventListener('input', () => {
-      input.style.height = 'auto';
-      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
-    });
-  }
+  // Auto resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+  });
 
-  if (sendBtn) sendBtn.addEventListener('click', sendMessage);
-  if (clearBtn) clearBtn.addEventListener('click', clearChat);
+  sendBtn.addEventListener('click', sendMessage);
+  clearBtn.addEventListener('click', clearChat);
 
   function clearChat() {
     history = [];
-    const clearMsg = chatLang === 'ar'
-      ? 'تم مسح المحادثة! إزاي أقدر أساعدك اليوم؟ 😊'
-      : 'Chat cleared! How can I help you today? 😊';
     messagesEl.innerHTML = `
       <div class="grok-msg bot">
         <div class="grok-msg-avatar">🤖</div>
-        <div class="grok-msg-bubble">${clearMsg}</div>
+        <div class="grok-msg-bubble">Chat cleared! How can I help you? 😊</div>
       </div>`;
     quickBtnsEl.style.display = 'flex';
   }
 
-  function appendMessage(role, text, actionsHtml) {
+  function appendMessage(role, text) {
     const div = document.createElement('div');
     div.className = `grok-msg ${role}`;
     const avatarEmoji = role === 'bot' ? '🤖' : '👤';
-    let contentHtml = `<div class="grok-msg-avatar">${avatarEmoji}</div>
-      <div class="grok-msg-bubble">
-        ${escapeHtml(text).replace(/\n/g, '<br>')}
-        ${actionsHtml || ''}
-      </div>`;
-    div.innerHTML = contentHtml;
+    div.innerHTML = `
+      <div class="grok-msg-avatar">${avatarEmoji}</div>
+      <div class="grok-msg-bubble">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return div;
@@ -6650,17 +6248,10 @@ STRICT RULES:
     if (typing) typing.remove();
   }
 
-  function showErrorWithFallback(msg) {
-    const isAr = /[\u0600-\u06FF]/.test(msg) || (document.documentElement.lang === 'ar');
+  function showError(msg) {
     const div = document.createElement('div');
     div.className = 'grok-error-msg';
-    div.innerHTML = `
-      <div>${escapeHtml(msg)}</div>
-      <div style="margin-top:6px;">
-        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="grok-action-btn" style="display:inline-flex;margin:2px auto;">
-          💬 ${isAr ? 'تواصل مع عبد الرحمن على واتساب' : 'Contact on WhatsApp'}
-        </a>
-      </div>`;
+    div.textContent = msg;
     messagesEl.appendChild(div);
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
@@ -6671,149 +6262,55 @@ STRICT RULES:
     return d.innerHTML;
   }
 
-  async function fetchGeminiDirect(sysPrompt, text, chatHistory) {
-    const key = window.PORTFOLIO_GEMINI_KEY;
-    if (!key) throw new Error('No Gemini Key configured');
-    const model = window.PORTFOLIO_GEMINI_MODEL || 'gemini-3.5-flash-lite';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`;
-
-    const contents = [];
-    if (Array.isArray(chatHistory)) {
-      for (const m of chatHistory.slice(-6)) {
-        if (m && m.content) {
-          contents.push({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }]
-          });
-        }
-      }
-    }
-    if (contents.length === 0 || contents[contents.length - 1].role !== 'user') {
-      contents.push({ role: 'user', parts: [{ text: text }] });
-    }
-
-    const payload = {
-      systemInstruction: { parts: [{ text: sysPrompt }] },
-      contents: contents,
-      generationConfig: {
-        temperature: 0.6,
-        maxOutputTokens: 600
-      }
-    };
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) throw new Error('Gemini API HTTP ' + res.status);
-    const data = await res.json();
-    const cand = data && data.candidates && data.candidates[0];
-    if (cand && cand.content && cand.content.parts && cand.content.parts[0]) {
-      return cand.content.parts[0].text.trim();
-    }
-    throw new Error('Empty Gemini reply');
-  }
-
-  async function fetchWorker(endpoint, payload, retryCount) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 7000); // 7s timeout before fast fallback
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      if (res.status === 429 && retryCount < 1) {
-        await new Promise(r => setTimeout(r, 4000));
-        return fetchWorker(endpoint, payload, retryCount + 1);
-      }
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      return data.message || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
-    } catch (err) {
-      clearTimeout(timeoutId);
-      throw err;
-    }
-  }
-
   async function sendMessage() {
     const text = input.value.trim();
     if (!text || isLoading) return;
 
-    if (quickBtnsEl) quickBtnsEl.style.display = 'none';
+    // Hide quick buttons
+    quickBtnsEl.style.display = 'none';
 
+    // Add user message
     appendMessage('user', text);
     history.push({ role: 'user', content: text });
     input.value = '';
     input.style.height = 'auto';
 
+    // Show loading state
     isLoading = true;
     sendBtn.disabled = true;
     input.disabled = true;
     showTyping();
 
-    const isArabicQuestion = /[\u0600-\u06FF]/.test(text) || (document.documentElement.lang === 'ar');
-    const endpoint = window.PORTFOLIO_AI_ENDPOINT;
-
     try {
-      const sysPrompt = buildSystemPrompt();
-      let reply = '';
-
-      if (endpoint && endpoint.indexOf('YOUR-WORKER-NAME') === -1) {
-        const combinedMessage = `[System Instructions & Pricing]:\n${sysPrompt}\n\n[Visitor Question]:\n${text}`;
-        const payload = {
-          message: combinedMessage,
-          systemPrompt: sysPrompt,
-          conversationHistory: history.slice(-8)
-        };
-        try {
-          reply = await fetchWorker(endpoint, payload, 0);
-        } catch (workerErr) {
-          console.warn('[Chatbot Worker error, falling back to Direct Gemini API]', workerErr);
-        }
-      }
-
-      if (!reply || !reply.trim()) {
-        reply = await fetchGeminiDirect(sysPrompt, text, history);
-      }
+      const response = await fetch(`${BACKEND_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-10) }),
+      });
 
       hideTyping();
 
-      if (reply && reply.trim()) {
-        const trimmed = reply.trim();
-        // Check if reply mentions pricing, booking, or contact to add interactive action buttons
-        const hasPricing = /\$|\bUSD\b|سعر|باقة|تكلفة|دولار/i.test(trimmed);
-        const hasContact = /واتساب|تواصل|whatsapp|contact|استشارة/i.test(trimmed);
-        let actionsHtml = '';
-        if (hasPricing || hasContact) {
-          const isArMode = chatLang === 'ar' || isArabicQuestion;
-          const waTxt = isArMode
-            ? 'أهلاً عبد الرحمن، كنت بتكلم مع المساعد الذكي وعايز أبدأ مشروعي.'
-            : 'Hi Abdelrahman, I was speaking with your AI assistant and would like to discuss my project.';
-          const bookLabel = isArMode ? '💬 احجز على واتساب' : '💬 Book on WhatsApp';
-          const planLabel = isArMode ? '📋 اكتب خطة مشروعي' : '📋 Create Project Plan';
-          actionsHtml = `
-            <div class="grok-actions-row">
-              <a href="https://wa.me/201123031944?text=${encodeURIComponent(waTxt)}" target="_blank" rel="noopener" class="grok-action-btn">${bookLabel}</a>
-              <a href="planner.html" class="grok-action-btn">${planLabel}</a>
-            </div>`;
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({ detail: 'Server error' }));
+        if (response.status === 500 && err.detail && err.detail.includes('GROK_API_KEY')) {
+          showError('⚠️ API key not configured. Please add your Grok API key to chatbot-backend/.env');
+        } else {
+          showError(`❌ Error: ${err.detail || 'Something went wrong'}`);
         }
-
-        appendMessage('bot', trimmed, actionsHtml);
-        history.push({ role: 'assistant', content: trimmed });
+        history.pop(); // Remove failed message from history
       } else {
-        throw new Error('empty-response');
+        const data = await response.json();
+        const reply = data.reply;
+        appendMessage('bot', reply);
+        history.push({ role: 'assistant', content: reply });
       }
     } catch (err) {
       hideTyping();
-      console.warn('[Chatbot Error]', err);
-      showErrorWithFallback(isArabicQuestion
-        ? 'عذرًا، المساعد يواجه ضغطًا مؤقتًا. تقدر تراسل عبد الرحمن مباشرة على واتساب:'
-        : 'Sorry, the assistant is temporarily busy. You can message Abdelrahman directly on WhatsApp:');
+      if (err.message.includes('fetch') || err.message.includes('Failed')) {
+        showError('⚠️ Backend not running. Start it with: cd chatbot-backend && python -m uvicorn main:app --reload');
+      } else {
+        showError(`❌ Network error: ${err.message}`);
+      }
       history.pop();
     } finally {
       isLoading = false;
@@ -6825,11 +6322,19 @@ STRICT RULES:
 })();
 </script>
 
+<!-- Build marker: confirms the newest version is loaded -->
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v22</div>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
+    if (window.caches && caches.keys) caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
+  }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=25" defer></script>
-<script src="assets/js/ai-planner.js?v=33" defer></script>
+<script src="assets/js/scroll-reveal.js?v=14" defer></script>
+<script src="assets/js/ai-planner.js?v=40" defer></script>
 </body> 
 </html>
 

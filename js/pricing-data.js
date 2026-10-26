@@ -60,11 +60,7 @@ window.PRICING = {
       cta: "Get Started"
     }
   ],
-  contact: window.PORTFOLIO_CONTACT || {
-    whatsappNumber: "201123031944",
-    phoneDisplay: "+20 112 303 1944",
-    email: "abdulrahman.abuoshaifa@gmail.com"
-  },
+  get contact() { return window.PORTFOLIO_CONTACT; },
   lastUpdated: "2026-10-25",
   notes: [
     "السعر النهائي بيتحدد حسب نطاق المشروع بعد استشارة مجانية",
