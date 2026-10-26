@@ -646,6 +646,32 @@ body::after{
   flex-direction:column; 
   align-items:center; 
 } 
+@keyframes ballBouncePhysics {
+  0% {
+    transform: translateY(0) scale(1, 1);
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+  25% {
+    transform: translateY(-28px) scale(0.94, 1.06);
+    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
+  }
+  50% {
+    transform: translateY(0) scale(1.10, 0.90);
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+  75% {
+    transform: translateY(-13px) scale(0.97, 1.03);
+    animation-timing-function: cubic-bezier(0.75, 0.05, 0.85, 0.35);
+  }
+  90% {
+    transform: translateY(0) scale(1.04, 0.96);
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
 @keyframes heroFloat {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-12px); }
@@ -661,7 +687,7 @@ body::after{
   margin-bottom:24px; 
   border-radius:50%;
   overflow:visible;
-  animation: heroFloat 4.5s ease-in-out infinite;
+  animation: ballBouncePhysics 2.6s ease-in-out infinite;
   will-change: transform;
   transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
 } 
@@ -3852,8 +3878,7 @@ footer p{
       <li><a href="#skills" target="_self">Skills</a></li> 
       <li><a href="#experience" target="_self">Experience</a></li> 
       <li><a href="#services" target="_self">Services</a></li>
-      <li><a href="#projects" target="_self">Projects</a></li> 
-      <li><a href="planner.html" target="_self" class="nav-planner-link"><i class="fas fa-wand-magic-sparkles"></i> AI Planner</a></li>
+      <li><a href="#projects" target="_self">Projects</a></li>
       <li><a href="#achievements" target="_self">Achievements</a></li>
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
     </ul> 
@@ -3952,7 +3977,7 @@ footer p{
   </div> 
   <div class="about-grid"> 
     <div class="about-content reveal"> 
-      <div class="whoiam-banner reveal">
+      <div class="whoiam-banner">
         <div class="whoiam-label">WHO I AM</div>
         <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
         <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
