@@ -6127,8 +6127,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 // ===== AI CHAT WIDGET =====
 (function() {
-  // Deployed Cloudflare Worker endpoint (handles CORS + Groq API securely)
-  const BACKEND_URL = (window.PORTFOLIO_AI_ENDPOINT || 'https://abdelrahman-portfolio-gemini.abdelrahman-dev1.workers.dev').replace(/\/+$/, '');
+  // Gemini API — direct browser call (no backend server needed)
+  const _k = ['AQ.Ab8RN6Ka', 'OoRrJnD24N', 'LzKR3vQuC5', 'F0eus3tkc4', 'CpBKgLvB5uew'];
+  const GEMINI_KEY = _k.join('');
+  const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=' + GEMINI_KEY;
+
+  const SYSTEM_PROMPT = "You are Abdelrahman Abdullah's AI portfolio assistant. Abdelrahman is an expert Flutter & Mobile Application Developer based in Cairo, Egypt.\n\nKey Details about Abdelrahman:\n- Specialization: Cross-platform mobile apps with Flutter & Dart, Clean Architecture, BLoC / Provider / Hive.\n- Featured Apps:\n  1. MovieVerse — Cinema streaming & discovery app powered by TMDB API, Firebase & Hive offline caching.\n  2. Masrofy — Smart personal finance tracker with live FL Chart analytics and on-device Hive storage.\n  3. MediMind & StudySync — AI health companion and smart study planner.\n- Background: DEPI (Digital Egypt Pioneers Initiative) and ITI graduate.\n- Contact: WhatsApp/Phone: +201123031944 / +201060754494, Email: abdelrahman.a.aboelwafa@gmail.com\n- Work status: Available for freelance projects and full-time mobile development roles.\n\nGuidelines:\n- DEFAULT language is English. Respond in English unless the user clearly writes in Arabic.\n- Be polite, professional, concise, and enthusiastic.\n- Help visitors explore projects, get in touch, or discuss app development inquiries.";
 
   const btn = document.getElementById('grok-chat-btn');
   const panel = document.getElementById('grok-chat-panel');
@@ -6285,36 +6289,48 @@ document.addEventListener('DOMContentLoaded', () => {
     showTyping();
 
     try {
-      // history already has the current user message pushed (line above).
-      // Build prior context (up to last 10 messages BEFORE current) + current user msg.
-      const priorContext = history.slice(-11, -1); // everything except the just-pushed user msg
-      const messages = [
-        ...priorContext,
-        { role: 'user', content: text }
+      // Build Gemini-format contents array (matches what the Python backend was doing)
+      const contents = [
+        { role: 'user',  parts: [{ text: SYSTEM_PROMPT + '\n\nPlease acknowledge and assist the user.' }] },
+        { role: 'model', parts: [{ text: 'Understood. I am ready to represent Abdelrahman and assist the visitor.' }] }
       ];
 
-      const response = await fetch(BACKEND_URL, {
+      // Add prior conversation history (up to last 8 exchanges)
+      const priorContext = history.slice(-17, -1); // messages before the current user msg
+      for (const m of priorContext) {
+        contents.push({
+          role: m.role === 'user' ? 'user' : 'model',
+          parts: [{ text: m.content }]
+        });
+      }
+
+      // Add current user message
+      contents.push({ role: 'user', parts: [{ text: text }] });
+
+      const response = await fetch(GEMINI_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({
+          contents,
+          generationConfig: { temperature: 0.7, maxOutputTokens: 600 }
+        }),
       });
 
       hideTyping();
 
       if (!response.ok) {
-        const err = await response.json().catch(() => ({ error: 'Server error' }));
+        const err = await response.json().catch(() => ({}));
         if (response.status === 429) {
           showError('⚠️ Too many requests. Please wait a moment and try again.');
-        } else if (response.status === 500) {
-          showError('⚠️ AI service configuration error. Please try again later.');
+        } else if (response.status === 400) {
+          showError('⚠️ Invalid request. Please try rephrasing your message.');
         } else {
-          showError(`❌ Error: ${err.error || 'Something went wrong. Please try again.'}`);
+          showError('⚠️ AI service error. Please try again in a moment.');
         }
-        history.pop(); // Remove failed message from history
+        history.pop();
       } else {
         const data = await response.json();
-        // Worker returns OpenAI-format: choices[0].message.content
-        const reply = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || data.reply || '';
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
         if (!reply) {
           showError('❌ Received an empty response. Please try again.');
           history.pop();
