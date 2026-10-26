@@ -6125,8 +6125,11 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <script>
-// ===== GROK AI CHAT WIDGET =====
+// ===== AI CHAT WIDGET =====
 (function() {
+  // Deployed Cloudflare Worker endpoint (handles CORS + Groq API securely)
+  const BACKEND_URL = (window.PORTFOLIO_AI_ENDPOINT || 'https://abdelrahman-portfolio-gemini.abdelrahman-dev1.workers.dev').replace(/\/+$/, '');
+
   const btn = document.getElementById('grok-chat-btn');
   const panel = document.getElementById('grok-chat-panel');
   const messagesEl = document.getElementById('grok-messages');
@@ -6282,35 +6285,47 @@ document.addEventListener('DOMContentLoaded', () => {
     showTyping();
 
     try {
-      const response = await fetch(`${BACKEND_URL}/chat`, {
+      // history already has the current user message pushed (line above).
+      // Build prior context (up to last 10 messages BEFORE current) + current user msg.
+      const priorContext = history.slice(-11, -1); // everything except the just-pushed user msg
+      const messages = [
+        ...priorContext,
+        { role: 'user', content: text }
+      ];
+
+      const response = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(-10) }),
+        body: JSON.stringify({ messages }),
       });
 
       hideTyping();
 
       if (!response.ok) {
-        const err = await response.json().catch(() => ({ detail: 'Server error' }));
-        if (response.status === 500 && err.detail && err.detail.includes('GROK_API_KEY')) {
-          showError('⚠️ API key not configured. Please add your Grok API key to chatbot-backend/.env');
+        const err = await response.json().catch(() => ({ error: 'Server error' }));
+        if (response.status === 429) {
+          showError('⚠️ Too many requests. Please wait a moment and try again.');
+        } else if (response.status === 500) {
+          showError('⚠️ AI service configuration error. Please try again later.');
         } else {
-          showError(`❌ Error: ${err.detail || 'Something went wrong'}`);
+          showError(`❌ Error: ${err.error || 'Something went wrong. Please try again.'}`);
         }
         history.pop(); // Remove failed message from history
       } else {
         const data = await response.json();
-        const reply = data.reply;
-        appendMessage('bot', reply);
-        history.push({ role: 'assistant', content: reply });
+        // Worker returns OpenAI-format: choices[0].message.content
+        const reply = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || data.reply || '';
+        if (!reply) {
+          showError('❌ Received an empty response. Please try again.');
+          history.pop();
+        } else {
+          appendMessage('bot', reply);
+          history.push({ role: 'assistant', content: reply });
+        }
       }
     } catch (err) {
       hideTyping();
-      if (err.message.includes('fetch') || err.message.includes('Failed')) {
-        showError('⚠️ Backend not running. Start it with: cd chatbot-backend && python -m uvicorn main:app --reload');
-      } else {
-        showError(`❌ Network error: ${err.message}`);
-      }
+      showError('❌ Could not reach the AI service. Please check your connection and try again.');
       history.pop();
     } finally {
       isLoading = false;
