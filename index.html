@@ -3952,7 +3952,7 @@ footer p{
   </div> 
   <div class="about-grid"> 
     <div class="about-content reveal"> 
-      <div class="whoiam-banner">
+      <div class="whoiam-banner reveal">
         <div class="whoiam-label">WHO I AM</div>
         <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
         <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
@@ -4226,10 +4226,52 @@ footer p{
     </div>
 
     <div class="skill-category reveal hidden" data-skill-panel="spoken-languages">
-      <div class="skill-header"><i class="fas fa-globe"></i><h3>Languages</h3></div>
-      <div class="skills-row">
-        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>Arabic</h4><span class="soft-skill-tag">Native Proficiency</span></div>
-        <div class="skill-item soft-skill-card"><i class="fas fa-globe"></i><h4>English</h4><span class="soft-skill-tag">Professional Proficiency</span></div>
+      <div class="skills-desc">
+        <p>Clear communication is the bridge between software architecture and business outcomes. Fluent in both <strong>Arabic</strong> and <strong>English</strong> for seamless collaboration across global engineering teams and regional stakeholders.</p>
+      </div>
+      <div class="skill-header"><i class="fas fa-language"></i><h3>Languages</h3></div>
+      <div class="languages-showcase-grid">
+        <div class="lang-showcase-card" data-accent="emerald">
+          <div class="lsc-top">
+            <div class="lsc-icon-wrap emerald"><i class="fas fa-globe-africa"></i></div>
+            <span class="lsc-badge badge-emerald">Native Language</span>
+          </div>
+          <div class="lsc-header-row">
+            <h4>Arabic</h4>
+            <span class="lsc-native-title">العربية</span>
+          </div>
+          <p class="lsc-desc">Mother tongue. Natural fluency in technical terminology, client management, and team leadership across the MENA region.</p>
+          <div class="lsc-level-bar">
+            <div class="lsc-level-track"><div class="lsc-level-fill fill-emerald" style="width: 100%;"></div></div>
+            <span class="lsc-level-label">Native / Mother Tongue • 100%</span>
+          </div>
+          <div class="lsc-tags">
+            <span class="lsc-tag">Mother Tongue</span>
+            <span class="lsc-tag">Tech Docs</span>
+            <span class="lsc-tag">Client Meetings</span>
+          </div>
+        </div>
+
+        <div class="lang-showcase-card" data-accent="cyan">
+          <div class="lsc-top">
+            <div class="lsc-icon-wrap cyan"><i class="fas fa-globe-americas"></i></div>
+            <span class="lsc-badge badge-cyan">Full Professional</span>
+          </div>
+          <div class="lsc-header-row">
+            <h4>English</h4>
+            <span class="lsc-native-title">English</span>
+          </div>
+          <p class="lsc-desc">Full professional proficiency. Experienced in international sprint demos, English technical specifications, and cross-border delivery.</p>
+          <div class="lsc-level-bar">
+            <div class="lsc-level-track"><div class="lsc-level-fill fill-cyan" style="width: 95%;"></div></div>
+            <span class="lsc-level-label">Full Professional Proficiency • Fluent</span>
+          </div>
+          <div class="lsc-tags">
+            <span class="lsc-tag">Global Teams</span>
+            <span class="lsc-tag">Sprint Demos</span>
+            <span class="lsc-tag">Clean Specs</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -4728,27 +4770,27 @@ footer p{
       <h3>Have a project in mind?</h3> 
       <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Let's create something amazing together.</p> 
       <div class="contact-links"> 
-        <a href="mailto:abdulrahman.abuoshaifa@gmail.com" class="contact-link contact-link-card direct-contact-action" data-copy-val="abdulrahman.abuoshaifa@gmail.com" title="Click to email & copy" aria-label="Send email to abdulrahman.abuoshaifa@gmail.com">
-          <div class="contact-icon-box email-box"><i class="fas fa-envelope"></i></div> 
+        <div class="contact-link contact-link-card">
+          <i class="fas fa-envelope"></i> 
           <div class="contact-link-copy">
-            <span class="contact-badge-label">EMAIL <span class="click-hint">• Click to email &amp; copy</span></span> 
-            <span class="contact-val">abdulrahman.abuoshaifa@gmail.com</span> 
+            <strong>Email</strong> 
+            <span>abdulrahman.abuoshaifa@gmail.com</span> 
           </div> 
-          <div class="contact-arrow-indicator"><i class="fas fa-paper-plane"></i></div>
-        </a>
-        <a href="https://wa.me/201123031944?text=Hello%20Abdelrahman" target="_blank" rel="noopener" class="contact-link contact-link-card direct-contact-action" data-copy-val="+201123031944" title="Click to call / WhatsApp & copy" aria-label="Call or WhatsApp +201123031944">
-          <div class="contact-icon-box phone-box"><i class="fas fa-phone-alt"></i></div> 
+          <div class="contact-link-actions"><button type="button" data-copy="abdulrahman.abuoshaifa@gmail.com">Copy</button><a href="mailto:abdulrahman.abuoshaifa@gmail.com">Open</a></div>
+        </div>
+        <div class="contact-link contact-link-card">
+          <i class="fas fa-phone-alt"></i> 
           <div class="contact-link-copy">
-            <span class="contact-badge-label">PHONE / WHATSAPP <span class="click-hint">• Click to chat &amp; copy</span></span> 
-            <span class="contact-val">+20 112 303 1944</span> 
+            <strong>Phone</strong> 
+            <span>+20 112 303 1944</span> 
           </div> 
-          <div class="contact-arrow-indicator"><i class="fab fa-whatsapp"></i></div>
-        </a>
+          <div class="contact-link-actions"><button type="button" data-copy="+201123031944">Copy</button><a href="tel:+201123031944">Open</a></div>
+        </div>
       </div> 
       <div class="contact-social-row">
-        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="social-pill social-whatsapp large-social" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
-        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" target="_blank" rel="noopener" class="social-pill social-linkedin large-social" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span>LinkedIn</span></a>
-        <a href="https://github.com/abdelrahmanabuoelwafa-cell" target="_blank" rel="noopener" class="social-pill social-github large-social" aria-label="GitHub" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></a>
+        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="social-pill social-whatsapp" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/abdelrahman-abdullah/" target="_blank" rel="noopener" class="social-pill social-linkedin" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://github.com/abdelrahmanabuoelwafa-cell" target="_blank" rel="noopener" class="social-pill social-github" aria-label="GitHub" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
       </div>
     </div> 
 
@@ -5283,28 +5325,31 @@ function showCopyToast(msg) {
   }, 2400);
 }
 
-document.querySelectorAll('.direct-contact-action').forEach((card) => {
-  card.addEventListener('click', async (e) => {
-    const val = card.getAttribute('data-copy-val');
-    if (val) {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(val);
-        } else {
-          const temp = document.createElement('textarea');
-          temp.value = val;
-          temp.style.position = 'fixed';
-          temp.style.opacity = '0';
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand('copy');
-          temp.remove();
-        }
-        const isAr = document.documentElement.lang === 'ar';
-        showCopyToast(isAr ? 'تم النسخ إلى الحافظة بنجاح!' : 'Copied to clipboard!');
-      } catch (err) {
-        console.warn('Clipboard write error:', err);
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  button.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const value = button.getAttribute('data-copy');
+    if (!value) return;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const temporary = document.createElement('textarea');
+        temporary.value = value;
+        temporary.style.position = 'fixed';
+        temporary.style.opacity = '0';
+        document.body.appendChild(temporary);
+        temporary.select();
+        document.execCommand('copy');
+        temporary.remove();
       }
+      const isAr = document.documentElement.lang === 'ar';
+      showCopyToast(isAr ? 'تم النسخ إلى الحافظة بنجاح!' : 'Copied to clipboard!');
+      const original = button.textContent;
+      button.textContent = isAr ? 'تم النسخ!' : 'Copied!';
+      setTimeout(() => { button.textContent = original; }, 1800);
+    } catch (error) {
+      button.textContent = isAr ? 'تعذر النسخ' : 'Failed';
     }
   });
 });
@@ -5657,7 +5702,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('[data-skill-panel="soft-skills"] .soft-skill-card h4', ['العمل الجماعي','حل المشكلات','إدارة الوقت','تعدد المهام','التواصل','سرعة التعلم']);
     setAllText('[data-skill-panel="soft-skills"] .soft-skill-tag', ['التعاون','التحليل','التنظيم','التنفيذ','التواصل الشخصي','التطور']);
     setAllText('[data-skill-panel="spoken-languages"] h4', ['العربية','الإنجليزية']);
-    setAllText('[data-skill-panel="spoken-languages"] .soft-skill-tag', ['اللغة الأم','إتقان مهني']);
+    setAllText('[data-skill-panel="spoken-languages"] .lsc-badge', ['اللغة الأم','إتقان مهني كامل']);
+    setAllText('[data-skill-panel="spoken-languages"] .lsc-level-label', ['اللغة الأم • ١٠٠٪','إتقان مهني واحترافي • طليق']);
+    setAllText('[data-skill-panel="spoken-languages"] .lsc-desc', [
+      'اللغة الأم. طلاقة تامة في المصطلحات التقنية وإدارة المشاريع والتواصل اليومي في الشرق الأوسط وشمال إفريقيا.',
+      'إتقان مهني كامل. خبرة عملية في العروض الفنية، مواصفات البرمجيات المعمارية، والتعاون مع فرق دولية.'
+    ]);
 
     // Experience
     setAllText('.exp-tech-tags span', ['Flutter','Dart','المعمارية النظيفة','واجهات REST API','Laravel','PHP','MySQL','HTML/CSS/JS']);
