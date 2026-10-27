@@ -40,6 +40,8 @@
 <!-- Apple Touch Icon -->
 <link rel="apple-touch-icon" href="images/profile-closeup.jpg">
 
+<!-- Performance: preload LCP hero image & preconnect -->
+<link rel="preload" as="image" href="images/profile-closeup.webp" type="image/webp" fetchpriority="high">
 <!-- Performance: preconnect to third-party origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3347,329 +3349,132 @@ footer p{
 [data-theme="light"] .footer-logo{color:#1e293b;}
 [data-theme="light"] .footer-logo .code-bracket{color:#94a3b8;}
 
-/* AI Planner Box Enhancements */
-.services-planner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.planner-box {
-  background: var(--card-bg);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 20px;
-  padding: 0;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15), 0 0 60px rgba(168, 85, 247, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.planner-box::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(147, 51, 234, 0.3), rgba(168, 85, 247, 0.5));
-  z-index: -1;
-  filter: blur(10px);
-  opacity: 0.7;
-  animation: plannerGlow 4s ease-in-out infinite;
-}
-
-@keyframes plannerGlow {
-  0%, 100% { opacity: 0.6; filter: blur(10px); }
-  50% { opacity: 0.9; filter: blur(14px); }
-}
-
-.planner-badge {
-  padding: 14px 24px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  text-align: center;
-  background: rgba(168, 85, 247, 0.12);
-  border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-  color: var(--neon);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 1;
-}
-
-.planner-badge.ai-connected {
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.08));
-  border-bottom-color: rgba(34, 211, 238, 0.25);
-  color: #22d3ee;
-}
-
-.planner-badge.ai-connected::before {
-  content: '';
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 8px;
-  background: #22d3ee;
-  border-radius: 50%;
-  box-shadow: 0 0 12px #22d3ee, 0 0 24px rgba(34, 211, 238, 0.6);
-  animation: pulse-green 2s ease-in-out infinite;
-}
-
-@keyframes pulse-green {
-  0%, 100% {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    box-shadow: 0 0 12px #22d3ee, 0 0 24px rgba(34, 211, 238, 0.6);
+  /* ===== Neon CTA Box (Link to planner.html) ===== */
+  .neon-cta-box {
+    position: relative;
+    border-radius: 24px;
+    isolation: isolate;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 auto;
   }
-  50% {
-    opacity: 0.7;
-    transform: translateY(-50%) scale(1.3);
-    box-shadow: 0 0 16px #22d3ee, 0 0 32px rgba(34, 211, 238, 0.8);
+  .neon-cta-box:hover {
+    transform: translateY(-4px) scale(1.01);
   }
-}
-
-.planner-form {
-  padding: 28px 32px;
-  position: relative;
-  z-index: 1;
-}
-
-.pf-field {
-  margin-bottom: 20px;
-}
-
-.pf-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--neon);
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
-.pf-input {
-  width: 100%;
-  background: rgba(168, 85, 247, 0.06);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  border-radius: 12px;
-  padding: 12px 16px;
-  color: var(--text);
-  font-size: 14px;
-  transition: all 0.25s ease;
-}
-
-.pf-input:focus {
-  border-color: var(--neon);
-  background: rgba(168, 85, 247, 0.1);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15), 0 0 20px rgba(168, 85, 247, 0.2);
-  outline: none;
-}
-
-.pf-grid2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.pf-chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.pf-chip {
-  padding: 8px 16px;
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  border-radius: 20px;
-  font-size: 13px;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.pf-chip:hover {
-  background: rgba(168, 85, 247, 0.15);
-  border-color: rgba(168, 85, 247, 0.35);
-}
-
-.pf-chip[aria-pressed="true"] {
-  background: linear-gradient(135deg, #A855F7, #9333EA);
-  border-color: #A855F7;
-  color: white;
-}
-
-.pf-actions {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.pf-actions button {
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.pf-note {
-  font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-}
-
-.planner-result {
-  position: relative;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.15);
-  border-top: 1px solid rgba(168, 85, 247, 0.15);
-  padding: 24px 32px;
-}
-
-.pr-state {
-  font-size: 14px;
-  color: var(--muted);
-  text-align: center;
-  padding: 20px;
-}
-
-.pr-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.pr-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--neon);
-  border-radius: 50%;
-  animation: bounce 1.2s ease-in-out infinite;
-}
-
-.pr-dot:nth-child(2) { animation-delay: 0.15s; }
-.pr-dot:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes bounce {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-  30% { transform: translateY(-8px); opacity: 1; }
-}
-
-.pr-preview {
-  background: rgba(168, 85, 247, 0.05);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  border-radius: 12px;
-  padding: 20px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--text);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.pr-error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #f87171;
-  border-radius: 12px;
-  padding: 16px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.pr-body {
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--text);
-}
-
-[data-theme="light"] .planner-box {
-  background: #ffffff;
-  border-color: rgba(147, 51, 234, 0.2);
-  box-shadow: 0 4px 24px rgba(147, 51, 234, 0.1), 0 0 50px rgba(147, 51, 234, 0.08);
-}
-
-[data-theme="light"] .planner-box::before {
-  background: linear-gradient(135deg, rgba(147, 51, 234, 0.5), rgba(124, 58, 237, 0.3), rgba(147, 51, 234, 0.5));
-}
-
-[data-theme="light"] .planner-badge {
-  background: rgba(147, 51, 234, 0.08);
-  border-bottom-color: rgba(147, 51, 234, 0.15);
-  color: #9333EA;
-}
-
-[data-theme="light"] .planner-badge.ai-connected {
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(34, 211, 238, 0.06));
-  border-bottom-color: rgba(34, 211, 238, 0.18);
-  color: #0891b2;
-}
-
-[data-theme="light"] .planner-badge.ai-connected::before {
-  background: #0891b2;
-  box-shadow: 0 0 12px #0891b2, 0 0 24px rgba(8, 145, 178, 0.5);
-}
-
-[data-theme="light"] .pf-input {
-  background: rgba(147, 51, 234, 0.05);
-  border-color: rgba(147, 51, 234, 0.18);
-  color: #1e293b;
-}
-
-[data-theme="light"] .pf-input:focus {
-  border-color: #9333EA;
-  background: rgba(147, 51, 234, 0.08);
-  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1), 0 0 20px rgba(147, 51, 234, 0.15);
-}
-
-[data-theme="light"] .pf-chip {
-  background: rgba(147, 51, 234, 0.06);
-  border-color: rgba(147, 51, 234, 0.15);
-  color: #1e293b;
-}
-
-[data-theme="light"] .pf-chip:hover {
-  background: rgba(147, 51, 234, 0.1);
-  border-color: rgba(147, 51, 234, 0.25);
-}
-
-[data-theme="light"] .pf-chip[aria-pressed="true"] {
-  background: linear-gradient(135deg, #9333EA, #7c3aed);
-  border-color: #9333EA;
-}
-
-[data-theme="light"] .planner-result {
-  background: rgba(0, 0, 0, 0.02);
-  border-top-color: rgba(147, 51, 234, 0.12);
-}
-
-[data-theme="light"] .pr-preview {
-  background: rgba(147, 51, 234, 0.04);
-  border-color: rgba(147, 51, 234, 0.12);
-  color: #334155;
-}
-
-[data-theme="light"] .pr-error {
-  background: rgba(239, 68, 68, 0.06);
-  border-color: rgba(239, 68, 68, 0.2);
-  color: #dc2626;
-}
-
-@media (max-width: 768px) {
-  .pf-grid2 {
-    grid-template-columns: 1fr;
+  .neon-cta-box::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    z-index: -1;
+    border-radius: 27px;
+    background: linear-gradient(120deg, #a855f7, #22d3ee, #34d399, #a855f7);
+    background-size: 300% 300%;
+    animation: neonFlow 8s ease infinite;
+    filter: blur(12px);
+    opacity: .5;
+    transition: opacity 0.3s ease;
   }
-  
-  .planner-form {
-    padding: 20px 24px;
+  .neon-cta-box:hover::before {
+    opacity: .75;
+    filter: blur(16px);
   }
-  
-  .planner-result {
-    padding: 16px 24px;
+  @keyframes neonFlow {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
-}
-</style> 
+  .neon-cta-inner {
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 24px;
+    padding: 48px 36px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  [data-theme="light"] .neon-cta-inner {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(147, 51, 234, 0.3);
+  }
+  .neon-cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    color: #c084fc;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  [data-theme="light"] .neon-cta-badge {
+    background: rgba(147, 51, 234, 0.1);
+    color: #7c3aed;
+    border-color: rgba(147, 51, 234, 0.25);
+  }
+  .neon-cta-dot {
+    width: 8px;
+    height: 8px;
+    background: #34d399;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #34d399;
+    animation: pulse-green 2s infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 10px #34d399;
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.3);
+      box-shadow: 0 0 16px #34d399, 0 0 24px rgba(52, 211, 153, 0.6);
+    }
+  }
+  .neon-cta-title {
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.3;
+    max-width: 650px;
+  }
+  .neon-cta-desc {
+    font-size: clamp(14px, 1.8vw, 16px);
+    color: var(--muted);
+    max-width: 620px;
+    line-height: 1.6;
+  }
+  .neon-cta-btn-wrap {
+    margin-top: 8px;
+  }
+  .neon-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s ease;
+  }
+  .neon-cta-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
+    color: #ffffff;
+  }
+</style>
+
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
 <link rel="stylesheet" href="assets/css/scroll-reveal.css?v=11">
 <base target="_blank" rel="noopener">
@@ -3704,7 +3509,7 @@ footer p{
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
   <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <img class="brand-mark" src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" width="960" height="960" style="object-fit:cover;object-position:center top;">
+    <picture><source srcset="images/profile-closeup.webp" type="image/webp"><img class="brand-mark" src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" width="960" height="960" decoding="async" style="object-fit:cover;object-position:center top;"></picture>
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
       <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
@@ -3754,7 +3559,7 @@ footer p{
     <div class="hero-top-image"> 
       <div class="top-img-ring"></div> 
       <div class="top-img-container"> 
-        <img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high">
+        <picture><source srcset="images/profile-closeup.webp" type="image/webp"><img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high" decoding="async"></picture>
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
       <div class="floating-badge" role="img" aria-label="Development workspace"><i class="fas fa-laptop-code lab-icon" aria-hidden="true"></i></div>
@@ -3820,7 +3625,7 @@ footer p{
     </div> 
     <div class="about-image reveal"> 
       <div class="about-img-container"> 
-        <img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" width="653" height="1280" loading="lazy">
+        <picture><source srcset="images/6037452442028413306.webp" type="image/webp"><img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" width="653" height="1280" loading="lazy" decoding="async"></picture>
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
     </div> 
@@ -3838,7 +3643,7 @@ footer p{
       <div class="car-header">
         <div class="car-logo-info">
           <div class="car-logo-box">
-            <img src="images/MTI.png" alt="MTI Logo" loading="lazy" width="200" height="200">
+            <img src="images/MTI.png" alt="MTI Logo" loading="lazy" decoding="async" width="200" height="200">
           </div>
           <div>
             <h3 style="font-size:22px;font-weight:700;color:#fff;">B.Sc. Computer Science &amp; Artificial Intelligence</h3>
@@ -4143,7 +3948,7 @@ footer p{
     <div class="pro-exp-card reveal">
       <div class="exp-header">
         <div class="exp-logo-box">
-          <img src="images/depi.png" alt="DEPI Logo" width="558" height="558" loading="lazy">
+          <img src="images/depi.png" alt="DEPI Logo" width="558" height="558" loading="lazy" decoding="async">
         </div>
         <div class="exp-title-info">
           <h3>Flutter Developer Trainee</h3>
@@ -4187,7 +3992,7 @@ footer p{
     <div class="pro-exp-card reveal">
       <div class="exp-header">
         <div class="exp-logo-box bg-white">
-          <img src="images/iti.png" alt="ITI Logo" width="750" height="430" loading="lazy">
+          <img src="images/iti.png" alt="ITI Logo" width="750" height="430" loading="lazy" decoding="async">
         </div>
         <div class="exp-title-info">
           <h3>Full-Stack Development Trainee</h3>
@@ -4305,7 +4110,7 @@ footer p{
     <!-- Project 1: MovieVerse -->
     <div class="project-card reveal" onclick="openProjectModal(0)"> 
       <div class="project-image">
-        <img src="images/movie2.jpg" alt="MovieVerse Showcase" width="1280" height="853" loading="lazy">
+        <picture><source srcset="images/movie2.webp" type="image/webp"><img src="images/movie2.jpg" alt="MovieVerse Showcase" width="1280" height="853" loading="lazy" decoding="async"></picture>
       </div> 
       <div class="project-content"> 
         <h3>MovieVerse — Movie Explorer</h3>
@@ -4321,7 +4126,7 @@ footer p{
           <button class="project-btn primary" onclick="openProjectModal(0)"><i class="fas fa-eye"></i> See More</button> 
           <a href="#demo-movieverse" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <img src="images/movie2.jpg" alt="MovieVerse Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'">
+              <picture><source srcset="images/movie2.webp" type="image/webp"><img src="images/movie2.jpg" alt="MovieVerse Demo" width="1280" height="853" loading="lazy" decoding="async" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
@@ -4336,7 +4141,7 @@ footer p{
     <!-- Project 2: Masrofy -->
     <div class="project-card reveal" onclick="openProjectModal(1)"> 
       <div class="project-image">
-        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy"></picture>
+        <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Showcase" width="1280" height="853" loading="lazy" decoding="async"></picture>
       </div> 
       <div class="project-content"> 
         <h3>Masrofy — Smart Expense Tracker</h3>
@@ -4352,7 +4157,7 @@ footer p{
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
           <a href="#demo-masrofy" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
-              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" onerror="this.style.display='none'"></picture>
+              <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" decoding="async" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
             </div>
             <div class="demo-info">
@@ -4447,7 +4252,7 @@ footer p{
     <!-- Project: StudySync -->
     <div class="project-card reveal" onclick="openProjectModal(2)">
       <div class="project-image">
-        <img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" width="1280" height="853" loading="lazy">
+        <picture><source srcset="images/STUDYSYNC.webp" type="image/webp"><img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" width="1280" height="853" loading="lazy" decoding="async"></picture>
       </div>
       <div class="project-content">
         <h3>StudySync — Smart Study Planner</h3>
@@ -4467,7 +4272,7 @@ footer p{
     <!-- Project: MediMind -->
     <div class="project-card reveal" onclick="openProjectModal(3)">
       <div class="project-image">
-        <img src="images/MediMind.jpg" alt="MediMind Showcase" width="1280" height="854" loading="lazy">
+        <picture><source srcset="images/MediMind.webp" type="image/webp"><img src="images/MediMind.jpg" alt="MediMind Showcase" width="1280" height="854" loading="lazy" decoding="async"></picture>
       </div>
       <div class="project-content">
         <h3>MediMind — Health Companion</h3>
@@ -4590,6 +4395,29 @@ footer p{
 </section>
 
 
+<!-- AI Project Planner CTA Box -->
+<section id="ai-planner-cta" style="padding:40px 20px 80px;max-width:960px;margin:0 auto;">
+  <div class="neon-cta-box reveal" onclick="window.location.href='planner.html'" role="region" aria-label="AI Project Planner CTA">
+    <div class="neon-cta-inner">
+      <div class="neon-cta-badge">
+        <span class="neon-cta-dot"></span>
+        <span>AI-powered · Free · No sign-up</span>
+      </div>
+      <h2 class="neon-cta-title">
+        Got a project idea? Let's turn it into a real plan.
+      </h2>
+      <p class="neon-cta-desc">
+        Answer a few quick questions and get a complete 9-section development roadmap, architecture choices, and timeline estimates in under a minute.
+      </p>
+      <div class="neon-cta-btn-wrap">
+        <a href="planner.html" class="neon-cta-btn" onclick="event.stopPropagation()">
+          ✨ Build your plan — free
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact Section (5 Cards + Form) --> 
 <section id="contact"> 
   <div class="section-header reveal"> 
@@ -4674,23 +4502,23 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <img class="footer-logo-img" src="images/brand-icon.png" alt="Abdelrahman Abdullah logo" width="1024" height="1024" loading="lazy">
+      <picture><source srcset="images/brand-icon.webp" type="image/webp"><img class="footer-logo-img" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96" loading="lazy" decoding="async"></picture>
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
-          <img src="images/platforms/khamsat.png" alt="Khamsat" loading="lazy" width="52" height="52">
+          <img src="images/platforms/khamsat.png" decoding="async" alt="Khamsat" loading="lazy" width="52" height="52">
         </a>
         <a href="https://nafezly.com/u/ENGabdelrahamn" class="platform-icon" target="_blank" rel="noopener" title="Nafezly" aria-label="Nafezly" style="--platform-color:#14b8a6">
-          <img src="images/platforms/nafezly.png" alt="Nafezly" loading="lazy" width="52" height="52">
+          <img src="images/platforms/nafezly.png" decoding="async" alt="Nafezly" loading="lazy" width="52" height="52">
         </a>
         <a href="https://mostaql.com/onboarding/profile" class="platform-icon" target="_blank" rel="noopener" title="Mostaql" aria-label="Mostaql" style="--platform-color:#25a9e0">
-          <img src="images/platforms/mostaql.png" alt="Mostaql" loading="lazy" width="52" height="52">
+          <img src="images/platforms/mostaql.png" decoding="async" alt="Mostaql" loading="lazy" width="52" height="52">
         </a>
         <a href="https://www.freelancer.com/u/abdelrahmana089" class="platform-icon" target="_blank" rel="noopener" title="Freelancer" aria-label="Freelancer" style="--platform-color:#1686d9">
-          <img src="images/platforms/freelancer.png" alt="Freelancer" loading="lazy" width="52" height="52">
+          <img src="images/platforms/freelancer.png" decoding="async" alt="Freelancer" loading="lazy" width="52" height="52">
         </a>
         <a href="https://rebhy.com/freelancers/abdelrahman_aboelwafa" class="platform-icon" target="_blank" rel="noopener" title="Rebhy" aria-label="Rebhy" style="--platform-color:#8b5cf6">
-          <img src="images/platforms/rebhy.png" alt="Rebhy" loading="lazy" width="52" height="52">
+          <img src="images/platforms/rebhy.png" decoding="async" alt="Rebhy" loading="lazy" width="52" height="52">
         </a>
       </div>
     </div>
@@ -5729,7 +5557,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setAllText('.btn-contact-nav span', ['تواصل معي']);
     setText('.scroll-indicator span', 'مرّر للأسفل');
     setText('.skip-link', 'انتقل إلى المحتوى الرئيسي');
-    setHtml('#ai-planner-section .section-title', 'مخطط المشاريع <span class="gradient-text">بالذكاء الاصطناعي</span>');
+        // AI Planner CTA Box
+    setText('#ai-planner-cta .neon-cta-badge span:last-child', 'مدعوم بالذكاء الاصطناعي · مجاني · بدون تسجيل');
+    setText('#ai-planner-cta .neon-cta-title', 'عندك فكرة مشروع؟ خلينا نحوّلها لخطة شغل حقيقية');
+    setText('#ai-planner-cta .neon-cta-desc', 'جاوب على أسئلة سريعة واحصل على خطة مشروع متكاملة من 9 أقسام مع التكلفة التقديرية والجدول الزمني خلال دقيقة.');
+    setText('#ai-planner-cta .neon-cta-btn', '✨ ابنِ خطتك مجانًا');
     setAllText('.price-tier-name', ['الباقة الأساسية','الباقة القياسية','الباقة الاحترافية']);
     setText('#videoModalTitle', 'عرض المشروع');
     setAttr('.whoiam-banner', 'role', 'group');
