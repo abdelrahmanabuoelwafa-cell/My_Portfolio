@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    Cinematic Scroll Animations — CSS Foundation with Glow Effects
    Works with GSAP ScrollTrigger (scroll-reveal.js)
    No-JS fallback: content visible by default
@@ -22,7 +22,6 @@ html.js.js-enabled .reveal.is-visible {
 
 /* GSAP owns hero entrance + scrubbed scroll-out; disable CSS
    keyframes to avoid double animation and scrub handoff glitches */
-html.js.js-enabled .hero-top-image,
 html.js.js-enabled .hero-name,
 html.js.js-enabled .typing-container,
 html.js.js-enabled .hero-badge,
@@ -1404,7 +1403,7 @@ html, body {
 .hero-top-image,
 html.js .hero-top-image,
 html.js-enabled .hero-top-image {
-  animation: heroFloatBounce 4.2s ease-in-out infinite !important;
+  animation: gentleBubbleFloat 4.2s ease-in-out infinite !important;
   will-change: transform;
 }
 
@@ -1413,7 +1412,7 @@ html.js-enabled .hero-top-image {
   inset: -10px;
   border: 2px dashed rgba(168, 85, 247, 0.55);
   border-radius: 50%;
-  animation: ringPulseGlow 15s linear infinite !important;
+  animation: spin 16s linear infinite, ringPulseGlow 4.2s ease-in-out infinite !important;
   z-index: 3;
   pointer-events: none;
 }
