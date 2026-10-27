@@ -3350,13 +3350,16 @@ footer p{
 [data-theme="light"] .footer-logo .code-bracket{color:#94a3b8;}
 
   /* ===== Neon CTA Box (Link to planner.html) ===== */
-  .neon-cta-box {
+  .neon-cta-box,
+  html.js.js-enabled .neon-cta-box {
     position: relative;
     border-radius: 24px;
     isolation: isolate;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 0 auto;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .neon-cta-box:hover {
     transform: translateY(-4px) scale(1.01);
@@ -3473,10 +3476,36 @@ footer p{
     box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
     color: #ffffff;
   }
+
+  /* Responsive Mobile Tweaks for Neon CTA Box */
+  @media (max-width: 768px) {
+    #ai-planner-cta {
+      padding: 30px 16px 50px !important;
+    }
+    .neon-cta-inner {
+      padding: 28px 16px !important;
+      gap: 14px !important;
+      border-radius: 20px !important;
+    }
+    .neon-cta-title {
+      font-size: 20px !important;
+      line-height: 1.35 !important;
+    }
+    .neon-cta-desc {
+      font-size: 14px !important;
+      line-height: 1.5 !important;
+    }
+    .neon-cta-btn {
+      padding: 12px 24px !important;
+      font-size: 14px !important;
+      width: 100% !important;
+      justify-content: center !important;
+    }
+  }
 </style>
 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=11">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=28">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -4397,7 +4426,7 @@ footer p{
 
 <!-- AI Project Planner CTA Box -->
 <section id="ai-planner-cta" style="padding:40px 20px 80px;max-width:960px;margin:0 auto;">
-  <div class="neon-cta-box reveal" onclick="window.location.href='planner.html'" role="region" aria-label="AI Project Planner CTA">
+  <div class="neon-cta-box is-visible reveal" onclick="window.location.href='planner.html'" role="region" aria-label="AI Project Planner CTA">
     <div class="neon-cta-inner">
       <div class="neon-cta-badge">
         <span class="neon-cta-dot"></span>
@@ -6393,7 +6422,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v27</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v28</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
@@ -6403,7 +6432,7 @@ STRICT RULES:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="assets/js/scroll-reveal.js?v=27" defer></script>
+<script src="assets/js/scroll-reveal.js?v=28" defer></script>
 <script src="assets/js/ai-planner.js?v=42" defer></script>
 </body> 
 </html>

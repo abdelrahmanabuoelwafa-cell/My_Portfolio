@@ -10,6 +10,13 @@ html.js.js-enabled .reveal {
   opacity: 0;
 }
 
+/* Neon CTA Box should always remain visible on both mobile and desktop */
+html.js.js-enabled .neon-cta-box,
+.neon-cta-box {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 html.js.js-enabled .reveal.is-visible {
   opacity: 1;
   transform: none;

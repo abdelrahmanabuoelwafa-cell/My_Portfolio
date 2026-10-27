@@ -101,7 +101,8 @@
     '.future-card.reveal',
     '.pro-exp-card.reveal',
     '.contact-info.reveal',
-    '.planner-box.reveal'
+    '.planner-box.reveal',
+    '.neon-cta-box.reveal'
   ];
 
   cardSelectors.forEach(function (sel) {
