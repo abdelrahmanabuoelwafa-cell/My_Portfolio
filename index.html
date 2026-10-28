@@ -1830,28 +1830,45 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   box-shadow:0 25px 50px rgba(168, 85, 247, 0.7); 
 } 
 /* Expanded 420px Showcase Image Box for Full High-Quality Mockup View */
-.project-image{ 
-  height:420px; 
-  background:linear-gradient(180deg, #0d0d14 0%, #151520 100%); 
-  display:flex; 
-  align-items:center; 
-  justify-content:center; 
-  font-size:70px; 
-  position:relative; 
-  overflow:hidden;
-  border-bottom:1px solid rgba(51,65,85,.6);
+.project-image { 
+  width: 100%;
+  aspect-ratio: 1280 / 853;
+  height: auto;
+  max-height: 440px;
+  background: linear-gradient(180deg, #0d0d14 0%, #151520 100%); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+  overflow: hidden;
+  border-bottom: 1px solid rgba(51,65,85,.6);
 }
 
 [data-theme="light"] .project-image {
   background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
   border-bottom: 1px solid rgba(148, 163, 184, 0.6);
 } 
-.project-image img{
-  width:100%; height:100%; object-fit:contain; object-position:center;
-  transition:transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+
+.project-image picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
-.project-card:hover .project-image img{
-  transform:scale(1.05);
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.03);
 }
 .project-content{padding:32px} 
 .project-content h3{ 
@@ -3146,7 +3163,7 @@ footer p{
   .contact-container{grid-template-columns:1fr} 
   .hero-name{font-size:38px} 
   .about-image{width:min(336px,88vw);height:min(336px,88vw)}
-  .project-image{height:260px;}
+  .project-image{aspect-ratio:1280 / 853;height:auto;max-height:300px;}
 }
 
 /* Responsive hardening for all new premium sections */
@@ -4153,7 +4170,7 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(0)"><i class="fas fa-eye"></i> See More</button> 
-          <a href="#demo-movieverse" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
+          <div class="demo-card" onclick="event.stopPropagation(); event.preventDefault(); openProjectVideo('images/movieberse.mp4', 'MovieVerse');" style="flex: 1.5; margin: 0; padding: 8px; cursor: pointer;" role="button" aria-label="Watch MovieVerse Demo">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
               <picture><source srcset="images/movie2.webp" type="image/webp"><img src="images/movie2.jpg" alt="MovieVerse Demo" width="1280" height="853" loading="lazy" decoding="async" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
@@ -4162,7 +4179,7 @@ footer p{
               <h4 style="font-size: 13px;">Watch Web<br>Project</h4>
             </div>
             <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
-          </a>
+          </div>
         </div> 
       </div> 
     </div> 
@@ -4184,7 +4201,7 @@ footer p{
         </div> 
         <div class="project-links" onclick="event.stopPropagation()"> 
           <button class="project-btn primary" onclick="openProjectModal(1)"><i class="fas fa-eye"></i> See More</button> 
-          <a href="#demo-masrofy" target="_self" class="demo-card" style="flex: 1.5; margin: 0; padding: 8px;">
+          <div class="demo-card" onclick="event.stopPropagation(); event.preventDefault(); openProjectVideo('images/masrofy.mp4', 'Masrofy');" style="flex: 1.5; margin: 0; padding: 8px; cursor: pointer;" role="button" aria-label="Watch Masrofy Demo">
             <div class="demo-thumbnail" style="width: 70px; height: 50px;">
               <picture><source srcset="images/masrofy2.webp" type="image/webp"><img src="images/masrofy2.png" alt="Masrofy Demo" width="1280" height="853" loading="lazy" decoding="async" onerror="this.style.display='none'"></picture>
               <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
@@ -4193,7 +4210,7 @@ footer p{
               <h4 style="font-size: 13px;">Watch Mobile<br>Project</h4>
             </div>
             <div class="demo-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right"></i></div>
-          </a>
+          </div>
         </div> 
       </div> 
     </div> 
@@ -4293,7 +4310,7 @@ footer p{
         </div>
         <div class="project-links" onclick="event.stopPropagation()">
           <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button>
-          <a href="#demo-studysync" class="project-btn secondary" target="_self"><i class="fas fa-play"></i> View Project</a>
+          <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(2);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
         </div>
       </div>
     </div> 
@@ -4313,7 +4330,7 @@ footer p{
         </div>
         <div class="project-links" onclick="event.stopPropagation()">
           <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button>
-          <a href="#demo-medimind" class="project-btn secondary" target="_self"><i class="fas fa-play"></i> View Project</a>
+          <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(3);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
         </div>
       </div>
     </div> 
@@ -5262,14 +5279,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoTitle = document.getElementById('videoModalTitle');
 
   window.openProjectVideo = function(videoSrc, projectName) {
-    videoTitle.textContent = projectName + (document.documentElement.lang === 'ar' ? ' — عرض' : ' Demo');
-    videoPlayer.src = videoSrc;
-
-    videoModal.classList.add('active');
-
+    if (!videoSrc) return;
+    const isAr = document.documentElement.lang === 'ar';
+    const cleanName = (projectName || 'Project').trim();
+    if (videoTitle) {
+      videoTitle.textContent = cleanName + (isAr ? ' — عرض الفيديو' : ' Demo Video');
+    }
+    const videoSource = document.getElementById('videoSource');
+    if (videoSource) videoSource.src = videoSrc;
+    if (videoPlayer) {
+      videoPlayer.src = videoSrc;
+      videoPlayer.load();
+    }
+    if (videoModal) {
+      videoModal.classList.add('active');
+    }
     setTimeout(() => {
-      videoPlayer.play().catch(e => console.log("Auto-play prevented:", e));
-    }, 300);
+      if (videoPlayer) {
+        const p = videoPlayer.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(e => console.log('Auto-play prevented:', e));
+        }
+      }
+    }, 150);
   };
 
   function closeVideoModal() {
@@ -6422,7 +6454,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v28</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v29</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
@@ -6433,7 +6465,7 @@ STRICT RULES:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="assets/js/scroll-reveal.js?v=28" defer></script>
-<script src="assets/js/ai-planner.js?v=42" defer></script>
+<script src="assets/js/ai-planner.js?v=43" defer></script>
 </body> 
 </html>
 

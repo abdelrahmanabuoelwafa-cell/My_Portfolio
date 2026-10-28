@@ -47,14 +47,14 @@
   var audEl       = document.getElementById('pf-audience') || document.getElementById('planner-audience');
   var platGroup   = document.getElementById('pf-platform') || document.getElementById('planner-platform');
   var featEl      = document.getElementById('pf-features') || document.getElementById('planner-features');
-  var currEl      = document.getElementById('pf-currency') || document.getElementById('planner-budget');
+  var currEl      = document.getElementById('pf-currency') || document.getElementById('planner-currency') || document.getElementById('planner-budget');
   var deadlineEl  = document.getElementById('pf-deadline') || document.getElementById('planner-deadline');
   var btn         = document.getElementById('planner-submit-btn') || document.getElementById('planner-btn');
   var errEl       = document.getElementById('planner-error');
   var loadEl      = document.getElementById('planner-results-loading') || document.getElementById('planner-loading');
   var bodyEl      = document.getElementById('planner-results-body') || document.getElementById('planner-body');
   var modeEl      = document.getElementById('planner-mode');
-  var currencyChips = document.querySelectorAll('.pf-curr-chip');
+  var currencyChips = document.querySelectorAll('.pf-curr-chip, #planner-currency-chips .pf-chip, [data-curr]');
 
   if (!form || !btn) return;
 
@@ -192,8 +192,24 @@
 
   function platforms() {
     if (!platGroup) return 'Mobile app (iOS & Android via Flutter)';
-    var sel = platGroup.querySelector('.pf-plat-btn.on') || platGroup.querySelector('.pf-plat-btn[aria-pressed="true"]');
+    var sel = platGroup.querySelector('.on') || platGroup.querySelector('[aria-pressed="true"]');
     return sel ? sel.getAttribute('data-v') : 'Mobile app (iOS & Android via Flutter)';
+  }
+
+  // Platform chips click interaction
+  if (platGroup) {
+    var platChips = platGroup.querySelectorAll('.pf-chip, .pf-plat-btn');
+    platChips.forEach(function (chip) {
+      chip.addEventListener('click', function (e) {
+        e.preventDefault();
+        platChips.forEach(function (c) {
+          c.classList.remove('on');
+          c.setAttribute('aria-pressed', 'false');
+        });
+        chip.classList.add('on');
+        chip.setAttribute('aria-pressed', 'true');
+      });
+    });
   }
 
   // Format currency ranges with strict LTR isolation so '-' is ALWAYS in the center
@@ -316,10 +332,14 @@
   }
 
   // Currency chips — form level
+  function getCurrencyChips() {
+    return document.querySelectorAll('.pf-curr-chip, #planner-currency-chips .pf-chip, [data-curr]');
+  }
+
   function activateCurrencyChip(code) {
     currentSelectedCurrency = code;
     if (currEl) currEl.value = code;
-    currencyChips.forEach(function (chip) {
+    getCurrencyChips().forEach(function (chip) {
       var active = chip.getAttribute('data-curr') === code;
       chip.classList.toggle('on', active);
       chip.setAttribute('aria-pressed', active ? 'true' : 'false');
@@ -327,8 +347,9 @@
     if (bodyEl && !bodyEl.hidden) updateBudgetCardAmounts(code);
   }
 
-  currencyChips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
+  getCurrencyChips().forEach(function (chip) {
+    chip.addEventListener('click', function (e) {
+      e.preventDefault();
       var code = chip.getAttribute('data-curr');
       if (code) activateCurrencyChip(code);
     });
