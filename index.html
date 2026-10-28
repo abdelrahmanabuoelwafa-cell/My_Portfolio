@@ -5,24 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Primary Meta Tags -->
-<title>Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert</title>
-<meta name="title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
+<title>Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert</title>
+<meta name="title" content="Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert">
 <meta name="description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development. Transform your ideas into beautiful, high-performance mobile apps.">
 <meta name="keywords" content="Flutter Developer, Mobile App Development, Cross-Platform Apps, UI/UX Design, Dart, Firebase, App Development, Cairo, Egypt">
-<meta name="author" content="Abdelrahman Abdullah">
+<meta name="author" content="Abdelrahman Abouelwafa">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
-<meta property="og:title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
+<meta property="og:title" content="Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert">
 <meta property="og:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
 <meta property="og:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/profile-closeup.jpg">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
-<meta property="twitter:title" content="Abdelrahman Abdullah — Flutter Developer | Mobile App Development Expert">
+<meta property="twitter:title" content="Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert">
 <meta property="twitter:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
 <meta property="twitter:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/profile-closeup.jpg">
 
@@ -130,7 +130,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Abdelrahman Abdullah",
+  "name": "Abdelrahman Abouelwafa",
   "jobTitle": "Flutter Developer",
   "url": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/",
   "image": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/logo.png",
@@ -437,7 +437,7 @@ body::after{
 } 
 
 /* Navbar */ 
-/* --- Brand Navbar (Abdelrahman Abdullah personal logo) --- */
+/* --- Brand Navbar (Abdelrahman Abouelwafa personal logo) --- */
 #navbar{
   position:fixed;
   top:0; left:0; right:0;
@@ -954,11 +954,11 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
 
 /* About Section */ 
 .about-grid{ 
-  display:grid; 
-  grid-template-columns:1fr 1fr; 
-  gap:40px; 
+  display:flex; 
+  flex-direction:column; 
+  gap:28px; 
   align-items:center; 
-  max-width:1200px; 
+  max-width:900px; 
   margin:0 auto; 
 } 
 .about-image{ 
@@ -966,14 +966,13 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   display:flex; 
   justify-content:center; 
   align-items:center;
-  justify-self:center;
-  align-self:center;
   flex:none;
-  width:456px;
-  height:456px;
+  width:min(280px, 68vw);
+  height:min(280px, 68vw);
   margin: 0 auto;
   border-radius: 50%;
   overflow: visible;
+  box-shadow: 0 0 25px rgba(168,85,247,.28), 0 0 50px rgba(168,85,247,.14);
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 } 
 .about-img-container{ 
@@ -995,11 +994,11 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   transform:scale(1.03); 
 }
 .about-image{
-  translate:4px -12px;
+  
   box-shadow:0 0 22px rgba(168,85,247,.22),0 0 60px rgba(168,85,247,.12);
 }
 @media(min-width:769px){
-  .about-image{translate:14px -155px;}
+  
 }
 .about-img{ 
   width:100%; 
@@ -1049,7 +1048,7 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   margin-bottom:20px; 
 } 
 /* --- Who I Am banner --- */
-.whoiam-banner{position:relative;overflow:hidden;border:1px solid rgba(168,85,247,.28);border-radius:20px;background:linear-gradient(135deg,#0B0F1E 0%,#141033 55%,#1E1040 100%);padding:clamp(28px,3.6vw,42px) clamp(24px,4vw,48px);margin-bottom:28px}
+.whoiam-banner{position:relative;overflow:hidden;border:1px solid rgba(168,85,247,.28);border-radius:20px;background:linear-gradient(135deg,#0B0F1E 0%,#141033 55%,#1E1040 100%);padding:clamp(24px,3.4vw,38px) clamp(22px,3.8vw,44px);margin:0 auto;width:100%;box-sizing:border-box;}
 .whoiam-banner::before{content:"";position:absolute;top:-70px;left:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.28),transparent 70%);pointer-events:none}
 .whoiam-banner::after{content:"";position:absolute;bottom:-80px;right:-50px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.16),transparent 70%);pointer-events:none}
 .whoiam-label{display:inline-block;font-size:14px;letter-spacing:2px;font-weight:800;color:#C084FC;border:1px solid rgba(192,132,252,.4);border-radius:999px;padding:7px 16px;margin-bottom:20px}
@@ -2508,6 +2507,104 @@ footer p{
   .footer-social-icons,.freelance-platforms{justify-content:center}
 }
 
+
+/* --- Testimonials Interactive Carousel --- */
+.testimonials-carousel-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0 20px;
+}
+.testimonials-carousel-track {
+  position: relative;
+  width: 100%;
+}
+.testimonial-slide {
+  display: none;
+  width: 100%;
+  animation: fadeInTestimonial 0.35s ease;
+}
+.testimonial-slide.active {
+  display: block;
+}
+@keyframes fadeInTestimonial {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.testimonial-slide .premium-testimonial-card {
+  width: 100%;
+  max-width: 100%;
+}
+.testimonial-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+}
+.testimonial-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.testimonial-arrow:hover {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.45);
+}
+.testimonial-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.testimonial-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.25);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+.testimonial-dot.active {
+  width: 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #9333EA, #A855F7);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+  border-color: #A855F7;
+}
+[data-theme="light"] .testimonial-arrow {
+  background: rgba(147, 51, 234, 0.08);
+  border-color: rgba(147, 51, 234, 0.28);
+  color: #1e293b;
+}
+[data-theme="light"] .testimonial-arrow:hover {
+  background: #9333EA;
+  color: #fff;
+}
+[data-theme="light"] .testimonial-dot {
+  background: rgba(147, 51, 234, 0.2);
+  border-color: rgba(147, 51, 234, 0.35);
+}
+[data-theme="light"] .testimonial-dot.active {
+  background: #9333EA;
+}
+
 /* --- Premium Testimonial Card --- */
 .premium-testimonial-card{
   background:var(--card-bg);
@@ -3553,11 +3650,11 @@ footer p{
 
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
-  <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abdullah - Home">
-    <picture><source srcset="images/profile-closeup.webp" type="image/webp"><img class="brand-mark" src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" width="960" height="960" decoding="async" style="object-fit:cover;object-position:center top;"></picture>
+  <a href="#hero" class="brand" target="_self" aria-label="Abdelrahman Abouelwafa - Home">
+    <picture><source srcset="images/brand-icon.webp" type="image/webp"><img class="brand-mark" src="images/brand-icon-96.png" alt="Abdelrahman Abouelwafa logo" width="96" height="96" decoding="async"></picture>
     <span class="brand-name">
       <span class="brand-line">Abdelrahman</span>
-      <span class="brand-line brand-last">Abdullah<span class="brand-underscore">_</span></span>
+      <span class="brand-line brand-last">Abouelwafa<span class="brand-underscore">_</span></span>
     </span>
   </a> 
   <div class="nav-menu" id="navMenu"> 
@@ -3569,14 +3666,9 @@ footer p{
       <li><a href="#experience" target="_self">Experience</a></li> 
       <li><a href="#services" target="_self">Services</a></li>
       <li><a href="#projects" target="_self">Projects</a></li> 
-      <li><a href="#achievements" target="_self">Achievements</a></li>
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
     </ul> 
     <div class="nav-actions"> 
-      <a href="images/Abdelrahman-Abdullah-CV.pdf" download class="btn-cv" target="_self" aria-label="Download CV as PDF">
-        <span>Download CV</span> 
-        <i class="fas fa-download" aria-hidden="true"></i> 
-      </a> 
       <a href="#contact" class="btn-contact-nav" target="_self" aria-label="Contact Me"> 
         <span>Contact Me</span> 
         <i class="fas fa-paper-plane" aria-hidden="true"></i> 
@@ -3604,13 +3696,13 @@ footer p{
     <div class="hero-top-image"> 
       <div class="top-img-ring"></div> 
       <div class="top-img-container"> 
-        <picture><source srcset="images/profile-closeup.webp" type="image/webp"><img src="images/profile-closeup.jpg" alt="Abdelrahman Abdullah" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high" decoding="async"></picture>
+        <picture><source srcset="images/profile-closeup.webp" type="image/webp"><img src="images/profile-closeup.jpg" alt="Abdelrahman Abouelwafa" class="top-img protected-img" width="960" height="960" loading="eager" fetchpriority="high" decoding="async"></picture>
         <div class="image-blocker" aria-hidden="true"></div> 
       </div> 
       <div class="floating-badge" role="img" aria-label="Development workspace"><i class="fas fa-laptop-code lab-icon" aria-hidden="true"></i></div>
     </div> 
 
-    <h1 class="hero-name" id="hero-title">Abdelrahman Abdullah</h1> 
+    <h1 class="hero-name" id="hero-title">Abdelrahman Abouelwafa</h1> 
     <p class="hero-hook">Cross-platform MVPs, built with clean architecture and delivered fast.</p>
 
     <div class="typing-container"> 
@@ -3622,16 +3714,12 @@ footer p{
       <span class="status-dot"></span> Available for new projects 
     </div> 
 
-    <p class="hero-desc"> 
-      Flutter Developer specializing in building high-performance, cross-platform mobile applications with clean architecture and modern development practices. 
-    </p> 
-
     <div class="hero-buttons"> 
       <a href="#projects" class="btn-primary" target="_self"> 
         <i class="fas fa-rocket"></i> View Projects 
       </a> 
-      <a href="#contact" class="btn-outline" target="_self"> 
-        <i class="fas fa-envelope"></i> Contact Me 
+      <a href="images/Abdelrahman-Abdullah-CV.pdf" download class="btn-outline" target="_self" aria-label="Download CV as PDF"> 
+        <i class="fas fa-download"></i> Download CV 
       </a> 
     </div> 
 
@@ -3654,25 +3742,19 @@ footer p{
     <h2 class="section-title">Get To Know <span class="gradient-text">Me Better</span></h2> 
   </div> 
   <div class="about-grid"> 
-    <div class="about-content reveal"> 
-      <div class="whoiam-banner reveal">
+    <div class="about-image reveal"> 
+      <div class="about-img-container"> 
+        <picture><source srcset="images/6037452442028413306.webp" type="image/webp"><img src="images/6037452442028413306.jpg" alt="Abdelrahman Abouelwafa" class="about-img protected-img" width="653" height="1280" loading="lazy" decoding="async"></picture>
+        <div class="image-blocker" aria-hidden="true"></div> 
+      </div> 
+    </div> 
+    <div class="about-content reveal" style="width:100%;max-width:860px;margin:0 auto;"> 
+      <div class="whoiam-banner">
         <div class="whoiam-label">WHO I AM</div>
         <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
         <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
         <p class="whoiam-line3"><strong class="whoiam-edge">My Edge:</strong> practical, verified training — Full-Stack &amp; Flutter at <span class="hl-orange">DEPI</span> and <span class="hl-cyan">ITI</span>, plus a <span class="hl-purple">B.Sc. in Computer Science &amp; AI</span> at <strong class="whoiam-edge">MTI</strong>.</p>
       </div>
-      <div class="about-detail-stack">
-        <div><h4 class="about-detail-label">Experience</h4><p class="about-detail-copy">Training through ITI and DEPI in full-stack development and Flutter.</p></div>
-        <div><h4 class="about-detail-label">Tech Stack</h4><p class="about-detail-copy">Flutter, Dart, Firebase, REST APIs, and clean architecture.</p></div>
-        <div><h4 class="about-detail-label">Education</h4><p class="about-detail-copy">B.Sc. Computer Science &amp; Artificial Intelligence at MTI, 2024 — 2028.</p></div>
-      </div>
-
-    </div> 
-    <div class="about-image reveal"> 
-      <div class="about-img-container"> 
-        <picture><source srcset="images/6037452442028413306.webp" type="image/webp"><img src="images/6037452442028413306.jpg" alt="Abdelrahman Abdullah" class="about-img protected-img" width="653" height="1280" loading="lazy" decoding="async"></picture>
-        <div class="image-blocker" aria-hidden="true"></div> 
-      </div> 
     </div> 
   </div> 
 </section> 
@@ -4215,141 +4297,153 @@ footer p{
     </div> 
 
   </div> 
+
+  <!-- What's Next content integrated directly below projects -->
+  <div id="future-projects" class="whats-next-wrapper" style="margin-top: clamp(48px, 6vw, 72px);">
+    <div class="section-header reveal">
+      <div class="section-label">What's Next</div>
+      <h2 class="section-title">What's <span class="gradient-text">Next</span></h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Project: StudySync -->
+      <div class="project-card reveal" onclick="openProjectModal(2)">
+        <div class="project-image">
+          <picture><source srcset="images/STUDYSYNC.webp" type="image/webp"><img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" width="1280" height="853" loading="lazy" decoding="async"></picture>
+        </div>
+        <div class="project-content">
+          <h3>StudySync — Smart Study Planner</h3>
+          <div class="project-subtitle">Study Organization &amp; Focus</div>
+          <p>A focused study companion that keeps your learning on track. StudySync brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Dart</span>
+          </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button>
+            <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(2);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
+          </div>
+        </div>
+      </div> 
+
+      <!-- Project: MediMind -->
+      <div class="project-card reveal" onclick="openProjectModal(3)">
+        <div class="project-image">
+          <picture><source srcset="images/MediMind.webp" type="image/webp"><img src="images/MediMind.jpg" alt="MediMind Showcase" width="1280" height="854" loading="lazy" decoding="async"></picture>
+        </div>
+        <div class="project-content">
+          <h3>MediMind — Health Companion</h3>
+          <div class="project-subtitle">Wellness &amp; Medication Reminders</div>
+          <p>A simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Dart</span>
+          </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button>
+            <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(3);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
+          </div>
+        </div>
+      </div> 
+
+    </div>
+    <div class="future-grid" style="margin-top: 36px;">
+      <div class="future-card reveal">
+        <div class="future-icon"><i class="fas fa-brain"></i></div>
+        <h3 class="future-title">Deepening AI &amp; ML</h3>
+        <p class="future-desc">Expanding my Artificial Intelligence studies at MTI and applying ML concepts into Flutter-powered smart mobile experiences.</p>
+      </div>
+      <div class="future-card reveal">
+        <div class="future-icon"><i class="fas fa-store"></i></div>
+        <h3 class="future-title">Client-Launched Apps</h3>
+        <p class="future-desc">Shipping freelance Flutter apps to production on Google Play and the App Store — for clients across Khamsat and Nafzly.</p>
+      </div>
+      <div class="future-card reveal">
+        <div class="future-icon"><i class="fas fa-plug"></i></div>
+        <h3 class="future-title">Full-Stack Flutter</h3>
+        <p class="future-desc">Bridging mobile and backend with clean REST APIs, Firebase, and Laravel to deliver complete, end-to-end product experiences.</p>
+      </div>
+    </div>
+  </div>
 </section> 
 
-<!-- Achievements Section -->
-<section id="achievements">
-  <div class="section-header reveal">
-    <div class="section-label">Achievements</div>
-    <h2 class="section-title">Progress &amp; <span class="gradient-text">Training</span></h2>
-  </div>
-  <div class="stats-grid">
-    <div class="stat-card reveal"><div class="stat-value">+8</div><div class="stat-label">Projects Completed</div></div>
-    <div class="stat-card reveal"><div class="stat-value">+4</div><div class="stat-label">Years of Learning &amp; Building</div></div>
-    <div class="stat-card reveal"><div class="stat-value">2</div><div class="stat-label">Intensive Training Programs</div></div>
-    <div class="stat-card reveal"><div class="stat-value">100%</div><div class="stat-label">Commitment to Clean Code</div></div>
-  </div>
-</section>
-
-<!-- Testimonials Section -->
+<!-- Testimonials Section (Interactive Carousel) -->
 <section id="testimonials">
   <div class="section-header reveal">
     <div class="section-label">Testimonials</div>
     <h2 class="section-title">Words From <span class="gradient-text">My Mentors</span></h2>
   </div>
-  <div class="testimonials-grid">
-    <div class="premium-testimonial-card reveal" style="grid-column:1/-1;width:100%;">
-      <div class="stars">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <p class="quote">"Abdelrahman stood out during the Flutter training as a fast learner with a genuine passion for building clean, well-architected mobile applications. He consistently went beyond the required tasks, delivered polished projects on time, and approached every challenge with a professional, problem-solving mindset. I confidently recommend him for any mobile development opportunity."</p>
-      <div class="author-info">
-        <div class="avatar" style="background-color: #a855f7;">A</div>
-        <div class="details">
-          <h4>A. Amira — Soft skills Mentor</h4>
-          <div class="linkedin-link">
-            <span class="recommendation-text">Recommendation —</span>
-            <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
-              <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
+
+  <div class="testimonials-carousel-wrapper reveal">
+    <div class="testimonials-carousel-track" id="testimonialTrack">
+
+      <!-- Testimonial 1: A. Amira -->
+      <div class="testimonial-slide active" data-index="0">
+        <div class="premium-testimonial-card">
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="quote">"Abdelrahman stood out during the Flutter training as a fast learner with a genuine passion for building clean, well-architected mobile applications. He consistently went beyond the required tasks, delivered polished projects on time, and approached every challenge with a professional, problem-solving mindset. I confidently recommend him for any mobile development opportunity."</p>
+          <div class="author-info">
+            <div class="avatar" style="background-color: #a855f7;">A</div>
+            <div class="details">
+              <h4>A. Amira — Soft skills Mentor</h4>
+              <div class="linkedin-link">
+                <span class="recommendation-text">Recommendation —</span>
+                <a href="https://www.linkedin.com/in/amira-ellahlopy-9a6998150" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+                  <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="premium-testimonial-card reveal" style="grid-column:1/-1;width:100%;">
-      <div class="stars">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <p class="quote clamped">"I had the pleasure of working with Abdelrahman for seven months as Freelancing &amp; Coaching Instructor, and what makes his journey stand out to me is that he didn't stop when the program ended.<br><br>Throughout our journey, he consistently applied what we worked on and kept looking for real opportunities to put it into practice. He was able to work with clients outside Egypt, which was a great reflection of the effort and consistency he put into his development.<br><br>What I appreciate even more is what happened after the journey. Abdelrahman continued looking for new opportunities, exploring different platforms and areas, and working on himself without needing someone to push him. He even explored AI training and evaluation platforms such as Outlier and kept reaching out to me for guidance and sharing his progress.<br><br>For me, this says a lot about his mindset. He is not someone who stops at reaching one goal; he keeps looking for the next opportunity to learn, improve, and grow.<br><br>I'm genuinely proud of the progress Abdelrahman has made and happy that I had the chance to be part of his journey. I'm confident that his persistence and continuous drive to improve will take him much further."</p>
-      <button class="quote-more-btn" type="button" aria-expanded="false">more</button>
-      <div class="author-info">
-        <div class="avatar" style="background-color: #22d3ee;">M</div>
-        <div class="details">
-          <h4>Menna Omar — Freelancing &amp; Coaching Instructor</h4>
-          <div class="linkedin-link">
-            <span class="recommendation-text">Recommendation —</span>
-            <a href="https://www.linkedin.com/in/mennaomar/" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
-              <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
+
+      <!-- Testimonial 2: Menna Omar -->
+      <div class="testimonial-slide" data-index="1">
+        <div class="premium-testimonial-card">
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="quote clamped">"I had the pleasure of working with Abdelrahman for seven months as Freelancing &amp; Coaching Instructor, and what makes his journey stand out to me is that he didn't stop when the program ended.<br><br>Throughout our journey, he consistently applied what we worked on and kept looking for real opportunities to put it into practice. He was able to work with clients outside Egypt, which was a great reflection of the effort and consistency he put into his development.<br><br>What I appreciate even more is what happened after the journey. Abdelrahman continued looking for new opportunities, exploring different platforms and areas, and working on himself without needing someone to push him. He even explored AI training and evaluation platforms such as Outlier and kept reaching out to me for guidance and sharing his progress.<br><br>For me, this says a lot about his mindset. He is not someone who stops at reaching one goal; he keeps looking for the next opportunity to learn, improve, and grow.<br><br>I'm genuinely proud of the progress Abdelrahman has made and happy that I had the chance to be part of his journey. I'm confident that his persistence and continuous drive to improve will take him much further."</p>
+          <button class="quote-more-btn" type="button" aria-expanded="false">more</button>
+          <div class="author-info">
+            <div class="avatar" style="background-color: #22d3ee;">M</div>
+            <div class="details">
+              <h4>Menna Omar — Freelancing &amp; Coaching Instructor</h4>
+              <div class="linkedin-link">
+                <span class="recommendation-text">Recommendation —</span>
+                <a href="https://www.linkedin.com/in/mennaomar/" target="_blank" rel="noopener" class="linkedin-icon-btn" title="View Profile on LinkedIn">
+                  <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
-  </div>
-</section>
 
-<!-- What's Next: planned projects and goals -->
-<section id="future-projects">
-  <div class="section-header reveal">
-    <div class="section-label">What's Next</div>
-    <h2 class="section-title">What's <span class="gradient-text">Next</span></h2>
-  </div>
-  <div class="projects-grid">
-
-    <!-- Project: StudySync -->
-    <div class="project-card reveal" onclick="openProjectModal(2)">
-      <div class="project-image">
-        <picture><source srcset="images/STUDYSYNC.webp" type="image/webp"><img src="images/STUDYSYNC.jpg" alt="StudySync Showcase" width="1280" height="853" loading="lazy" decoding="async"></picture>
+    <!-- Carousel Controls: Arrows + Dots -->
+    <div class="testimonial-controls">
+      <button type="button" class="testimonial-arrow prev-btn" id="testimonialPrev" aria-label="Previous Testimonial">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <div class="testimonial-dots" id="testimonialDots" role="tablist" aria-label="Testimonial Pagination">
+        <button type="button" class="testimonial-dot active" data-index="0" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+        <button type="button" class="testimonial-dot" data-index="1" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
       </div>
-      <div class="project-content">
-        <h3>StudySync — Smart Study Planner</h3>
-        <div class="project-subtitle">Study Organization &amp; Focus</div>
-        <p>A focused study companion that keeps your learning on track. StudySync brings schedules, tasks, and progress together in one calm, distraction-free interface so you can plan smarter and study with intention.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">Dart</span>
-        </div>
-        <div class="project-links" onclick="event.stopPropagation()">
-          <button class="project-btn primary" onclick="openProjectModal(2)"><i class="fas fa-eye"></i> See More</button>
-          <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(2);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
-        </div>
-      </div>
-    </div> 
-
-    <!-- Project: MediMind -->
-    <div class="project-card reveal" onclick="openProjectModal(3)">
-      <div class="project-image">
-        <picture><source srcset="images/MediMind.webp" type="image/webp"><img src="images/MediMind.jpg" alt="MediMind Showcase" width="1280" height="854" loading="lazy" decoding="async"></picture>
-      </div>
-      <div class="project-content">
-        <h3>MediMind — Health Companion</h3>
-        <div class="project-subtitle">Wellness &amp; Medication Reminders</div>
-        <p>A simple, caring health companion that helps you remember medication schedules and stay mindful of daily wellness routines — with gentle reminders and an easy-to-use interface designed around your wellbeing.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">Dart</span>
-        </div>
-        <div class="project-links" onclick="event.stopPropagation()">
-          <button class="project-btn primary" onclick="openProjectModal(3)"><i class="fas fa-eye"></i> See More</button>
-          <button type="button" class="project-btn secondary" onclick="event.stopPropagation(); openProjectModal(3);" style="cursor:pointer;"><i class="fas fa-eye"></i> View Project</button>
-        </div>
-      </div>
-    </div> 
-
-  </div>
-  <div class="future-grid">
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-brain"></i></div>
-      <h3 class="future-title">Deepening AI &amp; ML</h3>
-      <p class="future-desc">Expanding my Artificial Intelligence studies at MTI and applying ML concepts into Flutter-powered smart mobile experiences.</p>
-    </div>
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-store"></i></div>
-      <h3 class="future-title">Client-Launched Apps</h3>
-      <p class="future-desc">Shipping freelance Flutter apps to production on Google Play and the App Store — for clients across Khamsat and Nafzly.</p>
-    </div>
-    <div class="future-card reveal">
-      <div class="future-icon"><i class="fas fa-plug"></i></div>
-      <h3 class="future-title">Full-Stack Flutter</h3>
-      <p class="future-desc">Bridging mobile and backend with clean REST APIs, Firebase, and Laravel to deliver complete, end-to-end product experiences.</p>
+      <button type="button" class="testimonial-arrow next-btn" id="testimonialNext" aria-label="Next Testimonial">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </section>
@@ -4547,7 +4641,7 @@ footer p{
       </div>
     </div>
     <div class="footer-col center-col">
-      <picture><source srcset="images/brand-icon.webp" type="image/webp"><img class="footer-logo-img" src="images/brand-icon-96.png" alt="Abdelrahman Abdullah logo" width="96" height="96" loading="lazy" decoding="async"></picture>
+      <picture><source srcset="images/brand-icon.webp" type="image/webp"><img class="footer-logo-img" src="images/brand-icon-96.png" alt="Abdelrahman Abouelwafa logo" width="96" height="96" loading="lazy" decoding="async"></picture>
       <p class="footer-subtitle">Flutter Developer — Cairo, Egypt</p>
       <div class="freelance-platforms">
         <a href="https://khamsat.com/user/abdelrahman_aboelwfa" class="platform-icon" target="_blank" rel="noopener" title="Khamsat" aria-label="Khamsat" style="--platform-color:#f6a623">
@@ -4569,10 +4663,10 @@ footer p{
     </div>
     <div class="footer-col right-col">
       <h4 class="footer-title">WHO AM I?</h4>
-      <p>I'm <strong style="color:var(--text)">Abdelrahman Abdullah</strong>, a Flutter Developer passionate about building scalable, cross-platform mobile apps with clean architecture and seamless user experiences.</p>
+      <p>I'm <strong style="color:var(--text)">Abdelrahman Abouelwafa</strong>, a Flutter Developer passionate about building scalable, cross-platform mobile apps with clean architecture and seamless user experiences.</p>
     </div>
   </div>
-  <p class="footer-copy">&copy; 2026 Abdelrahman Abdullah. All rights reserved.</p> 
+  <p class="footer-copy">&copy; 2026 Abdelrahman Abouelwafa. All rights reserved.</p> 
 </footer> 
 
 <!-- Project Detail Modal -->
@@ -4626,7 +4720,7 @@ window.addEventListener('scroll', () => {
 }); 
 
 // Scroll-spy: highlight the active section link in the nav
-const spySections = ['hero','about','education','skills','experience','services','projects','achievements','testimonials'];
+const spySections = ['hero','about','education','skills','experience','services','projects','testimonials'];
 function updateActiveLink() { 
   const links = document.querySelectorAll('.nav-links a'); 
   if (!links.length) return; 
@@ -5321,6 +5415,83 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeVideoModal();
   });
 });
+
+// ===== Testimonials Interactive Carousel =====
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('testimonialTrack');
+  const prevBtn = document.getElementById('testimonialPrev');
+  const nextBtn = document.getElementById('testimonialNext');
+  const dotsContainer = document.getElementById('testimonialDots');
+  if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+  const slides = Array.from(track.querySelectorAll('.testimonial-slide'));
+  const dots = Array.from(dotsContainer.querySelectorAll('.testimonial-dot'));
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      const active = i === currentIndex;
+      slide.classList.toggle('active', active);
+    });
+
+    dots.forEach((dot, i) => {
+      const active = i === currentIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const isRtl = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+    showSlide(isRtl ? currentIndex + 1 : currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    const isRtl = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+    showSlide(isRtl ? currentIndex - 1 : currentIndex + 1);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(i));
+  });
+
+  // Touch swipe support on mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartX = e.touches[0].clientX;
+      touchEndX = touchStartX;
+    }
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchEndX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    const deltaX = touchEndX - touchStartX;
+    const threshold = 40;
+    if (Math.abs(deltaX) > threshold) {
+      const isRtl = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+      if (deltaX < 0) {
+        showSlide(isRtl ? currentIndex - 1 : currentIndex + 1);
+      } else {
+        showSlide(isRtl ? currentIndex + 1 : currentIndex - 1);
+      }
+    }
+  }, { passive: true });
+});
+
 </script>
 
 <script>
@@ -5361,10 +5532,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero
     setHtml('.hero-badge', '<span class="status-dot"></span> متاح لمشاريع جديدة');
-    setText('.hero-desc', 'مطوّر Flutter متخصص في بناء تطبيقات موبايل عالية الأداء ومتعددة المنصات، بمعمارية نظيفة وممارسات تطوير حديثة.');
-    setText('.hero-hook', 'أحوّل الأفكار المعقدة إلى تطبيقات Flutter جاهزة للإنتاج.');
+        setText('.hero-hook', 'أحوّل الأفكار المعقدة إلى تطبيقات Flutter جاهزة للإنتاج.');
     setHtml('.hero-buttons .btn-primary', '<i class="fas fa-rocket"></i> شاهد المشاريع');
-    setHtml('.hero-buttons .btn-outline', '<i class="fas fa-envelope"></i> تواصل معي');
+    setHtml('.hero-buttons .btn-outline', '<i class="fas fa-download"></i> تحميل السيرة الذاتية');
     setText('.hero-scroll-text', 'مرّر للاستكشاف');
 
     // Typewriter words
@@ -5380,11 +5550,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setHtml('#about .section-title', 'تعرّف عليّ <span class="gradient-text">عن قرب</span>');
     setText('.about-content h3', 'من أنا');
     setText('.about-hook', 'أحوّل الأفكار المعقدة إلى تطبيقات Flutter جاهزة للإنتاج.');
-    setHtml('.about-content > p:not(.about-hook):not(.about-usp)', 'أنا <strong>عبدالرحمن عبدالله</strong>، مطوّر Flutter من القاهرة، مصر. أعمل على تحويل الأفكار إلى تطبيقات موبايل عملية وسهلة الاستخدام.');
+    setHtml('.about-content > p:not(.about-hook):not(.about-usp)', 'أنا <strong>عبدالرحمن أبو الوفا</strong>، مطوّر Flutter من القاهرة، مصر. أعمل على تحويل الأفكار إلى تطبيقات موبايل عملية وسهلة الاستخدام.');
     setText('.about-usp', 'أساعد الشركات الناشئة والأعمال الصغيرة على إطلاق نسخ أولية متعددة المنصات، بمعمارية نظيفة وتدريب من ITI وDEPI وتنفيذ سريع.');
-    setAllText('.about-detail-label', ['الخبرة','التقنيات','التعليم']);
-    setAllText('.about-detail-copy', ['تدريب في تطوير الويب المتكامل وتطبيقات Flutter عبر ITI وDEPI.','Flutter وDart وFirebase وواجهات REST API والمعمارية النظيفة.','بكالوريوس علوم الحاسب والذكاء الاصطناعي في MTI، 2024 — 2028.']);
-
+        
     // Skills
     setText('#skills .section-label', 'المهارات');
     setHtml('#skills .section-title', 'المهارات و<span class="gradient-text">التقنيات</span>');
@@ -5455,9 +5623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText('#stats .section-label', 'بالأرقام');
     setHtml('#stats .section-title', 'أثر <span class="gradient-text">بالأرقام</span>');
     setAllText('.stat-label', ['مشاريع مكتملة','سنوات من التعلم والبناء','برامج تدريبية مكثفة','الالتزام بالكود النظيف','مشاريع مكتملة','سنوات من التعلم والبناء','برامج تدريبية مكثفة','الالتزام بالكود النظيف']);
-    setText('#achievements .section-label', 'الإنجازات');
-    setHtml('#achievements .section-title', 'التقدم و<span class="gradient-text">التدريب</span>');
-
+        
     // Projects
     setText('#projects .section-label', 'أعمالي');
     setHtml('#projects .section-title', 'مشاريع<span class="gradient-text">ي</span>');
@@ -5603,9 +5769,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Footer
     setAllText('.footer-title', ['لنتواصل','من أنا؟']);
     setText('.footer-col.left-col p', 'أنا دائمًا منفتح لمناقشة مشاريع فلاتر جديدة وفرص العمل الحر والتعاون لبناء تجارب موبايل رائعة.');
-    setHtml('.footer-col.right-col p', 'أنا <strong style="color:var(--text)">عبدالرحمن عبدالله</strong>، مطوّر فلاتر شغوف ببناء تطبيقات موبايل متعددة المنصات قابلة للتوسع بمعمارية نظيفة وتجارب مستخدم سلسة.');
+    setHtml('.footer-col.right-col p', 'أنا <strong style="color:var(--text)">عبدالرحمن أبو الوفا</strong>، مطوّر فلاتر شغوف ببناء تطبيقات موبايل متعددة المنصات قابلة للتوسع بمعمارية نظيفة وتجارب مستخدم سلسة.');
     setText('.footer-subtitle', 'مطوّر Flutter — القاهرة، مصر');
-    setText('.footer-copy', '© 2026 عبدالرحمن عبدالله. جميع الحقوق محفوظة.');
+    setText('.footer-copy', '© 2026 عبدالرحمن أبو الوفا. جميع الحقوق محفوظة.');
 
     // AI Planner follows the site language
     setText('#planner-subtitle', 'حوّل فكرتك الأولية إلى ملخص مشروع منظّم في أقل من دقيقة.');
@@ -5627,8 +5793,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setAttr('.whoiam-banner', 'role', 'group');
     setAttr('.whoiam-banner', 'aria-label', 'نبذة عن عبدالرحمن');
     setAttr('.floating-badge', 'aria-label', 'أدوات التطوير');
-    setAttr('.top-img', 'alt', 'صورة عبدالرحمن عبدالله');
-    setAttr('.about-img', 'alt', 'صورة عبدالرحمن عبدالله');
+    setAttr('.top-img', 'alt', 'صورة عبدالرحمن أبو الوفا');
+    setAttr('.about-img', 'alt', 'صورة عبدالرحمن أبو الوفا');
     setAttr('.lang-toggle-nav', 'title', 'التبديل بين العربية والإنجليزية');
     setAttr('.lang-toggle-nav', 'aria-label', 'التبديل بين العربية والإنجليزية');
     document.querySelectorAll('.find-me-tile').forEach(function(tile){ setAttr('.find-me-tile:nth-of-type(' + (Array.prototype.indexOf.call(tile.parentNode.children, tile) + 1) + ')', 'aria-label', 'حساب ' + (tile.getAttribute('data-platform') || '')); });
@@ -6144,7 +6310,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLoading = false;
   let chatLang = 'en'; // Default English as requested
 
-  const CHAT_SYSTEM_PROMPT_TEMPLATE = `You are "Abdelrahman's AI" — the official portfolio assistant for Abdelrahman Abdullah, a top-tier Flutter & Dart mobile engineer from Cairo, Egypt.
+  const CHAT_SYSTEM_PROMPT_TEMPLATE = `You are "Abdelrahman's AI" — the official portfolio assistant for Abdelrahman Abouelwafa, a top-tier Flutter & Dart mobile engineer from Cairo, Egypt.
 His standout projects: MovieVerse, Masrofy, StudySync, MediMind.
 
 OFFICIAL CONTACT:
@@ -6453,7 +6619,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v30</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v31</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });

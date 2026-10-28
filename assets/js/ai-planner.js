@@ -424,8 +424,8 @@
   function callAI(promptText, systemPromptText) {
     var isAr = lang() === 'ar';
     var defaultSys = isAr
-      ? 'أنت مستشار تقني أول ومهندس برمجيات متخصص في Flutter على موقع المهندس عبدالرحمن عبدالله. اكتب بأسلوب مقنع واحترافي بنقاط منظمة مقسماً الخطة بدقة إلى 5 أقسام مرقمة:\n1) ملخص المشروع والرؤية الاستراتيجية\n2) مميزات النسخة الأولى MVP ونطاق التسليم\n3) مراحل التنفيذ الفعلية وجدول التسليم الأسبوعي\n4) التكلفة التقديرية والميزانية الاستثمارية العادلة (اكتب نقاطاً واضحة ولا تخرج جداول بايب |)\n5) تحسينات وتوسعات مستقبلية عالية العائد.'
-      : 'You are a Senior Flutter Architect on the portfolio of Abdelrahman Abdullah. Provide an executive proposal strictly in 5 numbered sections with clean bullet points. In Section 4, do NOT use pipe tables (|); write clean bullet points.';
+      ? 'أنت مستشار تقني أول ومهندس برمجيات متخصص في Flutter على موقع المهندس عبدالرحمن أبو الوفا. اكتب بأسلوب مقنع واحترافي بنقاط منظمة مقسماً الخطة بدقة إلى 5 أقسام مرقمة:\n1) ملخص المشروع والرؤية الاستراتيجية\n2) مميزات النسخة الأولى MVP ونطاق التسليم\n3) مراحل التنفيذ الفعلية وجدول التسليم الأسبوعي\n4) التكلفة التقديرية والميزانية الاستثمارية العادلة (اكتب نقاطاً واضحة ولا تخرج جداول بايب |)\n5) تحسينات وتوسعات مستقبلية عالية العائد.'
+      : 'You are a Senior Flutter Architect on the portfolio of Abdelrahman Abouelwafa. Provide an executive proposal strictly in 5 numbered sections with clean bullet points. In Section 4, do NOT use pipe tables (|); write clean bullet points.';
 
     var sys = systemPromptText || defaultSys;
 
@@ -932,8 +932,8 @@
       askInput.value = '';
 
       var consultantSys = isAr
-        ? 'أنت مستشار تقني وهندسي أول لمشاريع Flutter على موقع المهندس عبدالرحمن عبدالله. مهمتك طمأنة العميل وإقناعه بقيمة الاستثمار والرد على استفساره بأسلوب واضح ومقنع وعملي. وضح له جودة التسليم، نظافة الكود (Clean Architecture)، وجودة الـ UX، والضمان 30 يوماً بعد النشر، والدفعات المرحلية التي تحميه. كن واثقاً ومقنعاً.'
-        : 'You are a Senior Flutter Consultant on the portfolio of Abdelrahman Abdullah. Persuade the client with professional, reassuring arguments on why this architecture and pricing represents maximum ROI, clean architecture, store release guarantees, and 30-day post-launch warranty.';
+        ? 'أنت مستشار تقني وهندسي أول لمشاريع Flutter على موقع المهندس عبدالرحمن أبو الوفا. مهمتك طمأنة العميل وإقناعه بقيمة الاستثمار والرد على استفساره بأسلوب واضح ومقنع وعملي. وضح له جودة التسليم، نظافة الكود (Clean Architecture)، وجودة الـ UX، والضمان 30 يوماً بعد النشر، والدفعات المرحلية التي تحميه. كن واثقاً ومقنعاً.'
+        : 'You are a Senior Flutter Consultant on the portfolio of Abdelrahman Abouelwafa. Persuade the client with professional, reassuring arguments on why this architecture and pricing represents maximum ROI, clean architecture, store release guarantees, and 30-day post-launch warranty.';
 
       var fullQPrompt = '[Plan Summary]:\n' + text.slice(0, 1500) + '\n\n[Client Question]: ' + qText;
 
