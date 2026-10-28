@@ -955,25 +955,44 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
 /* About Section */ 
 .about-grid{ 
   display:flex; 
-  flex-direction:column; 
-  gap:28px; 
-  align-items:center; 
-  max-width:900px; 
+  align-items:flex-start;
+  justify-content:center;
+  gap:44px; 
+  max-width:1200px; 
   margin:0 auto; 
 } 
+.about-content{
+  flex:1.2;
+  min-width:0;
+}
 .about-image{ 
   position:relative; 
   display:flex; 
   justify-content:center; 
   align-items:center;
-  flex:none;
-  width:min(280px, 68vw);
-  height:min(280px, 68vw);
-  margin: 0 auto;
+  flex:0 0 auto;
+  width:clamp(300px, 28vw, 400px);
+  height:clamp(300px, 28vw, 400px);
+  margin:-32px 0 0 0;
   border-radius: 50%;
   overflow: visible;
-  box-shadow: 0 0 25px rgba(168,85,247,.28), 0 0 50px rgba(168,85,247,.14);
+  box-shadow: 0 0 25px rgba(168,85,247,.28), 0 0 60px rgba(168,85,247,.15);
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+} 
+@media(max-width:900px){
+  .about-grid{
+    flex-direction:column-reverse;
+    align-items:center;
+    gap:26px;
+  }
+  .about-content{
+    width:100%;
+  }
+  .about-image{
+    width:min(280px, 70vw);
+    height:min(280px, 70vw);
+    margin:0 auto;
+  }
 } 
 .about-img-container{ 
   width:100%; 
@@ -3664,9 +3683,9 @@ footer p{
       <li><a href="#education" target="_self">Education</a></li>
       <li><a href="#skills" target="_self">Skills</a></li> 
       <li><a href="#experience" target="_self">Experience</a></li> 
-      <li><a href="#services" target="_self">Services</a></li>
       <li><a href="#projects" target="_self">Projects</a></li> 
       <li><a href="#testimonials" target="_self">Testimonials</a></li> 
+      <li><a href="#services" target="_self">Services</a></li> 
     </ul> 
     <div class="nav-actions"> 
       <a href="#contact" class="btn-contact-nav" target="_self" aria-label="Contact Me"> 
@@ -3742,19 +3761,19 @@ footer p{
     <h2 class="section-title">Get To Know <span class="gradient-text">Me Better</span></h2> 
   </div> 
   <div class="about-grid"> 
-    <div class="about-image reveal"> 
-      <div class="about-img-container"> 
-        <picture><source srcset="images/6037452442028413306.webp" type="image/webp"><img src="images/6037452442028413306.jpg" alt="Abdelrahman Abouelwafa" class="about-img protected-img" width="653" height="1280" loading="lazy" decoding="async"></picture>
-        <div class="image-blocker" aria-hidden="true"></div> 
-      </div> 
-    </div> 
-    <div class="about-content reveal" style="width:100%;max-width:860px;margin:0 auto;"> 
+    <div class="about-content reveal"> 
       <div class="whoiam-banner">
         <div class="whoiam-label">WHO I AM</div>
         <p class="whoiam-line1">Transforming <span class="hl-cyan">complex ideas</span> into <span class="hl-purple">production-ready Flutter apps</span>.</p>
         <p class="whoiam-line2"><span class="hl-orange">Flutter Developer</span> specializing in <span class="hl-cyan">scalable MVPs</span>, <span class="hl-purple">clean architecture</span>, and <span class="hl-green">fast, focused delivery</span>.</p>
         <p class="whoiam-line3"><strong class="whoiam-edge">My Edge:</strong> practical, verified training — Full-Stack &amp; Flutter at <span class="hl-orange">DEPI</span> and <span class="hl-cyan">ITI</span>, plus a <span class="hl-purple">B.Sc. in Computer Science &amp; AI</span> at <strong class="whoiam-edge">MTI</strong>.</p>
       </div>
+    </div> 
+    <div class="about-image reveal"> 
+      <div class="about-img-container"> 
+        <picture><source srcset="images/6037452442028413306.webp" type="image/webp"><img src="images/6037452442028413306.jpg" alt="Abdelrahman Abouelwafa" class="about-img protected-img" width="653" height="1280" loading="lazy" decoding="async"></picture>
+        <div class="image-blocker" aria-hidden="true"></div> 
+      </div> 
     </div> 
   </div> 
 </section> 
@@ -4188,43 +4207,6 @@ footer p{
   </div> 
 </section>
 
-<!-- Services Section (5 Cards) -->
-<section id="services">
-  <div class="section-header reveal">
-    <div class="section-label">What I Do</div>
-    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2>
-  </div>
-
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-      <h3 class="service-title">Mobile App Development</h3>
-      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-      <h3 class="service-title">UI/UX Design</h3>
-      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fas fa-plug"></i></div>
-      <h3 class="service-title">API Integration</h3>
-      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div>
-      <h3 class="service-title">App Optimization</h3>
-      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fas fa-globe"></i></div>
-      <h3 class="service-title">Portfolio & Landing Pages</h3>
-      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p>
-    </div>
-  </div>
-
-    </section>
-
 <!-- Projects Section (High Quality Showcase Display) --> 
 <section id="projects"> 
   <div class="section-header reveal"> 
@@ -4447,6 +4429,43 @@ footer p{
     </div>
   </div>
 </section>
+
+<!-- Services Section (5 Cards) -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Services I <span class="gradient-text">Provide</span></h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3 class="service-title">Mobile App Development</h3>
+      <p class="service-desc">Cross-platform Flutter applications for iOS & Android with native-like performance and smooth user experience</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+      <h3 class="service-title">UI/UX Design</h3>
+      <p class="service-desc">Beautiful, responsive interfaces with modern design patterns and fluid animations that delight users</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-plug"></i></div>
+      <h3 class="service-title">API Integration</h3>
+      <p class="service-desc">Seamless backend connectivity with REST APIs, Firebase, and third-party services for robust data management</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-tachometer-alt"></i></div>
+      <h3 class="service-title">App Optimization</h3>
+      <p class="service-desc">Performance tuning, code refactoring, and optimization techniques for scalable and efficient applications</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-globe"></i></div>
+      <h3 class="service-title">Portfolio & Landing Pages</h3>
+      <p class="service-desc">Professional portfolio websites and landing pages that convert visitors into clients — designed to make you stand out from the competition</p>
+    </div>
+  </div>
+
+    </section>
 
 <!-- Pricing Section (3 Tiers) -->
 <section id="pricing">
@@ -4720,7 +4739,7 @@ window.addEventListener('scroll', () => {
 }); 
 
 // Scroll-spy: highlight the active section link in the nav
-const spySections = ['hero','about','education','skills','experience','services','projects','testimonials'];
+const spySections = ['hero','about','education','skills','experience','projects','testimonials','services'];
 function updateActiveLink() { 
   const links = document.querySelectorAll('.nav-links a'); 
   if (!links.length) return; 
@@ -5528,7 +5547,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setAttr('#themeToggle', 'aria-label', 'تبديل الوضع الفاتح والداكن');
 
     // Nav
-    setAllText('.nav-links a', ['الرئيسية','من أنا','التعليم','المهارات','الخبرة','الخدمات','المشاريع','الإنجازات','آراء الآخرين']);
+    setAllText('.nav-links a', ['الرئيسية','من أنا','التعليم','المهارات','الخبرة','المشاريع','آراء الآخرين','الخدمات']);
 
     // Hero
     setHtml('.hero-badge', '<span class="status-dot"></span> متاح لمشاريع جديدة');
@@ -6619,7 +6638,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v31</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v32</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
