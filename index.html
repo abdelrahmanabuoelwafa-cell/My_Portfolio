@@ -2726,140 +2726,6 @@ footer p{
 } 
 [data-theme="light"] .project-links{border-top-color:rgba(148,163,184,.4)}
 
-/* ===== Interactive Pull-Lamp ===== */
-.universe-lamp{
-  position:fixed;
-  top:64px;
-  right:24px;
-  z-index:1200;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  cursor:pointer;
-  pointer-events:auto;
-}
-.lamp-cord{
-  width:3px;
-  height:70px;
-  background:linear-gradient(180deg,#555,#2c2c2c);
-  position:relative;
-  transition:transform .25s ease;
-  transform-origin:top center;
-}
-.lamp-knob{
-  position:absolute;
-  bottom:-6px;
-  left:50%;
-  transform:translateX(-50%);
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,#ffd166,#d97706);
-  box-shadow:0 0 10px rgba(217,119,6,.6);
-  border:1px solid rgba(255,255,255,.2);
-}
-.lamp-body{
-  width:52px;
-  height:38px;
-  background:linear-gradient(180deg,var(--card-bg),#1a1a2e);
-  border:1px solid var(--border);
-  border-radius:26px 26px 8px 8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:-1px;
-  box-shadow:0 8px 20px rgba(0,0,0,.4);
-}
-.lamp-bulb{
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  background:#444;
-  transition:all .4s ease;
-}
-.universe-lamp.pulled .lamp-cord{
-  transform:translateY(6px) scaleY(1.12);
-}
-.universe-lamp.lit .lamp-bulb{
-  background:radial-gradient(circle at 40% 40%,#fff7d6,#ffd166 55%,#f59e0b);
-  box-shadow:0 0 20px 8px rgba(255,209,102,.55),0 0 45px 18px rgba(255,209,102,.25);
-}
-.universe-lamp.lit .lamp-body{
-  border-color:rgba(255,209,102,.5);
-}
-/* Light pool that brightens the universe when lit */
-.lamp-glow{
-  position:fixed;
-  inset:0;
-  z-index:1100;
-  pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 88% 8%,rgba(255,209,102,.16),transparent 60%);
-  opacity:0;
-  transition:opacity .6s ease;
-}
-.lamp-glow.on{opacity:1;}
-/* Revealed form panel */
-.lamp-form{
-  position:absolute;
-  top:150px;
-  right:0;
-  width:240px;
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
-  display:none;
-  flex-direction:column;
-  gap:10px;
-  box-shadow:0 20px 45px rgba(0,0,0,.5);
-}
-.universe-lamp.lit .lamp-form{display:flex;}
-.lamp-form-title{
-  font-size:13px;
-  font-weight:700;
-  color:var(--neon);
-  text-align:center;
-  margin-bottom:2px;
-}
-.lamp-form input,
-.lamp-form textarea{
-  width:100%;
-  padding:10px 12px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:var(--text);
-  font-family:inherit;
-  font-size:13px;
-  transition:border-color .3s, box-shadow .3s;
-}
-.lamp-form textarea{min-height:70px;resize:none;}
-.lamp-form input:focus,
-.lamp-form textarea:focus{
-  outline:none;
-  border-color:var(--neon);
-  box-shadow:0 0 8px rgba(168,85,247,.25);
-}
-.lamp-send{
-  padding:10px;
-  background:var(--primary);
-  border:none;
-  border-radius:10px;
-  color:#fff;
-  font-family:inherit;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:all .3s;
-}
-.lamp-send:hover{box-shadow:0 8px 20px rgba(168,85,247,.5);}
-[data-theme="light"] .lamp-body{background:linear-gradient(180deg,#fffbe8,#f3e6c9);}
-[data-theme="light"] .lamp-form{box-shadow:0 20px 45px rgba(15,23,42,.15);}
-
 /* --- ????? ?????? ?????? ???????? --- */
 .interactive-lamp-side {
   position: relative;
@@ -3649,23 +3515,7 @@ footer p{
   <canvas id="vortex-canvas" style="width:100%;height:100%;display:block;"></canvas>
 </div>
 
-<div class="lamp-glow" id="lampGlow"></div>
 
-<!-- Interactive Pull-Lamp (universe light) -->
-<div class="universe-lamp" id="universeLamp" aria-hidden="true">
-  <div class="lamp-cord" id="lampCord">
-    <span class="lamp-knob"></span>
-  </div>
-  <div class="lamp-body">
-    <div class="lamp-bulb"></div>
-  </div>
-  <div class="lamp-form" id="lampForm">
-    <p class="lamp-form-title">Quick Message</p>
-    <input type="text" id="lampName" placeholder="Your name">
-    <textarea id="lampMsg" placeholder="How can I help?"></textarea>
-    <button type="button" class="lamp-send" onclick="sendLampMessage()"><i class="fas fa-paper-plane"></i> Send</button>
-  </div>
-</div>
 
 <!-- Navbar (Brand Logo) --> 
 <nav id="navbar" role="navigation" aria-label="Main navigation"> 
@@ -5298,44 +5148,7 @@ document.addEventListener('mousedown', () => {
 </script>
 
 <script>
-// ===== Interactive Pull-Lamp =====
-(function() {
-  const lamp = document.getElementById('universeLamp');
-  const glow = document.getElementById('lampGlow');
-  if (!lamp || !glow) return;
 
-  function lightUp() {
-    lamp.classList.toggle('lit');
-    lamp.classList.toggle('pulled');
-    glow.classList.toggle('on', lamp.classList.contains('lit'));
-  }
-
-  lamp.addEventListener('click', (e) => {
-    if (e.target.closest('.lamp-send') || e.target.closest('.lamp-form')) return;
-    lightUp();
-    // Collapse the form after a moment if not filled
-    setTimeout(() => {
-      if (lamp.classList.contains('lit')) {
-        lamp.classList.remove('pulled');
-      }
-    }, 250);
-  });
-})();
-
-function sendLampMessage() {
-  const name = document.getElementById('lampName').value.trim();
-  const msg = document.getElementById('lampMsg').value.trim();
-  if (!name || !msg) { alert('Please fill in your name and message.'); return; }
-  const text = encodeURIComponent('Hello Abdelrahman! My name is ' + name + '. ' + msg);
-  window.open('https://wa.me/201123031944?text=' + text, '_blank');
-  document.getElementById('lampName').value = '';
-  document.getElementById('lampMsg').value = '';
-  const lamp = document.getElementById('universeLamp');
-  const glow = document.getElementById('lampGlow');
-  lamp.classList.remove('lit');
-  lamp.classList.remove('pulled');
-  glow.classList.remove('on');
-}
 
 // ===== Interactive Contact Lamp (pull to reveal message form) =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -5764,10 +5577,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var labIcon = document.querySelector('.floating-badge'); if (labIcon) labIcon.setAttribute('aria-label', 'بيئة التطوير');
     document.querySelectorAll('.find-me-tile').forEach(function (tile) { tile.setAttribute('aria-label', 'حساب ' + (tile.getAttribute('data-platform') || '')); });
     setHtml('#contact .section-title', 'لنعمل <span class="gradient-text">معًا</span>');
-    setText('.lamp-form-title', 'رسالة سريعة');
-    setPh('lampName', 'اسمك');
-    setPh('lampMsg', 'كيف أستطيع مساعدتك؟');
-    setHtml('.lamp-send', '<i class="fas fa-paper-plane"></i> إرسال');
     setAttr('.btn-cv', 'aria-label', 'تنزيل السيرة الذاتية PDF');
     setAttr('.btn-contact-nav', 'aria-label', 'تواصل معي');
     setAttr('.hamburger', 'aria-label', 'فتح أو إغلاق القائمة');
@@ -6638,7 +6447,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v32</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v34</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
