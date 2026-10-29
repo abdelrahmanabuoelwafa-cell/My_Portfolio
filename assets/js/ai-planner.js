@@ -227,7 +227,7 @@
     var cur = CURRENCY_RATES[currency] || CURRENCY_RATES.USD;
     var sMin = Math.round(minUsd * cur.rate).toLocaleString();
     var sMax = Math.round(maxUsd * cur.rate).toLocaleString();
-    return sMin + ' – ' + sMax + ' ' + cur.symbol;
+    return sMin + ' - ' + sMax + ' ' + cur.symbol;
   }
 
   function getEstimatedAmounts(currency) {
@@ -978,36 +978,55 @@
         var tierPrice     = selectedBudgetTier.priceText;
         var plat          = platforms();
         var deadline      = deadlineEl ? deadlineEl.options[deadlineEl.selectedIndex].text : '';
-        var sep           = '────────────────────────';
+        // Clean separator used via spacing
+
+        var cleanTierPrice = (tierPrice || '').replace(/[\u2013\u2014]/g, '-');
+        var clientInfo = clientName + (clientContact ? ' (' + clientContact + ')' : '');
 
         var waMsg = isAr ? [
-          '✅ موافقة مبدئية على خطة المشروع', sep,
-          '👤 الاسم: ' + clientName + (clientContact ? ' | ' + clientContact : ''),
-          '💡 فكرة التطبيق: ' + userIdea,
-          '📱 المنصة: ' + plat,
-          '📦 الباقة المختارة: ' + tierName + (tierPrice ? ' — ' + tierPrice : ''),
-          '🪙 العملة: ' + curCode + ' (' + curSym + ')',
-          '⏱️ الجدول الزمني: ' + deadline, sep,
-          '📌 مراحل التسليم المتفق عليها:',
-          '  الأسبوع 1: بروتوتايب Figma تفاعلي',
-          '  الأسبوع 2: نسخة تجريبية v0.1 على هاتفي',
-          '  الأسبوع 3: نسخة مكتملة v0.5',
-          '  الأسبوع 4: نشر على المتجرين + سورس كود + ضمان 30 يوماً', sep,
-          'أرجو جدولة استشارة مجانية (15 دقيقة) لتأكيد التفاصيل النهائية والبدء! 🚀'
+          'مرحباً عبد الرحمن 👋',
+          'أرغب في مناقشة واعتماد خطة المشروع التالية:',
+          '',
+          '📋 *بيانات المشروع:*',
+          '• *الاسم:* ' + clientInfo,
+          '• *فكرة التطبيق:* ' + (userIdea || 'غير محددة بعد'),
+          '• *المنصة:* ' + plat,
+          '• *الجدول الزمني:* ' + (deadline || 'مرن / حسب الاتفاق'),
+          '',
+          '💼 *الباقة والميزانية التقديرية:*',
+          '• *الباقة المختارة:* ' + tierName,
+          '• *الاستثمار التقديري:* ' + (cleanTierPrice || 'حسب المتطلبات'),
+          '• *العملة:* ' + curCode + ' (' + curSym + ')',
+          '',
+          '🚀 *مراحل التسليم المقترحة:*',
+          '1️⃣ *الأسبوع 1:* تصميم Figma تفاعلي واعتماد الـ UI/UX',
+          '2️⃣ *الأسبوع 2:* هيكلة التطبيق والنسخة التجريبية (v0.1)',
+          '3️⃣ *الأسبوع 3:* ربط الـ APIs وقواعد البيانات والنسخة الكاملة (v0.5)',
+          '4️⃣ *الأسبوع 4:* النشر على المتاجر وتسليم الكود كامل + ضمان 30 يوماً',
+          '',
+          'جاهز لتحديد موعد مكالمة سريعة (15 دقيقة) لمناقشة التفاصيل والبدء! 🤝'
         ].join('\n') : [
-          '✅ Project Plan Approval', sep,
-          '👤 Client: ' + clientName + (clientContact ? ' | ' + clientContact : ''),
-          '💡 App Concept: ' + userIdea,
-          '📱 Platform: ' + plat,
-          '📦 Selected Package: ' + tierName + (tierPrice ? ' — ' + tierPrice : ''),
-          '🪙 Currency: ' + curCode + ' (' + curSym + ')',
-          '⏱️ Timeline: ' + deadline, sep,
-          '📌 Agreed Delivery Flow:',
-          '  Week 1: Interactive Figma prototype',
-          '  Week 2: Test build v0.1 on device',
-          '  Week 3: Staging build v0.5',
-          '  Week 4: Store release + source code + 30-day warranty', sep,
-          'Please schedule our free 15-min alignment call to lock in deliverables! 🚀'
+          'Hi Abdelrahman 👋',
+          'I would like to discuss and move forward with this project plan:',
+          '',
+          '📋 *Project Details:*',
+          '• *Client:* ' + clientInfo,
+          '• *App Concept:* ' + (userIdea || 'To be discussed'),
+          '• *Platform:* ' + plat,
+          '• *Timeline:* ' + (deadline || 'Milestone-based'),
+          '',
+          '💼 *Selected Scope & Investment:*',
+          '• *Package:* ' + tierName,
+          '• *Estimated Budget:* ' + (cleanTierPrice || 'Custom scope'),
+          '• *Currency:* ' + curCode + ' (' + curSym + ')',
+          '',
+          '🚀 *Agreed Delivery Milestones:*',
+          '1️⃣ *Week 1:* Interactive Figma prototype & UI/UX sign-off',
+          '2️⃣ *Week 2:* Flutter core architecture & internal build (v0.1)',
+          '3️⃣ *Week 3:* APIs & database integration with test build (v0.5)',
+          '4️⃣ *Week 4:* Store launch, full source code handover + 30-day warranty',
+          '',
+          'Ready to schedule our free 15-min alignment call to finalize details and kick off! 🤝'
         ].join('\n');
 
         window.open('https://wa.me/' + CONTACT.whatsappNumber + '?text=' + encodeURIComponent(waMsg), '_blank', 'noopener');
