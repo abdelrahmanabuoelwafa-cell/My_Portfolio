@@ -118,10 +118,29 @@
     revealElement(card, 28, 'top 90%');
   });
 
-  /* About Image Reveal */
+  /* About Image Reveal — force gentleBubbleFloat after GSAP clears transforms */
   var aboutImg = document.querySelector('.about-image.reveal');
   if (aboutImg) {
-    revealElement(aboutImg, 26, 'top 88%');
+    gsap.fromTo(aboutImg,
+      { opacity: 0, y: 26, scale: 0.99 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.55,
+        ease: 'power2.out',
+        clearProps: 'all',
+        onComplete: function () {
+          aboutImg.classList.add('is-visible');
+          aboutImg.style.animation = 'gentleBubbleFloat 4.8s ease-in-out infinite';
+        },
+        scrollTrigger: {
+          trigger: aboutImg,
+          start: 'top 88%',
+          once: true
+        }
+      }
+    );
   }
 
   /* ============================================================
