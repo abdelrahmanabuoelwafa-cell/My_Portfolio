@@ -25,17 +25,30 @@
   // Currency Conversion Rates (Base: USD)
   var CURRENCY_RATES = {
     USD: { symbol: '$',   rate: 1.0,  code: 'USD', name: 'USD ($)', symPos: 'suffix' },
-    EGP: { symbol: 'ج.م', rate: 50.0, code: 'EGP', name: 'EGP (ج.م)', symPos: 'suffix' },
+    EGP: { symbol: 'ج.م', rate: (typeof window !== 'undefined' && window.PRICING && window.PRICING.fxRateEgp) || 48.0, code: 'EGP', name: 'EGP (ج.م)', symPos: 'suffix' },
     SAR: { symbol: 'ر.س', rate: 3.75, code: 'SAR', name: 'SAR (ر.س)', symPos: 'suffix' },
     AED: { symbol: 'د.إ', rate: 3.67, code: 'AED', name: 'AED (د.إ)', symPos: 'suffix' }
   };
 
   // Base tier ranges in USD (Fair, realistic pricing)
-  var TIER_BASE_USD = {
-    starter:  { min: 150,  max: 350 },
-    standard: { min: 450,  max: 950 },
-    pro:      { min: 1100, max: 2500 }
-  };
+  var TIER_BASE_USD = (function() {
+    if (typeof window !== 'undefined' && window.PRICING && Array.isArray(window.PRICING.tiers)) {
+      var map = {};
+      window.PRICING.tiers.forEach(function(t) {
+        map[t.id] = { min: t.price[0], max: t.price[1] };
+      });
+      return {
+        starter:  map.starter  || { min: 60,  max: 120 },
+        standard: map.standard || { min: 180, max: 400 },
+        pro:      map.pro      || { min: 550, max: 1200 }
+      };
+    }
+    return {
+      starter:  { min: 60,  max: 120 },
+      standard: { min: 180, max: 400 },
+      pro:      { min: 550, max: 1200 }
+    };
+  })();
 
   var selectedBudgetTier = { id: 'standard', name: 'STANDARD', priceText: '' };
   var currentSelectedCurrency = 'USD';
@@ -577,6 +590,140 @@
     return secs;
   }
 
+  
+  function parsePlannerInputsForQuote() {
+    var idea = (ideaEl && ideaEl.value.trim()) || '';
+    var featText = (featEl && featEl.value.trim()) || '';
+    var combined = (idea + ' ' + featText).toLowerCase();
+
+    var screens = 0;
+    var screenMatch = combined.match(/(\d+)\s*(?:screens?|شاش[ةات]|صفح[ةات]|views?)/i);
+    if (screenMatch) {
+      screens = parseInt(screenMatch[1], 10);
+    }
+
+    var features = [];
+    if (/auth|login|sign\s*in|register|حساب|تسجيل/i.test(combined)) features.push('firebaseAuth');
+    if (/realtime|firestore|قاعدة|بيانات\s*لحظية|database/i.test(combined)) features.push('firestoreRealtime');
+    if (/api|rest|سيرفر/i.test(combined)) features.push('restApi');
+    if (/pay|دفع|stripe|سداد|visa|checkout|متجر|store/i.test(combined)) features.push('payments');
+    if (/push|notif|إشعار|تنبيه/i.test(combined)) features.push('pushNotifications');
+    if (/admin|dashboard|لوحة\s*تحكم|إدارة/i.test(combined)) features.push('adminPanel');
+    if (/map|gps|خريطة|خرائط|تتبع|location/i.test(combined)) features.push('mapsGps');
+    if (/chat|رسائل|محادثة|شات|messaging/i.test(combined)) features.push('chatMessaging');
+    if (/figma|ui|تصميم\s*خاص|ux/i.test(combined)) features.push('figmaCustomUI');
+    if (/store|play\s*store|app\s*store|رفع\s*متاجر/i.test(combined)) features.push('storeSubmission');
+    if (/ar\b|en\b|عربي|إنجليزي|تعريب|لغتين|localization/i.test(combined)) features.push('localizationArEn');
+    if (/offline|بدون\s*نت|أوفلاين/i.test(combined)) features.push('offlineMode');
+    if (/chart|analytics|رسم\s*بياني|إحصائيات|تحليلات/i.test(combined)) features.push('chartsAnalytics');
+    if (/ads|إعلانات|admob/i.test(combined)) features.push('adsIntegration');
+
+    var complexity = 'simple';
+    if (features.indexOf('adminPanel') !== -1 || features.indexOf('payments') !== -1 || features.indexOf('chatMessaging') !== -1 || features.indexOf('mapsGps') !== -1 || screens > 12) {
+      complexity = 'complex';
+    } else if (features.length >= 2 || screens > 5) {
+      complexity = 'medium';
+    }
+
+    if (!screens) {
+      screens = complexity === 'complex' ? 15 : (complexity === 'medium' ? 8 : 5);
+    }
+
+    return { screens: screens, features: features, complexity: complexity };
+  }
+
+  function formatFeatureName(key, isAr) {
+    var names = {
+      firebaseAuth: isAr ? 'تسجيل دخول وحسابات Firebase' : 'Firebase Authentication',
+      firestoreRealtime: isAr ? 'قاعدة بيانات لحظية Firestore' : 'Firestore Realtime DB',
+      restApi: isAr ? 'ربط REST API خارجي' : 'REST API Integration',
+      payments: isAr ? 'بوابة دفع إلكتروني وسداد' : 'Online Payment Gateway',
+      pushNotifications: isAr ? 'إشعارات لحظية Push' : 'Push Notifications',
+      adminPanel: isAr ? 'لوحة تحكم وإدارة' : 'Admin Dashboard',
+      mapsGps: isAr ? 'خرائط وتتبع GPS' : 'Maps & GPS Tracking',
+      chatMessaging: isAr ? 'شات ومحادثات فورية' : 'Live Chat / Messaging',
+      figmaCustomUI: isAr ? 'تصميم واجهات مخصصة Figma' : 'Custom Figma UI/UX',
+      storeSubmission: isAr ? 'رفع ونشر على المتاجر' : 'App Store & Play Store Submission',
+      localizationArEn: isAr ? 'تعريب ولغتان (عربي/إنجليزي)' : 'Localization (AR / EN)',
+      offlineMode: isAr ? 'دعم العمل دون إنترنت Offline' : 'Offline Mode Storage',
+      chartsAnalytics: isAr ? 'رسوم بيانية وتحليلات' : 'Charts & Analytics',
+      adsIntegration: isAr ? 'إعلانات AdMob' : 'AdMob Integration'
+    };
+    return names[key] || key;
+  }
+
+  function appendCustomQuoteBox(card, isAr, cur) {
+    var parsed = parsePlannerInputsForQuote();
+    var quote = (typeof window !== 'undefined' && window.estimateQuote)
+      ? window.estimateQuote(parsed)
+      : { estimate: 200, range: [150, 250], exceedsCeiling: false };
+
+    var curRate = (CURRENCY_RATES[cur] || CURRENCY_RATES.USD).rate;
+    var curSym  = (CURRENCY_RATES[cur] || CURRENCY_RATES.USD).symbol;
+
+    var box = document.createElement('div');
+    box.className = 'custom-quote-box';
+    box.style.cssText = 'margin-top:22px;padding:20px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.3);border-radius:16px;';
+
+    if (quote.exceedsCeiling) {
+      box.innerHTML = '<div style="font-size:15px;font-weight:700;color:#c084fc;margin-bottom:8px;"><i class="fas fa-handshake"></i> ' +
+        (isAr ? 'مشروع مخصص واسع النطاق' : 'Enterprise / Custom Project Scope') + '</div>' +
+        '<p style="font-size:13px;color:var(--text);margin-bottom:14px;line-height:1.6;">' +
+        (isAr ? 'المشروع ده محتاج مناقشة مباشرة مع عبدالرحمن لتحديد البنية والجدول والتكلفة المناسبة.'
+              : 'This project scope requires a direct consultation with Abdelrahman to tailor architecture and timeline.') + '</p>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;">' +
+        '  <a href="https://wa.me/' + CONTACT.whatsappNumber + '?text=' + encodeURIComponent(isAr ? 'أهلاً عبد الرحمن، لدي مشروع متقدم وأرغب في مناقشته مباشرة.' : 'Hi Abdelrahman, I have a custom enterprise project to discuss.') + '" target="_blank" rel="noopener" class="pr-action-btn" style="background:#22c55e;color:#fff;padding:8px 16px;border-radius:8px;font-weight:700;text-decoration:none;"><i class="fab fa-whatsapp"></i> ' + (isAr ? 'تواصل على واتساب' : 'Chat on WhatsApp') + '</a>' +
+        '  <a href="mailto:' + CONTACT.email + '" class="pr-action-btn" style="background:rgba(255,255,255,0.1);color:#fff;padding:8px 16px;border-radius:8px;font-weight:700;text-decoration:none;"><i class="fas fa-envelope"></i> ' + (isAr ? 'إرسال بريد إلكتروني' : 'Send Email') + '</a>' +
+        '</div>';
+      card.appendChild(box);
+      return;
+    }
+
+    var estLocal = Math.round(quote.estimate * curRate).toLocaleString();
+    var minLocal = Math.round(quote.range[0] * curRate).toLocaleString();
+    var maxLocal = Math.round(quote.range[1] * curRate).toLocaleString();
+
+    var marketCmp = '';
+    if (quote.estimate <= 150) {
+      marketCmp = isAr ? 'نفس هذا المشروع على Fiverr بيتباع عادةً $120–360' : 'Similar scope on Fiverr typically sells for $120–360';
+    } else if (quote.estimate <= 450) {
+      marketCmp = isAr ? 'نفس هذا المشروع على Fiverr وUpwork بيتباع عادةً $480–1,200' : 'Similar project on Fiverr & Upwork typically sells for $480–1,200';
+    } else {
+      marketCmp = isAr ? 'نفس هذا المشروع على Fiverr بيتباع عادةً $1,450+ وفي وكالات مصر من $1,500+' : 'Similar production project typically sells for $1,450+ on Fiverr & agencies';
+    }
+
+    var cfg = (typeof window !== 'undefined' && window.QUOTE_CONFIG) || { base: 60, perScreenExtra: 15, features: {} };
+    var extraScreens = Math.max(0, parsed.screens - 3);
+    var rows = '<tr><td>' + (isAr ? 'أساس المشروع (يشمل أول 3 شاشات)' : 'Base Project (incl. first 3 screens)') + '</td><td dir="ltr">$' + cfg.base + '</td></tr>';
+    if (extraScreens > 0) {
+      rows += '<tr><td>' + (isAr ? 'شاشات إضافية (' + extraScreens + ' × $15)' : 'Extra screens (' + extraScreens + ' × $15)') + '</td><td dir="ltr">$' + (extraScreens * 15) + '</td></tr>';
+    }
+    parsed.features.forEach(function(fKey) {
+      var cost = (cfg.features && cfg.features[fKey]) || 0;
+      rows += '<tr><td>' + formatFeatureName(fKey, isAr) + '</td><td dir="ltr">$' + cost + '</td></tr>';
+    });
+    var mult = parsed.complexity === 'complex' ? '1.35x' : (parsed.complexity === 'medium' ? '1.15x' : '1.0x');
+    rows += '<tr><td>' + (isAr ? 'معامل التعقيد (' + (parsed.complexity === 'complex' ? 'معقد' : (parsed.complexity === 'medium' ? 'متوسط' : 'بسيط')) + ')' : 'Complexity Multiplier (' + parsed.complexity + ')') + '</td><td dir="ltr">' + mult + '</td></tr>';
+
+    box.innerHTML = '<div style="font-size:14px;font-weight:700;color:#c084fc;margin-bottom:6px;display:flex;align-items:center;gap:8px;">' +
+      '<i class="fas fa-calculator"></i> ' + (isAr ? 'التكلفة التقديرية المخصصة لمشروعك' : 'Estimated Cost Quote for Your Scope') + '</div>' +
+      '<div style="font-size:24px;font-weight:800;color:#38bdf8;margin:6px 0 10px 0;" dir="ltr">' +
+      '  ~' + curSym + estLocal + ' <span style="font-size:13px;font-weight:500;color:var(--muted);">(' + (isAr ? 'نطاق: ' : 'Range: ') + curSym + minLocal + ' – ' + curSym + maxLocal + ')</span>' +
+      '</div>' +
+      '<div style="overflow-x:auto;margin:12px 0;">' +
+      '  <table class="cpc-table" style="font-size:12px;width:100%;">' +
+      '    <thead><tr><th>' + (isAr ? 'البند / المميزة' : 'Item / Feature') + '</th><th>' + (isAr ? 'القيمة التقديرية' : 'Est. Value') + '</th></tr></thead>' +
+      '    <tbody>' + rows + '</tbody>' +
+      '  </table>' +
+      '</div>' +
+      '<div style="font-size:12px;color:rgba(168,85,247,0.9);margin:8px 0;font-style:italic;"><i class="fas fa-chart-line"></i> ' + marketCmp + '</div>' +
+      '<div style="font-size:11px;color:var(--muted);opacity:0.85;margin-top:6px;"><i class="fas fa-info-circle"></i> ' +
+      (isAr ? 'سعر تقريبي لأغراض التخطيط — السعر النهائي بعد مراجعة عبدالرحمن للمتطلبات.'
+            : 'Approximate estimate for planning purposes — Final quote finalized after Abdelrahman reviews requirements.') + '</div>';
+
+    card.appendChild(box);
+  }
+
   // Render Plan with Rich Interactive Visuals
   function renderPlan(text) {
     if (!bodyEl) return;
@@ -660,13 +807,13 @@
         var bh = document.createElement('div');
         bh.className = 'budget-estimate-highlight';
         bh.innerHTML = isAr ? [
-          '<div class="beh-tier-card selectable-tier" data-tier-id="starter" data-tier-name="STARTER"><div class="beh-tier-name">STARTER (الباقة الأساسية)</div><div class="beh-price" id="price-tier-starter" dir="ltr">' + initialEst.starterHtml + '</div><div class="beh-desc">تطبيقات خدمية خفيفة، حتى 5 شاشات، سورس كود كامل.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
-          '<div class="beh-tier-card recommended selectable-tier tier-selected" data-tier-id="standard" data-tier-name="STANDARD"><div class="beh-tier-name">⭐ STANDARD (الباقة القياسية — موصى بها)</div><div class="beh-price" id="price-tier-standard" dir="ltr">' + initialEst.standardHtml + '</div><div class="beh-desc">تطبيقات متكاملة (متاجر، حجوزات)، حتى 12 شاشة، سيرفر وAuth وضمان 30 يوماً.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
-          '<div class="beh-tier-card selectable-tier" data-tier-id="pro" data-tier-name="PRO"><div class="beh-tier-name">PRO (إطلاق إنتاجي شامل)</div><div class="beh-price" id="price-tier-pro" dir="ltr">' + initialEst.proHtml + '</div><div class="beh-desc">شاشات غير محدودة، نشر المتجرين (iOS & Android)، دفع إلكتروني متقدم.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>'
+          '<div class="beh-tier-card selectable-tier" data-tier-id="starter" data-tier-name="STARTER"><div class="beh-tier-name">STARTER (الباقة الأساسية)</div><div class="beh-price" id="price-tier-starter" dir="ltr">' + initialEst.starterHtml + '</div><div class="beh-desc">تطبيقات خدمية خفيفة، حتى 5 شاشات، سورس كود كامل.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">السوق عادةً: $120–360 على Fiverr</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
+          '<div class="beh-tier-card recommended selectable-tier tier-selected" data-tier-id="standard" data-tier-name="STANDARD"><div class="beh-tier-name">⭐ STANDARD (الباقة القياسية — موصى بها)</div><div class="beh-price" id="price-tier-standard" dir="ltr">' + initialEst.standardHtml + '</div><div class="beh-desc">تطبيقات متكاملة (متاجر، حجوزات)، حتى 12 شاشة، سيرفر وAuth وضمان 30 يوماً.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">السوق عادةً: $480–1,200 على Fiverr وUpwork</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
+          '<div class="beh-tier-card selectable-tier" data-tier-id="pro" data-tier-name="PRO"><div class="beh-tier-name">PRO (إطلاق إنتاجي شامل)</div><div class="beh-price" id="price-tier-pro" dir="ltr">' + initialEst.proHtml + '</div><div class="beh-desc">شاشات غير محدودة، نشر المتجرين (iOS & Android)، دفع إلكتروني متقدم.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">السوق عادةً: $1,450+ على Fiverr و$1,500+ في وكالات مصر</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>'
         ].join('') : [
-          '<div class="beh-tier-card selectable-tier" data-tier-id="starter" data-tier-name="STARTER"><div class="beh-tier-name">STARTER</div><div class="beh-price" id="price-tier-starter" dir="ltr">' + initialEst.starterHtml + '</div><div class="beh-desc">Lean utility apps, up to 5 screens, clean codebase.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
-          '<div class="beh-tier-card recommended selectable-tier tier-selected" data-tier-id="standard" data-tier-name="STANDARD"><div class="beh-tier-name">⭐ STANDARD (Recommended)</div><div class="beh-price" id="price-tier-standard" dir="ltr">' + initialEst.standardHtml + '</div><div class="beh-desc">Complete apps, up to 12 screens, Auth, DB, API & 30-day warranty.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
-          '<div class="beh-tier-card selectable-tier" data-tier-id="pro" data-tier-name="PRO"><div class="beh-tier-name">PRO (Full Scale)</div><div class="beh-price" id="price-tier-pro" dir="ltr">' + initialEst.proHtml + '</div><div class="beh-desc">Full production app, unlimited screens, store deployment, advanced payments.</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>'
+          '<div class="beh-tier-card selectable-tier" data-tier-id="starter" data-tier-name="STARTER"><div class="beh-tier-name">STARTER</div><div class="beh-price" id="price-tier-starter" dir="ltr">' + initialEst.starterHtml + '</div><div class="beh-desc">Lean utility apps, up to 5 screens, clean codebase.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">Market typically: $120–360 on Fiverr</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
+          '<div class="beh-tier-card recommended selectable-tier tier-selected" data-tier-id="standard" data-tier-name="STANDARD"><div class="beh-tier-name">⭐ STANDARD (Recommended)</div><div class="beh-price" id="price-tier-standard" dir="ltr">' + initialEst.standardHtml + '</div><div class="beh-desc">Complete apps, up to 12 screens, Auth, DB, API & 30-day warranty.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">Market typically: $480–1,200 on Fiverr & Upwork</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>',
+          '<div class="beh-tier-card selectable-tier" data-tier-id="pro" data-tier-name="PRO"><div class="beh-tier-name">PRO (Full Scale)</div><div class="beh-price" id="price-tier-pro" dir="ltr">' + initialEst.proHtml + '</div><div class="beh-desc">Full production app, unlimited screens, store deployment, advanced payments.</div><div class="beh-market-cmp" style="font-size:11px;color:rgba(168,85,247,0.9);margin:4px 0 6px;font-style:italic;">Market typically: $1,450+ on Fiverr, $1,500+ with agencies</div><div class="beh-select-indicator"><i class="fas fa-check-circle"></i> ' + t('tierSelected') + '</div></div>'
         ].join('');
         card.appendChild(bh);
 
@@ -738,6 +885,7 @@
           updateMilestonesBox(cur, 'standard');
           updateDeliverablesTable(cur, 'standard');
         }, 10);
+        appendCustomQuoteBox(card, isAr, cur);
       }
 
       // SECTION 5: Future Enhancements Grid
@@ -987,6 +1135,7 @@
           '📱 المنصة: ' + plat,
           '📦 الباقة المختارة: ' + tierName + (tierPrice ? ' — ' + tierPrice : ''),
           '🪙 العملة: ' + curCode + ' (' + curSym + ')',
+          '📊 التقدير المخصص: ' + (window.estimateQuote ? ('~$' + window.estimateQuote(parsePlannerInputsForQuote()).estimate + ' (نطاق $' + window.estimateQuote(parsePlannerInputsForQuote()).range.join('-$') + ')') : ''),
           '⏱️ الجدول الزمني: ' + deadline, sep,
           '📌 مراحل التسليم المتفق عليها:',
           '  الأسبوع 1: بروتوتايب Figma تفاعلي',

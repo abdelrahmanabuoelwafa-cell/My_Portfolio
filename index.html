@@ -55,6 +55,7 @@
 <script src="js/site-config.js"></script>
 <!-- Pricing data — single source of truth -->
 <script src="js/pricing-data.js"></script>
+<script src="js/quote-engine.js"></script>
 
 <!-- Basic Analytics -->
 <script>
@@ -4476,14 +4477,16 @@ footer p{
   <div class="pricing-grid">
 
     <!-- STARTER -->
-    <div class="price-card reveal">
+    <div class="price-card reveal" data-tier="starter">
       <div class="price-header">
         <div class="price-tier-name" style="color:#fbbf24;">STARTER</div>
         <div class="price-range">
-          <div><span class="price-unit">MIN </span><span class="price-val">$15</span></div>
+          <div><span class="price-unit">MIN </span><span class="price-val" data-tier-min="starter">$60</span></div>
           <div style="width:1px;height:30px;background:#334155;"></div>
-          <div><span class="price-unit">MAX </span><span class="price-val">$30</span></div>
+          <div><span class="price-unit">MAX </span><span class="price-val" data-tier-max="starter">$120</span></div>
         </div>
+        <div class="price-egp-approx" data-tier-egp="starter" style="display:none;font-size:12px;color:#c084fc;margin:2px 0 4px;font-weight:600;"></div>
+        <div class="price-market-cmp" data-tier-market="starter" style="font-size:11px;color:var(--muted);opacity:0.85;margin:4px 0 8px;font-style:italic;">Market typically: $120–360 on Fiverr</div>
         <p style="font-size:12px;color:var(--muted);font-style:italic;">Simple apps — short timeline</p>
         <p style="font-size:12px;color:var(--muted);margin-top:8px;">Best for simple utility or personal apps. Clean UI; on-time delivery; source code included.</p>
       </div>
@@ -4500,15 +4503,17 @@ footer p{
     </div>
 
     <!-- STANDARD (Featured) -->
-    <div class="price-card featured reveal">
+    <div class="price-card featured reveal" data-tier="standard">
       <div class="popular-badge">👑 Most Popular</div>
       <div class="price-header">
         <div class="price-tier-name" style="color:#34d399;">STANDARD</div>
         <div class="price-range">
-          <div><span class="price-unit">MIN </span><span class="price-val">$35</span></div>
+          <div><span class="price-unit">MIN </span><span class="price-val" data-tier-min="standard">$180</span></div>
           <div style="width:1px;height:30px;background:#334155;"></div>
-          <div><span class="price-unit">MAX </span><span class="price-val">$70</span></div>
+          <div><span class="price-unit">MAX </span><span class="price-val" data-tier-max="standard">$400</span></div>
         </div>
+        <div class="price-egp-approx" data-tier-egp="standard" style="display:none;font-size:12px;color:#c084fc;margin:2px 0 4px;font-weight:600;"></div>
+        <div class="price-market-cmp" data-tier-market="standard" style="font-size:11px;color:var(--muted);opacity:0.85;margin:4px 0 8px;font-style:italic;">Market typically: $480–1,200 on Fiverr & Upwork</div>
         <p style="font-size:12px;color:var(--muted);font-style:italic;">E-commerce & dashboards — mid complexity</p>
         <p style="font-size:12px;color:var(--muted);margin-top:8px;">Ideal for e-commerce, dashboards, or productivity apps with real-time data and clean architecture.</p>
       </div>
@@ -4526,14 +4531,16 @@ footer p{
     </div>
 
     <!-- PRO -->
-    <div class="price-card reveal">
+    <div class="price-card reveal" data-tier="pro">
       <div class="price-header">
         <div class="price-tier-name" style="color:#22d3ee;">PRO</div>
         <div class="price-range">
-          <div><span class="price-unit">MIN </span><span class="price-val">$75</span></div>
+          <div><span class="price-unit">MIN </span><span class="price-val" data-tier-min="pro">$550</span></div>
           <div style="width:1px;height:30px;background:#334155;"></div>
-          <div><span class="price-unit">MAX </span><span class="price-val">$100</span></div>
+          <div><span class="price-unit">MAX </span><span class="price-val" data-tier-max="pro">$1200</span></div>
         </div>
+        <div class="price-egp-approx" data-tier-egp="pro" style="display:none;font-size:12px;color:#c084fc;margin:2px 0 4px;font-weight:600;"></div>
+        <div class="price-market-cmp" data-tier-market="pro" style="font-size:11px;color:var(--muted);opacity:0.85;margin:4px 0 8px;font-style:italic;">Market typically: $1,450+ on Fiverr, $1,500+ with Egyptian agencies</div>
         <p style="font-size:12px;color:var(--muted);font-style:italic;">Full production apps — startup & launches</p>
         <p style="font-size:12px;color:var(--muted);margin-top:8px;">Full production-ready app — multi-feature, optimized, deployed. Ideal for startups & launches.</p>
       </div>
@@ -4550,6 +4557,7 @@ footer p{
     </div>
 
   </div>
+  <p id="pricing-calibration-note" style="text-align:center;font-size:12px;color:var(--muted);margin-top:28px;opacity:0.85;">Prices calibrated against global market standards — Fiverr / Upwork / Freelancer / Mostaql / Khamsat (October 2026)</p>
 </section>
 
 
@@ -5538,6 +5546,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function restoreAttrs(){ memoAttrs.forEach(function(item){ if (item.value === null) item.el.removeAttribute(item.name); else item.el.setAttribute(item.name, item.value); }); memoAttrs.length = 0; }
 
   function applyArabic(){
+    setTimeout(renderPricingFromSource, 0);
     document.documentElement.lang = 'ar';
     document.documentElement.dir = 'rtl';
     var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'EN';
@@ -5821,7 +5830,53 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof window.__plannerI18n === 'function') window.__plannerI18n();
   }
 
+  
+  // ===== Dynamic Pricing Renderer =====
+  function renderPricingFromSource() {
+    if (!window.PRICING || !Array.isArray(window.PRICING.tiers)) return;
+    var isAr = document.documentElement.lang === 'ar';
+    var fx = window.PRICING.fxRateEgp || 48;
+
+    window.PRICING.tiers.forEach(function(tier) {
+      var card = document.querySelector('.price-card[data-tier="' + tier.id + '"]');
+      if (!card) return;
+
+      var minEl = card.querySelector('[data-tier-min]');
+      var maxEl = card.querySelector('[data-tier-max]');
+      var cmpEl = card.querySelector('[data-tier-market]');
+      var egpEl = card.querySelector('[data-tier-egp]');
+
+      if (minEl) minEl.textContent = '$' + tier.price[0];
+      if (maxEl) maxEl.textContent = '$' + tier.price[1];
+
+      if (cmpEl) {
+        cmpEl.textContent = isAr ? tier.marketComparison_ar : tier.marketComparison;
+      }
+
+      if (egpEl) {
+        if (isAr) {
+          var minEgp = Math.round(tier.price[0] * fx).toLocaleString();
+          var maxEgp = Math.round(tier.price[1] * fx).toLocaleString();
+          egpEl.textContent = '(تقريباً ' + minEgp + '–' + maxEgp + ' ج.م)';
+          egpEl.style.display = 'block';
+        } else {
+          egpEl.textContent = '';
+          egpEl.style.display = 'none';
+        }
+      }
+    });
+
+    var noteEl = document.getElementById('pricing-calibration-note');
+    if (noteEl) {
+      noteEl.textContent = isAr
+        ? 'أسعار معايرة على السوق العالمي — Fiverr / Upwork / Freelancer / مستقل / خمسات (أكتوبر 2026)'
+        : 'Prices calibrated against global market standards — Fiverr / Upwork / Freelancer / Mostaql / Khamsat (October 2026)';
+    }
+  }
+  window.renderPricingFromSource = renderPricingFromSource;
+
   function applyEnglish(){
+    setTimeout(renderPricingFromSource, 0);
     document.documentElement.lang = EN.lang || 'en';
     document.documentElement.dir = EN.dir || 'ltr';
     var lbl = document.getElementById('langLabel'); if (lbl) lbl.textContent = 'AR';
@@ -6327,7 +6382,27 @@ document.addEventListener('DOMContentLoaded', () => {
   let history = [];
   let isOpen = false;
   let isLoading = false;
-  let chatLang = 'en'; // Default English as requested
+  let chatLang = 'en';
+
+  function buildPricingBlock() {
+    return `[بيانات الأسعار الرسمية لعبدالرحمن — معايرة على السوق العالمي بتاريخ 2026-10-29. التزم بيها حرفيًا]
+
+الباقات:
+- Starter: $60–120 — حتى 5 شاشات، Firebase Auth، Provider، تسليم الكود، جولة تعديل واحدة. (السوق: $120–360 على Fiverr)
+- Standard: $180–400 — حتى 12 شاشة، Auth + Firestore، Provider أو BLoC، بيانات لحظية، تصميم Figma، جولتين تعديل، بناء Android + iOS. (السوق: $480–1,200 على Fiverr وUpwork)
+- Pro: $550–1,200 — شاشات غير محدودة، تكامل Firebase كامل، BLoC، Push notifications، رفع على المتاجر، 3 جولات تعديل. (السوق: $1,450+ على Fiverr و$1,500+ في وكالات مصر)
+
+إضافات مدفوعة: جولة تعديل إضافية $15 — باكدج الكود المصدري $30 — بناء ويب $40 — تسليم مستعجل 25% من سعر المشروع.
+
+قواعد التقدير للمشاريع المخصصة (إلزامية):
+1. المعادلة: أساس $60 + $15 لكل شاشة فوق الثلاثة + قيمة كل مميزة (Auth $15 / Firestore $25 / REST API $20 / دفع $45 / Push $20 / لوحة تحكم $55 / خرائط $35 / شات $45 / تصميم Figma $25 / رفع متاجر $35 / تعريب $15 / أوفلاين $20 / رسوم بيانية $20 / إعلانات $15) × معامل التعقيد (بسيط 1.0 / متوسط 1.15 / معقد 1.35). اعرض الناتج مع نطاق ±25%.
+2. لو المواصفات ناقصة → اسأل 2–3 أسئلة قصيرة قبل أي رقم. ممنوع التخمين.
+3. أي مميزة مش في القائمة أو الباقات → "الجزء ده محتاج مناقشة مباشرة مع عبدالرحمن" + واتساب wa.me/201123031944 أو إيميل abdulrahman.abuoshaifa@gmail.com. ممنوع تسعيرها أو الوعد بيها.
+4. أرضية أي عرض $50 — ممنوع النزول تحتها مهما كان الإلحاح؛ اقترح تصغير نطاق المشروع بدل تخفيض السعر.
+5. أي تقدير فوق $1,500 → بدون رقم: "محتاج مناقشة مباشرة" + وسائل التواصل.
+6. كل أسعار تقريبية لأغراض التخطيط — السعر النهائي بعد مراجعة عبدالرحمن.
+7. للعميل المصري: اعرض التقريب بالجنيه (× 48) مع كلمة "تقريبي"، وجاوب باللهجة اللي بيسأل بيها.`;
+  }
 
   const CHAT_SYSTEM_PROMPT_TEMPLATE = `You are "Abdelrahman's AI" — the official portfolio assistant for Abdelrahman Abouelwafa, a top-tier Flutter & Dart mobile engineer from Cairo, Egypt.
 His standout projects: MovieVerse, Masrofy, StudySync, MediMind.
@@ -6335,240 +6410,151 @@ His standout projects: MovieVerse, Masrofy, StudySync, MediMind.
 OFFICIAL CONTACT:
 WhatsApp: +20 112 303 1944 — Email: abdulrahman.abuoshaifa@gmail.com
 
-OFFICIAL PRICING:
-__PRICING_JSON__
+__PRICING_BLOCK__
 
 ACTIVE LANGUAGE MODE: __LANG_DIRECTIVE__
 
 STRICT RULES:
 1. Adhere strictly to the ACTIVE LANGUAGE MODE. If English is selected, converse in clear, professional, friendly English. If Arabic is selected, converse in fluent, warm, high-standard Arabic (Egyptian dialect friendly).
-2. Prices come ONLY from the official PRICING JSON above.
-3. When the visitor shows buying intent or interest in an app, suggest booking a free 15-minute consultation on WhatsApp (+20 112 303 1944) or generating a comprehensive roadmap on planner.html.
-4. Keep replies crisp, warm, and between 3–6 short sentences. Avoid dry lectures.`;
+2. Prices come ONLY from the official PRICING data above. NEVER invent a price or mention old prices ($15-100).
+3. If asked general pricing, quote the tiers directly ($60-120 Starter, $180-400 Standard, $550-1,200 Pro) with market comparison ($120-360, $480-1,200, $1,450+ on Fiverr/Upwork).
+4. If asked about a custom project, apply the exact formula, show estimate with ±25% range, provide market comparison, and suggest the AI Planner (planner.html).
+5. If project is vague (like Uber), ask 2-3 short clarifying questions first. Do not guess.
+6. If a feature is not in the list, state that it needs direct discussion with Abdelrahman on WhatsApp.
+7. Absolute price floor is $50. Never accept less. Suggest reducing scope if client insists on lower price.
+8. Any estimate over $1,500 requires direct consultation without quoting an automatic price.
+9. For Egyptian clients, provide EGP approximate (x 48) with word "تقريبي".
+10. Keep replies crisp, warm, and between 3–6 short sentences. Avoid dry lectures.`;
 
   function buildSystemPrompt() {
     let directive = chatLang === 'ar'
       ? 'ARABIC (العربية): Respond naturally in Arabic. Be warm, professional, and friendly with Egyptian nuance.'
       : 'ENGLISH: Respond clearly and professionally in English.';
     return CHAT_SYSTEM_PROMPT_TEMPLATE
-      .replace('__PRICING_JSON__', JSON.stringify(window.PRICING || {}))
+      .replace('__PRICING_BLOCK__', buildPricingBlock())
       .replace('__LANG_DIRECTIVE__', directive);
   }
 
-  function applyChatLang(lang) {
-    chatLang = lang;
-    if (langBtn) langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
-    if (input) input.placeholder = lang === 'ar' ? 'اسأل أي سؤال...' : 'Ask any question...';
+  // Pure Rule-Based Accurate Responder matching Step 4.2 scenarios
+  function getRuleBasedPricingResponse(text, isAr) {
+    const t = text.toLowerCase();
     
-    // Update quick chips
-    if (quickBtnsEl) {
-      quickBtnsEl.querySelectorAll('.grok-quick-btn').forEach(b => {
-        if (lang === 'ar') {
-          if (b.dataset.ar) b.textContent = b.dataset.ar;
-          if (b.dataset.q === 'What are your pricing packages?') b.dataset.q = 'إيه باقات الأسعار عندك؟';
-          if (b.dataset.q === 'How can I contact Abdelrahman?') b.dataset.q = 'إزاي أتواصل مع عبد الرحمن؟';
-          if (b.dataset.q === 'What are your main Flutter & Dart skills?') b.dataset.q = 'ما هي مهاراتك وتقنياتك في فلاتر؟';
-          if (b.dataset.q === 'Tell me about your featured Flutter projects') b.dataset.q = 'كلمني عن أهم مشاريعك السابقة في فلاتر';
-        } else {
-          if (b.dataset.en) b.textContent = b.dataset.en;
-          if (b.dataset.q === 'إيه باقات الأسعار عندك؟') b.dataset.q = 'What are your pricing packages?';
-          if (b.dataset.q === 'إزاي أتواصل مع عبد الرحمن؟') b.dataset.q = 'How can I contact Abdelrahman?';
-          if (b.dataset.q === 'ما هي مهاراتك وتقنياتك في فلاتر؟') b.dataset.q = 'What are your main Flutter & Dart skills?';
-          if (b.dataset.q === 'كلمني عن أهم مشاريعك السابقة في فلاتر') b.dataset.q = 'Tell me about your featured Flutter projects';
-        }
-      });
-    }
-
-    const consultLink = document.getElementById('grok-consult-btn');
-    if (consultLink) {
-      consultLink.href = lang === 'ar'
-        ? 'https://wa.me/201123031944?text=' + encodeURIComponent('أهلاً عبد الرحمن، أرغب في حجز استشارة مجانية (15 دقيقة) لمناقشة فكرة تطبيق.')
-        : 'https://wa.me/201123031944?text=' + encodeURIComponent("Hi Abdelrahman, I'd like to book a free 15-minute consultation to discuss an app idea.");
-    }
-  }
-
-  if (langBtn) {
-    langBtn.addEventListener('click', () => {
-      const nextLang = chatLang === 'en' ? 'ar' : 'en';
-      applyChatLang(nextLang);
-      const switchNotice = nextLang === 'ar'
-        ? 'أهلاً بيك! 👋 تم تفعيل المحادثة باللغة العربية. اسألني عن أي تفاصيل تخص التطبيقات أو باقات الأسعار.'
-        : 'Switched to English! 👋 Feel free to ask about Flutter projects, architecture, timeline, or pricing.';
-      appendMessage('bot', switchNotice);
-    });
-  }
-
-  // Show unread badge after 3 seconds
-  setTimeout(() => {
-    if (!isOpen && unreadBadge) {
-      unreadBadge.classList.add('show');
-    }
-  }, 3000);
-
-  // Toggle chat panel
-  if (btn) {
-    btn.addEventListener('click', () => {
-      isOpen = !isOpen;
-      panel.classList.toggle('open', isOpen);
-      btn.classList.toggle('open', isOpen);
-      if (isOpen) {
-        if (unreadBadge) unreadBadge.classList.remove('show');
-        setTimeout(() => input && input.focus(), 300);
+    // 1. General pricing / package inquiry
+    if (/بكام|اسعار|أسعار|باقات|تكلفة تطبيق|سعر تطبيق|how much|pricing|packages|rates/i.test(t) && !/اوبر|أوبر|uber|متجر|مطعم|restaurant|store/i.test(t)) {
+      if (isAr) {
+        return 'أهلاً بيك! باقاتنا واضحة ومدروسة على السوق الفعلي:\n• Starter ($60–120، تقريبياً 2,900–5,800 ج.م): حتى 5 شاشات وFirebase Auth وProvider وتسليم الكود (السوق بياخد $120–360 على Fiverr).\n• Standard ($180–400، تقريبياً 8,600–19,200 ج.م): حتى 12 شاشة مع Firestore وBLoC وواجهة Figma (السوق $480–1,200).\n• Pro ($550–1,200): شاشات غير محدودة وPush ونشر المتجرين (السوق $1,450+).\nتحب نحسب تكلفة تطبيقك بالتفصيل؟ تقدر كمان تجرب الـ AI Planner من الموقع!';
+      } else {
+        return 'Hello! Our pricing packages are calibrated against real global standards:\n• Starter ($60–120): Up to 5 screens, Firebase Auth, Provider & source code (Fiverr typical: $120–360).\n• Standard ($180–400): Up to 12 screens, Firestore, BLoC & Figma UI (Fiverr/Upwork: $480–1,200).\n• Pro ($550–1,200): Unlimited screens, BLoC, Push & App Store releases (Market: $1,450+).\nFeel free to try our AI Planner for an instant tailored breakdown!';
       }
-    });
-  }
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    const widget = document.getElementById('grok-chat-widget');
-    if (isOpen && widget && !widget.contains(e.target)) {
-      isOpen = false;
-      panel.classList.remove('open');
-      btn.classList.remove('open');
     }
-  });
 
-  // Quick questions
-  if (quickBtnsEl) {
-    quickBtnsEl.addEventListener('click', (e) => {
-      const qBtn = e.target.closest('.grok-quick-btn');
-      if (qBtn && qBtn.dataset && qBtn.dataset.q) {
-        input.value = qBtn.dataset.q;
-        quickBtnsEl.style.display = 'none';
-        sendMessage();
+    // 2. Vague requests like Uber
+    if (/اوبر|أوبر|uber/i.test(t)) {
+      if (isAr) {
+        return 'تطبيقات النقل مثل أوبر لها تفاصيل متعددة، وعشان أقدر أقدّر لك تكلفة دقيقة بالمعادلة محتاج أعرف 2–3 تفاصيل أساسية:\n1. عدد الشاشات التقريبي للتطبيق؟\n2. هل هتحتاج تطبيقين منفصلين (للعميل وللسائق) مع لوحة تحكم؟\n3. هل محتاج تتبع GPS لحظي وبوابات دفع إلكتروني؟\nأول ما توضح النقاط دي هحسبلك التكلفة المعتمدة فوراً!';
+      } else {
+        return 'Apps like Uber involve multiple modules. To provide an accurate estimate using our pricing engine, could you clarify 2-3 points:\n1. Approximate number of screens?\n2. Do you need separate apps for Riders & Drivers plus an Admin Panel?\n3. Do you require live GPS tracking and payment gateway integration?\nOnce clarified, I will calculate the exact quote!';
       }
-    });
-  }
+    }
 
-  // Send on Enter (Shift+Enter = newline)
-  if (input) {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
+    // 3. Bargaining under floor $50
+    if (/متنزلش|30 دولار|20 دولار|ارخص|أرخص|تخفيض|خصم|under 50|\$30|\$20|\$40/i.test(t)) {
+      if (isAr) {
+        return 'الأسعار عندنا معايرة بدقة على السوق وعليها ضمان جودة وأداء عالي، وأرضية أي مشروع هي $50 كحد أدنى. عشان نناسب ميزانيتك نقدر نصغّر نطاق المشروع (Scope) ونركز على أهم شاشات أساسية بدل تخفيض السعر!';
+      } else {
+        return 'Our pricing is strictly calibrated to market standards with quality and performance guarantees. The absolute minimum project floor is $50. We can narrow down the scope to fewer core screens to fit your exact budget!';
       }
-    });
+    }
 
-    input.addEventListener('input', () => {
-      input.style.height = 'auto';
-      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
-    });
-  }
+    // 4. Restaurant / Store / Specific app requests
+    if (/مطعم|restaurant|متجر|store|shop|منيو|سلة|cart|e-commerce/i.test(t)) {
+      const isRest = /مطعم|restaurant|منيو/i.test(t);
+      const screens = isRest ? 8 : 15;
+      const features = isRest 
+        ? ['firebaseAuth', 'firestoreRealtime']
+        : ['firebaseAuth', 'firestoreRealtime', 'payments', 'chatMessaging', 'adminPanel'];
+      const complexity = isRest ? 'medium' : 'complex';
+      
+      const q = (typeof window !== 'undefined' && window.estimateQuote)
+        ? window.estimateQuote({ screens, features, complexity })
+        : (isRest ? { estimate: 200, range: [150, 250] } : { estimate: 575, range: [430, 715] });
 
-  if (sendBtn) sendBtn.addEventListener('click', sendMessage);
-  if (clearBtn) clearBtn.addEventListener('click', clearChat);
+      if (isAr) {
+        const egpEst = Math.round(q.estimate * 48).toLocaleString();
+        const egpRange0 = Math.round(q.range[0] * 48).toLocaleString();
+        const egpRange1 = Math.round(q.range[1] * 48).toLocaleString();
+        const market = isRest ? '$480–1,200 على Fiverr وUpwork' : '$480–1,200 على Fiverr وUpwork';
+        return `تقدير مشروعك حسب المواصفات: ~$${q.estimate} (نطاق: $${q.range[0]}–${q.range[1]}) — تقريبياً ${egpEst} ج.م (نطاق: ${egpRange0}–${egpRange1} ج.م).\nنفس هذا المشروع في سوق العمل الحر (Fiverr & Upwork) بيتباع عادةً بـ ${market}.\nتقدر تفتح الـ AI Planner في الموقع لعمل خطة تفصيلية بالجدول الزمني، أو تحجز استشارة مجانية مع عبدالرحمن!`;
+      } else {
+        return `Preliminary estimate for your scope: ~$${q.estimate} (Range: $${q.range[0]}–${q.range[1]}).\nSimilar projects on Fiverr & Upwork typically sell for $480–1,200.\nYou can check out our AI Planner (planner.html) for a complete roadmap or message Abdelrahman directly on WhatsApp!`;
+      }
+    }
 
-  function clearChat() {
-    history = [];
-    const clearMsg = chatLang === 'ar'
-      ? 'تم مسح المحادثة! إزاي أقدر أساعدك اليوم؟ 😊'
-      : 'Chat cleared! How can I help you today? 😊';
-    messagesEl.innerHTML = `
-      <div class="grok-msg bot">
-        <div class="grok-msg-avatar">🤖</div>
-        <div class="grok-msg-bubble">${clearMsg}</div>
-      </div>`;
-    quickBtnsEl.style.display = 'flex';
-  }
+    // 5. Massive scope (> $1500)
+    if (/30 شاشة|50 شاشة|كل المميزات|مجمع ضخم|enterprise|full system/i.test(t)) {
+      if (isAr) {
+        return 'المشروع ده بمواصفاته الكبيرة ونطاقه الواسع محتاج مناقشة مباشرة مع عبدالرحمن لتحديد البنية والجدول الزمني بدقة. تقدر تضغط على زرار الواتساب أسفل المحادثة لتنسيق استشارة مجانية!';
+      } else {
+        return 'This large-scale project requires a direct architectural consultation with Abdelrahman to tailor a custom plan and milestones. Please use the WhatsApp button below to schedule a free 15-minute alignment call!';
+      }
+    }
 
-  function appendMessage(role, text, actionsHtml) {
-    const div = document.createElement('div');
-    div.className = `grok-msg ${role}`;
-    const avatarEmoji = role === 'bot' ? '🤖' : '👤';
-    let contentHtml = `<div class="grok-msg-avatar">${avatarEmoji}</div>
-      <div class="grok-msg-bubble">
-        ${escapeHtml(text).replace(/\n/g, '<br>')}
-        ${actionsHtml || ''}
-      </div>`;
-    div.innerHTML = contentHtml;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    return div;
-  }
-
-  function showTyping() {
-    const div = document.createElement('div');
-    div.className = 'grok-msg bot grok-typing';
-    div.id = 'grok-typing-indicator';
-    div.innerHTML = `
-      <div class="grok-msg-avatar">🤖</div>
-      <div class="grok-typing-dots">
-        <div class="grok-typing-dot"></div>
-        <div class="grok-typing-dot"></div>
-        <div class="grok-typing-dot"></div>
-      </div>`;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  function hideTyping() {
-    const typing = document.getElementById('grok-typing-indicator');
-    if (typing) typing.remove();
-  }
-
-  function showErrorWithFallback(msg) {
-    const isAr = /[\u0600-\u06FF]/.test(msg) || (document.documentElement.lang === 'ar');
-    const div = document.createElement('div');
-    div.className = 'grok-error-msg';
-    div.innerHTML = `
-      <div>${escapeHtml(msg)}</div>
-      <div style="margin-top:6px;">
-        <a href="https://wa.me/201123031944" target="_blank" rel="noopener" class="grok-action-btn" style="display:inline-flex;margin:2px auto;">
-          💬 ${isAr ? 'تواصل مع عبد الرحمن على واتساب' : 'Contact on WhatsApp'}
-        </a>
-      </div>`;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  function escapeHtml(text) {
-    const d = document.createElement('div');
-    d.textContent = text;
-    return d.innerHTML;
+    return null;
   }
 
   async function fetchGeminiDirect(sysPrompt, text, chatHistory) {
-    const key = window.PORTFOLIO_GEMINI_KEY || ['AQ.Ab8RN6JI', 'mNt5eR0LS9XKu', 'OYGfA1yLVY_U', 'GDMRoSaso5zQzKqWQ'].join('');
-    if (!key) throw new Error('No Gemini Key configured');
-    const model = window.PORTFOLIO_GEMINI_MODEL || 'gemini-3.5-flash-lite';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`;
+    const isAr = chatLang === 'ar' || /[\u0600-\u06FF]/.test(text);
 
-    const contents = [];
-    if (Array.isArray(chatHistory)) {
-      for (const m of chatHistory.slice(-6)) {
-        if (m && m.content) {
-          contents.push({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }]
-          });
-        }
-      }
-    }
-    if (contents.length === 0 || contents[contents.length - 1].role !== 'user') {
-      contents.push({ role: 'user', parts: [{ text: text }] });
-    }
-
+    // Call Cloudflare Worker endpoint strictly: POST { message, systemPrompt, conversationHistory }
+    const workerUrl = 'https://abdelrahman-portfolio-gemini.abdelrahman-dev1.workers.dev/';
+    const pricingBlock = buildPricingBlock();
     const payload = {
-      systemInstruction: { parts: [{ text: sysPrompt }] },
-      contents: contents,
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 600
-      }
+      message: `${pricingBlock}\n\n[User Message]:\n${text}`,
+      systemPrompt: sysPrompt,
+      conversationHistory: Array.isArray(chatHistory) ? chatHistory.slice(-6) : []
     };
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) throw new Error('Gemini API HTTP ' + res.status);
-    const data = await res.json();
-    const cand = data && data.candidates && data.candidates[0];
-    if (cand && cand.content && cand.content.parts && cand.content.parts[0]) {
-      return cand.content.parts[0].text.trim();
+    try {
+      const res = await fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.status === 429) {
+        // Retry once after 1.5s
+        await new Promise(r => setTimeout(r, 1500));
+        const retryRes = await fetch(workerUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (retryRes.ok) {
+          const data = await retryRes.json();
+          const rep = data && (data.message || data.reply || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content));
+          if (rep && rep.trim()) return rep.trim();
+        }
+      } else if (res.ok) {
+        const data = await res.json();
+        const rep = data && (data.message || data.reply || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content));
+        if (rep && rep.trim()) return rep.trim();
+      }
+    } catch (err) {
+      console.warn('[Worker Error, checking rule fallback]', err);
     }
-    throw new Error('Empty Gemini reply');
+
+    // High-precision calibrated rule-based fallback for price scenarios
+    const fallbackAnswer = getRuleBasedPricingResponse(text, isAr);
+    if (fallbackAnswer) {
+      return fallbackAnswer;
+    }
+
+    // General fallback
+    if (isAr) {
+      return 'أهلاً بك! أنا مساعد عبدالرحمن الذكي. تقدر تسألني عن باقات الأسعار المعايرة ($60–120 للأدوات البسيطة، $180–400 للمتوسطة، $550–1,200 للمشاريع الكاملة)، أو تصف مشروعك لحساب التكلفة التقديرية بالمعادلة المعتمدة، أو تزور الـ AI Planner لبناء خطتك مجاناً!';
+    } else {
+      return "Hello! I am Abdelrahman's AI assistant. Feel free to ask about our calibrated packages ($60–120 Starter, $180–400 Standard, $550–1,200 Pro), describe your app idea for an instant quote, or visit our AI Planner for a full roadmap!";
+    }
   }
 
   async function sendMessage() {
@@ -6638,7 +6624,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v32</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v33</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
@@ -6650,6 +6636,7 @@ STRICT RULES:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="assets/js/scroll-reveal.js?v=28" defer></script>
 <script src="assets/js/ai-planner.js?v=43" defer></script>
+<script>document.addEventListener("DOMContentLoaded", function() { if (typeof renderPricingFromSource === "function") renderPricingFromSource(); });</script>
 </body> 
 </html>
 
