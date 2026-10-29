@@ -980,53 +980,57 @@
         var deadline      = deadlineEl ? deadlineEl.options[deadlineEl.selectedIndex].text : '';
         // Clean separator used via spacing
 
+        var wave = '\uD83D\uDC4B';
+        var pin = '\uD83D\uDCCC';
+        var money = '\uD83D\uDCB0';
+        var rocket = '\uD83D\uDE80';
+        var hand = '\uD83E\uDD1D';
+
         var cleanTierPrice = (tierPrice || '').replace(/[\u2013\u2014]/g, '-');
-        var clientInfo = clientName + (clientContact ? ' (' + clientContact + ')' : '');
+        var cleanDeadline  = (deadline || '').replace(/[\u2013\u2014]/g, '-');
+        var budgetText     = cleanTierPrice ? tierName + ' (' + cleanTierPrice + ')' : tierName;
+
+        var clientIntroAr = clientName ? 'معاك ' + clientName + (clientContact ? ' (' + clientContact + ')' : '') + '، ' : '';
+        var clientIntroEn = clientName ? 'My name is ' + clientName + (clientContact ? ' (' + clientContact + ')' : '') + '. ' : '';
 
         var waMsg = isAr ? [
-          'مرحباً عبد الرحمن 👋',
-          'أرغب في مناقشة واعتماد خطة المشروع التالية:',
+          'السلام عليكم عبد الرحمن ' + wave,
+          clientIntroAr + 'أرغب في مناقشة وبدء تنفيذ فكرة مشروعي:',
           '',
-          '📋 *بيانات المشروع:*',
-          '• *الاسم:* ' + clientInfo,
+          pin + ' *ملخص المشروع:*',
           '• *فكرة التطبيق:* ' + (userIdea || 'غير محددة بعد'),
-          '• *المنصة:* ' + plat,
-          '• *الجدول الزمني:* ' + (deadline || 'مرن / حسب الاتفاق'),
+          '• *المنصة:* ' + (plat || 'تطبيق موبايل'),
+          '• *المدة المقترحة:* ' + (cleanDeadline || 'مرن / حسب الاتفاق'),
           '',
-          '💼 *الباقة والميزانية التقديرية:*',
-          '• *الباقة المختارة:* ' + tierName,
-          '• *الاستثمار التقديري:* ' + (cleanTierPrice || 'حسب المتطلبات'),
-          '• *العملة:* ' + curCode + ' (' + curSym + ')',
+          money + ' *الباقة والميزانية التقديرية:*',
+          '• *الباقة المختارة:* ' + budgetText,
           '',
-          '🚀 *مراحل التسليم المقترحة:*',
-          '1️⃣ *الأسبوع 1:* تصميم Figma تفاعلي واعتماد الـ UI/UX',
-          '2️⃣ *الأسبوع 2:* هيكلة التطبيق والنسخة التجريبية (v0.1)',
-          '3️⃣ *الأسبوع 3:* ربط الـ APIs وقواعد البيانات والنسخة الكاملة (v0.5)',
-          '4️⃣ *الأسبوع 4:* النشر على المتاجر وتسليم الكود كامل + ضمان 30 يوماً',
+          rocket + ' *خطة العمل المقترحة:*',
+          '1. تصميم الـ UI/UX وبروتوتايب Figma تفاعلي',
+          '2. بناء هيكل التطبيق والنسخة التجريبية الأولى (v0.1)',
+          '3. ربط الـ APIs وقواعد البيانات والنسخة الكاملة (v0.5)',
+          '4. الفحص النهائي، الإطلاق، وتسليم كامل الكود مع الضمان',
           '',
-          'جاهز لتحديد موعد مكالمة سريعة (15 دقيقة) لمناقشة التفاصيل والبدء! 🤝'
+          'جاهز لتحديد موعد مكالمة استشارية سريعة (15 دقيقة) لمناقشة التفاصيل والبدء! ' + hand
         ].join('\n') : [
-          'Hi Abdelrahman 👋',
-          'I would like to discuss and move forward with this project plan:',
+          'Hi Abdelrahman ' + wave,
+          clientIntroEn + "I'd like to discuss and kick off my project with you:",
           '',
-          '📋 *Project Details:*',
-          '• *Client:* ' + clientInfo,
-          '• *App Concept:* ' + (userIdea || 'To be discussed'),
-          '• *Platform:* ' + plat,
-          '• *Timeline:* ' + (deadline || 'Milestone-based'),
+          pin + ' *Project Overview:*',
+          '• *Concept:* ' + (userIdea || 'To be discussed'),
+          '• *Platform:* ' + (plat || 'Mobile Application'),
+          '• *Target Timeline:* ' + (cleanDeadline || 'Milestone-based'),
           '',
-          '💼 *Selected Scope & Investment:*',
-          '• *Package:* ' + tierName,
-          '• *Estimated Budget:* ' + (cleanTierPrice || 'Custom scope'),
-          '• *Currency:* ' + curCode + ' (' + curSym + ')',
+          money + ' *Selected Package & Investment:*',
+          '• *Package:* ' + budgetText,
           '',
-          '🚀 *Agreed Delivery Milestones:*',
-          '1️⃣ *Week 1:* Interactive Figma prototype & UI/UX sign-off',
-          '2️⃣ *Week 2:* Flutter core architecture & internal build (v0.1)',
-          '3️⃣ *Week 3:* APIs & database integration with test build (v0.5)',
-          '4️⃣ *Week 4:* Store launch, full source code handover + 30-day warranty',
+          rocket + ' *Proposed Milestones:*',
+          '1. Interactive Figma UI/UX prototype & design approval',
+          '2. Core architecture setup & internal build (v0.1)',
+          '3. APIs & database integration with feature build (v0.5)',
+          '4. Final QA, production launch, full source code handover + warranty',
           '',
-          'Ready to schedule our free 15-min alignment call to finalize details and kick off! 🤝'
+          'Ready to schedule our free 15-min alignment call to finalize details and kick off! ' + hand
         ].join('\n');
 
         window.open('https://wa.me/' + CONTACT.whatsappNumber + '?text=' + encodeURIComponent(waMsg), '_blank', 'noopener');
