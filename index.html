@@ -977,6 +977,8 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   border-radius: 50%;
   overflow: visible;
   box-shadow: 0 0 25px rgba(168,85,247,.28), 0 0 60px rgba(168,85,247,.15);
+  animation: gentleBubbleFloat 4.8s ease-in-out infinite;
+  will-change: transform;
   transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 } 
 @media(max-width:900px){
@@ -3503,7 +3505,7 @@ footer p{
 </style>
 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=28">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=29">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -6447,7 +6449,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v34</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v35</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
