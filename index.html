@@ -349,9 +349,7 @@ body::after{
   50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
 }
 
-.project-card:hover {
-  animation: glowPulse 2s ease-in-out infinite;
-}
+/* .project-card:hover pulse removed to keep card sharp and stable */
 
 /* Testimonials Section Styling */
 .testimonials-grid {
@@ -1822,9 +1820,12 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
   border:1px solid var(--border); 
   border-radius:28px; 
   overflow:hidden; 
-  transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease; 
   cursor:pointer;
   position:relative;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 [data-theme="light"] .project-card {
@@ -1846,8 +1847,8 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
 }
 .project-card:hover{ 
   border-color:var(--neon); 
-  transform:translateY(-10px) scale(1.02); 
-  box-shadow:0 25px 50px rgba(168, 85, 247, 0.7); 
+  transform:translateY(-6px); 
+  box-shadow:0 20px 40px rgba(168, 85, 247, 0.35); 
 } 
 /* Expanded 420px Showcase Image Box for Full High-Quality Mockup View */
 .project-image { 
@@ -1887,7 +1888,7 @@ section{padding:clamp(50px,7vw,100px) clamp(16px,5vw,60px);position:relative;z-i
 }
 
 .project-card:hover .project-image img {
-  transform: scale(1.03);
+  transform: scale(1.01);
 }
 .project-content{padding:32px} 
 .project-content h3{ 
@@ -2700,7 +2701,7 @@ footer p{
 } 
 .project-card:hover::after{opacity:1} 
 .project-card:hover{ 
-  box-shadow:0 30px 60px rgba(168,85,247,.35); 
+  box-shadow:0 20px 40px rgba(168,85,247,.35); 
 } 
 .project-image::before{ 
   content:''; 
@@ -6449,7 +6450,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v35</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v36</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
