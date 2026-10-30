@@ -5051,10 +5051,10 @@ document.addEventListener("DOMContentLoaded", () => {
           var config = {
             floorRadius: 1150/60, waistRadius: 53/60, crownRadius: 380/60,
             waistAt: 0.5, twist: 3, zoom: 75, flowDir: 1, flowSpeed: 0.1,
-            lineCount: 80, lineColor: "#A855F7", lineGlow: 0.8,
-            showDots: true, dotCount: 1200, dotSize: 0.02, dotColor: "#C084FC", dotGlow: 1.2, dotFlicker: 0.7,
-            showComets: true, cometCount: 4, cometSpeed: 0.08, cometColor: "#A855F7", cometGlow: 0.8, cometTail: 16,
-            cometDelay: 6, collideForce: 0.6, hoverRepel: true, repelRadius: 120, repelStrength: 50, running: true
+            lineCount: 52, lineColor: "#A855F7", lineGlow: 1.15,
+            showDots: true, dotCount: 550, dotSize: 0.022, dotColor: "#06B6D4", dotGlow: 1.65, dotFlicker: 0.75,
+            showComets: true, cometCount: 5, cometSpeed: 0.085, cometColor: "#EC4899", cometGlow: 1.45, cometTail: 18,
+            cometDelay: 5, collideForce: 0.65, hoverRepel: true, repelRadius: 130, repelStrength: 55, running: true
           };
           if (document.documentElement.getAttribute("data-theme") === "light") {
             config.lineColor = "#F5B301"; config.dotColor = "#FFD23F"; config.cometColor = "#E8910D";
@@ -5114,13 +5114,16 @@ function applyVortexTheme(theme) {
     cfg.lineColor = '#F5B301';
     cfg.dotColor = '#FFD23F';
     cfg.cometColor = '#E8910D';
-    if (cfg.lineGlow !== undefined) cfg.lineGlow = 1.1;
-    if (cfg.dotGlow !== undefined) cfg.dotGlow = 1.6;
-    if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.1;
+    if (cfg.lineGlow !== undefined) cfg.lineGlow = 1.15;
+    if (cfg.dotGlow !== undefined) cfg.dotGlow = 1.65;
+    if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.2;
   } else {
     cfg.lineColor = '#A855F7';
-    cfg.dotColor = '#C084FC';
-    cfg.cometColor = '#A855F7';
+    cfg.dotColor = '#06B6D4';
+    cfg.cometColor = '#EC4899';
+    if (cfg.lineGlow !== undefined) cfg.lineGlow = 1.15;
+    if (cfg.dotGlow !== undefined) cfg.dotGlow = 1.65;
+    if (cfg.cometGlow !== undefined) cfg.cometGlow = 1.45;
   }
 }
 
@@ -6450,7 +6453,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v37</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v38</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
