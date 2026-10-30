@@ -555,23 +555,46 @@
     const observer = new ResizeObserver(resize);
 
     let repelTarget = 0;
+    let targetTiltX = 0;
+    let targetTiltY = 0;
+    let currentTiltX = 0;
+    let currentTiltY = 0;
+
     const onPointerMove = (e) => {
       const cfg = cfgRef.current;
       const rect = container.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      repelUniforms.uMouse.value.set(
-        ((e.clientX - rect.left) / rect.width) * 2 - 1,
-        -(((e.clientY - rect.top) / rect.height) * 2 - 1)
-      );
+      const ndcX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const ndcY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      repelUniforms.uMouse.value.set(ndcX, ndcY);
       repelTarget =
         cfg.hoverRepel && cfg.running ? clamp(cfg.repelStrength / 100, 0, 1) * REPEL_MAX_NDC : 0;
+
+      // Subtle dynamic 3D camera parallax tilt following mouse smoothly
+      targetTiltX = -ndcY * 0.12;
+      targetTiltY = ndcX * 0.18;
     };
+
     const onPointerLeave = () => {
       repelTarget = 0;
+      targetTiltX = 0;
+      targetTiltY = 0;
     };
+
+    const onPointerDown = (e) => {
+      if (dotCount > 0 && typeof addWave === "function") {
+        const rect = container.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const ndcX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const ndcY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+        addWave(ndcX * 4, ndcY * 4, 0, performance.now() / 1000, 1.2);
+      }
+    };
+
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerleave", onPointerLeave, { passive: true });
     window.addEventListener("pointercancel", onPointerLeave, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
 
     function addWave(x, y, z, at, amp) {
       wavesAwake = true;
@@ -953,6 +976,12 @@
       for (const comet of cometList) driveComet(comet, t, dt, fadeComet);
       tick++;
       if (tick % 2 === 0 && dotCount > 0) collide(t);
+
+      // Smooth 3D parallax tilt transition
+      currentTiltX += (targetTiltX - currentTiltX) * Math.min(1, dt * 3.5);
+      currentTiltY += (targetTiltY - currentTiltY) * Math.min(1, dt * 3.5);
+      group.rotation.x = currentTiltX;
+      group.rotation.y = currentTiltY;
 
       renderer.render(scene, camera);
     }
