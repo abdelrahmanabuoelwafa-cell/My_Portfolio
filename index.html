@@ -2629,31 +2629,52 @@ footer p{
 
 /* --- Premium Testimonial Card --- */
 .premium-testimonial-card{
-  background:var(--card-bg);
-  border:1px solid rgba(168,85,247,.25);
-  border-radius:16px;
-  padding:30px;
-  max-width:800px;
-  margin:0 auto;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
-  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 24px;
+  padding: 38px 34px;
+  max-width: 820px;
+  margin: 0 auto;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 30px rgba(168, 85, 247, 0.12);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.premium-testimonial-card:hover{border-color:var(--neon);box-shadow:0 15px 40px rgba(168,85,247,.35)}
-.stars{color:#fbbf24;margin-bottom:15px;font-size:14px;display:flex;gap:4px}
-.quote{color:var(--muted);font-style:italic;font-size:15px;line-height:1.8;margin-bottom:25px}
-.author-info{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
-.avatar{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px;background-color:#a855f7;box-shadow:0 0 18px rgba(168,85,247,.5)}
-.details h4{color:var(--text);margin:0 0 5px 0;font-size:15px}
-.linkedin-link{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
-.recommendation-text{color:var(--muted);font-size:13px}
-.linkedin-icon-btn{color:#0077b5;font-size:20px;text-decoration:none;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;transition:all .3s ease}
-.linkedin-icon-btn:hover{color:#c084fc;transform:scale(1.15) translateY(-2px);text-shadow:0 5px 15px rgba(168,85,247,.4)}
-.quote.clamped{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:2px}
-.quote-more-btn{display:inline-block;background:none;border:none;color:var(--neon);font-weight:800;font-size:14px;cursor:pointer;padding:0 0 23px 0;letter-spacing:.3px;transition:opacity .2s}
+.premium-testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #A855F7, #06B6D4, #EC4899);
+}
+.premium-testimonial-card:hover{
+  border-color: var(--neon);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.55), 0 0 40px rgba(168, 85, 247, 0.28);
+  transform: translateY(-4px);
+}
+[data-theme="light"] .premium-testimonial-card {
+  background: linear-gradient(145deg, #ffffff, #fdf8e6);
+  border-color: rgba(147, 51, 234, 0.25);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+}
+.stars{color:#fbbf24;margin-bottom:18px;font-size:16px;display:flex;gap:6px;filter:drop-shadow(0 2px 8px rgba(251,191,36,.35))}
+.quote{color:var(--text);font-style:italic;font-size:15.5px;line-height:1.85;margin-bottom:28px;opacity:0.92}
+.author-info{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:18px;border-top:1px solid rgba(168,85,247,0.18)}
+.avatar{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;background:linear-gradient(135deg, #A855F7, #7C3AED);box-shadow:0 0 20px rgba(168,85,247,.55);border:2px solid rgba(255,255,255,0.25)}
+.details h4{color:var(--text);margin:0 0 6px 0;font-size:16px;font-weight:700}
+.linkedin-link{display:flex;align-items:center;gap:10px;margin-top:4px;flex-wrap:wrap}
+.recommendation-text{color:var(--muted);font-size:13px;font-weight:600}
+.linkedin-icon-btn{color:#0A66C2;font-size:22px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:38px;min-width:38px;border-radius:8px;background:rgba(10,102,194,0.1);padding:4px 8px;transition:all .3s ease}
+.linkedin-icon-btn:hover{color:#fff;background:#0A66C2;transform:scale(1.1) translateY(-2px);box-shadow:0 4px 15px rgba(10,102,194,0.45)}
+.quote.clamped{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:4px}
+.quote-more-btn{display:inline-block;background:none;border:none;color:var(--neon);font-weight:800;font-size:14px;cursor:pointer;padding:0 0 20px 0;letter-spacing:.3px;transition:opacity .2s}
 .quote-more-btn:hover{text-decoration:underline;opacity:.85}
 @media(max-width:480px){
-  .premium-testimonial-card{padding:24px 18px}
-} 
+  .premium-testimonial-card{padding:26px 20px;border-radius:18px}
+  .quote{font-size:14.5px}
+}
 
 /* ===== Complete Light (White) Mode ===== */
 [data-theme="light"] .neon{text-shadow:0 0 12px rgba(124,58,237,.35)}
@@ -3506,7 +3527,7 @@ footer p{
 </style>
 
 <script>document.documentElement.classList.add('js');window.__skipOldReveal=true;</script>
-<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=29">
+<link rel="stylesheet" href="assets/css/scroll-reveal.css?v=31">
 <base target="_blank" rel="noopener">
 </head> 
 <body>
@@ -6453,7 +6474,7 @@ STRICT RULES:
 </script>
 
 <!-- Build marker: confirms the newest version is loaded -->
-<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v39</div>
+<div id="build-note" style="position:fixed;bottom:12px;left:12px;z-index:9999;background:rgba(147,51,234,.12);color:var(--neon);border:1px solid rgba(147,51,234,.35);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;opacity:0;transition:opacity .4s;pointer-events:none;">v40</div>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });

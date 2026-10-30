@@ -94,6 +94,7 @@
     '.skill-category.reveal',
     '.car-card.reveal',
     '.stat-card.reveal',
+    '.testimonials-carousel-wrapper.reveal',
     '.premium-testimonial-card.reveal',
     '.testimonial-card.reveal',
     '.service-card.reveal',

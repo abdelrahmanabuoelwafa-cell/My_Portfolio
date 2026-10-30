@@ -10,9 +10,11 @@ html.js.js-enabled .reveal {
   opacity: 0;
 }
 
-/* Neon CTA Box should always remain visible on both mobile and desktop */
+/* Neon CTA Box & Testimonials Carousel should always remain visible */
 html.js.js-enabled .neon-cta-box,
-.neon-cta-box {
+.neon-cta-box,
+html.js.js-enabled .testimonials-carousel-wrapper,
+.testimonials-carousel-wrapper {
   opacity: 1 !important;
   visibility: visible !important;
 }
