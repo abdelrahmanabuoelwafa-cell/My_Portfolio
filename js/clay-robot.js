@@ -728,16 +728,19 @@
       needResize = false;
     }
 
+    let cachedHostRect = null;
     function measureShown() {
-      const r = host.getBoundingClientRect();
-      if (layoutW > 0 && r.width > 0) {
-        const s = r.width / layoutW;
-        if (Math.abs(s - shown) / shown > 0.05) {
-          shown = s;
-          needResize = true;
+      if (!cachedHostRect) {
+        cachedHostRect = host.getBoundingClientRect();
+        if (layoutW > 0 && cachedHostRect.width > 0) {
+          const s = cachedHostRect.width / layoutW;
+          if (Math.abs(s - shown) / shown > 0.05) {
+            shown = s;
+            needResize = true;
+          }
         }
       }
-      return r;
+      return cachedHostRect;
     }
 
     function aimAt(u, v) {

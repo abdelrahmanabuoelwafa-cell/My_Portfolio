@@ -26,6 +26,7 @@
   resize();
   window.addEventListener('resize', resize);
 
+  var isRunning = false;
   window.addEventListener('mousemove', function(e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
@@ -42,8 +43,11 @@
       });
     }
 
-    if (rafId === null) rafId = requestAnimationFrame(render);
-  });
+    if (!isRunning) {
+      isRunning = true;
+      rafId = requestAnimationFrame(render);
+    }
+  }, { passive: true });
 
   function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -99,9 +103,19 @@
       ctx.restore();
     }
 
+    // Auto-pause when particles are finished and follower has reached mouse position
+    var dDot = Math.hypot(dot.x - mouse.x, dot.y - mouse.y);
+    var dRing = Math.hypot(ring.x - mouse.x, ring.y - mouse.y);
+    if (particles.length === 0 && dDot < 0.25 && dRing < 0.25) {
+      isRunning = false;
+      rafId = null;
+      return;
+    }
+
     rafId = requestAnimationFrame(render);
   }
 
+  isRunning = true;
   render();
 
   document.addEventListener('visibilitychange', function() {

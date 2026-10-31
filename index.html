@@ -14,20 +14,20 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
+<meta property="og:url" content="https://abdelrahmanabuoelwafa-cell.github.io/">
 <meta property="og:title" content="Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert">
 <meta property="og:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
-<meta property="og:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/profile-closeup.jpg">
+<meta property="og:image" content="https://abdelrahmanabuoelwafa-cell.github.io/images/profile-closeup.jpg">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
+<meta property="twitter:url" content="https://abdelrahmanabuoelwafa-cell.github.io/">
 <meta property="twitter:title" content="Abdelrahman Abouelwafa — Flutter Developer | Mobile App Development Expert">
 <meta property="twitter:description" content="Professional Flutter developer specializing in cross-platform mobile applications, UI/UX design, and modern app development.">
-<meta property="twitter:image" content="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/profile-closeup.jpg">
+<meta property="twitter:image" content="https://abdelrahmanabuoelwafa-cell.github.io/images/profile-closeup.jpg">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/">
+<link rel="canonical" href="https://abdelrahmanabuoelwafa-cell.github.io/">
 
 <!-- Favicon (Shows Abdelrahman's photo in browser tabs) -->
 <link rel="icon" type="image/jpeg" href="images/profile-closeup.jpg">
@@ -132,8 +132,8 @@
   "@type": "Person",
   "name": "Abdelrahman Abouelwafa",
   "jobTitle": "Flutter Developer",
-  "url": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/",
-  "image": "https://abdelrahmanabuoelwafa-cell.github.io/My_Portfolio/images/logo.png",
+  "url": "https://abdelrahmanabuoelwafa-cell.github.io/",
+  "image": "https://abdelrahmanabuoelwafa-cell.github.io/images/logo.png",
   "sameAs": [
     "https://github.com/abdelrahmanabuoelwafa-cell",
     "https://linkedin.com/in/abdelrahman-abdullah",
@@ -6486,251 +6486,6 @@ STRICT RULES:
 <script src="assets/js/scroll-reveal.js?v=28" defer></script>
 <script src="assets/js/ai-planner.js?v=43" defer></script>
 
-
-
-
-<script>
-(function() {
-  var SCALE_SMALL = 48;
-  var SCALE_BIG   = 82;
-  var robot = null;
-  var rafScale = null;
-
-  function animateScale(target) {
-    if (rafScale) cancelAnimationFrame(rafScale);
-    function step() {
-      if (!robot) return;
-      var cur = robot.opts.scale;
-      var diff = target - cur;
-      if (Math.abs(diff) < 0.4) {
-        robot.opts.scale = target;
-        robot.wake();
-        rafScale = null;
-        return;
-      }
-      robot.opts.scale = cur + diff * 0.18;
-      robot.wake();
-      rafScale = requestAnimationFrame(step);
-    }
-    rafScale = requestAnimationFrame(step);
-  }
-
-  function syncHitbox() {
-    if (robot) {
-      var hitbox = document.getElementById('clay-robot-hitbox');
-      var container = document.getElementById('clay-robot-container');
-      if (hitbox && container) {
-        var W = container.clientWidth || window.innerWidth;
-        var H = container.clientHeight || 165;
-        var S = Math.min(H, W / (1200 / 900));
-        var FRAME_UNITS = 9.0;
-        var k = robot.opts.scale / 100;
-        var walkX = robot.getWalkX();
-        // Convert scene walkX back to screen pixel X
-        var screenX = (walkX * k * S) / FRAME_UNITS + (W / 2);
-        var boxLeft = Math.max(5, Math.min(W - 120, screenX - 58));
-        hitbox.style.left = boxLeft + 'px';
-      }
-    }
-    requestAnimationFrame(syncHitbox);
-  }
-
-  function initRobot() {
-    var host = document.getElementById('clay-robot-container');
-    var canvas = document.getElementById('clay-robot-canvas');
-    var hitbox = document.getElementById('clay-robot-hitbox');
-    if (!host || !canvas || !window.createClayRobot) return;
-
-    robot = window.createClayRobot(host, canvas, {
-      scale: SCALE_SMALL,
-      walk: true,
-      walkSpeed: 3.5,
-      wave: true,
-      glance: 6,
-      blink: true,
-      colors: {
-        clay: "#FFC2A1",
-        visor: "#22225E",
-        eyes: "#00EEFF"
-      },
-      response: {
-        hop: 7,
-        track: "page",
-        headTurn: 8,
-        eyeTravel: 7,
-        followSpeed: 6
-      },
-      advanced: {
-        eyeGlow: 1.6,
-        sunAngle: 85,
-        sunElevation: 28,
-        sunStrength: 1.1,
-        skyStrength: 1.0,
-        shadowSoftness: 5,
-        occlusion: 0.9,
-        cameraDistance: 28
-      }
-    });
-
-    if (!robot) return;
-
-    // Hover on Hitbox: Smoothly grow + wave hi
-    if (hitbox) {
-      hitbox.addEventListener('mouseenter', function() {
-        animateScale(SCALE_BIG);
-        robot.wave(1);
-        robot.wake();
-      });
-
-      hitbox.addEventListener('mouseleave', function() {
-        animateScale(SCALE_SMALL);
-      });
-
-      hitbox.addEventListener('click', function() {
-        robot.hop();
-        robot.wave(1);
-      });
-    }
-
-    // Start hitbox sync loop
-    requestAnimationFrame(syncHitbox);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initRobot);
-  } else {
-    initRobot();
-  }
-})();
-</script>
-
-
-
-<script>
-(function() {
-  var robot = null;
-  var wrap = document.getElementById('clay-robot-wrap');
-  var canvas = document.getElementById('clay-robot-canvas');
-  if (!wrap || !canvas || !window.createClayRobot) return;
-
-  // Initialize robot with crystal-clear glowing eyes & lavender clay
-  robot = window.createClayRobot(wrap, canvas, {
-    scale: 96,
-    walkSpeed: 4,
-    wave: true,
-    glance: 6,
-    blink: true,
-    colors: {
-      clay: "#B5A1FF",   // Smooth lavender clay
-      visor: "#121024",  // Ultra dark visor for extreme eye contrast
-      eyes: "#00F7FF",   // Crisp, bright glowing cyan/white eyes
-    },
-    advanced: {
-      eyeGlow: 2.2,      // Extra bright and clear eyes
-      cameraDistance: 30,
-      sunAngle: 85,
-      sunElevation: 28,
-      shadowSoftness: 5
-    }
-  });
-
-  if (!robot) return;
-
-  // Hover: Enlarge smoothly & wave bye-bye 👋
-  var isHovered = false;
-  wrap.addEventListener('mouseenter', function() {
-    isHovered = true;
-    wrap.style.transform = 'scale(1.48) translateY(-14px)';
-    robot.wave(true); // Continuous wave while hovered
-  });
-
-  wrap.addEventListener('mouseleave', function() {
-    isHovered = false;
-    wrap.style.transform = 'scale(1) translateY(0)';
-    robot.stopWave();
-  });
-
-  wrap.addEventListener('click', function() {
-    robot.hop();
-  });
-
-  // --- 6-Second Idle Footer Wandering Logic ---
-  var IDLE_TIME_MS = 6000; // 6 seconds
-  var idleTimer = null;
-  var isWandering = false;
-  var wanderAnimId = null;
-  var wanderX = 18; // Default corner left position (px)
-  var wanderDir = 1;
-  var wanderSpeed = 1.6;
-
-  function resetIdle() {
-    // Stop wandering immediately and return to corner
-    if (isWandering) {
-      isWandering = false;
-      robot.setWalking(false);
-      returnToCorner();
-    }
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(startWandering, IDLE_TIME_MS);
-  }
-
-  function startWandering() {
-    if (isHovered) return;
-    isWandering = true;
-    robot.setWalking(true, 0.7);
-    stepWander();
-  }
-
-  function stepWander() {
-    if (!isWandering) return;
-    var maxRight = (window.innerWidth || document.documentElement.clientWidth) - 175;
-    var minLeft = 18;
-
-    wanderX += wanderSpeed * wanderDir;
-    if (wanderX >= maxRight) {
-      wanderX = maxRight;
-      wanderDir = -1;
-    } else if (wanderX <= minLeft) {
-      wanderX = minLeft;
-      wanderDir = 1;
-    }
-
-    wrap.style.left = wanderX + 'px';
-    wanderAnimId = requestAnimationFrame(stepWander);
-  }
-
-  function returnToCorner() {
-    if (wanderAnimId) cancelAnimationFrame(wanderAnimId);
-    var targetX = 18;
-    function animBack() {
-      if (isWandering) return; // If triggered again, exit
-      var diff = targetX - wanderX;
-      if (Math.abs(diff) < 2) {
-        wanderX = targetX;
-        wrap.style.left = wanderX + 'px';
-        robot.setWalking(false);
-        return;
-      }
-      robot.setWalking(true, 0.9);
-      wanderX += diff * 0.12;
-      wrap.style.left = wanderX + 'px';
-      requestAnimationFrame(animBack);
-    }
-    animBack();
-  }
-
-  // Listen for mouse movement anywhere on the page
-  window.addEventListener('pointermove', resetIdle, { passive: true });
-  window.addEventListener('scroll', resetIdle, { passive: true });
-  window.addEventListener('keydown', resetIdle, { passive: true });
-
-  // Start initial idle countdown
-  idleTimer = setTimeout(startWandering, IDLE_TIME_MS);
-})();
-</script>
-
-
-
 <!-- Cute 3D Clay Robot Companion (Originkit - Local Preview) -->
 <div id="clay-robot-wrap" style="position:fixed;bottom:12px;left:16px;width:145px;height:110px;z-index:9999;background:transparent;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);">
   <canvas id="clay-robot-canvas" style="width:100%;height:100%;display:block;background:transparent;pointer-events:none;"></canvas>
@@ -6795,14 +6550,24 @@ STRICT RULES:
   var wanderDir = 1;
   var wanderSpeed = 1.6;
 
+  var lastReset = 0;
   function resetIdle() {
+    var now = performance.now();
     if (isWandering) {
       isWandering = false;
       robot.setWalking(false);
       returnToCorner();
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(startWandering, IDLE_TIME_MS);
+      lastReset = now;
+      return;
     }
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(startWandering, IDLE_TIME_MS);
+    // Throttle idle timer reset to once every 200ms during continuous mouse movement
+    if (now - lastReset > 200) {
+      lastReset = now;
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(startWandering, IDLE_TIME_MS);
+    }
   }
 
   function startWandering() {
