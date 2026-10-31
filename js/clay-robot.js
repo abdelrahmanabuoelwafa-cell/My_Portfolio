@@ -999,7 +999,11 @@
         gait %= (Math.PI * 2);
       }
 
-      const faceT = tYaw * BODY_SHARE + Math.sign(walkV) * WALK_TURN * walkAmt;
+      // While walking: body faces walk direction only (so head can freely look at mouse)
+      // While standing: body partially follows mouse as normal (BODY_SHARE)
+      const faceT = walkAmt > 0.05
+        ? Math.sign(walkV) * WALK_TURN * walkAmt
+        : tYaw * BODY_SHARE;
       const T = 0.5 - (opts.response.followSpeed / 10) * 0.42;
 
       stepSpring(yaw, tYaw, T, dt);
