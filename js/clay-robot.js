@@ -419,12 +419,10 @@
 
           vec3 ds = uW2S * rd;
           vec3 db = uBody * (ds / sqv);
-          vec2 span = vec2(1e9, -1e9);
-          span = spanWith(span, slab(ohd, uHead * db, vec3(0.0), HEAD_B + 0.4));
-          span = spanWith(span, slab(ob, db, BODY_C, BODY_B + 0.4));
+          vec2 span = vec2(24.0, 36.0);
           bool hit = false;
-          float t = max(span.x, 0.0);
-          float tEnd = span.y + 0.6;
+          float t = 24.0;
+          float tEnd = 36.0;
           float hitAt = s == 0 ? 0.25 : 0.4;
           int steps = s == 0 ? 80 : 35;
           float rmin = 1e9, near = 1e9, prevR = 1e9;
