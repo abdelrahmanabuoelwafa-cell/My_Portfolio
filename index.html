@@ -6504,6 +6504,11 @@ STRICT RULES:
     wave: true,
     glance: 5,
     blink: true,
+    response: {
+      headTurn: 8.5,
+      followSpeed: 7,
+      eyeTravel: 7
+    },
     colors: {
       clay: "#B5A1FF",   // Lavender Clay
       visor: "#090714",  // Deep OLED visor for maximum eye contrast
@@ -6613,7 +6618,8 @@ STRICT RULES:
       // Returning left to corner: turn left (negative speed)
       var dir = diff < 0 ? -0.85 : 0.85;
       robot.setWalking(true, dir);
-      wanderX += diff * 0.14;
+      var step = Math.min(Math.abs(diff), 2.5);
+      wanderX += (diff < 0 ? -step : step);
       wrap.style.left = wanderX + 'px';
       requestAnimationFrame(animBack);
     }

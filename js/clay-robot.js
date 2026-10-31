@@ -92,7 +92,7 @@
   const SKY_AWAY = [-0.151, -0.124, -0.087];
   const SUN = [0.293, 0.227, 0.17];
 
-  const DPR_CAP = 2;
+  const DPR_CAP = 2.5;
   const PIXEL_BUDGET = 2.6e6;
   const LEVELS = [1, 0.85, 0.72, 0.6];
 
@@ -483,6 +483,16 @@
                   vec3 lit = (uSky + uSkyUp * n.y + uSkySide * max(side, 0.0) + uSkyAway * max(-side, 0.0)) * ao
                            + uSunCol * max(ndl, 0.0) * sh;
                   vec3 rgb = pow(max(alb * lit, 0.0), vec3(1.0 / 2.2));
+                  if (id > 1.5) {
+                      // High-end glossy specular highlight on visor glass
+                      vec3 h = normalize(uSun - rd);
+                      float spec = pow(max(dot(n, h), 0.0), 32.0);
+                      rgb += vec3(0.38 * spec * sh);
+                  } else {
+                      // Soft velvet rim light on tactile clay body
+                      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 3.0);
+                      rgb += uClay * 0.10 * rim * ao;
+                  }
                   if (id > 1.5 && id < 2.5) {
                       vec3 ph = toHead(toBody(uW2S * p));
                       float eD = eyeSD(ph.xy);
@@ -490,9 +500,9 @@
                       float eye = 1.0 - smoothstep(-eW, eW, eD);
                       float front = smoothstep(0.15, 0.38, ph.z);
                       float halo = uGlow * exp(-max(eD, 0.0) * 6.5) * (1.0 - eye);
-                      // Extra bright & crisp glowing eyes
-                      rgb += uEyeCol * halo * 0.7 * front;
-                      rgb = mix(rgb, uEyeCol * 1.6, eye * front);
+                      // Extra bright & crisp glowing eyes with radiant halo
+                      rgb += uEyeCol * halo * 0.75 * front;
+                      rgb = mix(rgb, uEyeCol * 1.65, eye * front);
                   }
                   col = vec4(rgb, 1.0);
                   if (s == 0) edge = near < 1.5 || dot(n, -rd) < 0.3;
@@ -667,10 +677,10 @@
     function initGL() {
       gl = canvas.getContext("webgl2", {
         alpha: true,
-        antialias: false,
+        antialias: true,
         depth: false,
         stencil: false,
-        powerPreference: "low-power",
+        powerPreference: "high-performance",
         preserveDrawingBuffer: true, // Prevents disappearing/glitching
       });
       if (!gl) return false;
@@ -728,19 +738,16 @@
       needResize = false;
     }
 
-    let cachedHostRect = null;
     function measureShown() {
-      if (!cachedHostRect) {
-        cachedHostRect = host.getBoundingClientRect();
-        if (layoutW > 0 && cachedHostRect.width > 0) {
-          const s = cachedHostRect.width / layoutW;
-          if (Math.abs(s - shown) / shown > 0.05) {
-            shown = s;
-            needResize = true;
-          }
+      const r = host.getBoundingClientRect();
+      if (layoutW > 0 && r.width > 0) {
+        const s = r.width / layoutW;
+        if (Math.abs(s - shown) / shown > 0.05) {
+          shown = s;
+          needResize = true;
         }
       }
-      return cachedHostRect;
+      return r;
     }
 
     function aimAt(u, v) {
@@ -775,10 +782,10 @@
     }
 
     function setAim(yawRaw, pitchRaw) {
-      const maxYaw = (opts.response.headTurn / 10) * 0.87;
-      const maxPitch = maxYaw * 0.55;
-      tYaw = maxYaw > 0 ? maxYaw * Math.tanh(yawRaw / maxYaw) : 0;
-      tPitch = maxPitch > 0 ? maxPitch * Math.tanh(pitchRaw / maxPitch) : 0;
+      const maxYaw = (opts.response.headTurn / 10) * 1.15;
+      const maxPitch = maxYaw * 0.60;
+      tYaw = maxYaw > 0 ? maxYaw * Math.tanh(yawRaw / (maxYaw * 1.15)) : 0;
+      tPitch = maxPitch > 0 ? maxPitch * Math.tanh(pitchRaw / (maxPitch * 1.15)) : 0;
       const et = opts.response.eyeTravel / 10;
       tEyeX = et * EYE_X * Math.tanh(yawRaw / 0.55);
       const py = Math.tanh(pitchRaw / 0.4);
@@ -889,8 +896,9 @@
       rotX(tilt, mW2S);
       for (let i = 0; i < 9; i++) mW2S[i] /= k;
       const hy = yaw.x - bodyYaw.x;
+      const rollHead = HEAD_ROLL * Math.max(-0.45, Math.min(0.45, hy));
       mul3(rotY(hy, tA), rotX(-pitch.x, tB), tmp);
-      mul3(tmp, rotZ(HEAD_ROLL * hy, tA), mHead);
+      mul3(tmp, rotZ(rollHead, tA), mHead);
       mul3(rotY(bodyYaw.x, tA), rotZ(roll, tB), mBody);
 
       const az = (opts.advanced.sunAngle * Math.PI) / 180;
