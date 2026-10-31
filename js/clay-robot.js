@@ -420,41 +420,30 @@
           vec3 ds = uW2S * rd;
           vec3 db = uBody * (ds / sqv);
           vec2 span = vec2(1e9, -1e9);
-          span = spanWith(span, slab(ohd, uHead * db, vec3(0.0), HEAD_B + 0.02));
-          span = spanWith(span, slab(ob, db, BODY_C, BODY_B + 0.02));
+          span = spanWith(span, slab(ohd, uHead * db, vec3(0.0), HEAD_B + 0.4));
+          span = spanWith(span, slab(ob, db, BODY_C, BODY_B + 0.4));
           bool hit = false;
-          float t = max(max(span.x, 0.0), tWarm);
-          float tEnd = min(span.y, tf);
+          float t = max(span.x, 0.0);
+          float tEnd = span.y + 0.6;
           float hitAt = s == 0 ? 0.25 : 0.4;
-          int steps = s == 0 ? 96 : 40;
+          int steps = s == 0 ? 80 : 35;
           float rmin = 1e9, near = 1e9, prevR = 1e9;
           vec2 hitD = vec2(0.0, 1.0);
 
           if (tEnd > t) {
-              float w = 1.4, lastD = 0.0, step = 0.0;
-              for (int i = 0; i < 96; i++) {
+              for (int i = 0; i < 80; i++) {
                   if (i >= steps) break;
                   vec2 dd = sceneD(uW2S * (ro + rd * t), true);
                   float d = dd.x * uScale;
-                  bool fail = w > 1.0 && d + lastD < step;
-                  if (fail) {
-                      step -= w * step;
-                      w = 1.0;
-                  } else {
-                      float fp = pxk * t;
-                      if (d < hitAt * fp) { hit = true; hitD = vec2(d, dd.y); break; }
-                      float r = d / fp;
-                      if (s == 0 && r < 1.5 && rmin >= 1.5) tWarm = t;
-                      rmin = min(rmin, r);
-                      if (r > prevR) near = min(near, prevR);
-                      prevR = r;
-                      step = d * w;
-                  }
-                  lastD = d;
-                  t += step;
+                  float fp = pxk * t;
+                  if (d < hitAt * fp) { hit = true; hitD = vec2(d, dd.y); break; }
+                  float r = d / fp;
+                  rmin = min(rmin, r);
+                  if (r > prevR) near = min(near, prevR);
+                  prevR = r;
+                  t += d;
                   if (t > tEnd) break;
               }
-              if (s == 0 && hit && rmin >= 1.5) tWarm = t;
           }
 
           bool same = s > 0 && hit == hitC && (!hit || abs(hitD.y - idC) < 0.5);
@@ -739,15 +728,7 @@
     }
 
     function measureShown() {
-      const r = host.getBoundingClientRect();
-      if (layoutW > 0 && r.width > 0) {
-        const s = r.width / layoutW;
-        if (Math.abs(s - shown) / shown > 0.05) {
-          shown = s;
-          needResize = true;
-        }
-      }
-      return r;
+      return host.getBoundingClientRect();
     }
 
     function aimAt(u, v) {
